@@ -1,4 +1,21 @@
+- menu do
+  %li= link_to 'Index', root_path
+  %li= link_to 'Edit', edit_user_path(@user)
+
+%h1= title('User')
 %p
   User: #{@user.name}
 %p
   Email: #{@user.email if @user.email}
+
+%h2= t(:authentication_providers)
+- unless @user.authentications.any?
+  %p= t(:no_authentication_providers_used)
+- else
+  %ul
+  - @user.authentications.each do |authentication|
+    %li
+      = authentication.provider.to_s.humanize
+      (
+      = authentication.uid.to_s
+      )

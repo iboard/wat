@@ -1,3 +1,7 @@
-%h3 Home
+%h1= title "Home"
 - @users.each do |user|
-  %p User: #{link_to user.name, user}
+  %p 
+    = link_to user.name, user
+    - if user == current_user
+      = " –&gt; ".html_safe + t(:you)
+    

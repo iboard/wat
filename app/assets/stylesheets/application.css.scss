@@ -12,24 +12,118 @@
  *= require_tree .
 */
 
+$content-width: 900px;
+
+nav {
+  height: 30px;
+  background: #111;
+}
+
+header {
+  margin-bottom: 50px;
+}
+
 header nav ul {
   list-style: none;
-  margin: 0 0 2em;
-  padding: 0;
+  margin: 0px;
+  color: #ddd;
+  padding: 5px;
+  padding-left: 5px;
+  padding-right: 10px;
+  text-shadow: 0.05em 0.05em #888;
+  a {
+    color: #fff;
+    text-decoration: none;
+    &:hover {
+      color: yellow;
+    }
+  }
 }
 header nav ul li {
   display: inline;
+  padding-left: 5px;
 }
+
+nav .mmenu {
+  text-align: left;
+  float: left;
+}
+
+nav .hmenu {
+  text-align: right;
+  float: right;
+}
+
+nav #content-menu {
+  height: 30px;
+  clear: both;
+  padding: 0px;
+  background: #ddd;
+  ul {
+    a {
+      color: #666;
+      &:hover {
+        color: black;
+      }
+    }
+  }
+}
+
 #flash_notice, #flash_alert {
+  width: 100%;
   padding: 5px 8px;
-  margin: 10px 0;
 }
 #flash_notice {
   background-color: #CFC;
-  border: solid 1px #6C6;
+  border-bottom: solid 1px #6C6;
 }
 #flash_alert {
   background-color: #FCC;
-  border: solid 1px #C66;
+  border-bottom: solid 1px #DAA;
 }
 
+.clear-both {
+  clear: both;
+}
+
+.clear-header {
+  clear: both;
+  margin-top: 50px;
+}
+
+#container {
+  #main {
+    padding: 10px;
+    width: $content-width;
+    margin-left: auto;
+    margin-right: auto;
+
+    h1 {
+      color: #333;
+      text-shadow: 0.05em 0.05em #ddd;
+    }
+  }
+}
+
+footer {
+  position: absolute;
+  width: 100%;
+  background: #333;
+  color: #aaa;
+  border-top: 1px solid #ddd;
+  padding-top: 5px;
+  bottom: 0px;
+  clear: both;
+  margin-top: 10px;
+  font-size: 0.5em;
+  text-align: center;
+}
+
+
+.field {
+  margin-top: 10px;
+}
+
+.actions {
+  margin-top: 10px;
+}

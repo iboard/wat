@@ -2,4 +2,24 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  authentication_error: "Authentication error: %{error}"
+  authentication_providers: Authentication providers
+  create_an_account: Create an account
+  email: Email
+  invalid_credentials_or_user_exists: Invalid credentials or user exists
+  login: Log in
+  login_as: Log in as
+  logout: Log out
+  methods: Methods
+  new_account: New account
+  no_authentication_providers_used: No authentication providers used
+  or_login_below: or login below
+  please_enter_your_email_address: Please enter your email address
+  prohibited_this_account_from_being_saved: Prohibited this account from being saved
+  register: Register
+  root: Root
+  sign_in: Sign in
+  signed_in: Signed in
+  signed_out: Signed out
+  use_a_login_provider: Use a login provider
+  you: You

@@ -1,14 +1,14 @@
 require 'rbconfig'
 HOST_OS = RbConfig::CONFIG['host_os']
 source 'https://rubygems.org'
+
 gem 'rails', '3.2.1'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-  
-  
   gem 'uglifier', '>= 1.0.3'
 end
+
 gem 'jquery-rails'
 gem "haml", ">= 3.1.4"
 gem "haml-rails", ">= 0.3.4", :group => :development
@@ -30,11 +30,31 @@ case HOST_OS
     gem 'win32console', :group => :development
     gem 'rb-notifu', :group => :development
 end
-gem "guard-bundler", ">= 0.1.3", :group => :development
-gem "guard-rails", ">= 0.0.3", :group => :development
-gem "guard-livereload", ">= 0.3.0", :group => :development
-gem "guard-rspec", ">= 0.4.3", :group => :development
+
+# Test environment
+group :test do
+  gem "guard-bundler", ">= 0.1.3", :group => :development
+  gem "guard-rails", ">= 0.0.3", :group => :development
+  gem "guard-livereload", ">= 0.3.0", :group => :development
+  gem "guard-rspec", ">= 0.4.3", :group => :development
+  gem "capybara"
+  gem "launchy"
+end
+
+# Application
 gem "bson_ext", ">= 1.5.2"
 gem "mongoid", ">= 2.4.4"
+gem "yard"
+gem "redcarpet"
+
+# Authentication
 gem "omniauth", ">= 1.0.2"
 gem "omniauth-twitter"
+gem "omniauth-facebook"
+gem "omniauth-linkedin"
+gem "omniauth-37signals"
+gem "omniauth-github"
+gem "omniauth-openid"
+gem "omniauth-google-oauth2"
+gem 'bcrypt-ruby', '~> 3.0.0'
+gem "omniauth-identity"

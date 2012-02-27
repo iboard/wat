@@ -1,5 +1,18 @@
+%h1= title "Edit User '#{@user.name}'"
+
+- menu do
+  %li= link_to 'Index', root_path
+  %li= link_to 'Show', @user
+  %li= link_to 'Edit', edit_user_path(@user)
+
+
 = form_for(@user) do |f|
-  = f.label :email
-  = f.text_field :email
+  .field
+    = f.label :name
+    = f.text_field :name, :disabled => true
+  .field
+    = f.label :email
+    = f.text_field :email
   %br/
-  = f.submit "Sign in"
+  %br/
+  = f.submit "Save"

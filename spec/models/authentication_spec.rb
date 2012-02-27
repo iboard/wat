@@ -1,10 +1,12 @@
 require 'spec_helper'
 
-describe User do
+describe Authentication do
 
-  it "uses name as a key" do
+  it "is embeded to a user" do
     user = User.create!(name: 'Andi Altendorfer', email: 'andreas@altendorfer.at')
-    assert User.find('andi-altendorfer') == user
+    user.add_authentication(Authentication.new(provider: 'test', uid: '123'))
+    user.save!
+    assert User.find_with_authentication('test','123') == user
   end
 
   it "doesn't allow two users having the same name" do

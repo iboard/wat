@@ -1,0 +1,26 @@
+%h1= title t(:sign_in)
+
+%h2= t(:use_a_login_provider)
+%ul
+  - Secrets::defined_providers.each do |provider|
+    %li.login_provider
+      = link_to provider.to_s.humanize, "/auth/#{provider.to_s.downcase}"
+  - if Secrets::secret['openid']
+    %li.login_provider
+      = link_to "OpenID", "/auth/open_id"
+
+%p
+  = link_to t(:create_an_account), new_identity_path
+  = t(:or_login_below)
+
+= form_tag "/auth/identity/callback" do
+  .field
+    = label_tag :auth_key, t(:email)
+    %br/
+    = text_field_tag :auth_key
+  .field
+    = label_tag :password
+    %br/
+    = password_field_tag :password
+  .actions
+    = submit_tag t(:login)

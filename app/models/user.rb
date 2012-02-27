@@ -1,20 +1,48 @@
 class User
   include Mongoid::Document
-  field :provider, :type => String
-  field :uid, :type => String
-  field :name, :type => String
+  
+  key   :name
+  validates_presence_of :name
+  validates_uniqueness_of :name
   field :email, :type => String
-  attr_accessible :provider, :uid, :name, :email
 
+  embeds_many :authentications
+  
+  attr_accessible :name, :email
+
+  # Create a new user using omniAuth information
+  # @param [Hash] auth The hash returned by omniauth-provider
+  # @return User or nil if it can't be found or created
   def self.create_with_omniauth(auth)
-    create! do |user|
-      user.provider = auth['provider']
-      user.uid = auth['uid']
-      if auth['info']
-         user.name = auth['info']['name'] || ""
-         user.email = auth['info']['email'] || ""
-      end
+    
+    _name = auth['info']['name']
+    
+    _existing_user = User.all_of( 
+      [:name => _name,
+       :authentications.matches => {
+         :provider => auth['provider'], :uid => auth['uid'].to_s
+       }]
+    ).first
+    return _existing_user if _existing_user
+
+
+    _user = create(name: _name) do |user|
+      user.email = auth['info']['email'] || ""
+      user.authentications.create(
+        provider: auth['provider'],
+        uid: auth['uid'].to_s
+      )
     end
+    
+    _user.valid? ? _user : nil
+  end
+
+  def self.find_with_authentication(provider, uid)
+    User.where(:authentications.matches => { provider: provider, uid: uid.to_s}).first
+  end
+
+  def add_authentication(authentication)
+    authentications << authentication
   end
 
 end
