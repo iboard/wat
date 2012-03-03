@@ -9,9 +9,12 @@ It uses
   * OmniAuth
   * HAML
 
-and is based on Rails 3.2.1
+and is based on Rails 3.2.2
 
-  * See [GitHub/RailsApps](https://github.com/RailsApps/rails3-application-templates)
+_see_
+
+  * [GitHub/RailsApps](https://github.com/RailsApps/rails3-application-templates)
+  * [WAT](https://github.com/iboard/wat)
 
 THIS PROJECT IS FOR TESTING PURPOSES ONLY (YET)
 YOU MAY USE IT AS A STARTER APP FOR YOUR APPLICATION
@@ -25,6 +28,10 @@ Things done after generating the app from the template
   * Modified: the behavior of omniauth-twiter and user-model to use name as a mongo-key
   * Add:      omniauth for Facebook, Google, Identity, LinkedIn, OpenID, 37signals
   * Added:    Some specs
+  * Added:    Twitter bootstrap
+  * Modified: User can have more authentications
+  * Added:    Spork support. Rake always runs with --drb
+
 
 Installation
 ============
