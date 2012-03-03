@@ -1,21 +1,60 @@
-- menu do
-  %li= link_to 'Index', root_path
-  %li= link_to 'Edit', edit_user_path(@user)
+- top_menu do
+  %ul{:class=>"nav nav-tabs"}
+    %li= ("&nbsp;"*8).html_safe
+    %li.active= link_to t(:you)
+    %li= link_to t(:edit), edit_user_path(@user)
+    %li= link_to t(:listing_users), root_path
+    
+=form_tag "", :class =>"form-vertical" do
+  %fieldset
+    %legend
+      = title('User')
+      .button{:style=>'float: right;margin-top: -5px'}
+        = link_to t(:edit), edit_user_path(@user), :class => "btn btn-primary"
+        = link_to t(:cancel_account), user_path(@user), :confirm => t(:are_you_sure), :method => :delete,:class => "btn btn-danger"
+    .control-group
+      .controls
+        %i.icon-user
+        %strong= @user.name
+      .controls
+        %i.icon-envelope
+        = link_to @user.email, "mailto:#{@user.email}" if @user.email
 
-%h1= title('User')
-%p
-  User: #{@user.name}
-%p
-  Email: #{@user.email if @user.email}
-
-%h2= t(:authentication_providers)
-- unless @user.authentications.any?
-  %p= t(:no_authentication_providers_used)
-- else
-  %ul
-  - @user.authentications.each do |authentication|
-    %li
-      = authentication.provider.to_s.humanize
-      (
-      = authentication.uid.to_s
-      )
+%well
+  %table.table.table-striped
+    %thead.thead
+      %tr
+        %th.span4= t(:provider)
+        %th.span4= t(:uid)
+        %th.span2 &nbsp;
+      %tbody.tbody
+        - _provider = Secrets::defined_providers.to_a
+        - _provider << 'identity'
+        - _provider.each do |type|
+          %tr
+            - _selected =  @user.authentications.where(:provider => type.to_s.downcase).first
+            %td
+              -if _selected
+                %strong= type.to_s.humanize 
+              - else
+                = type.to_s.humanize unless _selected
+            - if _selected
+              %td= _selected.uid.to_s
+              %td.input-prepend{ :class => "btn btn-warning span2"}
+                %i.icon-minus
+                = link_to( t(:remove),user_authentication_path(@user,_selected), confirm: t(:are_you_sure), method: :delete)
+                    
+            -else
+              -if type == 'identity'
+                %td &nbsp;
+                %td.input-prepend{:class=> "btn btn-success span2"}
+                  %i.icon-plus
+                  = link_to t(:create_account), new_identity_path, style: "color: white"
+              -else
+                %td –
+                %td.input-prepend{:class=> "btn btn-info span2"}
+                  %i.icon-plus
+                  = link_to "#{type.to_s.humanize}", "/auth/#{type}"
+      %caption{style: "text-align: left"}
+        %h3= t(:authentication_providers)
+ 

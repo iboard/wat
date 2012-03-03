@@ -4,5 +4,4 @@ class Authentication
   field :uid, :type => String
   
   embedded_in :user
-
 end

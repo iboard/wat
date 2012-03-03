@@ -1,28 +1,26 @@
-%h1= title t(:new_account)
 
-= form_tag "/auth/identity/register" do
-  - if @identity && @identity.errors.any? 
-    .error_messages
-      %h2
-        = pluralize(@identity.errors.count, "error") 
-        = t(:prohibited_this_account_from_being_saved)
-      %ul
-        - @identity.errors.full_messages.each do |msg|
-          %li= msg
-  .field
-    = label_tag :name
-    %br/
-    = text_field_tag :name, @identity.try(:name)
-  .field
-    = label_tag :email
-    %br/
-    = text_field_tag :email, @identity.try(:email) 
-  .field
-    = label_tag :password
-    %br/
-    = password_field_tag :password
-  .field
-    = label_tag :password_confirmation
-    %br/
-    = password_field_tag :password_confirmation
-  .actions= submit_tag t(:register)
+- @identity ||= Identity.new
+= form_tag( "/auth/identity/register", :class => "form-vertical") do
+  %fieldset
+    %legend= title t(:new_account)
+    - if @identity && @identity.errors.any? 
+      .control-group
+        .controls{:class=>"alert alert-error"}
+          %strong
+            = pluralize(@identity.errors.count, "error") 
+            = t(:prohibited_this_account_from_being_saved)
+          %ul
+            - @identity.errors.full_messages.each do |msg|
+              %li= msg
+    .control-group{class: @identity.errors[:name].present? ? "error" : ""}
+      .control-label= label_tag :name
+      .controls= text_field_tag :name, @identity.try(:name), :class => "span3"
+    .control-group{class: @identity.errors[:password].present? ? "error" : ""}
+      .control-label= label_tag :password
+      .controls= password_field_tag :password, '', :class => "span3"
+    .control-group{class: @identity.errors[:password_confirmation].present? ? "error" : ""}
+      .control-label= label_tag :password_confirmation
+      .controls= password_field_tag :password_confirmation, '', :class => "  span3"
+    .control.form-actions
+      = submit_tag t(:register), :class => 'btn btn-danger'
+      = link_to t(:cancel), signin_path, :class => 'btn'

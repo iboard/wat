@@ -1,29 +1,67 @@
-!!!
-%html
+!!! 5
+%html{:lang => "en"}
   %head
-    %title= content_for(:title) ? yield(:title) : "WAT"
-    %meta{:charset => "utf-8"}
-    %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1"}
-    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
-    = stylesheet_link_tag :application, :media => "all"
-    = javascript_include_tag :application
+    %meta{:charset => "utf-8"}/
+    %title= content_for?(:title) ? yield(:title) : "Wat"
     = csrf_meta_tags
-  %body{:class => params[:controller]}
-    #container.container
-      %header
-        - if flash.any?
-          - flash.each do |name, msg|
-            = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)  
-        %nav
-          %ul.mmenu
-            %li= link_to 'Home', root_path
-          %ul.hmenu
-            = render 'shared/navigation'
-          - unless content_for(:content_menu).empty?
-            #content-menu
-              %ul.cmenu
-                = yield(:content_menu)
-      #main{:role => "main"}
-        = yield
+    / Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
+    / Le styles
+    :css
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    = stylesheet_link_tag "application", :media => "all"
+    / Le fav and touch icons
+    %link{:href => "/images/favicon.ico", :rel => "shortcut icon"}/
+    %link{:href => "/images/apple-touch-icon.png", :rel => "apple-touch-icon"}/
+    %link{:href => "/images/apple-touch-icon-72x72.png", :rel => "apple-touch-icon", :sizes => "72x72"}/
+    %link{:href => "/images/apple-touch-icon-114x114.png", :rel => "apple-touch-icon", :sizes => "114x114"}/
+    %meta{:name=>"viewport", :content=>"width=device-width, initial-scale=1.0"}
+
+
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.brand{:href => "#"}Wat
+          .container.nav-collapse
+            %ul.nav
+              %li= link_to t(:home), root_path
+              = render 'shared/navigation'
+    - if content_for?(:top_menu)
+      =content_for(:top_menu)
+    .container
+      - if flash.any?
+        %div
+          - flash.any? do |type,message|
+            %div{:class => "alert alert-#{flash_alert(type)}"}
+              <a class="close" data-dismiss="alert">&times;</a>
+              %strong= flash_title(type).html_safe
+              %br/
+              = message
+      .content
+        .row
+          %div{ :class => "span#{content_for?(:content_menu) ? "9" : "12"}" }
+            = yield
+          - if content_for?(:content_menu)
+            .span1 &nbsp;
+            .span3
+              .well.sidebar-nav
+                %ul.nav.nav-list
+                  = yield(:content_menu)
+    
       %footer
-        © 2012 by Andreas Altendorfer
+        %p 
+          &copy; 2012 
+          = link_to 'Andreas Altendorfer', "http://about.me/andreas.altendorfer"
+    /
+      Le javascript
+      \==================================================
+    / Placed at the end of the document so the pages load faster
+    = javascript_include_tag "application"

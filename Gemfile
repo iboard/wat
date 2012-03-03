@@ -2,11 +2,12 @@ require 'rbconfig'
 HOST_OS = RbConfig::CONFIG['host_os']
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.2'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
+  gem "twitter-bootstrap-rails"
 end
 
 gem 'jquery-rails'
@@ -22,6 +23,8 @@ case HOST_OS
   when /darwin/i
     gem 'rb-fsevent', :group => :development
     gem 'growl', :group => :development
+    gem 'ruby_gntp', :group => :development
+
   when /linux/i
     gem 'libnotify', :group => :development
     gem 'rb-inotify', :group => :development
@@ -39,6 +42,14 @@ group :test do
   gem "guard-rspec", ">= 0.4.3", :group => :development
   gem "capybara"
   gem "launchy"
+  gem "spork"
+  gem "guard-spork"
+  gem "growl"
+  gem 'ruby_gntp'
+end
+
+group :development do
+  gem "guard-spork"
 end
 
 # Application
@@ -58,3 +69,5 @@ gem "omniauth-openid"
 gem "omniauth-google-oauth2"
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem "omniauth-identity"
+
+

@@ -1,5 +1,8 @@
 Wat::Application.routes.draw do
 
+  # Default
+  root :to => "home#index"
+
   # Authentication Routs
   match '/auth/:provider/callback' => 'sessions#create'
   match '/auth/identity/register' => 'users#create'
@@ -8,10 +11,10 @@ Wat::Application.routes.draw do
   match '/auth/failure' => 'sessions#failure'
   
   # Resources
-  resources :users
-  resources :identities 
+  resources :users do
+    resources :authentications, only: [:destroy]
+  end
+  resources :identities
   
-  # Default
-  root :to => "home#index"
-
+  
 end

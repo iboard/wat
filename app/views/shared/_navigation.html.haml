@@ -1,9 +1,6 @@
-- if user_signed_in?
-  %li
-    = t(:login_as)
-    %em #{current_user.name}
-  %li
-    = link_to(t(:logout), signout_path)
-- else
-  %li
+%li
+  - if user_signed_in?
+  
+    = link_to( t(:logout), signout_path)
+  - else
     = link_to(t(:login), signin_path)

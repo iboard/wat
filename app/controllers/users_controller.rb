@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :correct_user?
+
+  before_filter :authenticate_user!, :only => [:edit, :update, :show]
+  before_filter :correct_user?, :only => [:edit, :update, :show]
 
   def edit
     @user = User.find(params[:id])
@@ -9,8 +10,9 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
-      redirect_to @user
+      redirect_to @user, :notice => t(:user_successfully_updated)
     else
+      flash.now[:alert]= t(:cannot_save_user)
       render :edit
     end
   end
@@ -18,6 +20,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.authentications.delete_all
+    @user.delete
+    redirect_to signout_path, :notice => t(:user_successfully_deleted)
   end
 
 end

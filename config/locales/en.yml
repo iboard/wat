@@ -6,9 +6,9 @@ en:
   authentication_providers: Authentication providers
   create_an_account: Create an account
   email: Email
-  invalid_credentials_or_user_exists: Invalid credentials or user exists
+  invalid_credentials_or_user_exists: "Invalid credentials or user exists (%{user})"
   login: Log in
-  login_as: Log in as
+  login_as: Logged in as
   logout: Log out
   methods: Methods
   new_account: New account
@@ -23,3 +23,22 @@ en:
   signed_out: Signed out
   use_a_login_provider: Use a login provider
   you: You
+  user_successfully_created: User successfully created.
+  user_cant_be_saved: User can't be saved!
+  edit: 'Edit'
+  edit_your_record: '<b>You</b> –&gt; Edit'
+  listing_users: Listing Users
+  user_successfully_updated: Your data has been updated successfully
+  cannot_save_user: User data couldn't be saved
+  home_info: If you logged in you can show and edit your user. Otherwise you can login or create a new user.
+  sign_up_info: If you have no account yet. Here you can sign up and create an account for this service. It's free and without any warrenty
+  errors_label: Errors
+  or: "or"
+  help_name_uneditable: Username can't be changed once a user is created.
+  are_you_sure: Are you sure?
+  remove: "Remove"
+  removed_authentication_successfully: Your authentication was successfully removed.
+  cancel_account: 'Unhappy? Cancel Account'
+  user_successfully_deleted: "User successfully deleted. We hope to see you again."
+  provider_added: "Provider <strong>%{provider}</strong> added to your account."
+  last_authentication_cannot_be_deleted: Your last authentication can't be deleted!

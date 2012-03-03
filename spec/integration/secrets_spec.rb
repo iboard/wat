@@ -9,7 +9,10 @@ describe Secrets do
   end
 
   it "List defined providers" do
-    assert Secrets::defined_providers == [:twitter, :facebook, :linkedin, "37signals".to_sym, :github, :google_oauth2], Secrets::defined_providers.inspect
+    assert Secrets::defined_providers == [
+      :twitter, :facebook, :linkedin, 
+      "37signals".to_sym, :github, :google_oauth2
+    ], Secrets::defined_providers.inspect
   end
 
   it "provides openid storage" do
