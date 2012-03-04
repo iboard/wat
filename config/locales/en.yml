@@ -30,7 +30,6 @@ en:
   listing_users: Listing Users
   user_successfully_updated: Your data has been updated successfully
   cannot_save_user: User data couldn't be saved
-  home_info: If you logged in you can show and edit your user. Otherwise you can login or create a new user.
   sign_up_info: If you have no account yet. Here you can sign up and create an account for this service. It's free and without any warrenty
   errors_label: Errors
   or: "or"
@@ -42,3 +41,10 @@ en:
   user_successfully_deleted: "User successfully deleted. We hope to see you again."
   provider_added: "Provider <strong>%{provider}</strong> added to your account."
   last_authentication_cannot_be_deleted: Your last authentication can't be deleted!
+  home_info_logged_in: 
+    Signed in. In this template-application you see a list of registered users
+    where your own user is decorated with 'Edit-account' and 'Cancel-account' buttons.
+    When editing your account you can add and remove Authentication-providers.
+  home_info_logged_out: 
+    You are not logged in. Log in or create a new account. This is a template-application
+    cloned from http://github.com/iboard/wat

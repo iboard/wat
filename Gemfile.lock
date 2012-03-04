@@ -172,6 +172,7 @@ GEM
     omniauth-twitter (0.0.8)
       omniauth-oauth (~> 1.0)
     polyglot (0.3.3)
+    pow (0.2.3)
     rack (1.4.1)
     rack-cache (1.1)
       rack (>= 0.4)
@@ -286,6 +287,7 @@ DEPENDENCIES
   omniauth-linkedin
   omniauth-openid
   omniauth-twitter
+  pow
   rails (= 3.2.2)
   rb-fsevent
   redcarpet
