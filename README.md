@@ -31,6 +31,7 @@ Things done after generating the app from the template
   * Added:    Twitter bootstrap
   * Modified: User can have more authentications
   * Added:    Spork support. Rake always runs with --drb
+  * Added:    Foursquare Authentication
 
 
 Installation
@@ -42,6 +43,29 @@ Installation
     * Disable services you don't want by remarking it.
   3. bundle
   4. Run `bundle execute guard`
+
+API-Keys
+========
+
+  If you don't have API-Keys for various providers, you'll find them on the provider's websites
+
+  * Twitter
+    * https://dev.twitter.com/apps 
+
+  * Facebook
+    * https://developers.facebook.com/apps
+
+  * Google
+    * https://code.google.com/apis/console/
+
+  * Foursquare
+    * https://foursquare.com/oauth/
+
+  * LinkedIn
+    * https://www.linkedin.com/secure/developer
+
+    
+
 
 
 License

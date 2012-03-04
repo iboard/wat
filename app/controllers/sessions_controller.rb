@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
   # 5. Redirect to root_url with notice
   def create
     auth = request.env["omniauth.auth"]
+
     user = User.where(:authentications.matches => {
              :provider => auth['provider'], 
              :uid => auth['uid'].to_s

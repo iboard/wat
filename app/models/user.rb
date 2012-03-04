@@ -39,6 +39,9 @@ class User
     _name = auth['info']['name']
     _uid  = auth['info']['uid'].to_s
     _provider=auth['info']['provider']
+    unless _name
+      _name = [auth['info']['first_name']||'', auth['info']['last_name']||''].join(" ")
+    end
     
     _user = User.where( 
       :authentications.matches => {
