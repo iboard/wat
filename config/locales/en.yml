@@ -3,7 +3,7 @@
 
 en:
   authentication_error: "Authentication error: %{error}"
-  authentication_providers: Authentication providers
+  authentication_providers: Assign authentication providers
   create_an_account: Create an account
   email: Email
   invalid_credentials_or_user_exists: "Invalid credentials or user exists (%{user})"
@@ -48,3 +48,4 @@ en:
   home_info_logged_out: 
     You are not logged in. Log in or create a new account. This is a template-application
     cloned from http://github.com/iboard/wat
+  user: User

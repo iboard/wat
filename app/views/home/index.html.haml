@@ -1,19 +1,15 @@
 %h1= title "Home / Userlist"
 
-
-.nav
-  - @users.each do |user|
-    %ul
-    -if user == current_user
-      %li.btn.btn-primary{style: 'float: right; margin-top: 20px; margin-right: 20px'}
-        = link_to t(:edit_your_record).html_safe, user, class: "btn-primary"
-      %li.btn.btn-danger{style: 'float: right; margin-top: 20px;margin-right: 10px'}
-        = link_to t(:cancel_account), user_path(user), :confirm => t(:are_you_sure), :method => :delete,:class => "btn-danger"
-
-    %li.well
-      %h3= user.name
+.div
+  - @users.each_with_index do |user,idx|
+    .well
+      %h2= user.name
+      -if user == current_user
+        %ul.nav.pull-right
+          %li= link_to t(:edit_your_record).html_safe, user, class: "btn btn-primary span2"
+          %li= link_to t(:cancel_account), user_path(user), :confirm => t(:are_you_sure), :method => :delete,:class => "btn btn-danger span2"
       %ul
         - user.authentications.each do |auth|
           %li
             = auth.provider.to_s.humanize
-    
+  

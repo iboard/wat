@@ -5,28 +5,27 @@
     %li= link_to t(:edit), edit_user_path(@user)
     %li= link_to t(:listing_users), root_path
     
-=form_tag "", :class =>"form-vertical" do
-  %fieldset
-    %legend
-      = title('User')
-      .button{:style=>'float: right;margin-top: -5px'}
-        = link_to t(:edit), edit_user_path(@user), :class => "btn btn-primary"
-        = link_to t(:cancel_account), user_path(@user), :confirm => t(:are_you_sure), :method => :delete,:class => "btn btn-danger"
-    .control-group
-      .controls
-        %i.icon-user
-        %strong= @user.name
-      .controls
-        %i.icon-envelope
-        = link_to @user.email, "mailto:#{@user.email}" if @user.email
+.hero-unit
+  %ul.nav.pull-right
+    %li= link_to t(:edit), edit_user_path(@user), :class => "btn btn-primary"
+    %li= link_to t(:cancel_account), user_path(@user), :confirm => t(:are_you_sure), :method => :delete,:class => "btn btn-danger"
+  %h2
+    = title("#{t(:user)} #{@user.name}")
+  %ul.nav.nav-pills.nav-stacked
+    %li
+      %i.icon-user
+      %strong= @user.name
+    %li
+      %i.icon-envelope
+      %span= link_to @user.email, "mailto:#{@user.email}" if @user.email
 
-%well
+.div
   %table.table.table-striped
     %thead.thead
       %tr
-        %th.span4= t(:provider)
-        %th.span4= t(:uid)
-        %th.span2 &nbsp;
+        %th= t(:provider)
+        %th= t(:uid)
+        %th.span1 &nbsp;
       %tbody.tbody
         - _provider = Secrets::defined_providers.to_a
         - _provider << 'identity'

@@ -1,6 +1,6 @@
-%li
-  - if user_signed_in?
-  
-    = link_to( t(:logout), signout_path)
-  - else
-    = link_to(t(:login), signin_path)
+%ul{class: "nav pull-right"}
+  %li
+    - if user_signed_in?  
+      = link_to( t(:logout), signout_path)
+    - else
+      = link_to(t(:login), signin_path)

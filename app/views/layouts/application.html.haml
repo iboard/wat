@@ -33,7 +33,7 @@
           .container.nav-collapse
             %ul.nav
               %li= link_to t(:home), root_path
-              = render 'shared/navigation'
+            = render 'shared/navigation'
     - if content_for?(:top_menu)
       =content_for(:top_menu)
     .container
