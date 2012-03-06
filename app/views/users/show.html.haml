@@ -5,28 +5,34 @@
     %li= link_to t(:edit), edit_user_path(@user)
     %li= link_to t(:listing_users), root_path
     
-.hero-unit
-  %ul.nav.pull-right
-    %li= link_to t(:edit), edit_user_path(@user), :class => "btn btn-primary"
-    %li= link_to t(:cancel_account), user_path(@user), :confirm => t(:are_you_sure), :method => :delete,:class => "btn btn-danger"
-  %h2
-    = title("#{t(:user)} #{@user.name}")
-  %ul.nav.nav-pills.nav-stacked
-    %li
-      %i.icon-user
-      %strong= @user.name
-    %li
-      %i.icon-envelope
-      %span= link_to @user.email, "mailto:#{@user.email}" if @user.email
+.row-fluid
+  %span12
+    .hero-unit
+      %ul.nav.pull-right.span3
+        %li= link_to t(:edit), edit_user_path(@user), :class => "btn btn-primary"
+        %li= link_to t(:cancel_account), user_path(@user), :confirm => t(:are_you_sure), :method => :delete,:class => "btn btn-danger"
+      .span7
+        %h2
+          = title('User')
+        %ul.nav
+          %li
+            %i.icon-user
+            %strong= @user.name
+          %li
+            %i.icon-envelope
+            %strong= link_to @user.email, "mailto:#{@user.email}" if @user.email
+      %div{style: 'clear: both'}
+  
 
-.div
-  %table.table.table-striped
-    %thead.thead
-      %tr
+.row-fluid
+  .span12
+    %table.table.table-striped
+      %thead.thead
+        %tr
         %th= t(:provider)
         %th= t(:uid)
         %th.span1 &nbsp;
-      %tbody.tbody
+        %tbody.tbody
         - _provider = Secrets::defined_providers.to_a
         - _provider << 'identity'
         - _provider.each do |type|
@@ -54,6 +60,6 @@
                 %td.input-prepend{:class=> "btn btn-info span2"}
                   %i.icon-plus
                   = link_to "#{type.to_s.humanize}", "/auth/#{type}"
-      %caption{style: "text-align: left"}
-        %h3= t(:authentication_providers)
- 
+        %caption{style: "text-align: left"}
+          %h3= t(:authentication_providers)
+   

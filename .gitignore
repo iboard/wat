@@ -74,3 +74,4 @@ db/*.sqlite3
 
 # keep OmniAuth service provider secrets out of the Git repo
 config/initializers/omniauth.rb
+wat.sublime-project
