@@ -3,22 +3,21 @@ WAT (WebApplicationTemplate)
 
 WAT is derived from RailsApp/templates by [Daniel Kehoe](https://github.com/DanielKehoe)
 
-It uses
+Featuring
 
   * MongoDB / MongoID
   * OmniAuth
   * HAML
+  * Based on Rails 3.2.2
 
-and is based on Rails 3.2.2
-
-_see_
+_see:_
 
   * [GitHub/RailsApps](https://github.com/RailsApps/rails3-application-templates)
   * [WAT](https://github.com/iboard/wat)
 
-THIS PROJECT IS FOR TESTING PURPOSES ONLY (YET)
-YOU MAY USE IT AS A STARTER APP FOR YOUR APPLICATION
-BUT DON'T USE IT IN PRODUCTION AS IT IS AT THE MOMENT!
+    THIS PROJECT IS FOR TESTING PURPOSES ONLY (YET)
+    YOU MAY USE IT AS A STARTER APP FOR YOUR APPLICATION
+    BUT DON'T USE IT IN PRODUCTION AS IT IS AT THE MOMENT!
 
 Things done after generating the app from the template
 ------------------------------------------------------
@@ -32,12 +31,14 @@ Things done after generating the app from the template
   * Modified: User can have more authentications
   * Added:    Spork support. Rake always runs with --drb
   * Added:    Foursquare Authentication
+  * More:     Bootstraping
+  * Added:    Tumblr Authentication
 
 
 Installation
 ============
 
-  1. Clone or fork this project from Github
+  1. Clone or fork this project from [Github](http://github.com/iboard/wat)
   2. copy config/test_secrets.yml to config/secrets.yml and 
     * Enter your API-Keys
     * Disable services you don't want by remarking it.
@@ -45,24 +46,16 @@ Installation
   4. Run `bundle execute guard`
 
 API-Keys
-========
+--------
 
   If you don't have API-Keys for various providers, you'll find them on the provider's websites
 
-  * Twitter
-    * https://dev.twitter.com/apps 
-
-  * Facebook
-    * https://developers.facebook.com/apps
-
-  * Google
-    * https://code.google.com/apis/console/
-
-  * Foursquare
-    * https://foursquare.com/oauth/
-
-  * LinkedIn
-    * https://www.linkedin.com/secure/developer
+  * [Twitter](https://dev.twitter.com/apps )
+  * [Facebook](https://developers.facebook.com/apps)
+  * [Google](https://code.google.com/apis/console/)
+  * [Foursquare](https://foursquare.com/oauth/)
+  * [LinkedIn](https://www.linkedin.com/secure/developer)
+  * [Tumblr](http://www.tumblr.com/oauth/apps)
 
     
 
