@@ -3,4 +3,18 @@ footer {
   padding-top: 20px;
   padding-bottom: 20px;
   border-top: 1px solid #ddd;
+  background: black;
+  color: #ddd;
+  a {
+    color: #fff;
+    &:hover {
+      color: yellow;
+    }
+  }
+}
+
+textarea {
+  font-family: Courier new, monospaced;
+  overflow: scroll;
+
 }

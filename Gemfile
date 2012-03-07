@@ -58,6 +58,8 @@ gem "bson_ext", ">= 1.5.2"
 gem "mongoid", ">= 2.4.4"
 gem "yard"
 gem "redcarpet"
+gem 'albino'
+gem 'nokogiri'
 
 # Authentication
 gem "omniauth", ">= 1.0.2"
@@ -72,5 +74,3 @@ gem "omniauth-tumblr"
 gem "omniauth-foursquare"
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem "omniauth-identity"
-
-

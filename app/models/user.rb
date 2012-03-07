@@ -9,6 +9,7 @@ class User
   validates_format_of     :email, :with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i, :allow_nil => true
 
   embeds_many             :authentications
+  embeds_many             :facilities
   
   # Accessible Attributes
   attr_accessible :name, :email
@@ -81,5 +82,20 @@ class User
     authentications << authentication
   end
 
+
+  def can_read?(what)
+    facility = self.facilities.where(name: what).first
+    facility && facility.can_read?
+  end
+
+  def can_write?(what)
+    facility = self.facilities.where(name: what).first
+    facility && facility.can_write?
+  end
+
+  def can_execute?(what)
+    facility = self.facilities.where(name: what).first
+    facility && facility.can_execute?
+  end
 end
 

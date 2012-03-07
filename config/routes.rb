@@ -11,10 +11,25 @@ Wat::Application.routes.draw do
   match '/auth/failure' => 'sessions#failure'
   
   # Resources
+  # =========
+  #
+  #  User
+  #  ----
+  #  Is just the user's name (_login, username, nickname_, ...) and
+  #  a valid email-address which the user can edit at any time.
   resources :users do
     resources :authentications, only: [:destroy]
   end
+
+  # Identity
+  # --------
+  # The resource for omniauth-identity
   resources :identities
-  
+
+  # Page
+  # ----
+  # A semi-static page with a title (as key) and a body
+  resources :pages
+
   
 end

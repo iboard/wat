@@ -49,3 +49,18 @@ en:
     You are not logged in. Log in or create a new account. This is a template-application
     cloned from http://github.com/iboard/wat
   user: User
+  edit_page: Edit page
+  you_not_allowed_to_edit_this_page: You're not allowed to edit this page.
+  update_page: Update page
+  title_can_not_be_changed_once_created: The title can't be changed once the page is created.
+  page_successfully_updated: 'Page successfully updated.'
+  nothing_changed: 'Nothing changed'
+  cancel: Cancel
+  create_page: Create page
+  delete_page: Delete page
+  save_something: "Save %{what}"
+  page_successfully_deleted: Page successfully deleted.
+  page_not_found: Page not found (404).
+  page_successfully_created: Page successfully created.
+  page: Page
+  canceled: Canceled.
