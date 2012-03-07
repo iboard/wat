@@ -35,31 +35,33 @@
               %li= link_to t(:home), root_path
             = render 'shared/navigation'
     - if content_for?(:top_menu)
-      =content_for(:top_menu)
-    .container
+      .row-fluid12=content_for(:top_menu)
+    .container.row-fluid12
       - if flash.any?
-        %div
+        .row
           - flash.any? do |type,message|
             %div{:class => "alert alert-#{flash_alert(type)}"}
               <a class="close" data-dismiss="alert">&times;</a>
               %strong= flash_title(type).html_safe
               %br/
               = message
-      .content
-        .row
-          %div{ :class => "span#{content_for?(:content_menu) ? "9" : "12"}" }
-            = yield
-          - if content_for?(:content_menu)
-            .span1 &nbsp;
-            .span3
-              .well.sidebar-nav
-                %ul.nav.nav-list
-                  = yield(:content_menu)
+      .row.content.row-fluid12
+        %div{ :class => "span#{content_for?(:content_menu) ? "8" : "12"}" }
+          = yield
+        - if content_for?(:content_menu)
+          .span3.offset1
+            .well.sidebar-nav
+              %ul.nav.nav-list
+                = yield(:content_menu)
     
-      %footer
-        %p 
+      %footer.row-fluid12
+        .span9
           &copy; 2012 
-          = link_to 'Andreas Altendorfer', "http://about.me/andreas.altendorfer"
+          =link_to 'Andreas Altendorfer', "http://about.me/andreas.altendorfer"
+        .span2
+          .btn= link_to "Fork me on Github", "http://github.com/iboard/wat"
+      .row.span12
+        &nbsp;
     /
       Le javascript
       \==================================================

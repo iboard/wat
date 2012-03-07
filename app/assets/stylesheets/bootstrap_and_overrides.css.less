@@ -18,6 +18,31 @@
 @linkColor: #000088;
 @primaryButtonBackground: #08c;
 
+//@linkColorHover: white;
+//@navbarLinkColor: white;
+
 .alert {
   margin-top: 15px;
+}
+
+
+ 
+  .btn-info, 
+  .btn-primary,
+  .btn-warning,
+  .btn-danger,
+  .btn-success {
+    a {
+      color: white;
+      text-shadow: 0.01em #444;
+      &:hover {
+        color: black;
+      }
+    }
+  }
+
+.btn:hover {
+  a {
+    background: none;
+  }
 }
