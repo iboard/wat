@@ -1,12 +1,19 @@
+- if page.errors.any?
+  = errors_for page
+
 =form_for page, :html => { class: 'form-vertical'} do |f|
   %fieldset
-    .control-group
+    .control-group{error_class(page,:title)}
       .control-label= f.label :title, t(:title)
       .controls= f.text_field :title, :disabled => !page.new_record?, :style => "width: 100%"
-      .control-help= t(:title_can_not_be_changed_once_created)
-    .control-group
+      %span.help-inline
+        = error_label(page,:title,"span4")
+        = icon_label 'icon-exclamation-sign icon-white', 'label span5', t(:title_can_not_be_changed_once_created) 
+    .control-group{error_class(page,:body)}
       .control-label= f.label :body, t(:body)
       .controls= f.text_area :body, :style => "width: 100%"
+      %span.help-inline
+        = error_label(page,:body)
     .control-group
       .form-actions
         = f.submit t(:save_something, what: t(:page)), class: 'btn btn-primary'

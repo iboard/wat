@@ -1,20 +1,22 @@
 %h1= title "Home / Userlist"
 
-- @users.each_with_index do |user,idx|
-  .row.well
-    .row.span12
-      .span4
-        %h2= user.name
-        %ul
-          - user.authentications.each do |auth|
-            %li
-              = auth.provider.to_s.humanize
-      .span2.offset3
-        -if user == current_user
-          %ul.nav.nav-stacked
-            %li= button_link_to 'icon-edit', 'span3 btn btn-primary', t(:edit_your_record).html_safe, user
-            %li= button_link_to 'icon-remove', 'span3 btn btn-danger', t(:cancel_account), user_path(user), :confirm => t(:are_you_sure), :method => :delete
-    
+.container
+  - @users.each_with_index do |user,idx|
+    %div
+      .well
+        .row
+          .span4
+            %h2= user.name
+            %ul
+              - user.authentications.each do |auth|
+                %li
+                  = auth.provider.to_s.humanize
+          .span2.offset4
+            -if user == current_user
+              %ul.nav.nav-stacked
+                %li= button_link_to 'icon-edit', 'span3 btn btn-primary', t(:edit_your_record).html_safe, user
+                %li= button_link_to 'icon-remove', 'span3 btn btn-danger', t(:cancel_account), user_path(user), :confirm => t(:are_you_sure), :method => :delete
+
     
     
     

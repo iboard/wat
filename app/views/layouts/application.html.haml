@@ -36,22 +36,22 @@
               %li= link_to 'README', page_path('readme')
             = render 'shared/navigation'
     
-    - if content_for?(:top_menu)
-      .container=content_for(:top_menu)
-    
     .container
+      - if content_for?(:top_menu)
+        %div=content_for(:top_menu)
+    
       - if flash.any?
-        .row
-          - flash.any? do |type,message|
-            %div{:class => "alert alert-#{flash_alert(type)}"}
-              <a class="close" data-dismiss="alert">&times;</a>
+        .row-fluid
+          - flash.each do |type,message|
+            .alert{:class => "alert alert-#{flash_alert(type)}"}
+              = close_icon 
               %strong= flash_title(type).html_safe
               %br/
               = message
   
-      .container
+      .row-fluid
         - if content_for?(:content_menu)
-          .row
+          .row-fluid
             .span9= yield
             .span3.sidebar-nav
               %h1 &nbsp;

@@ -27,7 +27,7 @@ class PagesController < ApplicationController
       redirect_to root_path, :alert => t(:access_denied)
     else
       @page = Page.create(params[:page])
-      if @page
+      if @page.valid?
         redirect_to @page, :notice => t(:page_successfully_created)
       else
         render :new

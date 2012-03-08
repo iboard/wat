@@ -68,3 +68,7 @@ en:
   listing_pages: List all pages
   access_denied: Access denied.
   pages: 'Pages'
+  errors_prevent_item_from_saving:
+    zero: "No errors but %{item} can't be saved."
+    one: "One error prevents %{item} from being saved."
+    other: "%{count} errors prevents %{item} from being saved."
