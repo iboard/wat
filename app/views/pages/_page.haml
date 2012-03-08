@@ -1,0 +1,9 @@
+%div.well
+  %h2= link_to page.title, page
+  - _link = link_to( "<i class='icon-eye-open'></i>&nbsp;".html_safe+t(:read_more), page, class: 'btn')
+  - _preview = truncate(page.body,length: 350, omission: "... ")
+  %article
+    %div= markdown(_preview)
+    - if _preview.length < page.body.length
+      = _link
+  %p &nbsp;

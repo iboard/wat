@@ -17,7 +17,7 @@ module ApplicationHelper
   end
 
   def markdown(text)
-    Markdown.render(text).gsub(/\n/,"<br/>").html_safe
+    Markdown.render(text).html_safe
   end
   
 end

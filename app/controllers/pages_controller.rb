@@ -1,4 +1,12 @@
 class PagesController < ApplicationController
+
+  def index
+    unless current_user && current_user.can_execute?("Admin")
+      redirect_to root_path, :alert => t(:access_denied)
+    else
+      @pages = Page.asc(:title)
+    end
+  end
   
   def show
     begin

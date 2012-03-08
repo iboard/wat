@@ -45,4 +45,18 @@ module LayoutHelper
     end
   end
 
+  def button_link_to icon, classes, text, path, *args
+    _options = args.any? ? args.first : {}
+    _options.merge!( :class => classes, :style => 'text-align: left;' )
+    if classes =~ /danger|primary|info|warning|success|warning/
+      icon += " icon-white"
+    end
+    link_to(
+        "<i class='#{icon}'></i>&nbsp;".html_safe +
+        text,
+        path,
+        _options
+      )
+  end
+
 end

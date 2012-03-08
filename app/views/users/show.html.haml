@@ -10,16 +10,12 @@
     .span4
       %h2= title('User')
       %ul.nav.span4
-        %li
-          %i.icon-user
-          %strong= @user.name
-        %li
-          %i.icon-envelope
-          %strong= link_to @user.email, "mailto:#{@user.email}" if @user.email
+        %li= button_link_to 'icon-user', '', @user.name, '#'
+        %li= button_link_to 'icon-envelope', '', @user.email, "mailto:#{@user.email}" if @user.email
     .span2.offset3            
       %ul.nav.nav-pills
-        %li.nav.btn.btn-primary.span3= link_to "<i class='icon-edit'></i> ".html_safe + t(:edit), edit_user_path(@user)
-        %li.nav.btn.btn-danger.span3= link_to "<i class='icon-remove'></i> ".html_safe + t(:cancel_account), user_path(@user), :confirm => t(:are_you_sure), :method => :delete
+        %li= button_link_to 'icon-edit', 'nav btn btn-primary span3', t(:edit), edit_user_path(@user)
+        %li= button_link_to 'icon-remove', 'nav btn btn-danger span3',t(:cancel_account), user_path(@user), :confirm => t(:are_you_sure), :method => :delete
     %div{style: 'clear: both'}
   
 
@@ -44,21 +40,18 @@
                 = type.to_s.humanize unless _selected
             - if _selected
               %td= _selected.uid.to_s
-              %td{ :class => "btn btn-warning span2"}
-                %i.icon-minus
-                = link_to( t(:remove),user_authentication_path(@user,_selected), confirm: t(:are_you_sure), method: :delete)
+              %td
+                = button_link_to( 'icon-minus', 'btn btn-info span2', t(:remove),user_authentication_path(@user,_selected), confirm: t(:are_you_sure), method: :delete)
                     
             -else
               -if type == 'identity'
                 %td &nbsp;
-                %td{:class=> "btn btn-success span2"}
-                  %i.icon-plus
-                  = link_to t(:create_account), new_identity_path
+                %td
+                  = button_link_to 'icon-plus','btn btn-success span2',t(:create_account), new_identity_path
               -else
                 %td –
-                %td{:class=> "btn span2"}
-                  %i.icon-plus
-                  = link_to "#{type.to_s.humanize}", "/auth/#{type}"
+                %td
+                  = button_link_to 'icon-plus','btn btn-default span2', "#{type.to_s.humanize}", "/auth/#{type}"
         %caption{style: "text-align: left"}
           %h3= t(:authentication_providers)
    

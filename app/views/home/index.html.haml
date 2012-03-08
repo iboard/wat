@@ -9,15 +9,11 @@
           - user.authentications.each do |auth|
             %li
               = auth.provider.to_s.humanize
-      .span2.offset5
+      .span2.offset3
         -if user == current_user
           %ul.nav.nav-stacked
-            %li.input-prepend{:class=> "nav btn btn-primary span2"}
-              %i.icon-user
-              %strong= link_to t(:edit_your_record).html_safe, user
-            %li.input-prepend{:class=> "nav btn btn-danger span2"}
-              %i.icon-remove
-              %strong= link_to t(:cancel_account), user_path(user), :confirm => t(:are_you_sure), :method => :delete
+            %li= button_link_to 'icon-edit', 'span3 btn btn-primary', t(:edit_your_record).html_safe, user
+            %li= button_link_to 'icon-remove', 'span3 btn btn-danger', t(:cancel_account), user_path(user), :confirm => t(:are_you_sure), :method => :delete
     
     
     

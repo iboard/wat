@@ -1,17 +1,4 @@
-- if current_user && current_user.can_execute?('Admin')
-  - content_for :content_menu do
-    %h3= t(:admin)
-    %address= current_user.name
-    - if @page
-      .btn.btn-primary
-        %i.icon-edit
-        = link_to t(:edit_page), edit_page_path(@page)
-      .btn.btn-danger
-        %i.icon-minus-sign
-        = link_to t(:delete_page), page_path(@page), method: :delete, confirm: t(:are_you_sure)
-    .btn.btn-success
-      %i.icon-plus-sign
-      = link_to t(:create_page), new_page_path
+= render 'pages_menu'
 %article
   - if @page     
     .row

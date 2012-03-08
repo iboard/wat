@@ -29,7 +29,7 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand{:href => "#"}Campus{dev&alpha;}
+          %a.brand{:href => "#"} &alpha;Campus
           .container.nav-collapse
             %ul.nav
               %li= link_to t(:home), root_path
@@ -61,14 +61,14 @@
           
       
     %footer
-      .form-actions
-        .span3
-          &copy; 2012 
-          =link_to 'Andreas Altendorfer', "http://about.me/andreas.altendorfer"
-        .span2.offset8
-          = link_to "Fork me on Github", "http://github.com/iboard/wat"
-        .row
-          &nbsp;
+      .nav
+        %li.pull-left
+          %div
+            = "&copy;&nbsp;2012&nbsp;".html_safe
+            = link_to( 'Andreas Altendorfer', "http://about.me/andreas.altendorfer")
+        %li.pull-right{style: 'margin-right: 20px;'}
+          = button_link_to 'icon-share', 'btn span2', "Fork me on Github", "http://github.com/iboard/wat"
+
     /
       Le javascript
       \==================================================
