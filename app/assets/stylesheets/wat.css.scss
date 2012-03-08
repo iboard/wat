@@ -2,15 +2,9 @@ footer {
   margin-top: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
+  margin-bottom: 0px;
   border-top: 1px solid #ddd;
-  background: black;
-  color: #ddd;
-  a {
-    color: #fff;
-    &:hover {
-      color: yellow;
-    }
-  }
+  
 }
 
 textarea {

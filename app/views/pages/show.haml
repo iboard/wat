@@ -16,7 +16,7 @@
   - if @page     
     .row
       %h1= title( @page.title )
-      %address= @page.created_at.to_s
+      %address= @page.created_at.to_s(:long_ordinal)
       .content= markdown( @page.body )
   - else
     .alert.alert-error= t(:page_not_found)

@@ -2,11 +2,11 @@
   %fieldset
     .control-group
       .control-label= f.label :title, t(:title)
-      .controls= f.text_field :title, :disabled => !page.new_record?, class: 'span12'
+      .controls= f.text_field :title, :disabled => !page.new_record?, :style => "width: 100%"
       .control-help= t(:title_can_not_be_changed_once_created)
     .control-group
       .control-label= f.label :body, t(:body)
-      .controls= f.text_area :body, class: 'span12'
+      .controls= f.text_area :body, :style => "width: 100%"
     .control-group
       .form-actions
         = f.submit t(:save_something, what: t(:page)), class: 'btn btn-primary'

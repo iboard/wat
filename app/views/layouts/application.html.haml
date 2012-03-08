@@ -49,24 +49,26 @@
               %br/
               = message
   
-      .row.content
-        %div{ :class => "span#{content_for?(:content_menu) ? "9" : "12"}" }
-          = yield
+      .container
         - if content_for?(:content_menu)
-          .span3
-            .well.sidebar-nav
-              %ul.nav.nav-list
+          .row
+            .span9= yield
+            .span3.sidebar-nav
+              %ul.well.nav.nav-list
                 = yield(:content_menu)
+        - else
+          = yield
+          
       
     %footer
-      .row
-        .span8.offset1
+      .form-actions
+        .span3
           &copy; 2012 
           =link_to 'Andreas Altendorfer', "http://about.me/andreas.altendorfer"
-        .span2.offset1
-          = link_to "Fork me on Github", "http://github.com/iboard/wat", class: "btn"
-    .row
-      &nbsp;
+        .span2.offset8
+          = link_to "Fork me on Github", "http://github.com/iboard/wat"
+        .row
+          &nbsp;
     /
       Le javascript
       \==================================================

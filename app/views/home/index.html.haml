@@ -3,13 +3,13 @@
 - @users.each_with_index do |user,idx|
   .row.well
     .row.span12
-      %h2= user.name
-      .row.span3
+      .span4
+        %h2= user.name
         %ul
           - user.authentications.each do |auth|
             %li
               = auth.provider.to_s.humanize
-      .span3.offset5
+      .span2.offset5
         -if user == current_user
           %ul.nav.nav-stacked
             %li.input-prepend{:class=> "nav btn btn-primary span2"}
