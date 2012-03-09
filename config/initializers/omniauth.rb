@@ -3,7 +3,7 @@ require 'openid/store/filesystem'
 Rails.application.config.middleware.use OmniAuth::Builder do
 
   configure do |config|
-    config.path_prefix = '/auth' if RAILS_ENV == 'production'
+    config.path_prefix = '/auth' if Rails.env == 'production'
   end
 
 
