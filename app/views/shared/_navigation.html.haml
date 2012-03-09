@@ -1,14 +1,19 @@
 %ul{class: "nav pull-right"}
   %li
-    - if user_signed_in?  
-      = link_to( t(:logout), signout_path)
-    - else
+    - unless user_signed_in?  
       = link_to(t(:login), signin_path)
-  - if current_user && current_user.can_execute?('Admin')
+  - if current_user 
     %ul.nav
       %li.dropdown
-        = link_to "Admin <b class='caret'></b>".html_safe, "#", :class => 'dropdown-toggle', 'data-toggle' => 'dropdown'
+        = link_to (current_user.name + " <b class='caret'></b>").html_safe, "#", :class => 'dropdown-toggle', 'data-toggle' => 'dropdown'
         %ul.dropdown-menu
-          %li= link_to(t(:userlist), users_path)
-          %li= link_to(t(:pages), pages_path)
+          %li= icon_link_to 'icon-user', '', t(:edit_profile), user_path(current_user)
+          %li= icon_link_to 'icon-off', '', t(:logout), signout_path
+    - if current_user.can_execute?('Admin')
+      %ul.nav
+        %li.dropdown
+          = link_to "Admin <b class='caret'></b>".html_safe, "#", :class => 'dropdown-toggle', 'data-toggle' => 'dropdown'
+          %ul.dropdown-menu
+            %li= icon_link_to('icon-user', '', t(:userlist), users_path)
+            %li= icon_link_to('icon-list', '', t(:pages), pages_path)
 

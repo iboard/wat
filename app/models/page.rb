@@ -9,4 +9,12 @@ class Page
 
   field :body, type: String
 
+  def is_hero?
+    title == 'hero'
+  end
+
+  def is_featured?
+    title[0] == '@'
+  end
+
 end

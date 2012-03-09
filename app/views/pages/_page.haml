@@ -1,8 +1,34 @@
-.well{:style=> params[:controller]=='home' ? 'height: 200px;' : ''}
-  %h2= link_to page.title.gsub(/^@/,''), page
-  - _link = link_to( "<i class='icon-eye-open'></i>&nbsp;".html_safe+t(:read_more), page, class: 'btn')
-  - _preview = truncate(page.body,length: 350, omission: "... ")
+- _preview = truncate(page.body,length: 350, omission: "... ")
+- _link = icon_link_to( "icon-eye-open", "btn", t(:read_more), page)
+- truncated = _preview.length < page.body.length
+  
+
+.well{:style=> params[:controller]=='home' ? 'min-height: 200px;' : ''}
+  - if can_execute?('Admin')
+    %nav
+      - if page.is_hero?
+        %ul.nav.pull-left
+          %li
+            %label= icon_label 'icon-exclamation-sign icon-white', 'label label-important', "HERO-UNIT", :title => "First article on root-path"
+      - if page.is_featured?
+        %ul.nav.pull-left
+          %li
+            %label= icon_label 'icon-exclamation-sign icon-white', 'label label-info', "FEATURED", :title => 'Shown on root-path'
+      %ul.nav.pull-right
+        %li.dropdown.label
+          =icon_link_to( 'icon-cog icon-white', "", '<b class="caret"></b>'.html_safe, "#", :class => 'dropdown-toggle', 'data-toggle' => 'dropdown')
+          %ul.dropdown-menu
+            %li= label_link_to( 'icon-zoom-in', 'label', t(:open), page_path(page))
+            %li= label_link_to( 'icon-edit', 'label label-info', t(:edit_page), edit_page_path(page))
+            %li= label_link_to( 'icon-remove', 'label label-important', t(:delete), page_path(page), :method => :delete, :confirm => t(:are_you_sure))
+    %p{style: 'clear: left;'}      
+  
+  - if truncated      
+
+    %h2= link_to page.title.gsub(/^@/,''), page
+  - else
+    %h2=page.title.gsub(/^@/,'')
   %article
     = markdown(_preview)
-    - if _preview.length < page.body.length
+    - if truncated
       = _link

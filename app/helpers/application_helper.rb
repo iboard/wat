@@ -19,5 +19,15 @@ module ApplicationHelper
   def markdown(text)
     Markdown.render(text).html_safe
   end
+
+  def can_read?(what)
+    current_user && current_user.can_read?(what)
+  end
+  def can_write?(what)
+    current_user && current_user.can_write?(what)
+  end
+  def can_execute?(what)
+    current_user && current_user.can_execute?(what)
+  end
   
 end

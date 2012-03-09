@@ -92,14 +92,26 @@ module LayoutHelper
     end
   end
 
-  def icon_label( icon, classes, text)
-    content_tag :div, :class => classes do
+  def icon_label( icon, classes, text, *args)
+    options = {
+      :class => classes
+    }
+    args.each{ |a| options.merge!(a) }
+    content_tag :div, options do
       content_tag :span do
         content_tag( :i, :class => icon){"&nbsp;".html_safe} +
         "&nbsp;".html_safe+
         content_tag( :span, text)
       end
     end.html_safe
+  end
+
+  def label_link_to( icon, classes, text, *args)
+    link_to icon_label(icon+" icon-white",classes,text), *args
+  end
+
+  def icon_link_to( icon, classes, text, *args)
+    link_to icon_label(icon,classes,text), *args
   end
 
   def error_label(item,field,span='')

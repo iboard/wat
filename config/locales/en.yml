@@ -73,4 +73,19 @@ en:
     one: "One error prevents %{item} from being saved."
     other: "%{count} errors prevents %{item} from being saved."
   welcome: welcome
-  
+  new_account_hero_unit:
+    one:
+      Before you create an account
+      ============================
+      Please consider to sign up using an _authentication provider_.
+      If you have a _Twitter_, _Facebook_, _Google+_, or any of this identities,
+      go streight to [Sign in and use your provider](/signin). There´s no need to
+      create an account. Once you´ve logged in using an authentication provider
+      you can add a local identity, though.
+    two:
+      Adding an Identity
+      ==================
+      If you signed in already, you can add a local identity by using
+      the same name as used for the actual session you´re logged in with.
+  you_are_signd_in_as: "You're signed in as %{name}"
+  delete: Delete

@@ -14,6 +14,9 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    unless @user.valid? && @user.email
+      flash.now[:info] = t(:please_enter_your_email_address)
+    end
   end
   
   def update

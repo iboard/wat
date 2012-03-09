@@ -1,28 +1,15 @@
 - title t(:welcome)
 
 .row-fluid
-  .span12
-    .hero-unit
-      .row-fluid
-        .span8
-          - if @hero
-            = markdown( @hero.body )
-          - else
-            .alert.alert-error
-              %i.icon-warning-sign
-              %h1
-                Please create a page titled 'hero' which will be displayed here.
-        .span1 &nbsp;
-        .span3
-          - if current_user
-            %h4= current_user.name
-            =button_link_to 'icon-off', 'btn span2', t(:sign_out), signout_path
-          - else
-            %ul.nav
-              %li=button_link_to 'icon-user', 'btn btn-primary span2', t(:sign_in), signin_path
-              %li &nbsp;
-              %li &nbsp;
-              %li=button_link_to 'icon-leaf', 'btn btn-success span2', t(:create_account), new_identity_path
+  .hero-unit
+    .row-fluid
+      - if @hero
+        = markdown( @hero.body )
+      - else
+        .alert.alert-error
+          %i.icon-warning-sign
+          %h1
+            Please create a page titled 'hero' which will be displayed here.
 
 - @features.to_a.in_groups_of(2) do |row|
   .row-fluid
