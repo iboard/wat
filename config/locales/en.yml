@@ -7,9 +7,9 @@ en:
   create_an_account: Create an account
   email: Email
   invalid_credentials_or_user_exists: "Invalid credentials or user exists (%{user})"
-  login: Log in
-  login_as: Logged in as
-  logout: Log out
+  login: Sign in
+  login_as: Signed in as
+  logout: Sign out
   methods: Methods
   new_account: New account
   no_authentication_providers_used: No authentication providers used
@@ -46,7 +46,7 @@ en:
     where your own user is decorated with 'Edit-account' and 'Cancel-account' buttons.
     When editing your account you can add and remove Authentication-providers.
   home_info_logged_out: 
-    You are not logged in. Log in or create a new account. This is a template-application
+    You are not logged in. Sign in or create a new account. This is a template-application
     cloned from http://github.com/iboard/wat
   user: User
   edit_page: Edit page
@@ -72,3 +72,5 @@ en:
     zero: "No errors but %{item} can't be saved."
     one: "One error prevents %{item} from being saved."
     other: "%{count} errors prevents %{item} from being saved."
+  welcome: welcome
+  

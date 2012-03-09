@@ -2,7 +2,7 @@
 %html{:lang => "en"}
   %head
     %meta{:charset => "utf-8"}/
-    %title= content_for?(:title) ? yield(:title) : "Campus (dev &alpha;)"
+    %title= content_for?(:title) ? yield(:title) : "WAT (dev &alpha;)"
     = csrf_meta_tags
     / Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
@@ -29,7 +29,7 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand{:href => "#"} &alpha;Campus
+          %a.brand{:href => "#"} &alpha;WAT
           .container.nav-collapse
             %ul.nav
               %li= link_to t(:home), root_path
@@ -39,27 +39,27 @@
     .container
       - if content_for?(:top_menu)
         %div=content_for(:top_menu)
-    
       - if flash.any?
         .row-fluid
-          - flash.each do |type,message|
-            .alert{:class => "alert alert-#{flash_alert(type)}"}
-              = close_icon 
-              %strong= flash_title(type).html_safe
-              %br/
-              = message
-  
+          .span12
+            - flash.each do |type,message|
+              .alert{:class => "alert alert-#{flash_alert(type)}"}
+                = close_icon 
+                %strong= flash_title(type).html_safe
+                %br/
+                = message
       .row-fluid
         - if content_for?(:content_menu)
-          .row-fluid
-            .span9= yield
-            .span3.sidebar-nav
+          .span9= yield
+          .span3
+            .sidebar-nav
               %h1 &nbsp;
               %ul.well.nav.nav-list
                 = yield(:content_menu)
         - else
-          = yield
-          
+          .span12
+            = yield
+            
       
     %footer
       .nav

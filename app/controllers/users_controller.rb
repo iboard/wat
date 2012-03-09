@@ -3,6 +3,15 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, :only => [:edit, :update, :show]
   before_filter :correct_user?, :only => [:edit, :update, :show]
 
+  def index
+    @users = User.all
+    if current_user
+      flash.now[:info] = t(:home_info_logged_in)
+    else
+      flash.now[:info] = t(:home_info_logged_out)
+    end
+  end
+
   def edit
     @user = User.find(params[:id])
   end

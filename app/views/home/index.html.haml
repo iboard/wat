@@ -1,24 +1,33 @@
-%h1= title "Home / Userlist"
+- title t(:welcome)
 
-.container
-  - @users.each_with_index do |user,idx|
-    %div
-      .well
-        .row
-          .span4
-            %h2= user.name
-            %ul
-              - user.authentications.each do |auth|
-                %li
-                  = auth.provider.to_s.humanize
-          .span2.offset4
-            -if user == current_user
-              %ul.nav.nav-stacked
-                %li= button_link_to 'icon-edit', 'span3 btn btn-primary', t(:edit_your_record).html_safe, user
-                %li= button_link_to 'icon-remove', 'span3 btn btn-danger', t(:cancel_account), user_path(user), :confirm => t(:are_you_sure), :method => :delete
+.row-fluid
+  .span12
+    .hero-unit
+      .row-fluid
+        .span8
+          - if @hero
+            = markdown( @hero.body )
+          - else
+            .alert.alert-error
+              %i.icon-warning-sign
+              %h1
+                Please create a page titled 'hero' which will be displayed here.
+        .span1 &nbsp;
+        .span3
+          - if current_user
+            %h4= current_user.name
+            =button_link_to 'icon-off', 'btn span2', t(:sign_out), signout_path
+          - else
+            %ul.nav
+              %li=button_link_to 'icon-user', 'btn btn-primary span2', t(:sign_in), signin_path
+              %li &nbsp;
+              %li &nbsp;
+              %li=button_link_to 'icon-leaf', 'btn btn-success span2', t(:create_account), new_identity_path
 
-    
-    
-    
-    
-  
+- @features.to_a.in_groups_of(2) do |row|
+  .row-fluid
+    .span6
+      = render row[0] if row[0]
+    .span6
+      = render row[1] if row[1]
+
