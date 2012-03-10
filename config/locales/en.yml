@@ -89,3 +89,4 @@ en:
       the same name as used for the actual session you´re logged in with.
   you_are_signd_in_as: "You're signed in as %{name}"
   delete: Delete
+  save: Save

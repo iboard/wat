@@ -68,15 +68,6 @@ describe ApplicationController do
         sign_up_user name: 'Testuser', password: 'notsecret', email: 'test@iboard.cc'
       end
 
-      it "has a logout button" do
-        visit root_path
-        page.should have_link "Sign out"
-      end
-
-      it "has an edit profile button" do
-        visit root_path
-        page.should have_link "Edit Profile"
-      end
     end
     
   end

@@ -114,6 +114,12 @@ module LayoutHelper
     link_to icon_label(icon,classes,text), *args
   end
 
+  def icon_prefix(icon,text)
+    content_tag :span do
+      content_tag( :i, :class => icon) {} + text
+    end
+  end
+
   def error_label(item,field,span='')
     if item.errors[field].present?
       icon_label 'icon-warning-sign icon-white', "label label-important #{span}", error_message_for(item,field)

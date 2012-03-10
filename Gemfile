@@ -60,6 +60,7 @@ gem "yard"
 gem "redcarpet"
 gem 'albino'
 gem 'nokogiri'
+gem 'simple_form'
 
 # Authentication
 gem "omniauth", ">= 1.0.2"

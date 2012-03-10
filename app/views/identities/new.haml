@@ -1,4 +1,3 @@
-
 - @identity ||= Identity.new
 .row-fluid
   .span6
@@ -13,28 +12,12 @@
     %br/
     %br/
     %br/
-    = form_tag( "/auth/identity/register", :class => "form-vertical") do
+    = simple_form_for(@identity, :class => 'form-vertical',:url=>"/auth/identity/register") do |f|
       - @identity.name ||= current_user.name if current_user
       %fieldset
         %legend= title t(:new_account)
-        - if @identity && @identity.errors.any? 
-          .control-group
-            .controls{:class=>"alert alert-error"}
-              %strong
-                = pluralize(@identity.errors.count, "error") 
-                = t(:prohibited_this_account_from_being_saved)
-              %ul
-                - @identity.errors.full_messages.each do |msg|
-                  %li= msg
-        .control-group{class: @identity.errors[:name].present? ? "error" : ""}
-          .control-label= label_tag :name
-          .controls= text_field_tag :name, @identity.try(:name), :class => "span3", :editable => current_user == nil
-        .control-group{class: @identity.errors[:password].present? ? "error" : ""}
-          .control-label= label_tag :password
-          .controls= password_field_tag :password, '', :class => "span3"
-        .control-group{class: @identity.errors[:password_confirmation].present? ? "error" : ""}
-          .control-label= label_tag :password_confirmation
-          .controls= password_field_tag :password_confirmation, '', :class => "  span3"
-        .control.form-actions
-          = submit_tag t(:register), :class => 'btn btn-danger'
-          = link_to t(:cancel), signin_path, :class => 'btn'
+        =f.input :name, :input_html => {:id => 'name',:name => 'name'}
+        =f.input :password, :input_html => {:id => 'password', :name => 'password'}
+        =f.input :password_confirmation, :input_html => {:name => 'password_confirmation', :id => 'password_confirmation'}
+        =f.button :submit, t(:register), class: 'btn btn-success'
+        =button_link_to 'icon-remove', 'btn', t(:cancel), signin_path

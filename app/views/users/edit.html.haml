@@ -5,36 +5,10 @@
     %li.active= link_to t(:edit), edit_user_path(@user)
     %li= link_to t(:listing_users), users_path
     
-= form_for(@user,:html=>{:class=>"form-vertical"}) do |f|
+= simple_form_for(@user,:html=>{:class=>"form-vertical"}) do |f|
   %fieldset
-    %legend= title "Edit User '#{@user.name}'"
-    - if @user.errors.any?
-      .control-goup
-        .control-label &nbsp;
-        .controls
-          .alert.alert-error
-            - @user.errors.each do |field, error|
-              %strong= field.to_s.humanize
-              = error.to_s
-    .control-group{class: @user.errors[:name].present? ? "error" : ""}
-      .control-label= f.label :name
-      .controls
-        .input-prepend
-          .add-on
-            %span.icon-user
-          = f.text_field :name, :disabled => true
-          %span.help-inline= t(:help_name_uneditable)
-    .control-group{class: @user.errors[:email].present? ? "error" : ""}
-      .control-label= f.label :email
-      .controls
-        .input-prepend
-          .add-on
-            %span.icon-envelope
-          .input= f.text_field :email
-        %span.help-inline
-          - @user.errors.each do |field, error|
-            %strong= field.to_s.humanize
-            = error.to_s
-    .form-actions
-      = f.submit "Save", class: 'btn btn-primary'
-      = link_to t(:cancel), :back, :class => 'btn'
+    %legend= title( "Edit User '#{@user.name}'")
+    =f.input :name, :hint => icon_prefix('icon-exclamation-sign',t(:help_name_uneditable))
+    =f.input :email
+    =f.button :submit, t(:save), class: 'btn btn-primary'
+    =icon_link_to 'icon-remove-sign', 'btn', t(:cancel), :back
