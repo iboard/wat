@@ -1,8 +1,15 @@
 %ul{class: "nav pull-right"}
-  %li
-    - unless user_signed_in?  
-      = link_to(t(:login), signin_path)
-  - if current_user 
+  - unless user_signed_in?  
+    %li.dropdown
+      = link_to ((t(:login))+"<b class='caret'></b>").html_safe, "#", :class => 'dropdown-toggle', 'data-toggle' => 'dropdown'
+      %ul.dropdown-menu
+        %li= icon_link_to 'icon-off', '', t(:login), signin_path
+        %li.hr
+        - Secrets::defined_providers.each do |provider|
+          %li= link_to provider.to_s.humanize, "/auth/#{provider.to_s.downcase}"
+          - if Secrets::secret['openid']
+            %li= link_to "OpenID", "/auth/open_id", :class => 'btn btn-large'        
+  - else
     %ul.nav
       %li.dropdown
         = link_to (current_user.name + " <b class='caret'></b>").html_safe, "#", :class => 'dropdown-toggle', 'data-toggle' => 'dropdown'
