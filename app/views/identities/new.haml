@@ -12,7 +12,7 @@
     %br/
     %br/
     %br/
-    = simple_form_for(@identity, :class => 'form-vertical',:url=>"/auth/identity/register") do |f|
+    = simple_form_for(@identity,:url=>"/auth/identity/register") do |f|
       - @identity.name ||= current_user.name if current_user
       %fieldset
         %legend= title t(:new_account)

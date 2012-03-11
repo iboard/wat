@@ -1,18 +1,20 @@
 footer {
-  position: relative;
-  bottom: 0px;
-  margin-top: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  margin-top: 120px;
   margin-bottom: 0px;
+  margin-left: auto;
+  margin-left: auto;
+  padding: 10px;
   border-top: 1px solid #ddd;
-  width: 100%;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-left: auto;
-  margin-left: auto;
-  margin-top: 150px;
-  background: #ddd;
+  position: absolute fixed;
+  bottom: 0px;
+  background: #444;
+  color: white;
+  a {
+    color: white;
+    &:hover {
+      color: yellow;
+    }
+  }
 }
 
 textarea {

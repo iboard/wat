@@ -5,10 +5,11 @@
     %li.active= link_to t(:edit), edit_user_path(@user)
     %li= link_to t(:listing_users), users_path
     
-= simple_form_for(@user,:html=>{:class=>"form-vertical"}) do |f|
+= simple_form_for(@user,:html=>{:class=>"form-horizontal"}) do |f|
   %fieldset
     %legend= title( "Edit User '#{@user.name}'")
     =f.input :name, :hint => icon_prefix('icon-exclamation-sign',t(:help_name_uneditable))
     =f.input :email
-    =f.button :submit, t(:save), class: 'btn btn-primary'
-    =icon_link_to 'icon-remove-sign', 'btn', t(:cancel), :back
+    .form-actions
+      =f.button :submit, t(:save), class: 'btn btn-primary'
+      =icon_link_to 'icon-remove-sign', 'btn', t(:cancel), :back
