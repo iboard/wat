@@ -21,3 +21,11 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   }
 
 end
+
+
+module OmniAuth
+  module Strategies
+    autoload :Campus, File::join(Rails.root,'lib/campus_authorization')
+  end
+end
+
