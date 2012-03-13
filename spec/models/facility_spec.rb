@@ -15,4 +15,10 @@ describe Facility do
     assert !user.can_execute?('God'), 'Nobody should be execute as god!'
   end
 
+  it "must have a name" do
+    user = User.find_or_create_by(name: 'Testuser', email: 'test@iboard.cc')
+    user.facilities.create(name: '', access: 'rwx')
+    assert !user.valid?, 'User should not save with invalid facility'
+  end
+
 end

@@ -55,5 +55,5 @@ describe UsersController do
     visit users_path
     page.should have_content "Facilities: Admin"
   end
-  
+
 end

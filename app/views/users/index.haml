@@ -2,13 +2,13 @@
 
 .container
   - @users.each_with_index do |user,idx|
-    %div
+    %div{:id => user.id.to_s}
       .well
         .row
           .span4
             %h2= user.name
             - user.facilities_string do |str|
-              %p= str
+              %p.label= str
             %ul
               - user.authentications.each do |auth|
                 %li
@@ -18,6 +18,9 @@
               %ul.nav.nav-stacked
                 %li= button_link_to 'icon-edit', 'span3 btn btn-primary', t(:edit_your_record).html_safe, user
                 %li= button_link_to 'icon-remove', 'span3 btn btn-danger', t(:cancel_account), user_path(user), :confirm => t(:are_you_sure), :method => :delete
+            -elsif can_execute?('Admin')
+              %ul.nav.nav-stacked
+                %li{id:"#{user.id.to_s}-edit-button"}= button_link_to 'icon-cog', 'span3 btn', t(:edit_facilities), user_facilities_path(user)
 
     
     

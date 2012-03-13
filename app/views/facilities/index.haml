@@ -1,0 +1,41 @@
+%h1= title( t(:edit_facilities_for_user, user: @user.name))
+
+%p
+  %br/
+
+#facilities
+  %table.table.table-striped
+    %thead.thead
+      %tr
+        %th= t(:facility_name)
+        %th= t(:access_mode)
+        %th &nbsp;
+    %tbody.tbody
+      - @user.facilities.each do |facility|
+        %tr
+          %td
+            = facility.name
+          %td
+            = "(#{facility.access})"
+          %td{:id => "#{facility.id.to_s}-remove-button"}
+            = icon_link_to 'icon-remove icon-white', 'btn btn-danger btn-small', t(:remove), user_facility_path(@user,facility), confirm: t(:are_you_sure), method: :delete
+
+.well
+  %h2= t(:new_facility)
+  %p
+  =form_for [@user,@user.facilities.new], html: { :class => 'form-horizontal'} do |f|
+    %fieldset
+      .control-group
+        .control-label= f.label :name
+        .controls= f.select :name, Facility::FACILITY_SELECT
+      .control-group
+        .control-label=f.label :access
+        .controls
+          =f.check_box :can_read
+          =f.label :can_read, t(:read), style: 'display: inline'
+          =f.check_box :can_write
+          =f.label :can_write, t(:write), style: 'display: inline'
+          =f.check_box :can_execute
+          =f.label :can_execute, t(:execute), style: 'display: inline'
+      .form-actions
+        =f.submit t(:add_facility), class: 'btn btn-primary'

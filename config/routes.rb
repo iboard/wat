@@ -1,5 +1,11 @@
 Wat::Application.routes.draw do
 
+  get "facilities_controller/index"
+
+  get "facilities_controller/new"
+
+  get "facilities_controller/delete"
+
   # Default
   root :to => "home#index"
 
@@ -19,6 +25,7 @@ Wat::Application.routes.draw do
   #  a valid email-address which the user can edit at any time.
   resources :users do
     resources :authentications, only: [:destroy]
+    resources :facilities
   end
 
   # Identity

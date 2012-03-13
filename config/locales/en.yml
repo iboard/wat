@@ -91,3 +91,17 @@ en:
   delete: Delete
   save: Save
   facilities: "Facilities: %{list}"
+  edit_facilities: "Edit facilities"
+  you_need_to_sign_in: 'You need to sign in for access to this page.'
+  edit_facilities_for_user: "Edit facilities for user '%{user}'"
+  facility_successfully_removed: 'Facility successfully removed.'
+  new_facility: New Facility
+  add_facility: Add Facility
+  read: read
+  write: write
+  execute: execute
+  facility_could_not_be_added: "Facilit couldn't be added (%{errors})"
+  facility_successfully_added: Facility successfully added.
+  admin: Admin
+  author: Author
+  moderator: Moderator

@@ -26,9 +26,9 @@
     %table.table.table-striped
       %thead.thead
         %tr
-        %th= t(:provider)
-        %th= t(:uid)
-        %th.span1 &nbsp;
+          %th= t(:provider)
+          %th= t(:uid)
+          %th.span1 &nbsp;
         %tbody.tbody
         - _provider = Secrets::defined_providers.to_a
         - _provider << 'identity'
