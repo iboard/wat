@@ -8,7 +8,7 @@
 = simple_form_for(@user,:html=>{:class=>"form-horizontal"}) do |f|
   %fieldset
     %legend= title( "Edit User '#{@user.name}'")
-    =f.input :name, :hint => icon_prefix('icon-exclamation-sign',t(:help_name_uneditable))
+    =f.input :name, :disabled => !@user.new_record?, :hint => icon_prefix('icon-exclamation-sign',t(:help_name_uneditable))
     =f.input :email
     .form-actions
       =f.button :submit, t(:save), class: 'btn btn-primary'
