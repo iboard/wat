@@ -39,7 +39,11 @@
               - else
                 = type.to_s.humanize unless _selected
             - if _selected
-              %td= _selected.uid.to_s
+              %td
+                = _selected.uid.to_s
+                - if _selected.provider == 'identity'
+                  /
+                  = Identity.where(name: @user.name).first.name
               %td
                 = button_link_to( 'icon-minus', 'btn btn-info span2', t(:remove),user_authentication_path(@user,_selected), confirm: t(:are_you_sure), method: :delete)
                     

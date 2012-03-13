@@ -19,18 +19,14 @@ class User
   after_destroy :clear_identities
 
   def memorize_identities
-    @identities_to_remove = self.authentications.where(provider: "identity")
+    @identities_to_remove = Identity.where(name: self.name)
   end
 
   # Model Identity is handeled by omniauth-identity and is not
   # connected in any way to our user-model. To clean up unused
   # Identities we have to delete through this user's authentications  
   def clear_identities
-    if @identities_to_remove
-      @identities_to_remove.each do |authentication|
-        Identity.where( _id: authentication._id).delete
-      end
-    end
+    @identities_to_remove.delete_all if @identities_to_remove
   end
 
   # Add an authentication to this user
@@ -38,7 +34,7 @@ class User
   def add_omniauth(auth)
     self.authentications.find_or_create_by( 
       provider: auth['provider'],
-      uid: auth['uid']
+      uid: auth['uid'].to_s
     )
   end
 
