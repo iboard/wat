@@ -15,14 +15,20 @@ class User
   attr_accessible :name, :email
 
 
+  before_destroy :memorize_identities
   after_destroy :clear_identities
+
+  def memorize_identities
+    @identities_to_remove = self.authentications.where(provider: "identity")
+  end
+
   # Model Identity is handeled by omniauth-identity and is not
   # connected in any way to our user-model. To clean up unused
   # Identities we have to delete through this user's authentications  
   def clear_identities
-    self.authentications.where(provider: 'identity').each do |i|
-      if i.is_a?(Identity)
-        Identity.find(i.id).delete
+    if @identities_to_remove
+      @identities_to_remove.each do |authentication|
+        Identity.where( _id: authentication._id).delete
       end
     end
   end
