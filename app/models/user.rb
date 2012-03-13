@@ -99,5 +99,11 @@ class User
     facility = self.facilities.where(name: what).first
     facility && facility.can_execute?
   end
+
+  def facilities_string(&block)
+    if self.facilities.any?
+      yield I18n.translate(:facilities, list: self.facilities.map{|f| "#{f.name} (#{f.access})"}.join(", "))
+    end
+  end
 end
 

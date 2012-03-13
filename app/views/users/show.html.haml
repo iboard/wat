@@ -12,6 +12,8 @@
       %ul.nav.span4
         %li= button_link_to 'icon-user', '', @user.name, '#'
         %li= button_link_to 'icon-envelope', '', @user.email, "mailto:#{@user.email}" if @user.email
+        - @user.facilities_string do |str|
+          %li= icon_link_to 'icon-cog', '', str
     .span2.offset3            
       %ul.nav.nav-pills
         %li= button_link_to 'icon-edit', 'nav btn btn-primary span3', t(:edit), edit_user_path(@user)
@@ -41,9 +43,6 @@
             - if _selected
               %td
                 = _selected.uid.to_s
-                - if _selected.provider == 'identity'
-                  /
-                  = Identity.where(name: @user.name).first.name
               %td
                 = button_link_to( 'icon-minus', 'btn btn-info span2', t(:remove),user_authentication_path(@user,_selected), confirm: t(:are_you_sure), method: :delete)
                     

@@ -41,5 +41,19 @@ describe UsersController do
     visit users_path
     page.should have_no_content "Testuser"
   end
+
+  it "shows facilities in user-show view" do
+    User.first.facilities.create name: 'Admin', access: 'rwx'
+    sign_in_user name: 'Testuser', password: 'notsecret'
+    visit user_path(User.first)
+    page.should have_content "Facilities: Admin"
+  end
+
+  it "shows facilities in user-list" do
+    User.first.facilities.find_or_create_by name: 'Admin', access: 'rwx'
+    sign_in_user name: 'Testuser', password: 'notsecret'
+    visit users_path
+    page.should have_content "Facilities: Admin"
+  end
   
 end

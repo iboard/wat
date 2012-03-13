@@ -90,3 +90,4 @@ en:
   you_are_signd_in_as: "You're signed in as %{name}"
   delete: Delete
   save: Save
+  facilities: "Facilities: %{list}"
