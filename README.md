@@ -33,6 +33,7 @@ Things done after generating the app from the template
   * Added:    Foursquare Authentication
   * More:     Bootstraping
   * Added:    Tumblr Authentication
+  * Added:    Facilities (see below)
 
 
 Installation
@@ -58,6 +59,20 @@ API-Keys
   * [Tumblr](http://www.tumblr.com/oauth/apps)
 
     
+The 'Facility-Idea'
+-------------------
+
+A facility has a name (like 'Admin', 'Author') and an access-mask like in the unix-filesystem (rwx)
+Facilities are embedded to the user and helper-functions like _can_execute?('Admin')_ will return true or false if the user has this facility.
+
+Next step will be: Models like 'Page' will embed Facilities too in order to support code like this:
+
+```ruby
+  @page.facilities.create(name: 'user one', access: 'rw-')
+  if current_user.can_write_on?(@page)
+    ...
+  end
+```
 
 
 
