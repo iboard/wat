@@ -34,6 +34,7 @@ Things done after generating the app from the template
   * More:     Bootstraping
   * Added:    Tumblr Authentication
   * Added:    Facilities (see below)
+  * Added:    I18n for :en and :de
 
 
 Installation

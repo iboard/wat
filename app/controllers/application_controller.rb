@@ -1,5 +1,10 @@
+# -*- encoding : utf-8 -*-
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
+
+  before_filter :ensure_locale
+
   helper_method :current_user
   helper_method :user_signed_in?
   helper_method :correct_user?
@@ -50,6 +55,10 @@ class ApplicationController < ActionController::Base
     
     def can_execute?(what)
       current_user && current_user.can_execute?(what)
+    end
+
+    def ensure_locale
+      I18n.locale = session[:locale] if session[:locale]
     end
 
 

@@ -19,4 +19,3 @@ describe Secrets do
     assert Secrets::secret['openid']['store'] == "tmp/"
   end
 end
-

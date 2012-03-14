@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class SessionsController < ApplicationController
 
   def new
@@ -50,4 +51,8 @@ class SessionsController < ApplicationController
     redirect_to root_url, :alert => t(:authentication_error, error: params[:message].humanize)
   end
 
+  def switch_language
+    session[:locale] = params[:locale].to_sym
+    redirect_to :back, :notice => t(:language_changed_to, :lang => t(params[:locale].to_sym))
+  end
 end

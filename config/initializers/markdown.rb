@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'redcarpet'
 
 class HTMLwithAlbino < Redcarpet::Render::HTML

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class FacilitiesController < ApplicationController
 
   before_filter :authenticate_admin!

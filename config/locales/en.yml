@@ -1,7 +1,11 @@
+# -*- encoding : utf-8 -*-
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  en: English
+  de: Deutsch
+  language_changed_to: "Language changed to %{lang}"
   authentication_error: "Authentication error: %{error}"
   authentication_providers: Assign authentication providers
   create_an_account: Create an account
@@ -110,3 +114,5 @@ en:
   back_to_user_list: 'Back to user listing'
   edit_facilities_or: "Edit user's facilities or ..."
   user_has_no_facilities_defined_yet: User has no facilities defined yet.
+  create_account: Create Account
+  open: open

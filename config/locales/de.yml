@@ -1,0 +1,120 @@
+# -*- encoding : utf-8 -*-
+
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+de:
+  en: English
+  de: Deutsch
+  language_changed_to: "Die Sprache wurde auf %{lang} geändert"
+  authentication_error: "Authentifizierungs-Fehler: %{error}"
+  authentication_providers: Authentifizierungs-Anbieter
+  create_an_account: Erstellen Sie einen Account
+  email: Email
+  invalid_credentials_or_user_exists: "Login ungültig oder Benutzer bereits vorhanden (%{user})"
+  login: Anmelden
+  login_as: Angemeldet als
+  logout: Abmelden
+  methods: Methoden
+  new_account: Neuer Account
+  no_authentication_providers_used: Keine Authentifizierungs-Anbieter gewählt
+  or_login_below: oder melden sie sich hier an
+  please_enter_your_email_address: Geben Sie bitte Ihre EMail-Adresse an
+  prohibited_this_account_from_being_saved: verhinderten diesen Account zu speichern.
+  register: Registrieren
+  root: Root
+  sign_in: Anmelden
+  signed_in: Angemeldet
+  signed_out: Abgemeldet
+  use_a_login_provider: Benutzen Sie einen Authentifizierungs-Anbieter
+  you: Sie
+  user_successfully_created: Benutzer wurde erfolgreich erstellt
+  user_cant_be_saved: Benutzer konnte nicht gespeichert werden!
+  edit: 'Bearbeiten'
+  edit_your_record: '<b>Sie</b> –&gt; bearbeiten'
+  listing_users: Benutzerliste
+  user_successfully_updated: Ihre Daten wurden erfolgreich aktualisiert
+  cannot_save_user: Benutzerdaten konnten nicht gespeichert werden.
+  sign_up_info:  Falls Sie noch keinen Account haben können sie sich hier anmelden. Kostenlos und unverbindlich
+  errors_label: Fehler
+  or: "oder"
+  help_name_uneditable: Der Benutzername kann nach dem Erstellen nicht mehr geändert werden
+  are_you_sure: Sind Sie sicher?
+  remove: "entfernen"
+  removed_authentication_successfully: Die Authentifizierung wurde entfernt
+  cancel_account: 'Nicht zufrieden? Account löschen'
+  user_successfully_deleted: "Benutzer wurde gelöscht. Hoffentlich sehen wir Sie wieder."
+  provider_added: "Anbieter <strong>%{provider}</strong> wurde hinzugefügt."
+  last_authentication_cannot_be_deleted: Die letzte Authentifizierungsmöglichkeit kann nicht gelöscht werden!
+  home_info_logged_in: 
+    Signed in. In this template-application you see a list of registered users
+    where your own user is decorated with 'Edit-account' and 'Cancel-account' buttons.
+    When editing your account you can add and remove Authentication-providers.
+  home_info_logged_out: 
+    You are not logged in. Sign in or create a new account. This is a template-application
+    cloned from http://github.com/iboard/wat
+  user: Benutzer
+  edit_page: Seite bearbeiten
+  you_not_allowed_to_edit_this_page: Sie sind nicht berechtigt diese Seite zu bearbeiten
+  update_page: Seite aktualisieren
+  title_can_not_be_changed_once_created: Der Titel kann im Nachhinein nicht mehr geändert werden!
+  page_successfully_updated: 'Seite wurde erfolgreich aktualisiert'
+  nothing_changed: 'Es wurden keine Änderungen vorgenommen'
+  cancel: Abbrechen
+  create_page: Seite erzeugen
+  delete_page: Seite löschen
+  save_something: "%{what} speichern"
+  page_successfully_deleted: Seite wurde erfolgreich gelöscht
+  page_not_found: Die Seite wurde nicht gefunden (404).
+  page_successfully_created: Seite wurde erfolgreich erzeugt
+  page: Seite
+  canceled: Abgebrochen.
+  read_more: mehr lesen …
+  listing_pages: Liste aller Seiten
+  access_denied: Zugriff nicht erlaubt.
+  pages: 'Seiten'
+  errors_prevent_item_from_saving:
+    zero: "Keine Fehler aber %{item konnte dennoch nicht gespeichert werden."
+    one: "Ein Fehler verhindert dass '%{item}' gespeichert wird."
+    other: "%{count} Fehler verhindern dass '%{item}' gespeichert wird."
+  welcome: Willkommen
+  new_account_hero_unit:
+    one:
+      Bevor Sie ein Benutzerkonnto erstellen
+      =======================================
+      Ziehen sie bitte in Betracht einen _Authentifizierungsanbieter_ zu benutzen.
+      Wenn sie einen _Twitter_, _Facebook_, _Google+_ oder anderen Anbieter haben,
+      gehen Sie direkt zu [Anmelden und wählen sie ihren Anbieter](/signin). In dem Fall
+      Müssen sie keinen neuen Benutzer erstellen. Wenn Sie durch einen Anbieter angemeldet sind
+      können sie später jedoch auch noch einen lokalen Benutzer hinzufügen.
+    two:
+      Einen lokalen Benutzer hinzufügen
+      ==================================
+      Wenn sie bereits (mit einem Authentifizierungsanbieter) angemeldet sind können sie auch
+      einen lokalen Benutzer hinzufügen. Es wird dann der selbe Name benutzt, der vom Anbieter
+      geliefert wude.
+  you_are_signd_in_as: "Sie sind als %{name} angemeldet"
+  delete: Löschen
+  save: Speichern
+  facilities: "Kompetenz(en): %{list}"
+  edit_facilities: "Kompetenzen bearbeiten"
+  you_need_to_sign_in: 'Sie müssen angemeldet sein um diese Seite bearbeiten zu können.'
+  edit_facilities_for_user: "Kompetenzen des Benutzers '%{user}' bearbeiten"
+  facility_successfully_removed: 'Kompetenz wurde entfernt.'
+  new_facility: Neue Kompetenz
+  add_facility: Kompetenz hinzufügen
+  read: lesen
+  write: schreiben
+  execute: ausführen
+  facility_could_not_be_added: "Kompetenz konnte nicht hinzufügt werden (%{errors})"
+  facility_successfully_added: Kompetenz wurde erfolgreich hinzufügt.
+  admin: Administrator
+  author: Autor
+  moderator: Moderator
+  page_title_hint: 'Beginne mit @ um diese Seite auf der Startseite anzuzeigen'
+  page_body_hint: "Sie können Markdown benutzen. Siehe rechte Box"
+  back_to_user_list: 'Zurück zur Benutzerliste'
+  edit_facilities_or: "Kompetenzen bearbeiten oder ..."
+  user_has_no_facilities_defined_yet: Der Benutzer hat noch keine Kompetenzen.
+  create_account: Benuzterkonto erstellen
+  open: Öffnen

@@ -1,0 +1,3 @@
+- I18n.available_locales.each do |locale|
+  = icon_link_to 'icon-volume-down icon-white', 'inline', I18n.translate(locale.to_sym), switch_language_path(locale)
+

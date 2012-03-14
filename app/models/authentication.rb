@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Authentication
   include Mongoid::Document
   field :provider, :type => String

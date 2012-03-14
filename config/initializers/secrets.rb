@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # Configuration YAML reader
 module Secrets
 

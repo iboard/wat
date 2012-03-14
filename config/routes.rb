@@ -1,10 +1,5 @@
+# -*- encoding : utf-8 -*-
 Wat::Application.routes.draw do
-
-  get "facilities_controller/index"
-
-  get "facilities_controller/new"
-
-  get "facilities_controller/delete"
 
   # Default
   root :to => "home#index"
@@ -37,6 +32,10 @@ Wat::Application.routes.draw do
   # ----
   # A semi-static page with a title (as key) and a body
   resources :pages
+
+
+  # Language support
+  match '/switch_language/:locale' => 'sessions#switch_language', :as => :switch_language
 
   
 end

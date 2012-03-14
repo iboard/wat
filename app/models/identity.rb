@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Identity
   include Mongoid::Document
   include OmniAuth::Identity::Models::Mongoid
