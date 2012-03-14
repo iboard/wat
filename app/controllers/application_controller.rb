@@ -58,7 +58,33 @@ class ApplicationController < ActionController::Base
     end
 
     def ensure_locale
-      I18n.locale = session[:locale] if session[:locale]
+      set_locale = I18n.default_locale
+      session[:locale] ||= cookies[:locale]
+
+      if session[:locale]
+        set_locale = session[:locale]
+      else
+        if request.env['HTTP_ACCEPT_LANGUAGE'].present?
+          client_locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+          if I18n.available_locales.include?(client_locale.to_sym)
+            set_locale = client_locale.to_sym
+            flash.now[:info] = %{
+              <strong>Language #{I18n.translate(session[:locale])} selected</strong>
+              <br/>
+              We've tried to set the language of this site to the language provided by your browser.
+              You may change the language at the bottom of the page. We provide English and German.
+              <br/><br/>
+              <strong>Es wurde die Sprache #{I18n.translate(session[:locale])} ausgewählt</strong>
+              <br/>
+              Wir haben versucht die Sprache dieser Website anhand der Angaben ihres Browsers zu setzen.
+              Sie können die Sprache am Ende der Seite umstellen. Wir stellen Englisch und Deutsch zur Verfügung.
+            }.html_safe
+          end
+        end
+      end
+      session[:locale] = set_locale
+      cookies.permanent[:locale] = set_locale
+      I18n.locale = set_locale
     end
 
 

@@ -53,6 +53,7 @@ class SessionsController < ApplicationController
 
   def switch_language
     session[:locale] = params[:locale].to_sym
+    cookies.permanent[:locale] = params[:locale].to_sym
     redirect_to :back, :notice => t(:language_changed_to, :lang => t(params[:locale].to_sym))
   end
 end
