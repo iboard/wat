@@ -69,12 +69,12 @@ class ApplicationController < ActionController::Base
           if I18n.available_locales.include?(client_locale.to_sym)
             set_locale = client_locale.to_sym
             flash.now[:info] = %{
-              <strong>Language #{I18n.translate(session[:locale])} selected</strong>
+              <strong>Language #{I18n.translate(set_locale.to_sym)} selected</strong>
               <br/>
               We've tried to set the language of this site to the language provided by your browser.
               You may change the language at the bottom of the page. We provide English and German.
               <br/><br/>
-              <strong>Es wurde die Sprache #{I18n.translate(session[:locale])} ausgewählt</strong>
+              <strong>Es wurde die Sprache #{I18n.translate(set_locale.to_sym)} ausgewählt</strong>
               <br/>
               Wir haben versucht die Sprache dieser Website anhand der Angaben ihres Browsers zu setzen.
               Sie können die Sprache am Ende der Seite umstellen. Wir stellen Englisch und Deutsch zur Verfügung.
