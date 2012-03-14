@@ -56,7 +56,7 @@ en:
   edit_page: Edit page
   you_not_allowed_to_edit_this_page: You're not allowed to edit this page.
   update_page: Update page
-  title_can_not_be_changed_once_created: The title can't be changed once the page is created.
+  permalink_can_not_be_changed_once_created: The permalink can't be changed once the page is created.
   page_successfully_updated: 'Page successfully updated.'
   nothing_changed: 'Nothing changed'
   cancel: Cancel
@@ -116,3 +116,4 @@ en:
   user_has_no_facilities_defined_yet: User has no facilities defined yet.
   create_account: Create Account
   open: open
+  userlist: Listing users

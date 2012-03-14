@@ -8,7 +8,7 @@ describe PagesController do
 
   before(:each) do
     Page.delete_all
-    @page = Page.create!(title: "First Page", body: lorem())
+    @page = Page.create!(permalink: "First Page", title: 'First Page', body: lorem())
     User.delete_all
     Identity.delete_all
     sign_up_user name: 'Testuser', password: 'notsecret', email: 'test@iboard.cc'
@@ -56,6 +56,7 @@ describe PagesController do
     it "create a new page" do
       page.should have_link "Create page"
       click_link "Create page"
+      fill_in "page_permalink", with: "A new page for WAT"
       fill_in "page_title", with: "A new page for WAT"
       fill_in "page_body", with: lorem()
       click_button "Save Page"
@@ -76,7 +77,7 @@ describe PagesController do
 
     it "list available pages" do
       ["Page One", "Page Two", "Page Three"].each do |_title|
-        Page.create title: _title, body: lorem
+        Page.create permalink: _title, title: _title, body: lorem
       end
       visit pages_path
       page.should have_link "Page One"
@@ -85,13 +86,13 @@ describe PagesController do
     end
 
     it "delete a page from the page::index" do
-      Page.create title: "please destroy me", body: "Hello World"
+      Page.create permalink: "please destroy me", title: "please destroy me", body: "Hello World"
       visit pages_path
       page.should have_link "Delete"
     end
 
     it "edit a page from the page::index" do
-      Page.create title: "please edit me", body: "Hello World"
+      Page.create permalink: "please edit me", title: "please edit me", body: "Hello World"
       visit pages_path
       page.should have_link "Edit page"
     end
@@ -99,6 +100,15 @@ describe PagesController do
     it "create a new page from page::index" do
       visit pages_path
       page.should have_link "Create page"
+    end
+
+    it "should not accept empty permalinks" do
+      visit new_page_path
+      fill_in "page_permalink", with: ""
+      fill_in "page_title", with: "ABC"
+      fill_in "page_body", with: lorem
+      click_button "Save Page"
+      page.should have_content "Permalinkcan't be blank"
     end
 
     it "should not accept empty title" do
@@ -110,13 +120,13 @@ describe PagesController do
     end
 
     it "labels hero-unit" do
-      Page.create title: 'hero', body: "Ruby Is Hero"
+      Page.create permalink: "hero", title: 'hero', body: "Ruby Is Hero"
       visit pages_path
       page.should have_content "HERO-UNIT"
     end
 
     it "labels featured-articles" do
-      Page.create title: '@feature1', body: "Ruby Is Hero"
+      Page.create permalink: "@feature1", title: '@feature1', body: "Ruby Is Hero"
       visit pages_path
       page.should have_content "FEATURED"
     end

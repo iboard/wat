@@ -18,7 +18,7 @@ describe ApplicationController do
 
     before(:all) do
       Page.delete_all
-      @page = Page.create!(title: "First Page", body: 'Lorem ipsum dolores')
+      @page = Page.create!(permalink: "First Page", title: 'First Page', body: 'Lorem ipsum dolores')
     end
         
     before(:each) do
@@ -36,7 +36,7 @@ describe ApplicationController do
       end
   
       it "shows the hero-page" do
-        Page.create title: 'hero', body: "This is the hero\n==========\n\nlorem ipsum dolores"
+        Page.create permalink: 'hero', title: 'hero', body: "This is the hero\n==========\n\nlorem ipsum dolores"
         visit root_path
         page.should have_content "This is the hero"
       end
@@ -44,17 +44,17 @@ describe ApplicationController do
       it "shows a message to create the hero-page if not exists" do
         Page.delete_all
         visit root_path
-        page.should have_content "Please create a page titled 'hero' which will be displayed here"
+        page.should have_content "Please create a page with permalink 'hero' which will be displayed here."
       end
 
       it "shows pages prefixed by @" do
-        Page.create title: '@header1', body: "This is for the homepage"
+        Page.create permalink: '@header1', title: '@header1', body: "This is for the homepage"
         visit root_path
         page.should have_content "This is for the homepage"
       end
 
       it "doesn't show the featured-label" do
-        Page.create title: '@header2', body: "This is for the homepage"
+        Page.create permalink: '@header2', title: '@header2', body: "This is for the homepage"
         visit root_path
         page.should_not have_content "FEATURED"
       end

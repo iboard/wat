@@ -57,7 +57,7 @@ de:
   edit_page: Seite bearbeiten
   you_not_allowed_to_edit_this_page: Sie sind nicht berechtigt diese Seite zu bearbeiten
   update_page: Seite aktualisieren
-  title_can_not_be_changed_once_created: Der Titel kann im Nachhinein nicht mehr geändert werden!
+  permalink_can_not_be_changed_once_created: Der Permalink kann im Nachhinein nicht mehr geändert werden!
   page_successfully_updated: 'Seite wurde erfolgreich aktualisiert'
   nothing_changed: 'Es wurden keine Änderungen vorgenommen'
   cancel: Abbrechen
@@ -118,3 +118,4 @@ de:
   user_has_no_facilities_defined_yet: Der Benutzer hat noch keine Kompetenzen.
   create_account: Benuzterkonto erstellen
   open: Öffnen
+  userlist: Benutzerliste

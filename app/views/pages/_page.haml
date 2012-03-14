@@ -25,9 +25,9 @@
   
   - if truncated      
 
-    %h2= link_to page.title.gsub(/^@/,''), page
+    %h2= link_to page.title, page
   - else
-    %h2=page.title.gsub(/^@/,'')
+    %h2=page.title
   %article
     = markdown(_preview)
     - if truncated

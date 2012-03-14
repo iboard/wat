@@ -19,7 +19,7 @@ class PagesController < ApplicationController
   end
 
   def new
-    @page = Page.new title: ''
+    @page = Page.new permalink: ''
   end
 
   def create

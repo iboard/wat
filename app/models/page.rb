@@ -4,18 +4,21 @@ class Page
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  key  :title
-  validates_presence_of :title
-  validates_uniqueness_of :title
+  key  :permalink
+  validates_presence_of :permalink
+  validates_uniqueness_of :permalink
 
-  field :body, type: String
+  field :title, type: String, :localize => true
+  validates_presence_of :title
+  
+  field :body, type: String, :localize => true
 
   def is_hero?
-    title == 'hero'
+    permalink == 'hero'
   end
 
   def is_featured?
-    title[0] == '@'
+    permalink[0] == '@'
   end
 
 end
