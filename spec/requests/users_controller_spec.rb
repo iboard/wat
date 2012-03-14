@@ -8,7 +8,8 @@ describe UsersController do
   before(:each) do
     User.delete_all
     Identity.delete_all
-    sign_up_user name: 'Testuser', password: 'notsecret', email: 'test@iboard.cc'
+    sign_up_user name: 'Testuser', password: 'notsecret', email: 'test@iboard.cc'    
+    User.first.facilities.create name: 'Admin', access: 'rwx'
   end
  
   it "should login user" do
@@ -54,6 +55,15 @@ describe UsersController do
     sign_in_user name: 'Testuser', password: 'notsecret'
     visit users_path
     page.should have_content "Facilities: Admin"
+  end
+
+  it "should not show foreign users unless current_user is admin" do
+    visit signout_path
+    User.create  name: 'Foreigner', email: 'alien@iboard.cc'
+    sign_up_user name: 'Hacker', password: 'notsecret', email: 'hacked@iboard.cc'    
+    visit users_path
+    page.should_not have_content "Foreigner"
+    page.should have_content "Access denied"
   end
 
 end

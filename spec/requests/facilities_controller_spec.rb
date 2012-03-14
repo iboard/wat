@@ -48,6 +48,12 @@ describe FacilitiesController do
     page.should have_content 'Admin'
     page.should have_content 'r-x'
   end
+
+  it "shows 'no facilites yet' if user has no" do
+    sign_in_user name: 'Testuser', password: 'notsecret'
+    visit user_facilities_path(@user2)
+    page.should have_content "User has no facilities defined yet" 
+  end
   
 
 end

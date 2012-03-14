@@ -36,7 +36,7 @@
               %li= link_to 'README', page_path('readme')
             = render 'shared/navigation'
     
-    .container
+    .container.main
       - if content_for?(:top_menu)
         %div=content_for(:top_menu)
       - if flash.any?

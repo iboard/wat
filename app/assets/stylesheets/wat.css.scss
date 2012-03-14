@@ -1,3 +1,7 @@
+html {
+  background: #444;
+}
+
 footer {
   margin-top: 120px;
   margin-bottom: 0px;
@@ -5,8 +9,6 @@ footer {
   margin-left: auto;
   padding: 10px;
   border-top: 1px solid #ddd;
-  position: absolute fixed;
-  bottom: 0px;
   background: #444;
   color: white;
   a {

@@ -107,3 +107,6 @@ en:
   moderator: Moderator
   page_title_hint: 'Begin with @ to show this page on the start page'
   page_body_hint: "You can use Markdown here. See sidebar on the right"
+  back_to_user_list: 'Back to user listing'
+  edit_facilities_or: "Edit user's facilities or ..."
+  user_has_no_facilities_defined_yet: User has no facilities defined yet.

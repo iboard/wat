@@ -4,11 +4,10 @@ class UsersController < ApplicationController
   before_filter :correct_user?, :only => [:edit, :update, :show]
 
   def index
-    @users = User.all
-    if current_user
-      flash.now[:info] = t(:home_info_logged_in)
+    if can_execute?('Admin')
+      @users = User.all
     else
-      flash.now[:info] = t(:home_info_logged_out)
+      redirect_to root_path, :alert => t(:access_denied)
     end
   end
 

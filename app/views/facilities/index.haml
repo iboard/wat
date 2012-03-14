@@ -1,24 +1,32 @@
+- content_for :content_menu do
+  %h3= t(:edit_facilities_or)
+  %p
+  %p= icon_link_to 'icon-list', 'btn', t(:back_to_user_list), users_path
+
 %h1= title( t(:edit_facilities_for_user, user: @user.name))
 
 %p
   %br/
 
 #facilities
-  %table.table.table-striped
-    %thead.thead
-      %tr
-        %th= t(:facility_name)
-        %th= t(:access_mode)
-        %th &nbsp;
-    %tbody.tbody
-      - @user.facilities.each do |facility|
+  - unless @user.facilities.any?
+    %p.alert.alert-info= t(:user_has_no_facilities_defined_yet)
+  - else
+    %table.table.table-striped
+      %thead.thead
         %tr
-          %td
-            = facility.name
-          %td
-            = "(#{facility.access})"
-          %td{:id => "#{facility.id.to_s}-remove-button"}
-            = icon_link_to 'icon-remove icon-white', 'btn btn-danger btn-small', t(:remove), user_facility_path(@user,facility), confirm: t(:are_you_sure), method: :delete
+          %th= t(:facility_name)
+          %th= t(:access_mode)
+          %th &nbsp;
+      %tbody.tbody
+        - @user.facilities.each do |facility|
+          %tr
+            %td
+              = facility.name
+            %td
+              = "(#{facility.access})"
+            %td{:id => "#{facility.id.to_s}-remove-button", style: "text-align: right"}
+              = icon_link_to 'icon-remove icon-white', 'btn btn-danger btn-small', t(:remove), user_facility_path(@user,facility), confirm: t(:are_you_sure), method: :delete
 
 .well
   %h2= t(:new_facility)
