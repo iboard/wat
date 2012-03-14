@@ -1,0 +1,29 @@
+- content_for :content_menu do
+  .well
+    %h3 Markdown
+    %div{style: 'font-family: monospace'}
+      = "Header Level 1"
+      %br/
+      = "============="
+      %br/
+      = "Using **BOLD** and _italic_"
+      %br/
+      = "Header Level 2"
+      %br/
+      = "--------------"
+      %br/
+      = "  * Bullet List"
+      %br/
+      = "  * Item 2"
+      %br/
+      = "  * Item 3"
+      %br/
+      = "  1. Numbered list"
+      %br/
+      = "  1. item 2"
+      %br/
+      = "  1. item 3"
+      %br/
+      = "  [Text](http://.....)"
+
+    %p= icon_link_to 'icon-question-sign', '', "Markdown", "http://daringfireball.net/projects/markdown/"

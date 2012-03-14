@@ -1,10 +1,11 @@
-- if current_user && current_user.can_execute?('Admin')
+- if can_execute?('Admin')
   - content_for :content_menu do
     %h3= t(:admin)
     %address= current_user.name
-    - if @page
+    - if @page && !@page.new_record?
       %ul.nav
-        %li= button_link_to 'icon-edit', 'btn btn-primary', t(:edit_page), edit_page_path(@page)
+        - unless ['edit', 'new'].include? params[:action]
+          %li= button_link_to 'icon-edit', 'btn btn-primary', t(:edit_page), edit_page_path(@page)
         %li= button_link_to 'icon-minus-sign', 'btn btn-danger', t(:delete_page), page_path(@page), method: :delete, confirm: t(:are_you_sure)
     %ul.nav
       %li= button_link_to 'icon-list', 'btn btn-default', t(:listing_pages), pages_path

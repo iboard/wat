@@ -105,3 +105,5 @@ en:
   admin: Admin
   author: Author
   moderator: Moderator
+  page_title_hint: 'Begin with @ to show this page on the start page'
+  page_body_hint: "You can use Markdown here. See sidebar on the right"
