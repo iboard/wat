@@ -35,6 +35,7 @@ Things done after generating the app from the template
   * Added:    Tumblr Authentication
   * Added:    Facilities (see below)
   * Added:    I18n for :en and :de
+  * Added:    Model `Page`
 
 
 Installation
@@ -75,6 +76,15 @@ Next step will be: Models like 'Page' will embed Facilities too in order to supp
   end
 ```
 
+Model Page
+----------
+
+* A page has a _parmalink_ which is used as a key -> http://..../permalink
+* Title and body can be translated using mongoID :localize => true
+* Use permalink 'hero' for the "Hero-Page" displayed at the root-path
+* Begin permalink with @ will make a page "featured" and displays the page below the hero-page at the root_path.
+* Create a page in any language. Save it. Switch language (at the bottom of the screen). Edit the page and translate it.
+* Create one page permalinked as 'README' or remove the menu-item from `views/layout/application.haml`
 
 
 License
