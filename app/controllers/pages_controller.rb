@@ -3,7 +3,7 @@
 class PagesController < ApplicationController
 
   def index
-    unless current_user && current_user.can_execute?("Admin")
+    unless can_execute?("Admin")
       redirect_to root_path, :alert => t(:access_denied)
     else
       @pages = Page.asc(:title)
@@ -25,7 +25,7 @@ class PagesController < ApplicationController
   def create
     if params[:commit] == t(:cancel)
       redirect_to root_path, :notice => t(:canceled)
-    elsif !current_user || !current_user.can_write?('Admin')
+    elsif !can_write?('Admin')
       redirect_to root_path, :alert => t(:access_denied)
     else
       @page = Page.create(params[:page])
@@ -39,7 +39,7 @@ class PagesController < ApplicationController
 
   def edit
     @page = Page.find(params[:id])
-    unless current_user && current_user.can_write?('Admin')
+    unless can_write?('Admin')
       redirect_to @page, :alert => t(:you_not_allowed_to_edit_this_page)
     end
   end
@@ -51,7 +51,7 @@ class PagesController < ApplicationController
       return
     end
     
-    unless current_user && current_user.can_write?('Admin')
+    unless can_write?('Admin')
       redirect_to @page, :alert => t(:you_not_allowed_to_edit_this_page)
     else
       if @page.update_attributes(params[:page])
@@ -64,7 +64,7 @@ class PagesController < ApplicationController
 
   def destroy
     @page = Page.find(params[:id])
-    unless current_user && current_user.can_execute?('Admin')
+    unless can_execute?('Admin')
       redirect_to @page, :notice => t(:access_denied)
     else
       @page.delete

@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
     end
 
     def authenticate_admin!
-      unless can_execute?('Admin')
+      unless current_user && current_user.can_execute?('Admin')
         redirect_to signin_path, :alert => t(:access_denied)
       end
     end
