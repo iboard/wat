@@ -53,6 +53,7 @@ de:
   home_info_logged_out: 
     You are not logged in. Sign in or create a new account. This is a template-application
     cloned from http://github.com/iboard/wat
+  home: Home
   user: Benutzer
   edit_page: Seite bearbeiten
   you_not_allowed_to_edit_this_page: Sie sind nicht berechtigt diese Seite zu bearbeiten
@@ -72,6 +73,7 @@ de:
   read_more: mehr lesen …
   listing_pages: Liste aller Seiten
   access_denied: Zugriff nicht erlaubt.
+  access_mode: Zugriffsmodus
   pages: 'Seiten'
   errors_prevent_item_from_saving:
     zero: "Keine Fehler aber %{item konnte dennoch nicht gespeichert werden."
@@ -108,6 +110,7 @@ de:
   execute: ausführen
   facility_could_not_be_added: "Kompetenz konnte nicht hinzufügt werden (%{errors})"
   facility_successfully_added: Kompetenz wurde erfolgreich hinzufügt.
+  facility_name: Kompetenz
   admin: Administrator
   author: Autor
   moderator: Moderator
@@ -120,3 +123,13 @@ de:
   open: Öffnen
   userlist: Benutzerliste
   edit_profile: Benutzerkonto bearbeiten
+  action: Aktion
+  body: Inhalt
+  identity: Identität
+  name: Name
+  not_yet_connected: Noch nicht verbunden
+  provider: Anbieter
+  title: Titel
+  title_can_not_be_changed_once_created: Der Titel kann nicht mehr geändert werden wenn die Seite einmal erstellt wurde
+  uid: Eindeutige Kennung
+  user_list: Benutzerliste

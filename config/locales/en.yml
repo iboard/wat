@@ -52,6 +52,7 @@ en:
   home_info_logged_out: 
     You are not logged in. Sign in or create a new account. This is a template-application
     cloned from http://github.com/iboard/wat
+  home: Home
   user: User
   edit_page: Edit page
   you_not_allowed_to_edit_this_page: You're not allowed to edit this page.
@@ -71,6 +72,7 @@ en:
   read_more: read more …
   listing_pages: List all pages
   access_denied: Access denied.
+  access_mode: Access mode
   pages: 'Pages'
   errors_prevent_item_from_saving:
     zero: "No errors but %{item} can't be saved."
@@ -92,6 +94,7 @@ en:
       If you signed in already, you can add a local identity by using
       the same name as used for the actual session you´re logged in with.
   you_are_signd_in_as: "You're signed in as %{name}"
+  identity: Identity
   delete: Delete
   save: Save
   facilities: "Facilities: %{list}"
@@ -118,3 +121,13 @@ en:
   open: open
   userlist: Listing users
   edit_profile: Edit profile
+  action: Action
+  body: Body
+  facility_name: Facility name
+  name: Name
+  not_yet_connected: Not connected by now
+  provider: Provider
+  title: Title
+  title_can_not_be_changed_once_created: Title can't be changed once it's created
+  UID: Unique ID
+  user_list: Listing users
