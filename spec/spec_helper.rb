@@ -39,5 +39,10 @@ end
 
 Spork.each_run do
   Dir.glob("#{Rails.root}/app/models/*.rb").sort.each { |file| load file }
+  Settings.reload_from_files(
+  Rails.root.join("config", "settings.yml").to_s,
+  Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
+  Rails.root.join("config", "environments", "#{Rails.env}.yml").to_s
+)
 end
 
