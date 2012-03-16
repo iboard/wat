@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/railsjedi/rails_config.git
+  revision: 83dce720c30d41545cb4d84fb4e800c3929d4500
+  specs:
+    rails_config (0.2.6)
+      activesupport (>= 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -301,6 +308,7 @@ DEPENDENCIES
   omniauth-twitter
   pow
   rails (= 3.2.2)
+  rails_config!
   rb-fsevent
   redcarpet
   rspec-rails (>= 2.8.1)

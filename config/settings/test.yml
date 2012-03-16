@@ -1,0 +1,10 @@
+# Test Settings
+smtp_server: mail.example.com
+smtp_port: 25
+smtp_domain: example.com
+smtp_user: username
+smtp_password: 'secret'
+smtp_authentication: plain
+smtp_enable_starttls_auto: true
+smtp_host: "www.example.com"
+smtp_default_from: "noreply@example.com"

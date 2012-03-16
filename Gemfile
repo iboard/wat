@@ -62,6 +62,7 @@ gem "redcarpet"
 gem 'albino'
 gem 'nokogiri'
 gem 'simple_form'
+gem 'rails_config', git: "https://github.com/railsjedi/rails_config.git"
 
 # Authentication
 gem "omniauth", ">= 1.0.2"

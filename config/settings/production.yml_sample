@@ -1,0 +1,10 @@
+# Production Settings
+smtp_server: mail.domain.com
+smtp_port: 25
+smtp_domain: domain.com
+smtp_user: username
+smtp_password: 'secret'
+smtp_authentication: plain
+smtp_enable_starttls_auto: true
+smtp_host: "www.domain.com"
+smtp_default_from: "noreply@domain.com"

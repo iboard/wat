@@ -45,8 +45,10 @@ Installation
   2. copy config/test_secrets.yml to config/secrets.yml and 
     * Enter your API-Keys
     * Disable services you don't want by remarking it.
-  3. bundle
-  4. Run `bundle execute guard`
+  3. copy config/settings/*yml_sample to *yml and edit development.yml and production.yml
+    * DO NOT EDIT test.yml!
+  4. bundle
+  5. Run `bundle execute guard`
 
 API-Keys
 --------

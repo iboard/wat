@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Facility
-  FACILITY_SELECT=[[I18n.translate(:admin), 'Admin'], [I18n.translate(:author), 'Author']]
   include Mongoid::Document
+  FACILITY_SELECT=[[I18n.translate(:admin), 'Admin'], [I18n.translate(:author), 'Author']]
 
   field :name
   field :access, type: String, default: "r--"

@@ -21,7 +21,11 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
+    email_changed = @user.email != params[:email]
     if @user.update_attributes(params[:user])
+      if email_changed
+        UserMailer.registration_confirmation(@user).deliver
+      end
       redirect_to @user, :notice => t(:user_successfully_updated)
     else
       flash.now[:alert]= t(:cannot_save_user)
