@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def index
     if can_execute?('Admin')
-      @users = User.order(:name,:asc)
+      @users = User.asc(:name)
     else
       redirect_to root_path, :alert => t(:access_denied)
     end
