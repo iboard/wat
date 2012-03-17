@@ -23,6 +23,7 @@ class SessionsController < ApplicationController
       current_user.save!
     else
       user = User.create_with_omniauth(auth,current_user)
+      _send_notification = true
       session[:user_id] = user.id
     end
 
@@ -30,6 +31,12 @@ class SessionsController < ApplicationController
       if user.email.blank? 
         redirect_to edit_user_path(user.id.to_s), :info => t(:please_enter_your_email_address)
       else
+        unless user.email_confirmed?
+          flash[:message] = t(:email_not_confirmed_yet, email: user.email).html_safe
+          if _send_notification
+            UserMailer.registration_confirmation(user).deliver
+          end
+        end
         redirect_to root_url, :notice => t(:signed_in)
       end
     else
@@ -39,7 +46,6 @@ class SessionsController < ApplicationController
         redirect_to user, :alert => t(:invalid_credentials_or_user_exists, user: user ? user.name : '')
       end
     end
-
   end
 
   def destroy

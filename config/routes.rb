@@ -21,7 +21,11 @@ Wat::Application.routes.draw do
   resources :users do
     resources :authentications, only: [:destroy]
     resources :facilities
+    member do
+      get 'confirm_email/:token' => :confirm_email, :as => 'confirm_email'
+    end
   end
+  
 
   # Identity
   # --------

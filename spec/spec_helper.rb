@@ -29,20 +29,26 @@ Spork.prefork do
         DatabaseCleaner.strategy = :truncation
         DatabaseCleaner.orm = "mongoid"
       end
-    
+
+      config.include(MailerMacros)    
+
       config.before(:each) do
         DatabaseCleaner.clean
+        reset_email
       end
     
   end
 end
 
 Spork.each_run do
+  # Check if any model changed
   Dir.glob("#{Rails.root}/app/models/*.rb").sort.each { |file| load file }
+
+  # Reload Settings
   Settings.reload_from_files(
-  Rails.root.join("config", "settings.yml").to_s,
-  Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
-  Rails.root.join("config", "environments", "#{Rails.env}.yml").to_s
-)
+    Rails.root.join("config", "settings.yml").to_s,
+    Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
+    Rails.root.join("config", "environments", "#{Rails.env}.yml").to_s
+  )
 end
 

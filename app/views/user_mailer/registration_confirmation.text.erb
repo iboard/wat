@@ -1,5 +1,22 @@
-<%= @user.name -%>, thank you for registering!
+ENGLISH
+
+  Please confirm your e-mail address "<%= @user.email -%>" for 
+  user "<%= @user.name -%>"
+
+  Confirm: <%= confirm_email_user_url(@user,@user.confirm_email_token) -%>
+
+  If you didn't create an account or changed your email recently, just ignore this mail.
+
+DEUTSCH
+
+  Bestätigen Sie bitte ihre Email-Adresse "<%= @user.email -%>" für
+  den Benutzer "<%= @user.name -%>"
+
+  Bestätigen: <%= confirm_email_user_url(@user,@user.confirm_email_token)  -%>
+
+  Falls Sie kein Benutzerkonto erstellt oder Ihre Email-Adresse geändert haben
+  ignorieren Sie dieses Mail einfach.
 
 
-Visit your profile at <%= strip_tags(link_to edit_user_url(@user)) -%>
-
+----
+<%= Settings.application_mail_signature -%>

@@ -9,15 +9,17 @@ class User
   field                   :email, :type => String 
   validates_format_of     :email, :with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i, :allow_nil => true
 
+  field                   :confirm_email_token
+  field                   :email_confirmed_at, :type => DateTime
+
   embeds_many             :authentications
   embeds_many             :facilities
   
   # Accessible Attributes
   attr_accessible :name, :email
 
-
   before_destroy :memorize_identities
-  after_destroy :clear_identities
+  after_destroy  :clear_identities
 
   def memorize_identities
     @identities_to_remove = Identity.where(name: self.name)
@@ -88,23 +90,33 @@ class User
 
   def can_read?(what)
     facility = self.facilities.where(name: what).first
-    facility && facility.can_read?
+    facility && facility.can_read? && self.email_confirmed?
   end
 
   def can_write?(what)
     facility = self.facilities.where(name: what).first
-    facility && facility.can_write?
+    facility && facility.can_write? && self.email_confirmed?
   end
 
   def can_execute?(what)
     facility = self.facilities.where(name: what).first
-    facility && facility.can_execute?
+    facility && facility.can_execute? && self.email_confirmed?
   end
 
   def facilities_string(&block)
     if self.facilities.any?
       yield I18n.translate(:facilities, list: self.facilities.map{|f| "#{f.name} (#{f.access})"}.join(", "))
     end
+  end
+
+  def generate_confirm_email_token!
+    self.confirm_email_token = SecureRandom.hex(10)
+    self.email_confirmed_at = nil
+    self.save!
+  end
+
+  def email_confirmed?
+    self.email_confirmed_at != nil
   end
 end
 

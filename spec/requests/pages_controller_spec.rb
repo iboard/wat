@@ -12,6 +12,9 @@ describe PagesController do
     User.delete_all
     Identity.delete_all
     sign_up_user name: 'Testuser', password: 'notsecret', email: 'test@iboard.cc'
+    user=User.first
+    user.email_confirmed_at = Time.now
+    user.save!
   end  
 
   it "page should show up with title as key" do

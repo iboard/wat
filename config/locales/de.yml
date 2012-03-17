@@ -133,3 +133,7 @@ de:
   title_can_not_be_changed_once_created: Der Titel kann nicht mehr geändert werden wenn die Seite einmal erstellt wurde
   uid: Eindeutige Kennung
   user_list: Benutzerliste
+  email_confirmed: Danke! Ihre EMail-Adresse ist nun bestätigt.
+  token_not_found: Das 'Token' wurde nicht gefunden. Möglicherweise haben Sie ihre Email-Adresse bereits bestätigt.
+  email_not_confirmed_yet: "Ihre EMail-Adresse ist noch nicht bestätigt. Kontrollieren Sie bitte Ihr Postfach für %{email}."
+  please_confirm_your_address: "Überprüfen sie bitte Ihr Postfach für %{address} und bestätigen sie ihre email-address!"

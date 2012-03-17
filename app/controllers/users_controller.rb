@@ -21,10 +21,11 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
-    email_changed = @user.email != params[:email]
+    email_changed = @user.email != params[:user][:email]
     if @user.update_attributes(params[:user])
       if email_changed
         UserMailer.registration_confirmation(@user).deliver
+        flash[:message] = t(:please_confirm_your_address, :address => @user.email)
       end
       redirect_to @user, :notice => t(:user_successfully_updated)
     else
@@ -32,7 +33,6 @@ class UsersController < ApplicationController
       render :edit
     end
   end
-
 
   def show
     @user = User.find(params[:id])
@@ -43,6 +43,18 @@ class UsersController < ApplicationController
     @user.authentications.delete_all
     @user.delete
     redirect_to signout_path, :notice => t(:user_successfully_deleted)
+  end
+
+  def confirm_email
+    @user = User.where(_id: params[:id], confirm_email_token: params[:token]).first
+    if @user
+      @user.confirm_email_token = nil
+      @user.email_confirmed_at = Time.now.utc
+      @user.save!
+      redirect_to root_path, :notice => t(:email_confirmed)
+    else
+      redirect_to root_path, :alert => t(:token_not_found)
+    end
   end
 
 end

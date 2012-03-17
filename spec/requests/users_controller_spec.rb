@@ -8,8 +8,11 @@ describe UsersController do
   before(:each) do
     User.delete_all
     Identity.delete_all
-    sign_up_user name: 'Testuser', password: 'notsecret', email: 'test@iboard.cc'    
-    User.first.facilities.create name: 'Admin', access: 'rwx'
+    sign_up_user name: 'Testuser', password: 'notsecret', email: 'test@iboard.cc'
+    user = User.first
+    user.email_confirmed_at =  Time.now
+    user.facilities.create name: 'Admin', access: 'rwx'
+    user.save!
   end
  
   it "should login user" do
@@ -64,6 +67,41 @@ describe UsersController do
     visit users_path
     page.should_not have_content "Foreigner"
     page.should have_content "Access denied"
+  end
+
+  it "sends a confirmation mail when a user is created" do
+    visit signout_path
+    sign_up_user name: "Friendly User", password: 'notsecret', email: 'newuser@iboard.cc'
+    last_email.to.should include('newuser@iboard.cc')
+  end
+
+  it "sends a confirmation mail when the email changes" do
+    visit signout_path
+    sign_up_user name: "Friendly User", password: 'notsecret', email: 'user@iboard.cc'
+    click_link "Edit"
+    fill_in "Email", with: "user1@iboard.cc"
+    click_button "Save"
+    last_email.to.should include('user1@iboard.cc')
+  end
+
+  it "checks email confirmed" do
+    visit signout_path
+    User.delete_all
+    sign_up_user name: "Friendly User", password: 'notsecret', email: 'user@iboard.cc'
+    user = User.first
+    assert user.email_confirmed? == false, "email_confirmed? should be false"
+    visit confirm_email_user_path(user,user.confirm_email_token)
+    user.reload
+    assert user.email_confirmed? == true, "email_confirmed? should be true after confirming it"
+  end
+
+  it "shows a message if user doesn't confirm their email yet" do
+    visit signout_path
+    User.delete_all
+    sign_up_user name: "Friendly User", password: 'notsecret', email: 'user@iboard.cc'
+    visit signout_path
+    sign_in_user name: "Friendly User", password: 'notsecret'
+    page.should have_content "Your email isn't confirmed yet. Please check your mailbox for user@iboard.cc."
   end
 
 end

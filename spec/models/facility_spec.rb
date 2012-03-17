@@ -4,6 +4,7 @@ describe Facility do
 
   it "defines class Facility for User" do
     user = User.create(name: 'Testuser', email: 'test@iboard.cc')
+    user.email_confirmed_at =  Time.now
     user.facilities.create(name: 'Admin', access: 'rwx')
     user.save!
     user.reload

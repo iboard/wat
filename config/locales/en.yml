@@ -131,3 +131,7 @@ en:
   title_can_not_be_changed_once_created: Title can't be changed once it's created
   UID: Unique ID
   user_list: Listing users
+  email_confirmed: Thank you! Your e-mail is confirmed now.
+  token_not_found: Token not found. Maybe your e-mail-address is confirmed already.
+  email_not_confirmed_yet: "Your email isn't confirmed yet. Please check your mailbox for %{email}."
+  please_confirm_your_address: "Please check your inbox for %{address} and confirm your email-address!"

@@ -36,7 +36,7 @@ module LayoutHelper
     when 'info'
       '<i class="icon-info-sign"></i> Info'
     else 
-      '<i class="icon-eye-open"></> Message'
+      '<i class="icon-eye-open"></i> Message'
     end
   end
 

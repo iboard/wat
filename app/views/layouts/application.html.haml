@@ -42,12 +42,12 @@
       - if flash.any?
         .row-fluid
           .span12
-            - flash.each do |type,message|
+            - flash.each do |type,msg|
               .alert{:class => "alert alert-#{flash_alert(type)}"}
                 = close_icon 
                 %strong= flash_title(type).html_safe
                 %br/
-                = message
+                = msg
       .row-fluid
         - if content_for?(:content_menu)
           .span9= yield
