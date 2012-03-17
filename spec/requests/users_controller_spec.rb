@@ -101,7 +101,26 @@ describe UsersController do
     sign_up_user name: "Friendly User", password: 'notsecret', email: 'user@iboard.cc'
     visit signout_path
     sign_in_user name: "Friendly User", password: 'notsecret'
-    page.should have_content "Your email isn't confirmed yet. Please check your mailbox for user@iboard.cc."
+    page.should have_content "Your email is not confirmed by now. Please check your mailbox for user@iboard.cc."
+    page.should have_link "Resend confirmation mail"
+  end
+
+  describe "as an admin" do
+    before(:each) do
+      User.delete_all
+      Identity.delete_all
+      sign_up_user name: "Admin", password: 'notsecret', email: 'admin@iboard.cc'
+      @admin = User.first
+      @confirmed_at = Time.now
+      @admin.email_confirmed_at = @confirmed_at
+      @admin.facilities.create name: 'Admin', access: 'rwx'
+      @admin.save
+    end
+
+    it "shows the confirmation status in user::index" do
+      visit users_path
+      page.should have_content "Email confirmed at: #{I18n.localize(@confirmed_at)}"
+    end
   end
 
 end

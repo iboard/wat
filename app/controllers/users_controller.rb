@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.authentications.delete_all
-    @user.delete
+    @user.destroy
     redirect_to signout_path, :notice => t(:user_successfully_deleted)
   end
 
@@ -55,6 +55,12 @@ class UsersController < ApplicationController
     else
       redirect_to root_path, :alert => t(:token_not_found)
     end
+  end
+
+  def resend_confirmation_mail
+    @user = User.find(params[:id])
+    UserMailer.registration_confirmation(@user).deliver
+    redirect_to root_path, :notice => t(:please_confirm_your_address, :address => @user.email)
   end
 
 end

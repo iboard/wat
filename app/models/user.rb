@@ -22,14 +22,14 @@ class User
   after_destroy  :clear_identities
 
   def memorize_identities
-    @identities_to_remove = Identity.where(name: self.name).all
+    @identity_to_remove = Identity.where(name: self.name).first
   end
 
   # Model Identity is handeled by omniauth-identity and is not
   # connected in any way to our user-model. To clean up unused
   # Identities we have to delete through this user's authentications  
   def clear_identities
-    @identities_to_remove.delete_all if @identities_to_remove
+    @identity_to_remove.delete if @identity_to_remove
   end
 
   # Add an authentication to this user

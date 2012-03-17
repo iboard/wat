@@ -32,7 +32,11 @@ class SessionsController < ApplicationController
         redirect_to edit_user_path(user.id.to_s), :info => t(:please_enter_your_email_address)
       else
         unless user.email_confirmed?
-          flash[:message] = t(:email_not_confirmed_yet, email: user.email).html_safe
+          flash[:message] = t(:email_not_confirmed_yet, email: user.email, 
+            confirm_link: dirty_link_to(I18n.t(:resend_confirmation_mail), resend_confirmation_mail_user_path(user))
+          ).html_safe
+
+
           if _send_notification
             UserMailer.registration_confirmation(user).deliver
           end
@@ -61,5 +65,10 @@ class SessionsController < ApplicationController
     session[:locale] = params[:locale].to_sym
     cookies.permanent[:locale] = params[:locale].to_sym
     redirect_to :back, :notice => t(:language_changed_to, :lang => t(params[:locale].to_sym))
+  end
+
+private
+  def dirty_link_to(body,url)
+    "<a href='#{url}'>#{body}</a>".html_safe
   end
 end

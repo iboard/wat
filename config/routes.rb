@@ -23,6 +23,7 @@ Wat::Application.routes.draw do
     resources :facilities
     member do
       get 'confirm_email/:token' => :confirm_email, :as => 'confirm_email'
+      get 'resend_confirmation_mail' => :resend_confirmation_mail, :as => 'resend_confirmation_mail'
     end
   end
   

@@ -135,5 +135,12 @@ de:
   user_list: Benutzerliste
   email_confirmed: Danke! Ihre EMail-Adresse ist nun bestätigt.
   token_not_found: Das 'Token' wurde nicht gefunden. Möglicherweise haben Sie ihre Email-Adresse bereits bestätigt.
-  email_not_confirmed_yet: "Ihre EMail-Adresse ist noch nicht bestätigt. Kontrollieren Sie bitte Ihr Postfach für %{email}."
+  email_not_confirmed_yet: 
+    Ihre EMail-Adresse ist noch nicht bestätigt. Kontrollieren Sie bitte Ihr Postfach für %{email}.
+    <br/>
+    Kein Mail erhalten? %{resend_link}
   please_confirm_your_address: "Überprüfen sie bitte Ihr Postfach für %{address} und bestätigen sie ihre email-address!"
+  email_confirmed_at: "Email bestätigt am: %{when}"
+  not_confirmed_yet: "Noch nicht bestätigt"
+  connected_providers: "Verknüpfte Authentifizierungsanbieter"
+  resend_confirmation_mail: "Bestätigungsmail erneut senden"

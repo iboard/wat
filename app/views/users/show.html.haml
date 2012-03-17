@@ -5,22 +5,8 @@
     %li= link_to t(:edit), edit_user_path(@user)
     %li= link_to t(:listing_users), users_path
     
-.hero-unit
-  .row
-    .span4
-      %h2= title('User')
-      %ul.nav.span4
-        %li= button_link_to 'icon-user', '', @user.name, '#'
-        %li= button_link_to 'icon-envelope', '', @user.email, "mailto:#{@user.email}" if @user.email
-        - @user.facilities_string do |str|
-          %li= icon_link_to 'icon-cog', '', str
-    .span2.offset3            
-      %ul.nav.nav-pills
-        %li= button_link_to 'icon-edit', 'nav btn btn-primary span3', t(:edit), edit_user_path(@user)
-        %li= button_link_to 'icon-remove', 'nav btn btn-danger span3',t(:cancel_account), user_path(@user), :confirm => t(:are_you_sure), :method => :delete
-    %div{style: 'clear: both'}
-  
-
+= render 'user', :user => @user
+.clear-both
 .row
   .span12
     %table.table.table-striped
