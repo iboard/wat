@@ -22,7 +22,7 @@ class User
   after_destroy  :clear_identities
 
   def memorize_identities
-    @identities_to_remove = Identity.where(name: self.name)
+    @identities_to_remove = Identity.where(name: self.name).all
   end
 
   # Model Identity is handeled by omniauth-identity and is not
