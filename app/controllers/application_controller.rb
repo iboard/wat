@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
 
   private
     def current_user
+      return $CURRENT_USER if Rails.env == 'test' && $CURRENT_USER.present? && $CURRENT_USER
       begin
         @current_user ||= User.find(session[:user_id]) if session[:user_id]
       rescue Mongoid::Errors::DocumentNotFound

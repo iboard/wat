@@ -105,6 +105,22 @@ describe UsersController do
     page.should have_link "Resend confirmation mail"
   end
 
+  it "adds an Identity to an existing user" do
+    visit signout_path
+    @twitteruser = User.create name: 'Twitter User', email: 'twitter@example.com'
+    @twitteruser.authentications.create provider: "twitter", uid: "1345"
+    set_current_user(@twitteruser)
+    visit new_identity_path
+    fill_in "password", with: "ABCdefg"
+    fill_in "password_confirmation", with: "ABCdefg"
+    click_button "Register"
+    page.should have_content "Provider identity added to your account."
+    unset_current_user
+    sign_in_user name: "Twitter User", password: 'ABCdefg'
+    page.should have_content "Signed in"
+  end
+
+  
   describe "as an admin" do
     before(:each) do
       User.delete_all
@@ -121,6 +137,7 @@ describe UsersController do
       visit users_path
       page.should have_content "Email confirmed at: #{I18n.localize(@confirmed_at)}"
     end
+
   end
 
 end

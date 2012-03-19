@@ -21,3 +21,12 @@ def sign_in_user(options={})
   fill_in "Password", with: options[:password]
   click_button "Sign in"
 end
+
+def set_current_user(user)
+  $CURRENT_USER = user
+end
+
+def unset_current_user
+  $CURRENT_USER = nil
+end
+
