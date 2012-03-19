@@ -5,6 +5,7 @@ class AuthenticationsController < ApplicationController
     @user = User.find(params[:user_id])
     unless @user.authentications.count == 1
       @user.authentications.find(params[:id]).delete
+      Identity.where(name: @user.name).first.delete
       @user.save
       redirect_to user_path(@user), :notice => t(:removed_authentication_successfully)
     else
