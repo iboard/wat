@@ -4,16 +4,20 @@ WAT (WebApplicationTemplate)
 WAT is derived from RailsApp/templates by [Daniel Kehoe](https://github.com/DanielKehoe)
 
 Featuring
+---------
 
   * MongoDB / MongoID
   * OmniAuth
   * HAML
   * Based on Rails 3.2.2
+  * TTD with RSpec
+  * Twitter Bootstrap
 
 _see:_
 
   * [GitHub/RailsApps](https://github.com/RailsApps/rails3-application-templates)
   * [WAT](https://github.com/iboard/wat)
+
 
     THIS PROJECT IS FOR TESTING PURPOSES ONLY (YET)
     YOU MAY USE IT AS A STARTER APP FOR YOUR APPLICATION
@@ -36,19 +40,21 @@ Things done after generating the app from the template
   * Added:    Facilities (see below)
   * Added:    I18n for :en and :de
   * Added:    Model `Page`
+  * Added:    Confirm registraton mail
 
 
 Installation
 ============
 
-  1. Clone or fork this project from [Github](http://github.com/iboard/wat)
-  2. copy config/test_secrets.yml to config/secrets.yml and 
+  1. Install [mongodb](http://mongodb.org) and [rvm](http://beginrescueend.com/rvm/install/)
+  2. Clone or fork this project from [Github](http://github.com/iboard/wat)
+  3. copy config/test_secrets.yml to config/secrets.yml and 
     * Enter your API-Keys
     * Disable services you don't want by remarking it.
-  3. copy config/settings/*yml_sample to *yml and edit development.yml and production.yml
+  4. copy config/settings/*yml_sample to *yml and edit development.yml and production.yml
     * DO NOT EDIT test.yml!
-  4. bundle
-  5. Run `bundle execute guard`
+  5. bundle
+  6. Run `bundle execute guard`
 
 API-Keys
 --------
@@ -62,6 +68,8 @@ API-Keys
   * [LinkedIn](https://www.linkedin.com/secure/developer)
   * [Tumblr](http://www.tumblr.com/oauth/apps)
 
+Models
+======
     
 The 'Facility-Idea'
 -------------------
@@ -82,7 +90,7 @@ Model Page
 ----------
 
 * A page has a _parmalink_ which is used as a key -> http://..../permalink
-* Title and body can be translated using mongoID :localize => true
+* Title and body can be translated using mongoID `:localize => true`
 * Use permalink 'hero' for the "Hero-Page" displayed at the root-path
 * Begin permalink with @ will make a page "featured" and displays the page below the hero-page at the root_path.
 * Create a page in any language. Save it. Switch language (at the bottom of the screen). Edit the page and translate it.
@@ -95,4 +103,14 @@ License
 Public Domain Dedication
 ------------------------
 
-This work is a compilation and derivation from other previously released works. With the exception of various included works, which may be restricted by other licenses, the author or authors of this code dedicate any and all copyright interest in this code to the public domain. We make this dedication for the benefit of the public at large and to the detriment of our heirs and successors. We intend this dedication to be an overt act of relinquishment in perpetuity of all present and future rights to this code under copyright law.
+This work is a compilation and derivation from other previously released works. With the exception of 
+various included works, which may be restricted by other licenses, the author or authors of this code 
+dedicate any and all copyright interest in this code to the public domain. We make this dedication for 
+the benefit of the public at large and to the detriment of our heirs and successors. We intend this 
+dedication to be an overt act of relinquishment in perpetuity of all present and future rights to this 
+code under copyright law.
+
+Running Demo
+============
+
+There is a running installation at [andi.altendorfer.at](http://andi.altendorfer.at)
