@@ -4,6 +4,15 @@
   .hero-unit
     .row-fluid
       - if @hero
+        - if can_execute?('Admin')
+          %ul.nav.pull-right
+            %li.dropdown
+              =icon_link_to( 'icon-cog', "btn", '<b class="caret"></b>'.html_safe, "#", :class => 'dropdown-toggle', 'data-toggle' => 'dropdown')
+              %ul.dropdown-menu
+                %li= icon_link_to( 'icon-zoom-in', '', t(:open_page), page_path(@hero))
+                %li= icon_link_to( 'icon-edit', '', t(:edit_page), edit_page_path(@hero))
+                %li= icon_link_to( 'icon-remove', '', t(:delete), page_path(@hero), :method => :delete, :confirm => t(:are_you_sure))
+    
         = markdown( @hero.body )
       - else
         .alert.alert-error

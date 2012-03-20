@@ -2,11 +2,12 @@
   - content_for :content_menu do
     %h3= t(:admin)
     %address= current_user.name
-    - if @page && !@page.new_record?
+    .btn-group
+      - if @page && !@page.new_record?
+        %ul.nav
+          - unless ['edit', 'new'].include? params[:action]
+            %li= button_link_to 'icon-edit', 'btn btn-primary span2', t(:edit_page), edit_page_path(@page)
+          %li= button_link_to 'icon-minus-sign', 'btn btn-danger span2', t(:delete_page), page_path(@page), method: :delete, confirm: t(:are_you_sure)
       %ul.nav
-        - unless ['edit', 'new'].include? params[:action]
-          %li= button_link_to 'icon-edit', 'btn btn-primary', t(:edit_page), edit_page_path(@page)
-        %li= button_link_to 'icon-minus-sign', 'btn btn-danger', t(:delete_page), page_path(@page), method: :delete, confirm: t(:are_you_sure)
-    %ul.nav
-      %li= button_link_to 'icon-list', 'btn btn-default', t(:listing_pages), pages_path
-      %li= button_link_to 'icon-plus-sign', 'btn btn-success', t(:create_page), new_page_path
+        %li= button_link_to 'icon-list', 'btn btn-default span2', t(:listing_pages), pages_path
+        %li= button_link_to 'icon-plus-sign', 'btn btn-success span2', t(:create_page), new_page_path

@@ -119,6 +119,7 @@ en:
   user_has_no_facilities_defined_yet: User has no facilities defined yet.
   create_account: Create Account
   open: open
+  open_page: Open page
   userlist: Listing users
   edit_profile: Edit profile
   action: Action

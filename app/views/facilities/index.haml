@@ -1,7 +1,4 @@
-- content_for :content_menu do
-  %h3= t(:edit_facilities_or)
-  %p
-  %p= icon_link_to 'icon-list', 'btn', t(:back_to_user_list), users_path
+.nav.pull-right= icon_link_to 'icon-list', 'btn', t(:back_to_user_list), users_path
 
 %h1= title( t(:edit_facilities_for_user, user: @user.name))
 

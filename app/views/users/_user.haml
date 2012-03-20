@@ -15,8 +15,6 @@
         - elsif can_execute?('Admin')
           %li{id: "#{user.id.to_s}-edit-button"}
             = icon_link_to( 'icon-cog', '', t(:edit_facilities), user_facilities_path(user), id:"#{user.id.to_s}-edit-button")
-
-
   %h2= user.name
   %p= t(:email_confirmed_at, :when => user.email_confirmed_at ? localize(user.email_confirmed_at) : t(:not_confirmed_yet))
   - user.facilities_string do |str|

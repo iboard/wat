@@ -15,12 +15,12 @@
           %li
             %label= icon_label 'icon-exclamation-sign icon-white', 'label label-info', "FEATURED", :title => 'Shown on root-path'
       %ul.nav.pull-right
-        %li.dropdown.label
-          =icon_link_to( 'icon-cog icon-white', "", '<b class="caret"></b>'.html_safe, "#", :class => 'dropdown-toggle', 'data-toggle' => 'dropdown')
+        %li.dropdown
+          =icon_link_to( 'icon-cog', "btn", '<b class="caret"></b>'.html_safe, "#", :class => 'dropdown-toggle', 'data-toggle' => 'dropdown')
           %ul.dropdown-menu
-            %li= label_link_to( 'icon-zoom-in', 'label', t(:open), page_path(page))
-            %li= label_link_to( 'icon-edit', 'label label-info', t(:edit_page), edit_page_path(page))
-            %li= label_link_to( 'icon-remove', 'label label-important', t(:delete), page_path(page), :method => :delete, :confirm => t(:are_you_sure))
+            %li= icon_link_to( 'icon-zoom-in', '', t(:open_page), page_path(page))
+            %li= icon_link_to( 'icon-edit', '', t(:edit_page), edit_page_path(page))
+            %li= icon_link_to( 'icon-remove', '', t(:delete), page_path(page), :method => :delete, :confirm => t(:are_you_sure))
     %p{style: 'clear: left;'}      
   
   - if truncated      
