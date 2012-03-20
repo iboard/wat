@@ -1,9 +1,10 @@
-= render 'pages_menu'
 .row-fluid
   - if @page     
     %article
       %h1= title( @page.title )
       %address= localize @page.created_at
+      = render 'pages_menu'
+      %hr
       .content= markdown( @page.body )
   - else
     .alert.alert-error= t(:page_not_found)

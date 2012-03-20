@@ -123,6 +123,10 @@ module LayoutHelper
     end
   end
 
+  def carret
+    '<b class="caret"></b>'.html_safe
+  end
+
   def error_label(item,field,span='')
     if item.errors[field].present?
       icon_label 'icon-warning-sign icon-white', "label label-important #{span}", error_message_for(item,field)

@@ -26,7 +26,7 @@ describe ApplicationController do
     end
 
     it "always has a link to 'Home'" do
-      page.should have_link "Home"
+      page.should have_link Settings.application_brand
     end
 
     describe "When not logged in" do

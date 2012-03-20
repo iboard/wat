@@ -275,4 +275,8 @@ de:
           attributes:
             email:
               invalid: ungültige EMail-Adresse
+        page:
+          attributes:
+            title:
+              blank_on_locale: Darf nicht leer sein
       

@@ -1,5 +1,6 @@
-= render 'pages_menu'
 = render 'markdown_hints'
-%h1= title t(:edit_page)
 
+%h1= title t(:edit_page)
+%hr
+= render 'pages_menu'
 = render "form", :page => @page

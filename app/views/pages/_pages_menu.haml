@@ -1,13 +1,10 @@
 - if can_execute?('Admin')
-  - content_for :content_menu do
-    %h3= t(:admin)
-    %address= current_user.name
-    .btn-group
-      - if @page && !@page.new_record?
-        %ul.nav
-          - unless ['edit', 'new'].include? params[:action]
-            %li= button_link_to 'icon-edit', 'btn btn-primary span2', t(:edit_page), edit_page_path(@page)
-          %li= button_link_to 'icon-minus-sign', 'btn btn-danger span2', t(:delete_page), page_path(@page), method: :delete, confirm: t(:are_you_sure)
-      %ul.nav
-        %li= button_link_to 'icon-list', 'btn btn-default span2', t(:listing_pages), pages_path
-        %li= button_link_to 'icon-plus-sign', 'btn btn-success span2', t(:create_page), new_page_path
+  - content_for :top_menu do
+    .pull-right
+      .btn-group
+        .btn= icon_link_to 'icon-list', '', t(:listing_pages), pages_path
+        .btn.btn-success= icon_link_to 'icon-plus-sign icon-white', '', t(:create_page), new_page_path
+  - unless params[:action] == 'index'
+    - if @page && !@page.new_record?
+      = render 'pages/page_menu', page: @page
+    .clear-both

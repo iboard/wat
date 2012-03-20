@@ -9,6 +9,8 @@ smtp_enable_starttls_auto: true
 smtp_host: "localhost:3000"
 smtp_default_from: "noreply@domain.com"
 
+
+application_brand: "&alpha;WAT"
 application_mail_signature: [W]eb[A]pplication[Template] http://gitbub.com/iboard/wat
 application_mail_subject_prefix: "WAT: "
 developer_mail_address: "developer@example.com"
