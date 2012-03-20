@@ -1,0 +1,31 @@
+%h3 ENGLISH
+
+%p
+  Please confirm your e-mail address
+  = @user.email
+  for user 
+  = @user.name
+
+%p
+  Confirm: 
+  = confirm_email_user_url(@user,@user.confirm_email_token)
+%p
+  If you didn't create an account or changed your email recently, just ignore this mail.
+
+%h3 DEUTSCH
+
+%p
+  Bestätigen Sie bitte ihre Email-Adresse
+  = @user.email
+  für den Benutzer
+  = @user.name
+%p
+  Bestätigen: 
+  = confirm_email_user_url(@user,@user.confirm_email_token)
+%p
+  Falls Sie kein Benutzerkonto erstellt oder Ihre Email-Adresse geändert haben
+  ignorieren Sie dieses Mail einfach.
+
+%pre
+  = "----"
+  = Settings.application_mail_signature

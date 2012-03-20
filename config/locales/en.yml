@@ -41,7 +41,7 @@ en:
   are_you_sure: Are you sure?
   remove: "Remove"
   removed_authentication_successfully: Your authentication was successfully removed.
-  cancel_account: 'Unhappy? Cancel Account'
+  cancel_account: 'Cancel Account'
   user_successfully_deleted: "User successfully deleted. We hope to see you again."
   provider_added: "Provider <strong>%{provider}</strong> added to your account."
   last_authentication_cannot_be_deleted: Your last authentication can't be deleted!

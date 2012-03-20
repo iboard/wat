@@ -1,29 +1,33 @@
-.row
-  .span12
-    .well{:id => user.id.to_s}
-      .span4
-        %h2= user.name
-        %p= t(:email_confirmed_at, :when => user.email_confirmed_at ? localize(user.email_confirmed_at) : t(:not_confirmed_yet))
-        - user.facilities_string do |str|
-          %p= str
-        - unless params[:action] == 'show'
-          %p
-            %strong= t(:connected_providers)
-            %ul
-              - user.authentications.each do |auth|
-                %li
-                  = auth.provider.to_s.humanize
-      .span3.offset3
-        -if user == current_user
-          %ul.nav.nav-stacked
-            - if params[:action] == "show"
-              %li= button_link_to 'icon-edit', 'span3 btn btn-primary', t(:edit).html_safe, edit_user_path(user)
-            - else
-              %li= button_link_to 'icon-edit', 'span3 btn btn-primary', t(:edit_your_record).html_safe, user
-            %li= button_link_to 'icon-remove', 'span3 btn btn-danger', t(:cancel_account), user_path(user), :confirm => t(:are_you_sure), :method => :delete
-        -elsif can_execute?('Admin')
-          %ul.nav.nav-stacked
-            %li{id:"#{user.id.to_s}-edit-button"}= button_link_to 'icon-cog', 'span3 btn', t(:edit_facilities), user_facilities_path(user)
-      .clear-both
+.well{:id => user.id.to_s}
+  %ul.nav.pull-right
+    %li{ :class => Rails.env != 'test' ? "dropdown" : ""}
+      =icon_link_to( 'icon-cog ' + (current_user == user ? 'icon-white' : ''), current_user == user ? 'btn btn-primary' : 'btn', '<b class="caret"></b>'.html_safe, "#", :class => 'dropdown-toggle', 'data-toggle' => 'dropdown')
+      %ul{ :class => Rails.env != 'test' ? "dropdown-menu" : ""}
+        - if user == current_user
+          - if params[:action] == "show"
+            %li{id: "#{user.id.to_s}-edit-button"}
+            = icon_link_to( 'icon-edit', '', t(:edit), edit_user_path(user))
+          - else
+            %li{id: "#{user.id.to_s}-edit-button"}
+            = icon_link_to( 'icon-edit', '', t(:edit_your_record).html_safe, user)
+          %li
+            = icon_link_to( 'icon-remove', '', t(:cancel_account), user, method: :delete, confirm: t(:are_you_sure))
+        - elsif can_execute?('Admin')
+          %li{id: "#{user.id.to_s}-edit-button"}
+            = icon_link_to( 'icon-cog', '', t(:edit_facilities), user_facilities_path(user), id:"#{user.id.to_s}-edit-button")
+
+
+  %h2= user.name
+  %p= t(:email_confirmed_at, :when => user.email_confirmed_at ? localize(user.email_confirmed_at) : t(:not_confirmed_yet))
+  - user.facilities_string do |str|
+    %p= str
+  - unless params[:action] == 'show'
+    %p
+      %strong= t(:connected_providers)
+      %ul
+        - user.authentications.each do |auth|
+          %li
+            = auth.provider.to_s.humanize
+  .clear-both
 
     

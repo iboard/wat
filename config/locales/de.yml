@@ -42,7 +42,7 @@ de:
   are_you_sure: Sind Sie sicher?
   remove: "entfernen"
   removed_authentication_successfully: Die Authentifizierung wurde entfernt
-  cancel_account: 'Nicht zufrieden? Account löschen'
+  cancel_account: 'Benutzer löschen'
   user_successfully_deleted: "Benutzer wurde gelöscht. Hoffentlich sehen wir Sie wieder."
   provider_added: "Anbieter <strong>%{provider}</strong> wurde hinzugefügt."
   last_authentication_cannot_be_deleted: Die letzte Authentifizierungsmöglichkeit kann nicht gelöscht werden!
