@@ -1,6 +1,6 @@
 class DevelopmentMailInterceptor
   def self.delivering_email(message)
     message.subject = "[#{message.to}] #{message.subject}"
-    message.to = "andi@iboard.cc"
+    message.to = Settings.developer_mail_address
   end
 end
