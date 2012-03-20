@@ -30,7 +30,7 @@ en:
   user_successfully_created: User successfully created.
   user_cant_be_saved: User can't be saved!
   edit: 'Edit'
-  edit_your_record: '<b>You</b> –&gt; Edit'
+  edit_your_record: 'You'
   listing_users: Listing Users
   user_successfully_updated: Your data has been updated successfully
   cannot_save_user: User data couldn't be saved

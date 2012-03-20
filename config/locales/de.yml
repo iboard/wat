@@ -31,7 +31,7 @@ de:
   user_successfully_created: Benutzer wurde erfolgreich erstellt
   user_cant_be_saved: Benutzer konnte nicht gespeichert werden!
   edit: 'Bearbeiten'
-  edit_your_record: '<b>Sie</b> –&gt; bearbeiten'
+  edit_your_record: 'Sie'
   listing_users: Benutzerliste
   user_successfully_updated: Ihre Daten wurden erfolgreich aktualisiert
   cannot_save_user: Benutzerdaten konnten nicht gespeichert werden.

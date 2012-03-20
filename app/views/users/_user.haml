@@ -9,7 +9,7 @@
               = icon_link_to( 'icon-edit', '', t(:edit), edit_user_path(user))
           - else
             %li{id: "#{user.id.to_s}-edit-button"}
-              = icon_link_to( 'icon-edit', '', t(:edit_your_record).html_safe, user)
+              = icon_link_to( 'icon-edit', '', t(:edit_your_record), user)
           %li
             = icon_link_to( 'icon-remove', '', t(:cancel_account), user, method: :delete, confirm: t(:are_you_sure))
         - elsif can_execute?('Admin')

@@ -18,7 +18,7 @@ describe UsersController do
   it "should login user" do
      sign_in_user name: 'Testuser', password: 'notsecret'
      visit users_path
-     page.click_link "You –> Edit"
+     page.click_link "You"
      page.should have_content "Testuser"
   end
 
