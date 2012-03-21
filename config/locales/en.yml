@@ -63,6 +63,7 @@ en:
   cancel: Cancel
   create_page: Create page
   delete_page: Delete page
+  save_page: Save page
   save_something: "Save %{what}"
   page_successfully_deleted: Page successfully deleted.
   page_not_found: Page not found (404).
@@ -140,8 +141,15 @@ en:
     No mail received? %{confirm_link}
   please_confirm_your_address: "Please check your inbox for %{address} and confirm your email-address!"
   email_confirmed_at: "Email confirmed at: %{when}"
+  account_exists_since: "Account exists since %{when}"
   not_confirmed_yet: "Not confirmed by now"
   connected_providers: "Connected authentication providers"
   resend_confirmation_mail: "Resend confirmation mail"
   your_profile: Your profile
   personal_information: Personal information
+  translate_to: "Translate for '%{lang}'"
+  available: 'available'
+  status: 'Status'
+  locale: 'Locale'
+  translations: Translations
+  not_available: Not available

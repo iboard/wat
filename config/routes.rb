@@ -38,7 +38,10 @@ Wat::Application.routes.draw do
   # Page
   # ----
   # A semi-static page with a title (as key) and a body
-  resources :pages
+  resources :pages do
+    get 'translate_to/:locale' => :translate_to, :as => 'translate_to'
+    get 'read_translation_of/:locale' => :read_translation_of, :as => 'read_translation_of'
+  end
 
 
   # Language support

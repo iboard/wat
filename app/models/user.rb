@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class User
   include Mongoid::Document
+  include Mongoid::Timestamps
   
   key                     :name
   validates_presence_of   :name

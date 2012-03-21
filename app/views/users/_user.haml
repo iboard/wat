@@ -18,7 +18,10 @@
   %h2= user.name
   %p
     = icon_link_to 'icon-envelope', '', user.email
-    = t(:email_confirmed_at, :when => user.email_confirmed_at ? localize(user.email_confirmed_at) : t(:not_confirmed_yet))
+    %br/
+    = t(:email_confirmed_at, when:  user.email_confirmed_at ? localize(user.email_confirmed_at) : t(:not_confirmed_yet))
+    %br/
+    = t(:account_exists_since, when: localize(user.created_at||(Time.now-48.years)))
   - user.facilities_string do |str|
     %p= str
   - unless params[:action] == 'show'

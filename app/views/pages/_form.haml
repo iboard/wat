@@ -3,7 +3,7 @@
     =f.input :permalink, :disabled => !page.new_record?, :hint => icon_label( 'icon-exclamation-sign', '', t(:permalink_can_not_be_changed_once_created) ), :input_html => {:style => "width: 100%;"}, :placeholder => t(:page_title_hint)
     =f.input :title, :input_html => {:style => "width: 100%;"}
     =f.input :body, :as => :text, :input_html => { :style => "width: 100%" }, placeholder: t(:page_body_hint)
-    = f.button :submit, t(:save_something, what: t(:page)), class: 'btn btn-primary'
+    = f.button :submit, t(:save_page), class: 'btn btn-primary'
     = button_link_to 'icon-remove', 'btn', t(:cancel), pages_path
 
   

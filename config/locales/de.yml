@@ -65,6 +65,7 @@ de:
   create_page: Seite erzeugen
   delete_page: Seite löschen
   save_something: "%{what} speichern"
+  save_page: Seite speichern
   page_successfully_deleted: Seite wurde erfolgreich gelöscht
   page_not_found: Die Seite wurde nicht gefunden (404).
   page_successfully_created: Seite wurde erfolgreich erzeugt
@@ -142,8 +143,15 @@ de:
     Kein Mail erhalten? %{resend_link}
   please_confirm_your_address: "Überprüfen sie bitte Ihr Postfach für %{address} und bestätigen sie ihre email-address!"
   email_confirmed_at: "Email bestätigt am: %{when}"
+  account_exists_since: "Benutzer existiert seit %{when}"
   not_confirmed_yet: "Noch nicht bestätigt"
   connected_providers: "Verknüpfte Authentifizierungsanbieter"
   resend_confirmation_mail: "Bestätigungsmail erneut senden"
   your_profile: Ihr Profil
   personal_information: Personendaten
+  translate_to: "Übersetzen für '%{lang}'"
+  available: "Verfügbar"
+  status: 'Status'
+  locale: 'Sprache/Land'
+  translations: Übersetzungen
+  not_available: nicht Verfügbar

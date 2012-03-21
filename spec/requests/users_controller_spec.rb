@@ -96,7 +96,7 @@ describe UsersController do
       user.reload
       assert user.email_confirmed? == true, "email_confirmed? should be true after confirming it"
     end
-  
+
     it "shows a message if user doesn't confirm their email yet" do
       visit signout_path
       User.delete_all
@@ -164,6 +164,7 @@ describe UsersController do
     it "shows the confirmation status in user::index" do
       visit users_path
       page.should have_content "Email confirmed at: #{I18n.localize(@confirmed_at)}"
+      page.should have_content "Account exists since #{I18n.localize(@admin.created_at)}"
     end
 
   end

@@ -123,6 +123,11 @@ module LayoutHelper
     end
   end
 
+  def icon(icon,classes="")
+    content_tag :i, :class => icon + " #{classes}" do
+    end
+  end
+
   def carret
     '<b class="caret"></b>'.html_safe
   end

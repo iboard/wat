@@ -71,4 +71,15 @@ class PagesController < ApplicationController
       redirect_to root_path, :notice => t(:page_successfully_deleted)
     end
   end
+
+  def translate_to
+    session[:locale] = params[:locale].to_sym
+    redirect_to edit_page_path(params[:page_id], t(:language_changed_to, :lang => params[:locale]))
+  end
+
+  def read_translation_of
+    @page = Page.find(params[:page_id])
+    I18n.locale = params[:locale].to_sym
+    render action: :show
+  end
 end

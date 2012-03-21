@@ -47,7 +47,7 @@ describe PagesController do
       page.click_link "Edit page"
       fill_in "page_body", with: "This is a modified page."
       
-      click_button "Save Page"
+      click_button "Save page"
       page.should have_content @page.title
       page.should have_content "This is a modified page"
     end
@@ -62,10 +62,41 @@ describe PagesController do
       fill_in "page_permalink", with: "A new page for WAT"
       fill_in "page_title", with: "A new page for WAT"
       fill_in "page_body", with: lorem()
-      click_button "Save Page"
+      click_button "Save page"
       page.should have_content "Page successfully created"
       page.should have_content "A new page for WAT"
       page.should have_content "Lorem ipsum"
+    end
+
+    describe "Translations" do
+      before(:each) do
+        click_link "Create page"
+        fill_in "page_permalink", with: "what we eat"
+        fill_in "page_title", with: "Fish'n'Chips"
+        fill_in "page_body", with: "ugly!"
+        click_button "Save page"
+      end
+      
+      it "displays translation-links after create" do
+        page.should have_link "Translate for 'de'"
+        page.should have_link "read"
+      end
+
+      it "lets read the available translation" do
+        visit page_path(Page.find('what-we-eat'))
+        click_link "read"
+        page.should have_content "Fish'n'Chips"
+      end
+  
+      it "lets the author edit the missing translation" do
+        visit page_path(Page.find('what-we-eat'))
+        click_link "Translate for 'de'"
+        fill_in "page_title", with: "A Gulasch und a Bier"
+        fill_in "page_body", with: "Guaaaat!"
+        click_button "Seite speichern"
+        page.should have_content "Guaaaat!"
+        switch_language_path('en')
+      end
     end
 
     it "see the destroy-button" do
@@ -110,7 +141,7 @@ describe PagesController do
       fill_in "page_permalink", with: ""
       fill_in "page_title", with: "ABC"
       fill_in "page_body", with: lorem
-      click_button "Save Page"
+      click_button "Save page"
       page.should have_content "Permalinkcan't be blank"
     end
 
@@ -118,7 +149,7 @@ describe PagesController do
       visit new_page_path
       fill_in "page_title", with: ""
       fill_in "page_body", with: lorem
-      click_button "Save Page"
+      click_button "Save page"
       page.should have_content "Titlecan't be blank"
     end
 

@@ -1,16 +1,17 @@
-- _preview = truncate(page.body,length: 350, omission: "... ")
-- _link = icon_link_to( "icon-eye-open", "btn", t(:read_more), page)
-- truncated = _preview.length < page.body.length
+- if page.title
+  - _preview = truncate(page.body,length: 350, omission: "... ")
+  - _link = icon_link_to( "icon-eye-open", "btn", t(:read_more), page)
+  - truncated = _preview.length < page.body.length
+    
   
-
-.well{:style=> params[:controller]=='home' ? 'min-height: 200px;' : ''}
-  = render 'pages/page_menu', page: page
-  - if truncated      
-    %h2= link_to page.title, page
-  - else
-    %h2=page.title
-  %article
-    = markdown(_preview)
-    - if truncated
-      = _link
-  .clear-both
+  .well{:style=> params[:controller]=='home' ? 'min-height: 200px;' : ''}
+    = render 'pages/page_menu', page: page
+    - if truncated      
+      %h2= link_to page.title, page
+    - else
+      %h2=page.title
+    %article
+      = markdown(_preview)
+      - if truncated
+        = _link
+    .clear-both
