@@ -1,0 +1,3 @@
+$('#personal_information').parent().removeClass( 'active');
+$('#authentication_providers').parent().addClass('active');
+$('#profile_section').html('<%= j(render "auth_providers", user: @user) -%>');

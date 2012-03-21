@@ -42,6 +42,7 @@ group :test do
   gem "guard-livereload", ">= 0.3.0", :group => :development
   gem "guard-rspec", ">= 0.4.3", :group => :development
   gem "capybara"
+  gem "capybara-webkit"
   gem "launchy"
   gem "spork"
   gem "guard-spork"

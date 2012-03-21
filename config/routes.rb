@@ -24,6 +24,8 @@ Wat::Application.routes.draw do
     member do
       get 'confirm_email/:token' => :confirm_email, :as => 'confirm_email'
       get 'resend_confirmation_mail' => :resend_confirmation_mail, :as => 'resend_confirmation_mail'
+      get 'auth_providers' => :auth_providers
+      get 'personal_information' => :personal_information
     end
   end
   

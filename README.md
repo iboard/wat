@@ -56,6 +56,21 @@ Installation
   5. bundle
   6. Run `bundle execute guard`
 
+Mac OS X (and may be others)
+----------------------------
+
+  Best you have `brew` installed, 'couse you'll need:
+
+  * Qt (for capybara-webkit)
+  * Mongo
+  * and other things
+
+```sh
+# install with webkit with 
+rvmsudo gem install capybara-webkit
+```
+
+
 API-Keys
 --------
 

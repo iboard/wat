@@ -1,0 +1,33 @@
+%table.table.table-striped
+  %thead.thead
+    %tr
+      %th= t(:provider)
+      %th= t(:uid)
+      %th.span1 &nbsp;
+    %tbody.tbody
+    - _provider = Secrets::defined_providers.to_a
+    - _provider << 'identity'
+    - _provider.each do |type|
+      %tr
+        - _selected =  user.authentications.where(:provider => type.to_s.downcase).first
+        %td
+          -if _selected
+            %strong= type.to_s.humanize 
+          - else
+            = type.to_s.humanize unless _selected
+        - if _selected
+          %td
+            = _selected.uid.to_s
+          %td
+            = button_link_to( 'icon-minus', 'btn btn-info span2', t(:remove),user_authentication_path(user,_selected), confirm: t(:are_you_sure), method: :delete)
+                
+        -else
+          -if type == 'identity'
+            %td &nbsp;
+            %td
+              = button_link_to 'icon-plus','btn btn-success span2',t(:create_account), new_identity_path
+          -else
+            %td –
+            %td
+              = button_link_to 'icon-plus','btn btn-default span2', "#{type.to_s.humanize}", "/auth/#{type}"
+   

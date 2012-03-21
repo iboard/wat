@@ -63,4 +63,11 @@ class UsersController < ApplicationController
     redirect_to root_path, :notice => t(:please_confirm_your_address, :address => @user.email)
   end
 
+  def auth_providers
+    @user = User.find(params[:id])
+  end
+
+  def personal_information 
+    @user = User.find(params[:id])
+  end
 end

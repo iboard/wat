@@ -28,6 +28,7 @@ Spork.prefork do
       config.before(:suite) do
         DatabaseCleaner.strategy = :truncation
         DatabaseCleaner.orm = "mongoid"
+        Capybara.javascript_driver = :webkit
       end
 
       config.include(MailerMacros)    
