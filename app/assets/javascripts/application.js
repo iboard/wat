@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
-//= require application
-//= require home
-//= require users
+//= require bootstrap
+//= require_tree .
+
+
