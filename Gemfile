@@ -28,6 +28,7 @@ case HOST_OS
   when /linux/i
     gem 'libnotify', :group => :development
     gem 'rb-inotify', :group => :development
+    gem 'therubyracer', :group => :assets
   when /mswin|windows/i
     gem 'rb-fchange', :group => :development
     gem 'win32console', :group => :development
