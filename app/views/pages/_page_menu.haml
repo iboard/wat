@@ -1,4 +1,11 @@
 - if can_execute?('Admin')
+  .pull-right{ :class => Rails.env != 'test' ? "dropdown" : ""}
+    %button.btn{ 'data-toggle' => 'dropdown'}
+      =icon_prefix( 'icon-cog', carret)
+    %ul{ :class => Rails.env != 'test' ? "dropdown-menu" : "" }
+      %li= icon_link_to( 'icon-zoom-in', '', t(:open_page), page_path(page)) unless params[:action] == 'show'
+      %li= icon_link_to( 'icon-edit', '', t(:edit_page), edit_page_path(page)) unless ['new','edit'].include? params[:action]
+      %li= icon_link_to( 'icon-remove', '', t(:delete_page), page_path(page), :method => :delete, :confirm => t(:are_you_sure)) unless params[:action] == 'new'
   .nav
     - if page.is_hero?
       %ul.nav.pull-left
@@ -8,14 +15,6 @@
       %ul.nav.pull-left
         %li
           %label= icon_label 'icon-exclamation-sign icon-white', 'label label-info', "FEATURED", :title => 'Shown on root-path'
-
-  .pull-right{ :class => Rails.env != 'test' ? "dropdown" : ""}
-    %button.btn{ 'data-toggle' => 'dropdown'}
-      =icon_prefix( 'icon-cog', carret)
-    %ul{ :class => Rails.env != 'test' ? "dropdown-menu" : "" }
-      %li= icon_link_to( 'icon-zoom-in', '', t(:open_page), page_path(page)) unless params[:action] == 'show'
-      %li= icon_link_to( 'icon-edit', '', t(:edit_page), edit_page_path(page)) unless ['new','edit'].include? params[:action]
-      %li= icon_link_to( 'icon-remove', '', t(:delete_page), page_path(page), :method => :delete, :confirm => t(:are_you_sure)) unless params[:action] == 'new'
   %p{style: 'clear: left;'}      
   
   
