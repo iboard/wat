@@ -1,4 +1,29 @@
 # -*- encoding : utf-8 -*-
+
+#
+# =Class User
+# 
+# * The user.name is used as a key to due readable URLs like /users/andi-altendorfer
+# * A user can embed many authentications (omni-* incl. omni-identity)
+# * A user can embed many [Facilities]
+# * Whenever the email is changed, the :email_confirmed_at invalidats until the user
+#   confirms his new address (UserMailer::registration_confirmation)
+#
+# ==Facilities
+#
+# ...can be used like:
+# 
+#    user = User.first
+#    user.facilities.create( name: 'Author', access: 'r--')
+#
+#    if user.can_read?('Author')
+#      yes, User can read with Author-access
+#    end
+#
+#    if user.can_write?('Author')
+#      no we'll not reach this line for this example-user
+#    end
+#
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -19,19 +44,11 @@ class User
   # Accessible Attributes
   attr_accessible :name, :email
 
-  before_destroy :memorize_identities
-  after_destroy  :clear_identities
-
-  def memorize_identities
-    @identity_to_remove = Identity.where(name: self.name).first
-  end
-
-  # Model Identity is handeled by omniauth-identity and is not
-  # connected in any way to our user-model. To clean up unused
-  # Identities we have to delete through this user's authentications  
-  def clear_identities
-    @identity_to_remove.delete if @identity_to_remove
-  end
+  # Destroy omni-identities when delete the user
+  # There is no association between User and Identity. So, we have to do this
+  # with this two filters.
+  before_destroy :memorize_identity
+  after_destroy  :clear_identity
 
   # Add an authentication to this user
   # @param [Hash] auth - as provided by omni-auth
@@ -79,45 +96,86 @@ class User
     _user
   end
 
-
+  # Find a User by a given authentication
+  # @param [String] provider like 'twitter', 'facebook', ...
+  # @param [String] uid of this user at this provider
+  # @return [User] or nil if not found by authentication
   def self.find_with_authentication(provider, uid)
     User.where(:authentications.matches => { provider: provider, uid: uid.to_s}).first
   end
 
+  # Adds an authentication to this user
+  # @param [Authentication]
   def add_authentication(authentication)
     authentications << authentication
   end
 
-
+  # @param [String] what - A facility-name
+  # @return [Boolean] true if User.facilities.where(name: what, access: /r../)
   def can_read?(what)
     facility = self.facilities.where(name: what).first
     facility && facility.can_read? && self.email_confirmed?
   end
 
+  # @param [String] what - A facility-name
+  # @return [Boolean] true if User.facilities.where(name: what, access: /.w./)
   def can_write?(what)
     facility = self.facilities.where(name: what).first
     facility && facility.can_write? && self.email_confirmed?
   end
 
+  # @param [String] what - A facility-name
+  # @return [Boolean] true if User.facilities.where(name: what, access: /..x/)
   def can_execute?(what)
     facility = self.facilities.where(name: what).first
     facility && facility.can_execute? && self.email_confirmed?
   end
 
+  # Join all facility-names with access modes. "Admin (rwx), Author (rw-), ..."
+  # yield a given block with this string or return the string otherwise.
+  # @return [String] - if no block given
   def facilities_string(&block)
     if self.facilities.any?
-      yield I18n.translate(:facilities, list: self.facilities.map{|f| "#{f.name} (#{f.access})"}.join(", "))
+      _string = I18n.translate(:facilities, list: self.facilities.map{|f| "#{f.name} (#{f.access})"}.join(", "))
+      if block_given?
+        yield _string
+      else
+        _string
+      end
+    else
+      unless block_given?
+        ""
+      end
     end
   end
 
+  # Generate a new random token and set email_confirmed_at to nil
+  # UsersControler will set email_confirmed_at when the user confirms the new address
   def generate_confirm_email_token!
     self.confirm_email_token = SecureRandom.hex(10)
     self.email_confirmed_at = nil
     self.save!
   end
 
+  # @return [Boolean] true if email_confirmed_at has a value
   def email_confirmed?
     self.email_confirmed_at != nil
+  end
+
+
+private
+  # Save Identities to remove after destroy. Called by before_filter
+  # @return [Identity] or nil if no Identity exists
+  def memorize_identity
+    @identity_to_remove = Identity.where(name: self.name).first
+  end
+
+  # Model Identity is handeled by omniauth-identity which is not
+  # connected in any way to our user-model. To clean up unused
+  # Identities we have to delete through this user's authentications
+  # Called by after_filter  
+  def clear_identity
+    @identity_to_remove.delete if @identity_to_remove
   end
 end
 
