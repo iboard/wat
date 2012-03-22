@@ -153,3 +153,5 @@ en:
   locale: 'Locale'
   translations: Translations
   not_available: Not available
+  done: 'done'
+  
