@@ -2,12 +2,8 @@
 class Facility
   include Mongoid::Document
 
-  if defined? APPLICATION_FACILITY_SELECT
-    FACILITY_SELECT=[[I18n.translate(:admin), 'Admin'], [I18n.translate(:author), 'Author']]+APPLICATION_FACILITY_SELECT
-  else
-    FACILITY_SELECT=[[I18n.translate(:admin), 'Admin'], [I18n.translate(:author), 'Author']]
-  end
-
+  WAT_APPLICATION_FACILITIES = [[I18n.translate(:admin), 'Admin'], [I18n.translate(:author), 'Author']]
+  
   field :name
   field :access, type: String, default: "r--"
 
@@ -49,6 +45,10 @@ class Facility
 
   def can_execute=(allow)
     access[2] = allow=="1" ? 'x' : '-'
+  end
+
+  def available_facilities
+    WAT_APPLICATION_FACILITIES
   end
   
 end

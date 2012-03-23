@@ -32,7 +32,7 @@
     %fieldset
       .control-group
         .control-label= f.label :name
-        .controls= f.select :name, Facility::FACILITY_SELECT
+        .controls= f.select :name, Facility::available_facilities
       .control-group
         .control-label=f.label :access
         .controls
