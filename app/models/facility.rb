@@ -47,7 +47,7 @@ class Facility
     access[2] = allow=="1" ? 'x' : '-'
   end
 
-  def available_facilities
+  def self.available_facilities
     WAT_APPLICATION_FACILITIES
   end
   
