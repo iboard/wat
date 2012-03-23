@@ -48,7 +48,11 @@ class Facility
   end
 
   def self.available_facilities
-    WAT_APPLICATION_FACILITIES
+    @facility_select ||= if Facility::respond_to?(:extra_facilities)
+      WAT_APPLICATION_FACILITIES + Facility::extra_facilities
+    else
+      WAT_APPLICATION_FACILITIES
+    end
   end
   
 end
