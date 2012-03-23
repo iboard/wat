@@ -58,6 +58,14 @@ describe ApplicationController do
         visit root_path
         page.should_not have_content "FEATURED"
       end
+
+      it "shows a sign-up item under sign in menu" do
+        visit root_path
+        click_link "Sign in"
+        click_link "Register new account"
+        page.should have_content "New account"
+        page.should have_content "Before you create an account"
+      end
     end
 
     describe "When logged in" do
