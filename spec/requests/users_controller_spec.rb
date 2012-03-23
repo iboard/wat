@@ -10,6 +10,7 @@ describe UsersController do
       User.delete_all
       Identity.delete_all
       visit root_path
+      visit switch_language_path(:en)
       sign_up_user name: 'Testuser', password: 'notsecret', email: 'test@iboard.cc'
       user = User.first
       user.email_confirmed_at =  Time.now
@@ -153,18 +154,38 @@ describe UsersController do
     before(:each) do
       User.delete_all
       Identity.delete_all
+      visit switch_language_path(:en)
       sign_up_user name: "Admin", password: 'notsecret', email: 'admin@iboard.cc'
       @admin = User.first
       @confirmed_at = Time.now
       @admin.email_confirmed_at = @confirmed_at
       @admin.facilities.create name: 'Admin', access: 'rwx'
-      @admin.save
+      @admin.save!
     end
 
     it "shows the confirmation status in user::index" do
       visit users_path
       page.should have_content "Email confirmed at: #{I18n.localize(@confirmed_at)}"
       page.should have_content "Account exists since #{I18n.localize(@admin.created_at)}"
+    end
+
+    it "finds users using the search-form without JS" do
+      User.create name: "Hidden user", email: "hidden@example.com"
+      visit users_path
+      fill_in 'search_search_text', with: "admi"
+      click_button "Search"
+      page.should have_content "Admin"
+      page.should_not have_content "Hidden user"
+    end
+
+    it "finds users using the search-form with JS", js: true do
+      User.create name: "Find Me", email: "find@me.com"
+      set_current_user @admin
+      visit users_path
+      fill_in 'search_search_text', with: "find"
+      page.should_not have_button "Search"
+      page.should have_content "Find Me"
+      page.should_not have_content "admin@iboard.cc"
     end
 
   end

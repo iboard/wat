@@ -11,6 +11,7 @@ describe PagesController do
     @page = Page.create!(permalink: "First Page", title: 'First Page', body: lorem())
     User.delete_all
     Identity.delete_all
+    visit switch_language_path(:en)
     sign_up_user name: 'Testuser', password: 'notsecret', email: 'test@iboard.cc'
     user=User.first
     user.email_confirmed_at = Time.now
@@ -39,7 +40,9 @@ describe PagesController do
     before(:each) do
       _usr = User.first
       _usr.facilities.find_or_create_by( name: 'Admin', access: 'rwx' )
+      _usr.email_confirmed_at = Time.now
       _usr.save!
+      visit switch_language_path(:en)
       visit page_path(@page)
     end
 
@@ -70,6 +73,7 @@ describe PagesController do
 
     describe "Translations" do
       before(:each) do
+        visit switch_language_path(:en)
         click_link "Create page"
         fill_in "page_permalink", with: "what we eat"
         fill_in "page_title", with: "Fish'n'Chips"
@@ -163,6 +167,32 @@ describe PagesController do
       Page.create permalink: "@feature1", title: '@feature1', body: "Ruby Is Hero"
       visit pages_path
       page.should have_content "FEATURED"
+    end
+
+    it "finds pages using the search-form without JS" do
+      Page.create permalink: "@feature1", title: '@feature1', body: "Ruby Is Hero"
+      Page.create permalink: "Find Me", title: "Find Me", body: "You catched me!"
+      visit pages_path
+      fill_in 'search_search_text', with: "find"
+      click_button "Search"
+      page.should have_content "You catched me!"
+    end
+
+    it "finds pages using the search-form with JS", js: true do
+      _usr = User.first
+      _usr.facilities.create name: 'Admin', access: 'rwx'
+      _usr.email_confirmed_at = Time.now
+      _usr.save!
+      switch_language_path(:en)
+      sign_in_user name: "Testuser", password: "notsecret"
+      Page.create permalink: "@feature1", title: '@feature1', body: "Ruby Is Hero"
+      Page.create permalink: "Find Me", title: "Find Me", body: "You catched me!"
+      visit pages_path
+      page.should have_content "Ruby Is Hero"
+      fill_in 'search_search_text', with: "find"
+      page.should_not have_button "Search"
+      page.should have_content "You catched me!"
+      page.should_not have_content "Ruby Is Hero"
     end
   end
 end

@@ -1,8 +1,14 @@
 %h1= title t(:listing_users)
+%br/
+= render 'shared/search'
 %hr/
 .container
-  - @users.each do |user|
-    = render 'user', :user => user
+  #result
+    - unless @users.any?
+      .alert.alert-error= t(:no_user_found_for, search: @search.search_text)
+    - else
+      - @users.each do |user|
+        = render 'user', :user => user
     
     
     

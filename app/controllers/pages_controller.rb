@@ -2,11 +2,13 @@
 
 class PagesController < ApplicationController
 
+  before_filter :parse_search_param, only: [:index]
+
   def index
-    unless can_execute?("Admin")
+    unless can_read?("Admin")
       redirect_to root_path, :alert => t(:access_denied)
     else
-      @pages = Page.asc(:title)
+      @pages ||= Page.asc(:title)
     end
   end
   
@@ -82,4 +84,19 @@ class PagesController < ApplicationController
     I18n.locale = params[:locale].to_sym
     render action: :show
   end
+
+private
+  def parse_search_param
+    if params[:search].present?
+      _p = params[:search].is_a?(String) ? JSON.parse( params[:search] ) : params[:search]
+      @search = Search.new( search_text: _p['search_text'], search_controller: _p['search_controller'] )
+      @pages = Page.any_of(
+        {title: /#{@search.search_text}/i}, 
+        {body: /#{@search.search_text}/i}
+      ).asc(:title)
+    else
+      @search = Search.new search_text: '', search_controller: 'pages'
+    end
+  end      
+
 end

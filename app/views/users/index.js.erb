@@ -1,0 +1,9 @@
+$('#result').html('<%= escape_javascript( 
+    if @users.any?
+      render( @users )
+    else
+      content_tag :div, :class => "alert alert-error" do
+        t(:no_user_found_for, :search => params[:search]["search_text"])
+      end
+    end
+) -%>');

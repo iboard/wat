@@ -157,3 +157,6 @@ en:
   register_new_account: Register new account
   default_preview_length: "Defaults to %{length}"
   default_preview_hint: "Number of characters shown in previews"
+  search: Search
+  no_user_found_for: "No user found where name or email matches '%{search}'"
+  no_page_found_for: "No page found where title or body matches '%{search}'"

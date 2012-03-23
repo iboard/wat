@@ -43,6 +43,9 @@ Wat::Application.routes.draw do
     get 'read_translation_of/:locale' => :read_translation_of, :as => 'read_translation_of'
   end
 
+  # Search
+  resources :searches, only: [:new,:create]
+
 
   # Language support
   match '/switch_language/:locale' => 'sessions#switch_language', :as => :switch_language

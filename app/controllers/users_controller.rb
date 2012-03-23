@@ -4,9 +4,11 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, :only => [:edit, :update, :show]
   before_filter :correct_user?, :only => [:edit, :update, :show]
 
+  before_filter :parse_search_param, only: [:index]
+
   def index
-    if can_execute?('Admin')
-      @users = User.asc(:name)
+    if can_read?('Admin')
+      @users ||= User.asc(:name)
     else
       redirect_to root_path, :alert => t(:access_denied)
     end
@@ -70,4 +72,19 @@ class UsersController < ApplicationController
   def personal_information 
     @user = User.find(params[:id])
   end
+
+private
+  def parse_search_param
+    if params[:search].present?
+      _p = params[:search].is_a?(String) ? JSON.parse( params[:search] ) : params[:search]
+      @search = Search.new( search_text: _p['search_text'], search_controller: _p['search_controller'] )
+      @users = User.any_of(
+        {name: /#{@search.search_text}/i}, 
+        {email: /#{@search.search_text}/i}
+      ).asc(:name)
+    else
+      @search = Search.new search_text: '', search_controller: 'users'
+    end
+  end      
+
 end

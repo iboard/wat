@@ -11,7 +11,7 @@ describe Secrets do
   it "List defined providers" do
     assert Secrets::defined_providers == [
       :twitter, :facebook, :linkedin, 
-      "37signals".to_sym, :github, :google_oauth2
+      "37signals".to_sym, :github, :google_oauth2, :foursquare, :tumblr
     ], Secrets::defined_providers.inspect
   end
 

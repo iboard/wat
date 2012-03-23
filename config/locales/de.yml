@@ -159,3 +159,6 @@ de:
   register_new_account: Neuer Benutzer
   default_preview_length: "Standard %{length}"
   default_preview_hint: "Anzahl Zeichen, die in der Vorschau angezeigt werden"
+  search: 'Suchen'
+  no_user_found_for: "Mit '%{search}' im Namen oder EMail wurde kein Benutzer gefunden"
+  no_page_found_for: "Mit '%{search}' im Titel oder Inhalt wurde keine Seite gefunden"

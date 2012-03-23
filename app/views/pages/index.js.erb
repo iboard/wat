@@ -1,0 +1,9 @@
+$('#result').html('<%= escape_javascript( 
+    if @pages.any?
+      render( @pages )
+    else
+      content_tag :div, :class => "alert alert-error" do
+        t(:no_page_found_for, :search => params[:search]["search_text"])
+      end
+    end
+) -%>');
