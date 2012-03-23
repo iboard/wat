@@ -1,7 +1,12 @@
 # -*- encoding : utf-8 -*-
 class Facility
   include Mongoid::Document
-  FACILITY_SELECT=[[I18n.translate(:admin), 'Admin'], [I18n.translate(:author), 'Author']]
+
+  if defined? APPLICATION_FACILITY_SELECT
+    FACILITY_SELECT=[[I18n.translate(:admin), 'Admin'], [I18n.translate(:author), 'Author']]+APPLICATION_FACILITY_SELECT
+  else
+    FACILITY_SELECT=[[I18n.translate(:admin), 'Admin'], [I18n.translate(:author), 'Author']]
+  end
 
   field :name
   field :access, type: String, default: "r--"
