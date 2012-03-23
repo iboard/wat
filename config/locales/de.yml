@@ -157,3 +157,5 @@ de:
   not_available: nicht Verfügbar
   done: erledigt
   register_new_account: Neuer Benutzer
+  default_preview_length: "Standard %{length}"
+  default_preview_hint: "Anzahl Zeichen, die in der Vorschau angezeigt werden"

@@ -1,5 +1,5 @@
 - if page.title
-  - _preview = truncate(page.body,length: 350, omission: "... ")
+  - _preview = truncate(page.body,length: page.preview_length_or_default, omission: "... ")
   - _link = icon_link_to( "icon-eye-open", "btn", t(:read_more), page)
   - truncated = _preview.length < page.body.length
     

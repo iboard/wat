@@ -1,0 +1,7 @@
+# -*- encoding : utf-8 -*-
+
+#
+# GLOBAL WAT DEFAULTS
+#
+
+default_preview_length: 300 # Chracters

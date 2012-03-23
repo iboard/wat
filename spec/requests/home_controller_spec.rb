@@ -66,6 +66,20 @@ describe ApplicationController do
         page.should have_content "New account"
         page.should have_content "Before you create an account"
       end
+
+      it "shows pages with defined preview-length on the homepage" do
+        Page.create permalink: "@10", title: "10 Characters preview", body: "lorem ipsum dolores", preview_length: 10
+        visit root_path
+        page.should have_content "lorem ..."
+        page.should have_link I18n.translate(:read_more)
+        page.should_not have_content "dolores"
+      end
+
+      it "shows default preview length if no value is given" do
+        Page.create permalink: "@full length", title: "Longer preview", body: lorem_text
+        visit root_path
+        page.should have_content "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in volupt..."
+      end
     end
 
     describe "When logged in" do
