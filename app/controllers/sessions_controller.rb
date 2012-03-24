@@ -23,7 +23,13 @@ class SessionsController < ApplicationController
       current_user.save!
     else
       user = User.create_with_omniauth(auth,current_user)
-      _send_notification = true
+      if user.email.present?
+        user.email_confirmed_at = Time.now
+        user.save!
+        _send_notification = false
+      else
+        _send_notification = true
+      end
       session[:user_id] = user.id
     end
 
