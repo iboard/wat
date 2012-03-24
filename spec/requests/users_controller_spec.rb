@@ -48,6 +48,21 @@ describe UsersController do
       visit users_path
       page.should have_no_content "Testuser"
     end
+
+    it "should display a message if an exeptions raised on user.destroy" do
+      sign_in_user name: 'Testuser', password: 'notsecret'
+      visit users_path
+      class User
+        def delete
+          raise "DON'T DELETE ME WHILE TESTING"
+        end
+        def destroy
+          raise "DON'T DESTROY ME WHILE TESTING"
+        end
+      end
+      page.click_link "Cancel Account" 
+      page.should have_content "ERROR: DON'T DESTROY ME WHILE TESTING"
+    end
   
     it "shows facilities in user-show view" do
       User.first.facilities.create name: 'Admin', access: 'rwx'

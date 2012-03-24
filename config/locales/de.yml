@@ -162,3 +162,4 @@ de:
   search: 'Suchen'
   no_user_found_for: "Mit '%{search}' im Namen oder EMail wurde kein Benutzer gefunden"
   no_page_found_for: "Mit '%{search}' im Titel oder Inhalt wurde keine Seite gefunden"
+  can_not_delete_user: "Ihr Benutzerkonto konnte nicht gelöscht werden. Fehler: %{error}"

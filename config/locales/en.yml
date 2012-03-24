@@ -160,3 +160,4 @@ en:
   search: Search
   no_user_found_for: "No user found where name or email matches '%{search}'"
   no_page_found_for: "No page found where title or body matches '%{search}'"
+  can_not_delete_user: "Sorry, your account could't be deleted. ERROR: %{error}"
