@@ -63,13 +63,12 @@
       
     %footer
       %div{style: "text-align: center"}
-        = "&copy;&nbsp;2012&nbsp;".html_safe
-        = link_to( 'Andreas Altendorfer', "http://about.me/andreas.altendorfer")
+        = render 'shared/copyright'
         &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
         = render 'shared/language_selection'
         &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-        = button_link_to 'icon-share', 'btn', "Fork me on Github", "http://github.com/iboard/wat"
-
+        = render 'shared/footer_right'
+        
     /
       Le javascript
       \==================================================

@@ -1,0 +1,7 @@
+- from_year = Settings.copyright_year || Time.now.year
+- yr = from_year.to_i != Time.now.year ? "#{from_year}–#{Time.now.year}" : "#{from_year}"
+- name = Settings.copyright_title || '!!configure Settings.copyright_title!!'
+- url = Settings.copyright_url || '!!configure Settings.copyright_url!!'
+= "&copy;&nbsp;#{yr}&nbsp;".html_safe
+= link_to( name, url)
+        
