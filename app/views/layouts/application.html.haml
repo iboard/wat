@@ -33,6 +33,7 @@
           .container.nav-collapse
             %ul.nav
               %li= link_to 'README', page_path('readme')
+            = yield(:search_bar) if content_for?(:search_bar)
             = render 'shared/navigation'
     
     .container.main

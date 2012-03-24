@@ -1,7 +1,6 @@
-%h1= title t(:listing_users)
-%br/
 = render 'shared/search'
-%hr/
+%h1= title t(:listing_users)
+
 .container
   #result
     - unless @users.any?

@@ -1,5 +1,0 @@
-= form_for @search, html: {class:'form search-form'} do |f|
-  .controlls
-    =f.hidden_field  :search_controller
-    =f.text_field    :search_text, placeholder: t(:search)+"...", class: "input-medium search-query"
-    =f.submit t(:search), id: 'search-button'
