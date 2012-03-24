@@ -140,7 +140,7 @@ de:
   email_not_confirmed_yet: 
     Ihre EMail-Adresse ist noch nicht bestätigt. Kontrollieren Sie bitte Ihr Postfach für %{email}.
     <br/>
-    Kein Mail erhalten? %{resend_link}
+    Kein Mail erhalten? %{confirm_link}
   please_confirm_your_address: "Überprüfen sie bitte Ihr Postfach für %{address} und bestätigen sie ihre email-address!"
   email_confirmed_at: "Email bestätigt am: %{when}"
   account_exists_since: "Benutzer existiert seit %{when}"
