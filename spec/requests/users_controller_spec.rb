@@ -51,7 +51,8 @@ describe UsersController do
 
     it "should display a message if destroying is not possible" do
       class User
-        def delete
+        before_destroy :prevent_destroying
+        def prevent_destroying
           self.errors.add( :base, "I'll not die yet!")
           return false
         end

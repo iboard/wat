@@ -42,7 +42,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    if @user.delete
+    if @user.destroy
       redirect_to signout_path, :notice => t(:user_successfully_deleted)
     else
       redirect_to user_path(@user), alert: t(:can_not_delete_user, why: @user.errors.full_messages.join(" & "))
