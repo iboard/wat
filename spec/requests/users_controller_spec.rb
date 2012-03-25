@@ -163,6 +163,11 @@ describe UsersController do
       click_link 'Assign authentication providers'
       page.should have_content "Identity"
     end
+
+    it "doesn't show Listing users unless user is admin" do
+      visit user_path(@user1)
+      page.should_not have_link "Listing Users"
+    end
   end
   
   describe "as an admin" do

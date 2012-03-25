@@ -1,36 +1,16 @@
-.well{:id => user.id.to_s}
-  %ul.nav.pull-right
-    %li{ :class => Rails.env != 'test' ? "dropdown" : ""}
-      =icon_link_to( 'icon-cog ' + (current_user == user ? 'icon-white' : ''), current_user == user ? 'btn btn-primary' : 'btn', '<b class="caret"></b>'.html_safe, "#", :class => 'dropdown-toggle', 'data-toggle' => 'dropdown')
-      %ul{ :class => Rails.env != 'test' ? "dropdown-menu" : ""}
-        - if user == current_user
-          - if params[:action] == "show"
-            %li{id: "#{user.id.to_s}-edit-button"}
-              = icon_link_to( 'icon-edit', '', t(:edit), edit_user_path(user))
-          - else
-            %li{id: "#{user.id.to_s}-edit-button"}
-              = icon_link_to( 'icon-edit', '', t(:your_profile), user)
-          %li
-            = icon_link_to( 'icon-remove', '', t(:cancel_account), user, method: :delete, confirm: t(:are_you_sure))
-        - elsif can_execute?('Admin')
-          %li{id: "#{user.id.to_s}-edit-button"}
-            = icon_link_to( 'icon-cog', '', t(:edit_facilities), user_facilities_path(user), id:"#{user.id.to_s}-edit-button")
-  %h2= user.name
-  %p
-    = icon_link_to 'icon-envelope', '', user.email
-    %br/
-    = t(:email_confirmed_at, when:  user.email_confirmed_at ? localize(user.email_confirmed_at) : t(:not_confirmed_yet))
-    %br/
-    = t(:account_exists_since, when: localize(user.created_at||(Time.now-48.years)))
-  - user.facilities_string do |str|
-    %p= str
-  - unless params[:action] == 'show'
+- present user do |presenter|
+  .well{:id => user.id.to_s}
+    = presenter.options_menu
+    %h2= presenter.name
     %p
-      %strong= t(:connected_providers)
-      %ul
-        - user.authentications.each do |auth|
-          %li
-            = auth.provider.to_s.humanize
-  .clear-both
+      = presenter.email
+      %br/
+      = presenter.confirmed_at
+      %br/
+      = presenter.exists_since
+    = presenter.facilities
+    - unless params[:action] == 'show'
+      = presenter.oauth_providers
+    .clear-both
 
     
