@@ -42,13 +42,10 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    _auths = @user.authentications
-    begin
-      @user.destroy
-      _auths.delete_all
+    if @user.delete
       redirect_to signout_path, :notice => t(:user_successfully_deleted)
-    rescue => e
-      redirect_to user_path(@user), alert: t(:can_not_delete_user, error: e.message)
+    else
+      redirect_to user_path(@user), alert: t(:can_not_delete_user, why: @user.errors.full_messages.join(" & "))
     end
   end
 

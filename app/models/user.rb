@@ -44,12 +44,8 @@ class User
   # Accessible Attributes
   attr_accessible :name, :email
 
-  # Destroy omni-identities when delete the user
-  # There is no association between User and Identity. So, we have to do this
-  # with this two filters.
-  before_destroy :memorize_identity
-  after_destroy  :clear_identity
-
+  after_destroy :clear_identity
+  
   # Add an authentication to this user
   # @param [Hash] auth - as provided by omni-auth
   def add_omniauth(auth)
@@ -162,20 +158,10 @@ class User
     self.email_confirmed_at != nil
   end
 
-
-private
-  # Save Identities to remove after destroy. Called by before_filter
-  # @return [Identity] or nil if no Identity exists
-  def memorize_identity
-    @identity_to_remove = Identity.where(name: self.name).first
-  end
-
-  # Model Identity is handeled by omniauth-identity which is not
-  # connected in any way to our user-model. To clean up unused
-  # Identities we have to delete through this user's authentications
-  # Called by after_filter  
+protected
   def clear_identity
-    @identity_to_remove.delete if @identity_to_remove
+    Identity.where(name: self.name).delete_all
   end
+
 end
 

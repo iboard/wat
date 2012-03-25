@@ -49,19 +49,18 @@ describe UsersController do
       page.should have_no_content "Testuser"
     end
 
-    it "should display a message if an exeptions raised on user.destroy" do
-      sign_in_user name: 'Testuser', password: 'notsecret'
-      visit users_path
+    it "should display a message if destroying is not possible" do
       class User
         def delete
-          raise "DON'T DELETE ME WHILE TESTING"
-        end
-        def destroy
-          raise "DON'T DESTROY ME WHILE TESTING"
+          self.errors.add( :base, "I'll not die yet!")
+          return false
         end
       end
+      sign_in_user name: 'Testuser', password: 'notsecret'
+      visit users_path
       page.click_link "Cancel Account" 
-      page.should have_content "ERROR: DON'T DESTROY ME WHILE TESTING"
+      page.should have_content "Testuser"
+      page.should have_content I18n.t(:can_not_delete_user, why: "I'll not die yet!")
     end
   
     it "shows facilities in user-show view" do
