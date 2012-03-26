@@ -12,12 +12,6 @@
         %li.hr
         %li= icon_link_to 'icon-leaf', '', t(:register_new_account), new_identity_path
   - else
-    %ul.nav
-      %li.dropdown
-        = link_to (current_user.name + " <b class='caret'></b>").html_safe, "#", :class => 'dropdown-toggle', 'data-toggle' => 'dropdown'
-        %ul.dropdown-menu
-          %li= icon_link_to 'icon-user', '', t(:edit_profile), user_path(current_user)
-          %li= icon_link_to 'icon-off', '', t(:logout), signout_path
     - if current_user.can_execute?('Admin')
       %ul.nav
         %li.dropdown
@@ -25,4 +19,10 @@
           %ul.dropdown-menu
             %li= icon_link_to('icon-user', '', t(:userlist), users_path)
             %li= icon_link_to('icon-list', '', t(:pages), pages_path)
+    %ul.nav
+      %li.dropdown
+        = link_to (current_user.name + " <b class='caret'></b>").html_safe, "#", :class => 'dropdown-toggle', 'data-toggle' => 'dropdown'
+        %ul.dropdown-menu
+          %li= icon_link_to 'icon-user', '', t(:edit_profile), user_path(current_user)
+          %li= icon_link_to 'icon-off', '', t(:logout), signout_path
 
