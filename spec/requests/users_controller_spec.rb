@@ -4,6 +4,21 @@ require File::expand_path('../../spec_helper', __FILE__)
 require 'capybara/rspec'
 
 describe UsersController do
+
+  it "doesn't allow passwords shorter than 5 characters" do
+    User.delete_all
+    Identity.delete_all
+    visit new_identity_path
+    fill_in "name", with: "Shorty"
+    fill_in "password", with: "1234"
+    fill_in "password_confirmation", with: "1234"
+    click_button "Register"
+    page.should have_content "Passwordis too short (minimum is 5 characters)"
+    fill_in "password", with: "12345"
+    click_button "Register"
+    page.should_not have_content "Prohibited this account from being saved"
+
+  end
   
   describe "With an admin and temporary users" do
     before(:each) do

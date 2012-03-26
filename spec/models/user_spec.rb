@@ -15,7 +15,7 @@ describe User do
 
   it "removes identities when destroyed" do
     user = User.create!(name: "Test With Identities", email: 'identity@iboard.cc')
-    identity = Identity.create!(provider: 'identity', uid:'test123', name: 'Test With Identities', password:"123", password_confirmation: "123")
+    identity = Identity.create!(provider: 'identity', uid:'test123', name: 'Test With Identities', password:"12345", password_confirmation: "12345")
     user.authentications = [ identity ]
     user.save!
     assert user.authentications.count == 1

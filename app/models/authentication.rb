@@ -5,4 +5,14 @@ class Authentication
   field :uid, :type => String
   
   embedded_in :user
+
+  after_destroy :remove_identity
+
+private
+  def remove_identity
+    if self.provider == 'Identity'
+      Identity.where(uid: self.uid).delete_all
+    end
+  end
+
 end
