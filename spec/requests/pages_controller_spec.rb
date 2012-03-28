@@ -12,10 +12,8 @@ describe PagesController do
     User.delete_all
     Identity.delete_all
     visit switch_language_path(:en)
-    sign_up_user name: 'Testuser', password: 'notsecret', email: 'test@iboard.cc'
-    user=User.first
-    user.email_confirmed_at = Time.now
-    user.save!
+    test_user 'Testuser', 'notsecret'
+    sign_in_user name: 'Testuser', password: 'notsecret'
   end  
 
   it "page should show up with title as key" do
@@ -179,9 +177,7 @@ describe PagesController do
     end
 
     it "finds pages using the search-form with JS", js: true do
-      _usr = User.first
-      _usr.facilities.create name: 'Admin', access: 'rwx'
-      _usr.email_confirmed_at = Time.now
+      _usr = User.first.facilities.find_or_create_by name: 'Admin', access: 'rwx'
       _usr.save!
       switch_language_path(:en)
       sign_in_user name: "Testuser", password: "notsecret"

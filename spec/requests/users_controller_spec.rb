@@ -26,11 +26,7 @@ describe UsersController do
       Identity.delete_all
       visit root_path
       visit switch_language_path(:en)
-      sign_up_user name: 'Testuser', password: 'notsecret', email: 'test@iboard.cc'
-      user = User.first
-      user.email_confirmed_at =  Time.now
-      user.facilities.create name: 'Admin', access: 'rwx'
-      user.save!
+      test_user 'Testuser', 'notsecret', "Admin"
     end
    
     it "should login user" do
@@ -80,14 +76,12 @@ describe UsersController do
     end
   
     it "shows facilities in user-show view" do
-      User.first.facilities.create name: 'Admin', access: 'rwx'
       sign_in_user name: 'Testuser', password: 'notsecret'
       visit user_path(User.first)
       page.should have_content "Facilities: Admin"
     end
   
     it "shows facilities in user-list" do
-      User.first.facilities.find_or_create_by name: 'Admin', access: 'rwx'
       sign_in_user name: 'Testuser', password: 'notsecret'
       visit users_path
       page.should have_content "Facilities: Admin"
@@ -95,8 +89,8 @@ describe UsersController do
   
     it "should not show foreign users unless current_user is admin" do
       visit signout_path
-      User.create  name: 'Foreigner', email: 'alien@iboard.cc'
-      sign_up_user name: 'Hacker', password: 'notsecret', email: 'hacked@iboard.cc'    
+      test_user 'Foreigner', 'alians'
+      test_user 'Hacker', 'notsecret'
       visit users_path
       page.should_not have_content "Foreigner"
       page.should have_content "Access denied"
@@ -104,13 +98,14 @@ describe UsersController do
   
     it "sends a confirmation mail when a user is created" do
       visit signout_path
-      sign_up_user name: "Friendly User", password: 'notsecret', email: 'newuser@iboard.cc'
-      last_email.to.should include('newuser@iboard.cc')
+      sign_up_user name: "Friendly User", password: 'notsecret', email: 'friendly.user@example.com'
+      last_email.to.should include('friendly.user@example.com')
     end
   
     it "sends a confirmation mail when the email changes" do
       visit signout_path
-      sign_up_user name: "Friendly User", password: 'notsecret', email: 'user@iboard.cc'
+      test_user 'New User', 'secret'
+      sign_in_user name: 'New User', password: 'secret'
       click_link "Edit"
       fill_in "Email", with: "user1@iboard.cc"
       click_button "Save"
@@ -161,8 +156,8 @@ describe UsersController do
       Identity.delete_all
       visit signout_path
       visit switch_language_path(:en)
-      sign_up_user name: 'Mr. Standard', password: "Mr. Nice", email: "standard@example.com"
-      @user1 = User.where(name: 'Mr. Standard').first
+      @user1 = test_user 'Mr. Standard', 'Mr. Nice'
+      sign_in_user name: 'Mr. Standard', password: 'Mr. Nice'
     end
 
     it "shows connected auth_providers" do
@@ -190,12 +185,9 @@ describe UsersController do
       User.delete_all
       Identity.delete_all
       visit switch_language_path(:en)
-      sign_up_user name: "Admin", password: 'notsecret', email: 'admin@iboard.cc'
-      @admin = User.first
-      @confirmed_at = Time.now
-      @admin.email_confirmed_at = @confirmed_at
-      @admin.facilities.create name: 'Admin', access: 'rwx'
-      @admin.save!
+      @admin = test_user 'Admin', 'notsecret', 'Admin'
+      @confirmed_at = @admin.email_confirmed_at
+      sign_in_user name: 'Admin', password: 'notsecret'
     end
 
     it "shows the confirmation status in user::index" do
@@ -205,7 +197,7 @@ describe UsersController do
     end
 
     it "finds users using the search-form without JS" do
-      User.create name: "Hidden user", email: "hidden@example.com"
+      test_user 'Hidden user', 'secret'
       visit users_path
       fill_in 'search_search_text', with: "admi"
       click_button "Search"

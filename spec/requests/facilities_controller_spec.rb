@@ -5,13 +5,9 @@ describe FacilitiesController do
   before(:each) do
     User.delete_all
     Identity.delete_all
-    sign_up_user name: 'Admin', password: 'notsecret', email: 'admin@iboard.cc'
-    @admin = User.first
-    @admin.email_confirmed_at = Time.now
-    @admin.facilities.find_or_create_by name: 'Admin', access: 'rwx'
-    @admin.save!
-    @user1 = User.create name: 'User One', email: 'usr1@iboard.cc', email_confirmed_at: Time.now
-    @user2 = User.create name: 'User Two', email: 'usr2@iboard.cc', email_confirmed_at: Time.now
+    @admin = test_user 'Testuser', 'notsecret', 'Admin'
+    @user1 = test_user 'User One', 'secret'
+    @user2 = test_user 'User Two', 'secret'
   end
 
   it "offers an edit-facility-button for any user if you're an admin" do

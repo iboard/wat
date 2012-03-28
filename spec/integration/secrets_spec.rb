@@ -18,4 +18,16 @@ describe Secrets do
   it "provides openid storage" do
     assert Secrets::secret['openid']['store'] == "tmp/"
   end
+
+  it "MUST be .gitignored!" do
+    gitignore = File.read( File::expand_path('.gitignore', Rails.root))
+    [
+      /^\/config\/secrets.yml/,
+      /^\/config\/settings\/production.yml/,
+      /^\/config\/config.yml/,
+      /^\/config\/database.yml/
+    ].each do |entry|
+      gitignore.should match entry
+    end
+  end
 end

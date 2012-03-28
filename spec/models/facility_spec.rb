@@ -3,12 +3,7 @@ require 'spec_helper'
 describe Facility do
 
   it "defines class Facility for User" do
-    user = User.create(name: 'Testuser', email: 'test@iboard.cc')
-    user.email_confirmed_at =  Time.now
-    user.facilities.create(name: 'Admin', access: 'rwx')
-    user.save!
-    user.reload
-
+    user = test_user 'Testuser', 'secret', ['Admin']
     assert user.can_read?('Admin'), 'can_read? should be true'
     assert user.can_write?('Admin'), 'can_write? should be true'
     assert user.can_execute?('Admin'), 'can_execute? should be true'

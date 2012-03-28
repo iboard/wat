@@ -10,6 +10,15 @@
 # http://github.com/RailsApps/rails3-application-templates/issues
 #----------------------------------------------------------------------------
 
+# IMPORTANT! Never push this files to a public repo!
+
+/config/settings/development.yml
+/config/settings/production.yml
+/config/settings.local.yml
+/config/settings/*.local.yml
+/config/environments/*.local.yml
+
+
 # bundler state
 /.bundle
 /vendor/bundle/
@@ -71,18 +80,9 @@ db/*.sqlite3
 # vim artifacts
 **.swp
 
-# keep OmniAuth service provider secrets out of the Git repo
-#config/initializers/omniauth.rb
-
-
 wat.sublime-project
 wat.sublime-workspace
 README.html
 
-config/settings/development.yml
-config/settings/production.yml
-config/settings.local.yml
-config/settings/*.local.yml
-config/environments/*.local.yml
 public/assets/*
 Gemfile.lock

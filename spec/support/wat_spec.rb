@@ -1,5 +1,29 @@
 # wat's Spec Helper
 
+
+# Create a user with Identity and Facilities through database
+# @param [String] username
+# @param [String] user's password
+# @param [Array] Facilities (will be added with access 'rwx')
+# @return [User]
+def test_user( name, password, facilities=[])
+  user = User.create(name: name, email: name.gsub(/\s/,'.').downcase+'@example.com')
+  user.email_confirmed_at =  Time.now
+  
+  _facilities = facilities.is_a?(String) ? [facilities] : facilities
+  _facilities.each do |f|
+    user.facilities.create(name: f, access: 'rwx')
+  end
+  
+  user.authentications << Authentication.new(provider: 'identity', uid: '7')
+  Identity.create( name: name, password: password, password_confirmation: password)
+  user.save!
+  user.reload
+  user
+end
+
+# Sign up a user through controller
+# @param [Hash] User-options eg. { name: ..., password: ...., email: .... }
 def sign_up_user(options={})
   _name = options[:name]
   _password = options[:password]
