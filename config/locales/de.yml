@@ -164,4 +164,10 @@ de:
   no_page_found_for: "Mit '%{search}' im Titel oder Inhalt wurde keine Seite gefunden"
   can_not_delete_user: "Ihr Benutzerkonto konnte nicht gelöscht werden. %{why}"
   no_name_given: KEIN NAME ANGEGEBEN
-  
+  create_a_local_user_first_and_connect:
+    Wenn der Benutzername, der von %{provider} übergeben wurde bereits existiert ...
+    <ol>
+      <li>Erstelle ein lokales Benutzerkonto</li>
+      <li>Verbinde das neue Konto mit %{provider}</li>
+      <li>Danach kann der lokale Benutzer auch wieder gelöscht werden.</li>
+    </ol>

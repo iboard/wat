@@ -4,36 +4,25 @@ class SessionsController < ApplicationController
   def new
   end
 
-  # 1. Login if user found by authentication
-  # 2. Add authentication to current_user if one exists
-  # 3. Create a new user by this authentication
-  # 4. Redirect to edit_user if email is invalid
-  # 5. Redirect to root_url with notice
+  # 1. Login if user found by authentication or could be created through auth
+  # 2. Redirect to edit_user if email is invalid
+  # 3. Redirect to root_url with notice
   def create
     auth = request.env["omniauth.auth"]
+    user = User.find_or_create_with_omniauth(auth,current_user)
 
-    user = User.where(:authentications.matches => {
-             :provider => auth['provider'], 
-             :uid => auth['uid'].to_s
-           }).first
-    if user && !current_user
+    if user && user.valid?
+      
       session[:user_id] = user.id
-    elsif current_user
-      current_user.add_omniauth(auth)
-      current_user.save!
-    else
-      user = User.create_with_omniauth(auth,current_user)
-      if user.email.present?
-        user.email_confirmed_at = Time.now
+      
+      if user.email.present? && auth['provider'] !~ /identity/i
+        user.email_confirmed_at ||= Time.now
         user.save!
         _send_notification = false
       else
         _send_notification = true
       end
-      session[:user_id] = user.id
-    end
-
-    if user && current_user
+      
       if user.email.blank? 
         redirect_to edit_user_path(user.id.to_s), :info => t(:please_enter_your_email_address)
       else
@@ -42,7 +31,6 @@ class SessionsController < ApplicationController
             confirm_link: dirty_link_to(I18n.t(:resend_confirmation_mail), resend_confirmation_mail_user_path(user))
           ).html_safe
 
-
           if _send_notification
             UserMailer.registration_confirmation(user).deliver
           end
@@ -50,11 +38,10 @@ class SessionsController < ApplicationController
         redirect_to root_url, :notice => t(:signed_in)
       end
     else
-      unless user
-        redirect_to current_user, :notice => t(:provider_added, provider: auth['provider']).html_safe
-      else
-        redirect_to user, :alert => t(:invalid_credentials_or_user_exists, user: user ? user.name : '')
+      if user
+        flash[:message] = t(:create_a_local_user_first_and_connect, provider: auth[:provider].humanize).html_safe
       end
+      redirect_to signin_path, :alert => t(:invalid_credentials_or_user_exists, user: user ? user.name : '')
     end
   end
 

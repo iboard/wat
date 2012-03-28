@@ -162,3 +162,10 @@ en:
   no_page_found_for: "No page found where title or body matches '%{search}'"
   can_not_delete_user: "Sorry, your account could't be deleted. %{why}"
   no_name_given: NO NAME GIVEN
+  create_a_local_user_first_and_connect:
+    If the username provided by %{provider} already exists you can ...
+    <ol>
+      <li>create a local account with a different name first</li>
+      <li>then, when logged in with this account, you can connect to %{provider}</li>
+      <li>once this is done you may remove the local acount if you like</li>
+    </ol>

@@ -58,35 +58,23 @@ class User
   # Create a new user using omniauth information
   # @param [Hash] auth The hash returned by omniauth-provider
   # @return User or nil if it can't be found nor created.
-  def self.create_with_omniauth(auth,current_user)
+  def self.find_or_create_with_omniauth(auth,current_user)
     
     _name = auth['info']['name']
-    _uid  = auth['info']['uid'].to_s
-    _provider=auth['info']['provider']
-
+    _uid  = auth['uid']
+    _provider = auth['provider']
+    _email = auth['info']['email'].present? ? auth['info']['email'] : nil
+    _first_name = auth['info']['first_name'].present? ? auth['info']['first_name'] : ''
+    _last_name = auth['info']['last_name'].present? ? auth['info']['last_name'] : ''
     # e.g. Foursquare doesn't fill 'info[:name]'
     # in this case join first_name and last_name
-    unless _name
-      _name = [auth['info']['first_name']||'', auth['info']['last_name']||''].join(" ")
-    end
+    _name ||= [_first_name , _lastname].join(" ")
     
-    # Find a user with this authentication
-    _user = User.where( 
-      :authentications.matches => {
-         :provider => _provider, :uid => _uid
-      }
-    ).first
-    
-    # Use current_user or create a new user
-    unless _user
-      _user = current_user || create(name: _name) do |user|
-        user.email ||= auth['info']['email'] if auth['info']['email'].present?
-        user.authentications.create(
-          provider: auth['provider'],
-          uid: auth['uid'].to_s
-        )
-      end
+    _user = User.find_with_authentication(_provider, _uid) || current_user || create(name: _name) 
+    if _user
+      _user.email ||= _email
       _user.save
+      _user.authentications.find_or_create_by(provider: _provider, uid: _uid )
     end
 
     _user

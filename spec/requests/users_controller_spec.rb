@@ -106,6 +106,7 @@ describe UsersController do
       visit signout_path
       test_user 'New User', 'secret'
       sign_in_user name: 'New User', password: 'secret'
+      click_link "Edit profile"
       click_link "Edit"
       fill_in "Email", with: "user1@iboard.cc"
       click_button "Save"
@@ -142,7 +143,6 @@ describe UsersController do
       fill_in "password", with: "ABCdefg"
       fill_in "password_confirmation", with: "ABCdefg"
       click_button "Register"
-      page.should have_content "Provider identity added to your account."
       unset_current_user
       sign_in_user name: "Twitter User", password: 'ABCdefg'
       page.should have_content "Signed in"

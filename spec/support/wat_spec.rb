@@ -6,17 +6,17 @@
 # @param [String] user's password
 # @param [Array] Facilities (will be added with access 'rwx')
 # @return [User]
-def test_user( name, password, facilities=[])
+def test_user( name, password, facilities=[], confirmed=true)
   user = User.create(name: name, email: name.gsub(/\s/,'.').downcase+'@example.com')
-  user.email_confirmed_at =  Time.now
+  user.email_confirmed_at =  Time.now if confirmed
   
   _facilities = facilities.is_a?(String) ? [facilities] : facilities
   _facilities.each do |f|
     user.facilities.create(name: f, access: 'rwx')
   end
   
-  user.authentications << Authentication.new(provider: 'identity', uid: '7')
-  Identity.create( name: name, password: password, password_confirmation: password)
+  identity = Identity.create( name: name, password: password, password_confirmation: password)
+  user.authentications << Authentication.new(provider: 'identity', uid: identity.id.to_s)
   user.save!
   user.reload
   user
