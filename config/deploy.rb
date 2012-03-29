@@ -15,7 +15,7 @@ set :use_sudo, false
 
 set :scm, "git"
 set :repository, "git@github.com:iboard/#{source_repository}.git"
-set :branch, "capify"
+set :branch, "master"
 # END SETUP SECTION =============================================
 
 
