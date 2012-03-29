@@ -12,16 +12,13 @@ Featuring
   * Based on Rails 3.2.2
   * TTD with RSpec
   * Twitter Bootstrap
+  * Deployment with capistrano
 
 _see:_
 
   * [GitHub/RailsApps](https://github.com/RailsApps/rails3-application-templates)
   * [WAT](https://github.com/iboard/wat)
 
-
-    THIS PROJECT IS FOR TESTING PURPOSES ONLY (YET)
-    YOU MAY USE IT AS A STARTER APP FOR YOUR APPLICATION
-    BUT DON'T USE IT IN PRODUCTION AS IT IS AT THE MOMENT!
 
 Things done after generating the app from the template
 ------------------------------------------------------
@@ -41,6 +38,7 @@ Things done after generating the app from the template
   * Added:    I18n for :en and :de
   * Added:    Model `Page`
   * Added:    Confirm registraton mail
+  * Added:    capistrano
 
 
 Installation
@@ -59,16 +57,22 @@ Installation
 Mac OS X (and may be others)
 ----------------------------
 
-  Best you have `brew` installed, 'couse you'll need:
+  Good to have `brew` installed, 'couse you'll need:
 
   * Qt (for capybara-webkit)
   * Mongo
+  * Gtk (for inotify)
   * and other things
 
 ```sh
 # install with webkit with 
 rvmsudo gem install capybara-webkit
 ```
+
+Deployment
+==========
+
+  see [DEPLOY](deploy.md)
 
 
 API-Keys
@@ -84,33 +88,9 @@ API-Keys
   * [Tumblr](http://www.tumblr.com/oauth/apps)
 
 Models
-======
-    
-The 'Facility-Idea'
--------------------
+------
 
-A facility has a name (like 'Admin', 'Author') and an access-mask like in the unix-filesystem (rwx)
-Facilities are embedded to the user and helper-functions like _can_execute?('Admin')_ will return true or false if the user has this facility.
-
-Next step will be: Models like 'Page' will embed Facilities too in order to support code like this:
-
-```ruby
-  @page.facilities.create(name: 'user one', access: 'rw-')
-  if current_user.can_write_on?(@page)
-    ...
-  end
-```
-
-Model Page
-----------
-
-* A page has a _parmalink_ which is used as a key -> http://..../permalink
-* Title and body can be translated using mongoID `:localize => true`
-* Use permalink 'hero' for the "Hero-Page" displayed at the root-path
-* Begin permalink with @ will make a page "featured" and displays the page below the hero-page at the root_path.
-* Create a page in any language. Save it. Switch language (at the bottom of the screen). Edit the page and translate it.
-* Create one page permalinked as 'README' or remove the menu-item from `views/layout/application.haml`
-
+  See file [MODELS](models.md)
 
 License
 =======

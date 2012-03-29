@@ -12,6 +12,8 @@
 
 # IMPORTANT! Never push this files to a public repo!
 
+/config/mongoid.yml
+/config/settings.yml
 /config/settings/development.yml
 /config/settings/production.yml
 /config/settings.local.yml
@@ -85,4 +87,3 @@ wat.sublime-workspace
 README.html
 
 public/assets/*
-Gemfile.lock

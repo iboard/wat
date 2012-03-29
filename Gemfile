@@ -21,14 +21,34 @@ gem "email_spec", ">= 1.2.1", :group => :test
 gem "guard", ">= 0.6.2", :group => :development  
 case HOST_OS
   when /darwin/i
+    # Original for app-template
+    # gem 'rb-fsevent', :group => :development
+    # gem 'growl', :group => :development
+    # gem 'ruby_gntp', :group => :development
+
+    # changed for capistrano
     gem 'rb-fsevent', :group => :development
     gem 'growl', :group => :development
     gem 'ruby_gntp', :group => :development
+    #gem 'libnotify', :group => :development
+    #gem 'rb-inotify', :group => :development
+    gem 'therubyracer', :group => :assets
+ 
 
   when /linux/i
-    gem 'libnotify', :group => :development
-    gem 'rb-inotify', :group => :development
+    # Original for app-template
+    # gem 'libnotify', :group => :development
+    # gem 'rb-inotify', :group => :development
+    # gem 'therubyracer', :group => :assets
+
+    # changed for capistrano
+    gem 'rb-fsevent', :group => :development
+    gem 'growl', :group => :development
+    gem 'ruby_gntp', :group => :development
+    #gem 'libnotify', :group => :development
+    #gem 'rb-inotify', :group => :development
     gem 'therubyracer', :group => :assets
+ 
   when /mswin|windows/i
     gem 'rb-fchange', :group => :development
     gem 'win32console', :group => :development
@@ -65,6 +85,7 @@ gem 'albino'
 gem 'nokogiri'
 gem 'simple_form'
 gem 'rails_config'
+gem 'capistrano'
 
 # Authentication
 gem "omniauth", ">= 1.0.2"

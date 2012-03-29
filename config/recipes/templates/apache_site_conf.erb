@@ -1,0 +1,64 @@
+<VirtualHost *:80>
+  ServerName <%= virtual_host %>
+  DocumentRoot <%= current_path %>/public
+
+  # Configure mongrel_cluster
+  <Proxy balancer://webrick>
+    Order allow,deny
+    Allow from all
+    <% for port in cluster_ports %>
+      <%= "BalancerMember http://#{bind_ip}:#{port}" %> 
+    <% end %>
+  </Proxy>
+
+  RewriteEngine On
+
+  # Prevent access to .svn directories
+  RewriteRule ^(.*/)?\.yml/ - [F,L]
+  ErrorDocument 403 "Access Forbidden"
+
+  # Check for asset hosts
+  RewriteRule %{REMOTE_HOST} ^assets\d.* [L]
+
+  # Check for maintenance file and redirect all requests
+  RewriteCond %{DOCUMENT_ROOT}/system/maintenance.html -f
+  RewriteCond %{SCRIPT_FILENAME} !maintenance.html
+  RewriteRule ^.*$ /system/maintenance.html [L]
+
+  # Rewrite to check for Rails cached page
+  RewriteRule ^([^.]+)$ $1.html [QSA]
+
+  # Redirect all non-static requests to cluster
+  RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-f
+  RewriteRule ^/(.*)$ balancer://webrick%{REQUEST_URI} [P,QSA,L]
+
+  <Directory <%= current_path %>/public>
+    Options -Indexes
+    Options +FollowSymlinks
+  </Directory>
+
+  # Logfiles
+  ErrorLog  /var/log/apache2/<%= virtual_host %>.error.log
+  CustomLog /var/log/apache2/<%= virtual_host %>.access.log combined
+
+  # Error pages
+  # ErrorDocument 400 /error/HTTP_BAD_REQUEST.html.var
+  # ErrorDocument 401 /error/HTTP_UNAUTHORIZED.html.var
+  # ErrorDocument 403 /error/HTTP_FORBIDDEN.html.var
+  # ErrorDocument 404 /error/HTTP_NOT_FOUND.html.var
+  # ErrorDocument 405 /error/HTTP_METHOD_NOT_ALLOWED.html.var
+  # ErrorDocument 408 /error/HTTP_REQUEST_TIME_OUT.html.var
+  # ErrorDocument 410 /error/HTTP_GONE.html.var
+  # ErrorDocument 411 /error/HTTP_LENGTH_REQUIRED.html.var
+  # ErrorDocument 412 /error/HTTP_PRECONDITION_FAILED.html.var
+  # ErrorDocument 413 /error/HTTP_REQUEST_ENTITY_TOO_LARGE.html.var
+  # ErrorDocument 414 /error/HTTP_REQUEST_URI_TOO_LARGE.html.var
+  # ErrorDocument 415 /error/HTTP_UNSUPPORTED_MEDIA_TYPE.html.var
+  # ErrorDocument 500 /error/HTTP_INTERNAL_SERVER_ERROR.html.var
+  # ErrorDocument 501 /error/HTTP_NOT_IMPLEMENTED.html.var
+  # ErrorDocument 502 /error/HTTP_BAD_GATEWAY.html.var
+  ErrorDocument 503 /HTTP_SERVICE_UNAVAILABLE.html
+  # ErrorDocument 506 /error/HTTP_VARIANT_ALSO_VARIES.html.var
+
+
+</VirtualHost>
