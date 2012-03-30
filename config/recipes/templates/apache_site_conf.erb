@@ -19,11 +19,7 @@
 
   # Check for asset hosts
   RewriteRule %{REMOTE_HOST} ^assets\d.* [L]
-  RewriteRule %{REMOTE_HOST} ^404.html$ [L]
-  RewriteRule %{REMOTE_HOST} ^422.html$ [L]
-  RewriteRule %{REMOTE_HOST} ^500.html$ [L]
-  RewriteRule %{REMOTE_HOST} ^503.html$ [L]
-
+  
   # Check for maintenance file and redirect all requests
   RewriteCond %{DOCUMENT_ROOT}/system/maintenance.html -f
   RewriteCond %{SCRIPT_FILENAME} !maintenance.html
@@ -49,7 +45,7 @@
   # ErrorDocument 400 /error/HTTP_BAD_REQUEST.html.var
   # ErrorDocument 401 /error/HTTP_UNAUTHORIZED.html.var
   # ErrorDocument 403 /error/HTTP_FORBIDDEN.html.var
-  ErrorDocument 404 /404.html
+  # ErrorDocument 404 /404.html
   # ErrorDocument 405 /error/HTTP_METHOD_NOT_ALLOWED.html.var
   # ErrorDocument 408 /error/HTTP_REQUEST_TIME_OUT.html.var
   # ErrorDocument 410 /error/HTTP_GONE.html.var
@@ -58,8 +54,8 @@
   # ErrorDocument 413 /error/HTTP_REQUEST_ENTITY_TOO_LARGE.html.var
   # ErrorDocument 414 /error/HTTP_REQUEST_URI_TOO_LARGE.html.var
   # ErrorDocument 415 /error/HTTP_UNSUPPORTED_MEDIA_TYPE.html.var
-  ErrorDocument 422 /422.html
-  ErrorDocument 500 /500.html
+  # ErrorDocument 422 /422.html
+  # ErrorDocument 500 /500.html
   # ErrorDocument 501 /error/HTTP_NOT_IMPLEMENTED.html.var
   # ErrorDocument 502 /error/HTTP_BAD_GATEWAY.html.var
   ErrorDocument 503 /503.html
