@@ -1,8 +1,13 @@
 # @param [String] from - the erb-template to read from
 # @param [String] to - where to put the rendered result
-def template(from, to)
+def template(from, to=nil)
   erb = File.read(File.expand_path("../templates/#{from}",__FILE__))
-  put ERB.new(erb).result(binding), to
+  result = ERB.new(erb).result(binding)
+  if to
+    put result, to  
+  else
+    result
+  end
 end
 
 
