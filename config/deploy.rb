@@ -20,6 +20,7 @@ set :branch, "master"
 
 
 load "config/recipes/base"
+load "config/recipes/check"
 
 # LOAD RECIPES FOR A WEBRICK-SERVER WITH APACHE PROXY-BALANCER
 load "config/recipes/virtual_host_proxy_balancer"
