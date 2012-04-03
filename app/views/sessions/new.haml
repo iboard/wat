@@ -10,7 +10,7 @@
           - if Secrets::secret['openid']
             = link_to "OpenID", "/auth/open_id", :class => 'btn btn-large'
 
-= form_tag( "/auth/identity/callback", :class => 'form-vertical') do
+= form_tag( "/auth/identity/callback", :class => 'form-horizontal') do
   %fieldset
     %legend= t(:or_login_below)
     .control-group
@@ -18,10 +18,13 @@
       .controls= text_field_tag :auth_key, '', class: "span3"
     .control-group
       .control-label= label_tag :password
-      .controls= password_field_tag :password, '', class: "span3"
+      .controls
+        = password_field_tag :password, '', class: "span3"
+        .control-help
+          %br/
+          = icon_link_to( 'icon-question-sign', '', t(:forgot_password), forgot_password_users_path).html_safe
+      
     .form-actions
-      .pull-right
-        = icon_link_to 'icon-question-sign', '', t(:forgot_password), forgot_password_users_path
       = submit_tag t(:login), class: "btn btn-primary"
       = t(:or)
       = link_to t(:create_account), new_identity_path, class: "btn btn-success"

@@ -33,7 +33,7 @@ class User
   validates_uniqueness_of :name
 
   field                   :email, :type => String 
-  validates_format_of     :email, :with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i, :allow_nil => true
+  validates_format_of     :email, :with => ::VALIDATE_EMAIL_REGEX, :allow_nil => true
 
   field                   :confirm_email_token
   field                   :email_confirmed_at, :type => DateTime

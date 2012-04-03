@@ -187,3 +187,5 @@ en:
   password_set: New password set
   wrong_token: Wrong token or token expired
   reset_your_password: Reset your password
+  invalidate_email_address: Invalidate email-address
+  send_reset_token_to: Send reset-token to ...

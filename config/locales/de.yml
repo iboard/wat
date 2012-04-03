@@ -189,3 +189,5 @@ de:
   password_set: Neues Passwort wurde gespeichert
   wrong_token: Falsches oder abgelaufenes 'Reset-Token'
   reset_your_password: Passwort zurücksetzen
+  invalidate_email_address: Ungültige EMail-Adresse
+  send_reset_token_to: Sende 'Reset-Token' an ...

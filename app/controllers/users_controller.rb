@@ -28,7 +28,7 @@ class UsersController < ApplicationController
       if create_or_update_authentication
         redirect_to signin_path, notice: t(:password_set)
       else
-        flash.now[:alert] =@identity.errors.full_messages.join("<br/>".html_safe)
+        flash.now[:alert] =@identity.errors.full_messages.join("<br/>").html_safe
         render :reset_password
       end
     else
@@ -94,12 +94,17 @@ class UsersController < ApplicationController
 
   # PUSH '/users/send_password_token'
   def send_password_reset_token
-    @user = User.where(email: /#{params[:email]}/i).first
-    if @user
-      @user.reset_password
-      redirect_to root_path, notice: t(:please_check_your_inbox_for, email: @user.email)
+    unless params[:email].present? and params[:email] =~ ::VALIDATE_EMAIL_REGEX
+      flash.now[:alert] = t(:invalidate_email_address)
+      render :forgot_password
     else
-      redirect_to forgot_password_users_path, alert: t(:email_not_found)
+      @user = User.where(email: /#{params[:email]}/i).first
+      if @user
+        @user.reset_password
+        redirect_to root_path, notice: t(:please_check_your_inbox_for, email: @user.email)
+      else
+        redirect_to forgot_password_users_path, alert: t(:email_not_found)
+      end
     end
   end
 
