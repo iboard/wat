@@ -18,9 +18,9 @@ namespace :webrick do
             run "kill -9 #{pid}"
           rescue => e
             # try to kill with ps
-            run "ps xa|grep 'server.*#{port}.*#{bind_ip}.*production.*#{port}.pid'|grep -v 'grep' > _old_pid"
+            run "ps xa|grep 'server.*#{port}.*#{bind_ip}.*production.*#{port}.pid'|grep -v 'grep' > /tmp/_old_pid"
             begin
-              run "kill -9 `cat _old_pid`; rm -f _old_pid"
+              run "kill -9 `cat /tmp/_old_pid`; rm -f /tmp/_old_pid"
             rescue => f
               puts "Exception: #{f.inspect}"
             end
