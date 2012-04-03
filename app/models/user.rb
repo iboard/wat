@@ -37,6 +37,7 @@ class User
 
   field                   :confirm_email_token
   field                   :email_confirmed_at, :type => DateTime
+  field                   :password_reset_token
 
   embeds_many             :authentications
   embeds_many             :facilities
@@ -144,6 +145,13 @@ class User
   # @return [Boolean] true if email_confirmed_at has a value
   def email_confirmed?
     self.email_confirmed_at != nil
+  end
+
+  # Send a reset_password_token to email on file
+  def reset_password
+    self.password_reset_token = SecureRandom::uuid
+    save! 
+    UserMailer.send_password_reset_token(self).deliver
   end
 
 protected

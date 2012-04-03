@@ -24,4 +24,18 @@ describe User do
     assert Identity.count == 0, "Identity should have been deleted"
   end
 
+  describe "(standard user)" do
+    before :each do
+      User.delete_all
+      @user = test_user "The Pirate", "ahoid"
+    end
+
+    it "sends a forgot password link" do
+      user = User.where(email: 'the.pirate@example.com').first
+      user.reset_password
+      last_email.to.should include('the.pirate@example.com')
+      last_email.parts.first.body.should  match /requeset to reset your password/
+    end
+  end
+
 end

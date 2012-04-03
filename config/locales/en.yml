@@ -135,6 +135,7 @@ en:
   user_list: Listing users
   email_confirmed: Thank you! Your e-mail is confirmed now.
   token_not_found: Token not found. Maybe your e-mail-address is confirmed already.
+  email_not_found: Email not found
   email_not_confirmed_yet: 
     Your email is not confirmed by now. Please check your mailbox for %{email}.
     <br/>
@@ -169,3 +170,20 @@ en:
       <li>then, when logged in with this account, you can connect to %{provider}</li>
       <li>once this is done you may remove the local acount if you like</li>
     </ol>
+  send_token: Send token
+  reset_token: Reset token
+  reset_password: Reset password
+  new_password: New password
+  confirm_password: Confirm password
+  set_new_password: Set new password
+  password_resetted_successfully: Your new password was set successfully
+  forgot_password: Forgot password?
+  forgot_password_explanation:
+    No problem. If you do not remember your password, just enter your email address
+    and you will receive an email containing a 'password-reset-token' which you can
+    use to reset your password. Please follow the instructions included to the mail.
+  enter_your_email: Please enter your email-address
+  please_check_your_inbox_for: "Please check your inbox for address %{email}"
+  password_set: New password set
+  wrong_token: Wrong token or token expired
+  reset_your_password: Reset your password

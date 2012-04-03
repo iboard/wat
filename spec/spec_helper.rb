@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'spork'
+require File.expand_path '../support/wat_spec', __FILE__
+
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 

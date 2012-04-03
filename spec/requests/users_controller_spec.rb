@@ -178,6 +178,39 @@ describe UsersController do
       visit user_path(@user1)
       page.should_not have_link "Listing Users"
     end
+
+    it "supports forgot password" do
+      user = test_user 'Fred Alzheimer', 'secret'
+      visit signout_path
+
+      # request a token for an existing email
+      visit forgot_password_users_path
+      fill_in "email", with: 'fred.alzheimer@example.com'
+      click_button 'Send token'
+      page.should have_content "Please check your inbox for address fred.alzheimer@example.com"
+
+      # Parse last email for token
+      @token = last_email.parts.first.body.to_s.gsub(/Reset token: ([\S|\-]+)\n/).first.gsub(/Reset token: /, '').strip
+      @token.should_not be nil
+
+      # Visit the reset password page and set new password
+      visit reset_password_user_path(user,@token)
+      fill_in 'Password', with: "dontforget"
+      fill_in 'Password confirmation', with: "dontforget"
+      click_button "Reset password"
+      page.should have_content "New password set"
+
+      # Check to login with new password
+      sign_in_user name: "Fred Alzheimer", password: 'dontforget'
+      page.should have_content "Signed in"
+    end
+
+    it "provides a forgot-password link on the sign-in-page" do
+      visit signin_path
+      page.should have_link 'Forgot password?'
+    end
+
+
   end
   
   describe "as an admin" do

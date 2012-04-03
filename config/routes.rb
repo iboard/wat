@@ -21,11 +21,16 @@ Wat::Application.routes.draw do
   resources :users do
     resources :authentications, only: [:destroy]
     resources :facilities
+    collection do
+      get 'forgot_password' => :forgot_password
+      post 'send_password_reset_token' => :send_password_reset_token
+    end
     member do
       get 'confirm_email/:token' => :confirm_email, :as => 'confirm_email'
       get 'resend_confirmation_mail' => :resend_confirmation_mail, :as => 'resend_confirmation_mail'
       get 'auth_providers' => :auth_providers
       get 'personal_information' => :personal_information
+      get 'reset_password/:token' => :reset_password, as: 'reset_password'
     end
   end
   

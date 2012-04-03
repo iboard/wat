@@ -143,6 +143,7 @@ de:
     Kein Mail erhalten? %{confirm_link}
   please_confirm_your_address: "Überprüfen sie bitte Ihr Postfach für %{address} und bestätigen sie ihre email-address!"
   email_confirmed_at: "Email bestätigt am: %{when}"
+  email_not_found: Email-Adresse nicht gefunden
   account_exists_since: "Benutzer existiert seit %{when}"
   not_confirmed_yet: "Noch nicht bestätigt"
   connected_providers: "Verknüpfte Authentifizierungsanbieter"
@@ -171,3 +172,20 @@ de:
       <li>Verbinde das neue Konto mit %{provider}</li>
       <li>Danach kann der lokale Benutzer auch wieder gelöscht werden.</li>
     </ol>
+  send_token: Reset PIN zusenden
+  reset_token: Reset PIN
+  new_password: Neues Passwort
+  reset_password: Passwort ändern
+  confirm_password: Passwort bestätigen
+  set_new_password: Neues Passwort setzen
+  password_resetted_successfully: Ihr neues Passwort wurde gespeichert
+  forgot_password: Passwort vergessen?
+  forgot_password_explanation:
+    Kein Problem, wenn ihnen ihr Passwort nicht mehr einfällt. Geben Sie hier
+    einfach Ihre 'EMail-Adresse' ein und wir senden ihnen ein 'Reset-Token' und
+    eine Anleitung, wie sie ein neues Passwort setzten können.
+  enter_your_email: Geben Sie bitte Ihre e-mail-Adresse ein
+  please_check_your_inbox_for: "Kontrollieren Sie bitte das Postfach für die Adresse: %{email}"
+  password_set: Neues Passwort wurde gespeichert
+  wrong_token: Falsches oder abgelaufenes 'Reset-Token'
+  reset_your_password: Passwort zurücksetzen
