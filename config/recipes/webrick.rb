@@ -18,7 +18,7 @@ namespace :webrick do
             run "kill -9 #{pid}"
           rescue => e
             # try to kill with ps
-            process = `ps xa|grep "server.*#{port}.*#{bind_ip}.*production.*#{port}.pid"|head -1`
+            process = `ps xa|grep "server.*#{port}.*#{bind_ip}.*production.*#{port}.pid"|grep -v "grep"`
             pid = process.strip.split(/\s+/)[0]
             puts "Found running process at #{process}"
             begin
