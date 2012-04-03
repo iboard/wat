@@ -43,7 +43,19 @@ else
   namespace :deploy do
     namespace :assets do
       task :precompile do
-        puts "NO ASSET::PRECOMPILE"        
+        puts %{
+          WARNING
+
+          deploy:assets:precompile skipped because there is no file
+          config/precompile_assets.txt
+
+          If you like assets being precompiled at deploy please
+          touch config/precompile_assets.txt and check this file in
+          with git add config/precompile_assets.txt
+
+          Precompiling assets on the debian server takes very long.
+          This ensures it will not be run unless it will be necessary.
+        }       
       end
     end
   end
