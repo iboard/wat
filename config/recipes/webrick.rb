@@ -1,7 +1,7 @@
 namespace :webrick do
 
   %w[start stop restart].each do |command|
-    task command, roles: :app do
+    task command, roles: :web do
       case command
       when 'start'
         for port in cluster_ports
