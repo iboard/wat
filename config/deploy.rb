@@ -37,6 +37,16 @@ load "config/recipes/webrick"
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
-before "deploy:assets:precompile", "bundle:install" if File::exist?(File.expand_path('../precompile_assets.txt',__FILE__))
+if File::exist?(File.expand_path('../precompile_assets.txt',__FILE__))
+  before "deploy:assets:precompile", "bundle:install" 
+else
+  namespace :deploy do
+    namespace :assets do
+      task :precompile do
+        puts "NO ASSET::PRECOMPILE"        
+      end
+    end
+  end
+end
 after "deploy", "deploy:cleanup" # keep 5 versions only
 

@@ -22,4 +22,15 @@ namespace :check do
   before "deploy", "check:revision"
   before "deploy:migrations", "check:revision"
   before "deploy:cold", "check:revision"
+
+  desc "Warn user about precompile_assets.txt"
+  task :warning_user, roles: :web do
+    puts "ATTENTION ==========================================="
+    puts "rake assets:precompile will not run on server        "
+    puts "unless you check in file config/precompile_assets.txt"
+    puts "====================================================="
+  end
+  before "deploy", "check:warning_user"
+  after "deploy:restart", "check:warning_user"
+
 end
