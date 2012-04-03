@@ -17,7 +17,11 @@ namespace :webrick do
             puts "Killing WEBrick with pid #{pid} (read from #{pidpath})"
             run "kill -9 #{pid}"
           rescue => e
-            puts "Server on port #{port} already stopped. => #{e.inspect}"
+            # try to kill with ps
+            process = `ps xa|grep "server -d -p #{port} -b #{bind_ip} --environment=production --pid=#{pidpath}"`
+            pid = process.strip.split(/\b/)[0]
+            puts "Found running process at #{process}"
+            run "kill -9 #{pid}"
           end
         end
       when 'restart'
