@@ -21,7 +21,11 @@ namespace :webrick do
             process = `ps xa|grep "server -d -p #{port} -b #{bind_ip} --environment=production --pid=#{pidpath}"`
             pid = process.strip.split(/\b/)[0]
             puts "Found running process at #{process}"
-            run "kill -9 #{pid}"
+            begin
+              run "kill -9 #{pid}"
+            rescue => f
+              puts "Exception: #{f.inspect}"
+            end
           end
         end
       when 'restart'
