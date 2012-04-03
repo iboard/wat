@@ -18,11 +18,9 @@ namespace :webrick do
             run "kill -9 #{pid}"
           rescue => e
             # try to kill with ps
-            process = run "ps xa|grep 'server.*#{port}.*#{bind_ip}.*production.*#{port}.pid'|grep -v 'grep'"
-            pid = process.strip.split(/\s+/)[0]
-            puts "Found running process at #{process}"
+            run "ps xa|grep 'server.*#{port}.*#{bind_ip}.*production.*#{port}.pid'|grep -v 'grep' > _old_pid"
             begin
-              run "kill -9 #{pid}"
+              run "kill -9 `cat _old_pid`; rm -f _old_pid"
             rescue => f
               puts "Exception: #{f.inspect}"
             end
