@@ -1,0 +1,2 @@
+$('#profile_section').html("<%= escape_javascript(render @user.profile||@user.build_profile, user: @user ) -%>");
+

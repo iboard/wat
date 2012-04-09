@@ -1,0 +1,9 @@
+= simple_form_for [user,user.profile], url: user_profile_path(user), html: {remote: true, class: 'form form-horizontal'} do |f|
+  %fieldset
+    = f.input :firstname
+    = f.input :lastname
+    = f.input :phone_number
+    = f.input :mobile
+    = f.input :dob
+  .form-actions
+    = f.button :submit, t(:save)

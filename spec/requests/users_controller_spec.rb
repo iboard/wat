@@ -166,14 +166,6 @@ describe UsersController do
       page.should have_link "Personal information"
     end
   
-    it "switches personal information and authentication providers", :js => true, :driver => :webkit do
-      visit user_path(@user1)
-      click_link 'Personal information'
-      page.should have_content "No personal information stored yet"
-      click_link 'Assign authentication providers'
-      page.should have_content "Identity"
-    end
-
     it "doesn't show Listing users unless user is admin" do
       visit user_path(@user1)
       page.should_not have_link "Listing Users"

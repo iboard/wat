@@ -191,3 +191,7 @@ de:
   reset_your_password: Passwort zurücksetzen
   invalidate_email_address: Ungültige EMail-Adresse
   send_reset_token_to: Sende 'Reset-Token' an ...
+  your_profile: Benutzerprofil
+  create_your_profile_now: Erstelle ein neues Profil
+  no_profile_created_yet: 'Bisher noch kein persönliches Profil erstellt.'
+  profile_successfully_updated: 'Änderungen wurden gespeichert'

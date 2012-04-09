@@ -41,6 +41,7 @@ class User
 
   embeds_many             :authentications
   embeds_many             :facilities
+  embeds_one              :profile
   
   # Accessible Attributes
   attr_accessible :name, :email

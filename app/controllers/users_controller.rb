@@ -81,12 +81,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def personal_information 
-    @user = User.find(params[:id])
-  end
-
-
-
   # GET '/users/forgot_password'
   def forgot_password
     # Render the form to reset password (enter email)

@@ -189,3 +189,7 @@ en:
   reset_your_password: Reset your password
   invalidate_email_address: Invalidate email-address
   send_reset_token_to: Send reset-token to ...
+  your_profile: Your profile
+  create_your_profile_now: Create your profile now
+  no_profile_created_yet: 'No profile created yet.'
+  profile_successfully_updated: Profile successfully updated

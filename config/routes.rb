@@ -20,6 +20,7 @@ Wat::Application.routes.draw do
   #  a valid email-address which the user can edit at any time.
   resources :users do
     resources :authentications, only: [:destroy]
+    resource  :profile
     resources :facilities
     collection do
       get 'forgot_password' => :forgot_password
@@ -29,7 +30,6 @@ Wat::Application.routes.draw do
       get 'confirm_email/:token' => :confirm_email, :as => 'confirm_email'
       get 'resend_confirmation_mail' => :resend_confirmation_mail, :as => 'resend_confirmation_mail'
       get 'auth_providers' => :auth_providers
-      get 'personal_information' => :personal_information
       get 'reset_password/:token' => :reset_password, as: 'reset_password'
     end
   end

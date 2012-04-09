@@ -1,0 +1,17 @@
+%h2= t(:your_profile)
+
+- if user.profile.new_record?
+  .well
+    %p=t(:no_profile_created_yet)
+    = button_link_to 'icon-plus-sign', 'btn btn-success', t(:create_your_profile_now), new_user_profile_path(user), remote:true
+- else
+  %p
+    = button_link_to 'icon-edit', 'btn btn-primary', t(:edit), edit_user_profile_path(user), remote: true
+    = button_link_to 'icon-edit', 'btn btn-danger', t(:delete), user_profile_path(user), method: :delete, confirm: t(:are_you_sure), remote: true
+  - user.profile.attributes.reject{|a| a=='_id'}.each do |name,value|
+    %p
+      = t(name.to_sym)
+      = ": "
+      %strong= value.blank? ? "n/a" : value
+
+

@@ -3,5 +3,7 @@ if( $('#user-name').length == 0  ) {
   $('#<%= @user.id.to_s %>').after('<h3 id="user-name" class="well"><%= @user.name -%></h3>');$('#personal_information').parent().removeClass( 'active');
 }
 
-$('#authentication_providers').parent().addClass('active');
-$('#profile_section').html('<%= j(render "auth_providers", user: @user) -%>');
+$('#authentication_providers').parent().removeClass( 'active');
+$('#personal_information').parent().addClass('active');
+$('#profile_section').html("<%= escape_javascript(render @user.profile||@user.build_profile, user: @user ) -%>");
+
