@@ -1,2 +1,2 @@
-$('#profile_section').html("<%= escape_javascript(render @user.profile||@user.build_profile, user: @user ) -%>");
-
+$('#user-menu').html('<%= escape_javascript render "users/user_menu", user: @user %>');
+$('#profile-section').html("<%= escape_javascript(render @user.profile||@user.build_profile, user: @user ) -%>");

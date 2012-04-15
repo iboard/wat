@@ -1,8 +1,8 @@
 $('#user-name').html('<%= escape_javascript render( "users/short_header", user: @user) %>');
 <% if @user.errors.any? %>
-  $('#profile_section').html("<div class='alert alert-error'><%= @user.errors.full_messages %></div>"+
+  $('#profile-section').html("<div class='alert alert-error'><%= @user.errors.full_messages %></div>"+
     "<%= escape_javascript(render( 'form', user: @user)) -%>");
 <% else %>
-  $('#profile_section').html( "<div class='alert alert-success'><i class='icon-ok-sign'></i> <%= t(:profile_successfully_updated) %></div>"+
+  $('#profile-section').html( "<div class='alert alert-success'><i class='icon-ok-sign'></i> <%= t(:profile_successfully_updated) %></div>"+
     "<%= escape_javascript(render( 'profile', user: @user)) %>");
 <% end %>

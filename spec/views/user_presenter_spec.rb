@@ -9,7 +9,7 @@ describe UserPresenter do
 
   it "renders gravatar" do
     presenter = UserPresenter.new(User.new, view)
-    presenter.user.profile = Profile.new( use_gravatar: true )
+    presenter.user.avatar = Avatar.new(use_gravatar: true)
     presenter.avatar.should match /gravatar.com/
   end
 end

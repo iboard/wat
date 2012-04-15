@@ -9,10 +9,9 @@
 
 .clear-both
 
-%ul{:class => "nav nav-tabs"}
-  %li.active= link_to t(:authentication_providers), auth_providers_user_path(@user), id: 'authentication_providers', remote: true, "data-user-id" => @user.id.to_s
-  %li= link_to t(:personal_information), user_profile_path(@user), id: 'personal_information', remote: true, "data-user-id" => @user.id.to_s
+#user-menu.row-fluid
+  = render 'user_menu', user: @user
 
-.row
-  #profile_section.span12
+.row-fluid
+  #profile-section.span12
     = render 'auth_providers', user: @user

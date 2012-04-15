@@ -1,0 +1,10 @@
+%h1= t(:upload_your_avatar)
+%br/
+=simple_form_for [user,user.avatar],url: user_avatar_path(user),html: {remote: true,multicast: true, class: 'form form-horizontal'} do |f|
+  %fieldset
+    =f.input :use_gravatar, as: :boolean, hint: "&nbsp;".html_safe+link_to( 'Gravatar?', "http://gravatar.com")
+    =f.input :avatar, as: :file
+  .clear-both
+  .form-actions
+    =f.submit value: t(:update_avatar), class: 'btn btn-primary'
+    =button_link_to 'icon-remove', 'btn btn-danger', t(:delete_avatar), user_avatar_path(user), method: :delete, remote: true, confirm: t(:are_you_sure)

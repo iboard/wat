@@ -4,4 +4,5 @@ if( $('#user-name').length == 0  ) {
 }
 
 $('#authentication_providers').parent().addClass('active');
-$('#profile_section').html('<%= j(render "auth_providers", user: @user) -%>');
+$('#profile-section').html('<%= j(render "auth_providers", user: @user) -%>');
+$('#user-menu').html('<%= escape_javascript render "users/user_menu", user: @user %>');

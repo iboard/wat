@@ -21,6 +21,8 @@ Wat::Application.routes.draw do
   resources :users do
     resources :authentications, only: [:destroy]
     resource  :profile
+    resource  :avatar
+    
     resources :facilities
     collection do
       get 'forgot_password' => :forgot_password

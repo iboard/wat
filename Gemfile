@@ -79,6 +79,7 @@ end
 # Application
 gem "bson_ext", ">= 1.5.2"
 gem "mongoid", ">= 2.4.4"
+gem "mongoid-paperclip", :require => 'mongoid_paperclip'
 gem "yard"
 gem "redcarpet"
 gem 'albino'

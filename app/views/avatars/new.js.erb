@@ -3,8 +3,6 @@ if( $('#user-name').length == 0  ) {
   $('#<%= @user.id.to_s %>').after('<div class="well"><%= escape_javascript render( "users/short_header", user: @user) %></div>');
   $('#personal_information').parent().removeClass( 'active');
 }
-
-$('#authentication_providers').parent().removeClass( 'active');
-$('#personal_information').parent().addClass('active');
-$('#profile-section').html("<%= escape_javascript(render @user.profile||@user.build_profile, user: @user ) -%>");
+$('#user-name').html('<%= escape_javascript render( "users/short_header", user: @user) %>');
 $('#user-menu').html('<%= escape_javascript render "users/user_menu", user: @user %>');
+$('#profile-section').html('<%= escape_javascript render "form", user: @user %>');

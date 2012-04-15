@@ -203,7 +203,13 @@ de:
   mobile: 'Mobil'
   phone_number: 'Telefon'
   use_gravatar: 'Gravatar benutzen'
-  
+  avatar: Avatar
+  create_avatar: Avatar erstellen
+  update_avatar: Avatar ändern
+  delete_avatar: Avatar löschen
+  upload_your_avatar: Upload Avatar
+  uid: Kennung
+
   simple_form:
     labels:
       user:
@@ -211,3 +217,5 @@ de:
         password: 'Passwort'
       profile:
         dob: 'Geburtsdatum'
+      avatar:
+        use_gravatar: 'Gravatar benutzen'

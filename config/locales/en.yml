@@ -201,6 +201,12 @@ en:
   mobile: 'Mobile'
   phone_number: 'Phone number'
   use_gravatar: 'Use Gravatar'
+  avatar: Avatar
+  create_avatar: Create avatar
+  update_avatar: Update avatar
+  delete_avatar: Delete avatar
+  upload_your_avatar: Upload your avatar
+  uid: Unique ID
 
   simple_form:
     labels:

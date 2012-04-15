@@ -1,0 +1,2 @@
+$('#user-name').html('<%= escape_javascript render( "users/short_header", user: @user) %>');
+$('#profile-section').html('<%= escape_javascript render "form", user: @user %>');
