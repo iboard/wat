@@ -1,16 +1,18 @@
 - present user do |presenter|
   .well{:id => user.id.to_s}
     = presenter.options_menu
-    %h2= presenter.name
-    %p
-      = presenter.email
-      %br/
-      = presenter.confirmed_at
-      %br/
-      = presenter.exists_since
-    = presenter.facilities
-    - unless params[:action] == 'show'
-      = presenter.oauth_providers
+    .span1= presenter.avatar
+    .offset1
+      %h2= presenter.name
+      %p
+        = presenter.email
+  
+        = presenter.confirmed_at
+        %br/
+        = presenter.exists_since
+      = presenter.facilities
+      - unless params[:action] == 'show'
+        = presenter.oauth_providers
     .clear-both
 
     

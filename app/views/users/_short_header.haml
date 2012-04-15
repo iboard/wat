@@ -1,0 +1,5 @@
+- present user do |u|
+  #user-name
+    .pull-right= u.avatar
+    %h3= link_to u.name, user_path(user)
+  .clear-both

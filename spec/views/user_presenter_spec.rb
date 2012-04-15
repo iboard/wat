@@ -6,4 +6,10 @@ describe UserPresenter do
     presenter = UserPresenter.new(User.new, view)
     presenter.name.should include(I18n.t(:no_name_given))
   end
+
+  it "renders gravatar" do
+    presenter = UserPresenter.new(User.new, view)
+    presenter.user.profile = Profile.new( use_gravatar: true )
+    presenter.avatar.should match /gravatar.com/
+  end
 end

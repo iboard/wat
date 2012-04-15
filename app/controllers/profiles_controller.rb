@@ -19,8 +19,13 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    @user.profile.update_attributes(params[:profile])
-    @user.save!
+    begin 
+      @user.profile.update_attributes(params[:profile])
+      @user.save
+    rescue => e
+      @user.profile.errors.add(:dob, e.message.inspect)
+      render :edit
+    end
   end
 
   def destroy

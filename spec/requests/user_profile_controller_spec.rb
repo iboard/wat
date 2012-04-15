@@ -65,4 +65,15 @@ describe UsersController do
     page.should have_content "Nockenfell"
   end
 
+  it "shows an avatar in user header", js: true do
+    visit user_path(@user1)
+    click_link 'Personal information'
+    click_link "Create your profile"
+    check "Use gravatar"
+    click_button "Save"
+    page.should have_content "Profile successfully updated"
+    visit user_path(@user1)
+    page.body.should match "http://gravatar.com/avatar/"
+  end
+
 end

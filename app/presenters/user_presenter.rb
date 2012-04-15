@@ -48,6 +48,12 @@ class UserPresenter < BasePresenter
     end
   end
     
+  def avatar
+    if user.profile && user.profile.use_gravatar
+      _url = "http://gravatar.com/avatar/#{gravatar_id}.png?cache=#{(user.updated_at||Time.now).strftime('%Y%m%d%H%M%S')}"
+      image_tag _url, class: 'avatar'
+    end
+  end
 
 private
   def provider_list
@@ -96,6 +102,10 @@ private
     content_tag :li do
       icon_link_to( 'icon-remove', '', t(:cancel_account), user, method: :delete, confirm: t(:are_you_sure))
     end
+  end
+
+  def gravatar_id
+    Digest::MD5.hexdigest(user.email.downcase) if user.email
   end
 
 

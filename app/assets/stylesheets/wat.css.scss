@@ -43,3 +43,12 @@ textarea {
     text-decoration: none;
   }
 }
+
+img.avatar {
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 2px 2px 5 #444;
+}
+
+.translation_missing {
+  background: yellow;
+}

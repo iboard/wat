@@ -193,3 +193,19 @@ en:
   create_your_profile_now: Create your profile now
   no_profile_created_yet: 'No profile created yet.'
   profile_successfully_updated: Profile successfully updated
+  date_of_birth: Date of birth
+  date_of_birth_placeholder: 'YYYY-MM-DD'
+  dob: 'Date of birth'
+  firstname: 'Firstname'
+  lastname: 'Lastname'
+  mobile: 'Mobile'
+  phone_number: 'Phone number'
+  use_gravatar: 'Use Gravatar'
+
+  simple_form:
+    labels:
+      user:
+        username: 'User name'
+        password: 'Password'
+      profile:
+        dob: 'Date of birth'

@@ -1,6 +1,6 @@
 $('#<%= @user.id.to_s %>').slideUp(250);
 if( $('#user-name').length == 0  ) {
-  $('#<%= @user.id.to_s %>').after('<h3 id="user-name" class="well"><%= @user.name -%></h3>');$('#personal_information').parent().removeClass( 'active');
+  $('#<%= @user.id.to_s %>').after('<div class="well"><%= escape_javascript render( "users/short_header", user: @user) %></div>');
 }
 
 $('#authentication_providers').parent().addClass('active');

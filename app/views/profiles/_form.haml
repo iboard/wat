@@ -4,6 +4,7 @@
     = f.input :lastname
     = f.input :phone_number
     = f.input :mobile
-    = f.input :dob
+    = f.input :dob, placeholder: t(:date_of_birth_placeholder)
+    = f.input :use_gravatar, as: :boolean, hint: "&nbsp;".html_safe + link_to( 'Gravatar?', 'http://gravatar.com', target: :blank )
   .form-actions
     = f.button :submit, t(:save)

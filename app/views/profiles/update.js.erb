@@ -1,3 +1,4 @@
+$('#user-name').html('<%= escape_javascript render( "users/short_header", user: @user) %>');
 <% if @user.errors.any? %>
   $('#profile_section').html("<div class='alert alert-error'><%= @user.errors.full_messages %></div>"+
     "<%= escape_javascript(render( 'form', user: @user)) -%>");

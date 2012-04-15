@@ -10,7 +10,11 @@
     = button_link_to 'icon-edit', 'btn btn-danger', t(:delete), user_profile_path(user), method: :delete, confirm: t(:are_you_sure), remote: true
   - user.profile.attributes.reject{|a| a=='_id'}.each do |name,value|
     %p
-      = t(name.to_sym)
+      - case name
+        - when 'Use Gravatar'
+          link_to( 'Gravatar?', 'http://gravatar.com', target: :blank )
+        - else
+          = t(name.to_sym)
       = ": "
       %strong= value.blank? ? "n/a" : value
 

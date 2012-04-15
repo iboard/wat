@@ -195,3 +195,19 @@ de:
   create_your_profile_now: Erstelle ein neues Profil
   no_profile_created_yet: 'Bisher noch kein persönliches Profil erstellt.'
   profile_successfully_updated: 'Änderungen wurden gespeichert'
+  date_of_birth: Geburtsdatum
+  date_of_birth_placeholder: 'JJJJ-MM-TT'
+  dob: 'Geburtsdatum'
+  firstname: 'Vorname'
+  lastname: 'Nachname'
+  mobile: 'Mobil'
+  phone_number: 'Telefon'
+  use_gravatar: 'Gravatar benutzen'
+  
+  simple_form:
+    labels:
+      user:
+        name: 'Benutzername'
+        password: 'Passwort'
+      profile:
+        dob: 'Geburtsdatum'

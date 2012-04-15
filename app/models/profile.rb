@@ -7,5 +7,6 @@ class Profile
   field :dob, type: Date
   field :phone_number
   field :mobile
+  field :use_gravatar, type: Boolean, default: false
 
 end
