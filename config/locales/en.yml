@@ -207,6 +207,7 @@ en:
   delete_avatar: Delete avatar
   upload_your_avatar: Upload your avatar
   uid: Unique ID
+  avatar_saved_successfully: Your avatar was uploaded successfully.
 
   simple_form:
     labels:

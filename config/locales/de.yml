@@ -209,6 +209,7 @@ de:
   delete_avatar: Avatar löschen
   upload_your_avatar: Upload Avatar
   uid: Kennung
+  avatar_saved_successfully: Ihr Avatar wurde gespeichert
 
   simple_form:
     labels:
