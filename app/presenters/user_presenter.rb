@@ -48,13 +48,18 @@ class UserPresenter < BasePresenter
     end
   end
     
-  def avatar
+  def avatar(size=:avatar)
     if user.avatar 
       if user.avatar.use_gravatar
         _url = "http://gravatar.com/avatar/#{gravatar_id}.png?cache=#{(user.updated_at||Time.now).strftime('%Y%m%d%H%M%S')}"
-        image_tag _url, class: 'avatar'
+        if size == :tiny
+          options = "width: 32px; height32px;"
+        else
+          options = ''
+        end
+        image_tag _url, class: 'avatar', style: options
       else
-        image_tag user.avatar.avatar.url(:avatar), class: 'avatar' if user.avatar && user.avatar.avatar.original_filename
+        image_tag user.avatar.avatar.url(size), class: 'avatar' if user.avatar && user.avatar.avatar.original_filename
       end
     end
   end

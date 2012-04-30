@@ -16,7 +16,8 @@ class AvatarsController < ApplicationController
     @user.save!
     respond_to do |format|
       format.html {
-        redirect_to user_path(@user), notice: t(:avatar_saved_successfully)
+        #redirect_to user_path(@user), notice: t(:avatar_saved_successfully)
+        render :crop_avatar
       }
       format.js {}
     end
@@ -26,6 +27,18 @@ class AvatarsController < ApplicationController
     @avatar = @user.create_avatar params[:avatar]
     @user.save!
     redirect_to user_path(@user), notice: t(:avatar_saved_successfully)
+  end
+
+  def crop_avatar
+    if is_in_crop_mode?
+      if @user.avatar.update_attributes(params[:avatar])
+        @user.save!
+        if params[:avatar][:crop_x].present?
+          @user.avatar.avatar.reprocess!
+        end
+      end
+      redirect_to user_path(@user), :error => @user.errors.map(&:to_s).join("<br />")
+    end
   end
 
   def destroy
@@ -38,5 +51,12 @@ private
   def load_resources
     @user = User.find params[:user_id]
   end
+
+  def is_in_crop_mode?
+    params[:avatar] &&
+    params[:avatar][:crop_x] && params[:avatar][:crop_y] &&
+    params[:avatar][:crop_w] && params[:avatar][:crop_h]
+  end
+
 
 end

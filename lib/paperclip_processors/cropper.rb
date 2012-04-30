@@ -19,7 +19,7 @@ module Paperclip
     def crop_command
       target = @attachment.instance
       if target.cropping?
-        ["-crop", "#{target.crop_w}x#{target.crop_h}+#{target.crop_x}+#{target.crop_y}"]
+        ["-crop", "#{target.crop_w.to_s}x#{target.crop_h.to_s}+#{target.crop_x.to_s}+#{target.crop_y.to_s}"]
       end
     end
   end

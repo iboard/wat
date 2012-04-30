@@ -21,7 +21,11 @@ Wat::Application.routes.draw do
   resources :users do
     resources :authentications, only: [:destroy]
     resource  :profile
-    resource  :avatar
+    resource  :avatar do
+      member do
+        put :crop_avatar
+      end
+    end
     
     resources :facilities
     collection do

@@ -208,6 +208,7 @@ en:
   upload_your_avatar: Upload your avatar
   uid: Unique ID
   avatar_saved_successfully: Your avatar was uploaded successfully.
+  crop_avatar: Crop your avatar
 
   simple_form:
     labels:

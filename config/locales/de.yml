@@ -210,6 +210,7 @@ de:
   upload_your_avatar: Upload Avatar
   uid: Kennung
   avatar_saved_successfully: Ihr Avatar wurde gespeichert
+  crop_avatar: Avatar zuschneiden
 
   simple_form:
     labels:

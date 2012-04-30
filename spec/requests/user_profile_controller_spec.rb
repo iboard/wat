@@ -83,6 +83,21 @@ describe UsersController do
     it "shows an avatar-upload form", js: true do
       page.should have_content "Upload your avatar"
     end
+
+    it "uploads a file", js: true do
+      avatar_file = File.join(::Rails.root, "fixtures/avatar.jpg") 
+      attach_file("avatar_avatar", avatar_file)
+      click_button("Update avatar")
+      page.should have_content "Your avatar was uploaded successfully."
+    end
+
+    it "offers a crop avatar form", js: true do
+      avatar_file = File.join(::Rails.root, "fixtures/avatar.jpg") 
+      attach_file("avatar_avatar", avatar_file)
+      click_button("Update avatar")
+      page.should have_content "Your avatar was uploaded successfully"
+    end
+
   end
 
 end

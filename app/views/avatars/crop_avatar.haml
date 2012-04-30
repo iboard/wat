@@ -1,0 +1,20 @@
+%h1= title t(:crop_avatar)
+
+%br/
+
+%div#cropbox_container
+  = image_tag @user.avatar.avatar.url(:large), :id => 'cropbox', style: 'max-width: none;'
+   
+%h4 Preview:
+%div{:style => "width:100px; height:100px; overflow: hidden;"}= image_tag( @user.avatar.avatar.url(:large), id: 'preview', style: 'max-width: none;')
+
+= form_for [@user,@user.avatar], :url => crop_avatar_user_avatar_path(@user,@user.avatar) do |f| 
+  - for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] 
+    = f.hidden_field attribute, :id => attribute
+  = f.hidden_field :use_gravatar, value: "0"
+  = f.hidden_field :original
+  = f.hidden_field :large
+  %p= f.submit "Crop", class: 'btn btn-primary'
+
+
+
