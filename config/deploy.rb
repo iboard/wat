@@ -25,6 +25,7 @@ load "config/recipes/check"
 # LOAD RECIPES FOR A WEBRICK-SERVER WITH APACHE PROXY-BALANCER
 load "config/recipes/virtual_host_proxy_balancer"
 load "config/recipes/webrick"
+load "config/recipes/paperclip"
 
 # NOT YET AVAILABLE BUT COMMING SOON
 #load "config/recipes/unicorn"  
