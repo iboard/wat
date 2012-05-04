@@ -209,6 +209,11 @@ en:
   uid: Unique ID
   avatar_saved_successfully: Your avatar was uploaded successfully.
   crop_avatar: Crop your avatar
+  google_uid: Google Uid
+  facebook_profile: Facebook Profile
+  twitter_handle: Twitter Handle
+  personal_contact: Personal Contact
+  social_media: Social Media
 
   simple_form:
     labels:

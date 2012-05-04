@@ -1,9 +1,17 @@
 = simple_form_for [user,user.profile], url: user_profile_path(user), html: {remote: true, class: 'form form-horizontal'} do |f|
-  %fieldset
-    = f.input :firstname
-    = f.input :lastname
-    = f.input :phone_number
-    = f.input :mobile
-    = f.input :dob, placeholder: t(:date_of_birth_placeholder)
-  .form-actions
-    = f.button :submit, t(:save)
+  .row-fluid
+    .span6
+      %h3=t(:personal_contact)
+      = f.input :firstname
+      = f.input :lastname
+      = f.input :phone_number
+      = f.input :mobile
+      = f.input :dob, placeholder: t(:date_of_birth_placeholder)
+    .span6
+      %h3=t(:social_media)
+      = f.input :twitter_handle, placeholder: '@itsme'
+      = f.input :facebook_profile, placeholder: 'firstname.lastname'
+      = f.input :google_uid, placeholder: '116071098827301487282'
+  .row-fluid
+    .form-actions
+      = f.button :submit, t(:save)

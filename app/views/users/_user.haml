@@ -4,9 +4,10 @@
     .span1= presenter.avatar
     .offset1
       %h2= presenter.name
+      - unless (_sm = presenter.social_media_links).blank?
+        %p= _sm
       %p
         = presenter.email
-  
         = presenter.confirmed_at
         %br/
         = presenter.exists_since

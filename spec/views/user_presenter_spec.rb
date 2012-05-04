@@ -12,4 +12,13 @@ describe UserPresenter do
     presenter.user.avatar = Avatar.new(use_gravatar: true)
     presenter.avatar.should match /gravatar.com/
   end
+
+  it "renders social media links" do
+    u = User.new
+    presenter = UserPresenter.new(u, view)
+    presenter.social_media_links.should eql("")
+    u.profile = Profile.new(facebook_profile: 'facebook.name', google_uid: 'google_uid', twitter_handle: 'twitter.handle')
+    presenter = UserPresenter.new(u, view)
+    presenter.social_media_links.should match(/Twitter.*Facebook.*Google/)
+  end
 end

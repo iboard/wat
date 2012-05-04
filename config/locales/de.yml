@@ -211,6 +211,11 @@ de:
   uid: Kennung
   avatar_saved_successfully: Ihr Avatar wurde gespeichert
   crop_avatar: Avatar zuschneiden
+  google_uid: Google Uid
+  facebook_profile: Facebook Profil
+  twitter_handle: Twitter Handle
+  personal_contact: Persönliche Kontaktdaten
+  social_media: Social Media
 
   simple_form:
     labels:

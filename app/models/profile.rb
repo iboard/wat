@@ -8,4 +8,8 @@ class Profile
   field :phone_number
   field :mobile
 
+  field :twitter_handle
+  field :facebook_profile
+  field :google_uid
+
 end

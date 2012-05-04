@@ -8,14 +8,19 @@
   %p
     = button_link_to 'icon-edit', 'btn btn-primary', t(:edit), edit_user_profile_path(user), remote: true
     = button_link_to 'icon-edit', 'btn btn-danger', t(:delete), user_profile_path(user), method: :delete, confirm: t(:are_you_sure), remote: true
-  - user.profile.attributes.reject{|a| a=='_id'}.each do |name,value|
+  - [:firstname,:lastname,:dob,:phone_number,:mobile,:twitter_handle,:google_uid,:facebook_profile].each do |attribute|
     %p
-      - case name
-        - when 'Use Gravatar'
-          link_to( 'Gravatar?', 'http://gravatar.com', target: :blank )
-        - else
-          = t(name.to_sym)
+      = t(attribute.to_sym)
       = ": "
-      %strong= value.blank? ? "n/a" : value
+      - value = user.profile.send(attribute)
+      - case attribute.to_s.underscore
+        - when 'twitter_handle'
+          = link_to( value, "http://twitter.com/#{value}", target: :blank)
+        - when 'facebook_profile'
+          = link_to( value, "http://facebook.com/#{value}", target: :blank)
+        - when 'google_uid'
+          = link_to( value, "https://plus.google.com/#{value}/about", target: :blank)
+        - else
+          %strong= value.blank? ? "n/a" : value
 
 

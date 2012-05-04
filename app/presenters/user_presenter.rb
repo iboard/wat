@@ -17,6 +17,22 @@ class UserPresenter < BasePresenter
     end
   end
 
+  def social_media_links
+    links = []
+    if user.profile
+      if user.profile.twitter_handle
+        links << link_to( 'Twitter', "http://twitter.com/#{user.profile.twitter_handle}", target: :blank)
+      end
+      if user.profile.facebook_profile
+        links << link_to( 'Facebook', "http://facebook.com/#{user.profile.facebook_profile}", target: :blank)
+      end
+      if user.profile.google_uid
+        links << link_to( 'Google+', "https://plus.google.com/#{user.profile.google_uid}/about", target: :blank)
+      end
+    end
+    links.join(", ").html_safe
+  end
+
   def email
     icon_link_to 'icon-envelope', '', user.email
   end
