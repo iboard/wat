@@ -1,3 +1,5 @@
+$tableBorderColor: #ccc;
+
 html {
   background: #444;
 }
@@ -55,4 +57,15 @@ img.avatar {
 
 .nav img {
   border-radius: 3px;
+}
+
+table {
+  border: 1px solid $tableBorderColor;
+  tr {
+     border-bottom: 1px solid $tableBorderColor;
+     td,th {
+       border-left: 1px solid $tableBorderColor;
+       padding: 5px;
+     }
+  }
 }

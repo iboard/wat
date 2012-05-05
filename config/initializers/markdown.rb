@@ -13,6 +13,7 @@ Markdown = Redcarpet::Markdown.new(HTMLwithAlbino,
   :space_after_headers => false,
   :fenced_code_blocks => true, 
   :autolink => true, 
+  :tables => true,
   :no_intra_emphasis => true,
   :strikethrough => true, 
   :superscripts => true
