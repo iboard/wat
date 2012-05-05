@@ -1,15 +1,18 @@
 # -*- encoding : utf-8 -*-
-namespace :wat do
-  desc "Find undefined locales"
-  task :undefined_locales => :environment do
+class Wat < Thor
+  desc "undefined_locales [en.yml] [en]", "Find undefined locales"
+  def undefined_locales(locale_file,locale)
 
     used_strings = []
+    ignored_dirs = %w(log tmp doc vendor)
 
-    Dir['**/*'].each do |file| 
+
+    Dir['**/*'].each do |file|
+      next if ignored_dirs.include?( file.split(/\//).first)
       if File::ftype(file) == "file"
         begin
           File::read(file).each_line do |line|
-            line.gsub( /t\(\:(\S+)\)/ ) do |x|
+            line.gsub( /\s+t\(\s?\:(\w+)\s?\)/ ) do |x|
               used_strings << x.gsub(/t\(\:/,'').gsub(/\)$/,'')
             end
           end
@@ -19,11 +22,11 @@ namespace :wat do
       end
     end
 
-    locale_en = YAML::load( File::read( 'config/locales/en.yml') )['en']
+    locale_en = YAML::load( File::read( "config/locales/#{locale_file}") )[locale]
     defined_keys = []
     not_defined_keys = []
     used_strings.each do |key|
-      if locale_en[key].present?
+      if locale_en[key.strip] != nil
         defined_keys << key
       else
         not_defined_keys << key
@@ -33,7 +36,7 @@ namespace :wat do
     if not_defined_keys.any?
       puts "NOT DEFINED KEYS:"
       not_defined_keys.uniq.sort.each do |key|
-        puts "  #{key}: #{key.to_s.humanize}"
+        puts "  #{key}: #{key.to_s}"
       end
     else
       puts "ALL KEYS DEFINED"
