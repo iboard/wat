@@ -2,16 +2,16 @@
   .row-fluid
     .span6
       %h3=t(:personal_contact)
-      = f.input :firstname
-      = f.input :lastname
+      = f.input :firstname, autocorrect: false
+      = f.input :lastname, autocorrect: false
       = f.input :phone_number, as: :tel, autocorrect: false
       = f.input :mobile, as: :tel, autocorrect: false
-      = f.input :dob, placeholder: t(:date_of_birth_placeholder), as: :decimal
+      = f.input :dob, placeholder: t(:date_of_birth_placeholder), as: :date
     .span6
       %h3=t(:social_media)
       = f.input :twitter_handle, placeholder: '@itsme', as: :email, autocorrect: false
       = f.input :facebook_profile, placeholder: 'firstname.lastname', autocorrect: false
-      = f.input :google_uid, placeholder: '116071098827301487282', as: :decimal
+      = f.input :google_uid, placeholder: '116071098827301487282'
   .row-fluid
     .form-actions
       = f.button :submit, t(:save), class: "btn btn-primary"
