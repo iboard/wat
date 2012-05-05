@@ -98,25 +98,34 @@ class User
     authentications << authentication
   end
 
-  # @param [String] what - A facility-name
+  # @param [String|Array] what - A facility-name
   # @return [Boolean] true if User.facilities.where(name: what, access: /r../)
-  def can_read?(what)
-    facility = self.facilities.where(name: what).first
-    facility && facility.can_read? && self.email_confirmed?
+  def can_read?(*what)
+    what.each do |w|
+      facility = self.facilities.where(name: w).first
+      return true if facility && facility.can_read? && self.email_confirmed?
+    end
+    false
   end
 
-  # @param [String] what - A facility-name
+  # @param [String|Array] what - A facility-name
   # @return [Boolean] true if User.facilities.where(name: what, access: /.w./)
-  def can_write?(what)
-    facility = self.facilities.where(name: what).first
-    facility && facility.can_write? && self.email_confirmed?
+  def can_write?(*what)
+    what.each do |w|
+      facility = self.facilities.where(name: w).first
+      return true if facility && facility.can_write? && self.email_confirmed?
+    end
+    false
   end
 
-  # @param [String] what - A facility-name
+  # @param [String|Array] what - A facility-name
   # @return [Boolean] true if User.facilities.where(name: what, access: /..x/)
-  def can_execute?(what)
-    facility = self.facilities.where(name: what).first
-    facility && facility.can_execute? && self.email_confirmed?
+  def can_execute?(*what)
+    what.each do |w|
+      facility = self.facilities.where(name: w).first
+      return true if facility && facility.can_execute? && self.email_confirmed?
+    end
+    false
   end
 
   # Join all facility-names with access modes. "Admin (rwx), Author (rw-), ..."
