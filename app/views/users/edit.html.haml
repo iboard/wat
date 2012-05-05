@@ -10,7 +10,7 @@
   %fieldset
     %legend= title( "Edit User '#{@user.name}'")
     =f.input :name, :disabled => !@user.new_record?, :hint => icon_prefix('icon-exclamation-sign',t(:help_name_uneditable))
-    =f.input :email
+    =f.input :email, as: :email, autocorrect: false
     .form-actions
       =f.button( :submit, t(:save), class: 'btn btn-primary')
       =button_link_to 'icon-remove-sign', 'btn btn-default', t(:cancel), :back
