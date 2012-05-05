@@ -1,7 +1,7 @@
 - present user do |presenter|
   .well{:id => user.id.to_s}
     = presenter.options_menu
-    .span1= presenter.avatar
+    .pull-left.shadow-img= presenter.avatar(:thumb)
     .offset1
       %h2= presenter.name
       - unless (_sm = presenter.social_media_links).blank?

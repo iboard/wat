@@ -59,13 +59,18 @@ img.avatar {
   border-radius: 3px;
 }
 
-table {
-  border: 1px solid $tableBorderColor;
-  tr {
-     border-bottom: 1px solid $tableBorderColor;
-     td,th {
-       border-left: 1px solid $tableBorderColor;
-       padding: 5px;
-     }
-  }
+.shadow-img img {
+  box-shadow: 2px 2px 4px #444;
 }
+
+.content
+  table {
+    border: 1px solid $tableBorderColor;
+    tr {
+       border-bottom: 1px solid $tableBorderColor;
+       td,th {
+         border-left: 1px solid $tableBorderColor;
+         padding: 5px;
+       }
+    }
+  }
