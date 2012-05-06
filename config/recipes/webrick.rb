@@ -18,7 +18,7 @@ namespace :webrick do
             run "kill -9 #{pid}"
           rescue => e
             # try to kill with ps
-            run "ps xa|grep 'server.*#{port}.*#{bind_ip}.*production.*#{port}.pid'|grep -v 'grep' > /tmp/_old_pid"
+            run "ps xa|grep 'server.*#{port}.*#{bind_ip}.*production.*'|grep -v 'grep' > /tmp/_old_pid"
             begin
               run "cat /tmp/_old_pid |cut -f1,2 -d' '|sed s/\\?//g > /tmp/__old_pid"
               run "xargs --arg-file=/tmp/__old_pid kill -9 && rm -f /tmp/*_old_pid"
