@@ -1,7 +1,5 @@
 class BasePresenter
   
-  include TwitterApi
-
   def initialize(object, template)
     @object = object
     @template = template
@@ -29,7 +27,7 @@ class BasePresenter
   def parse text
     text.gsub /(\[TWITTER_USER\:)(\S+)(,(\d+))?\]/ do |args|
       params = args.gsub(/[\[|\]]/,'').split(/\:|,/)
-      twitter_user(params[1],params[2]||Settings.max_twitter_messages||3)
+      "<div class='twitter-user' data-screen-name='#{params[1]}' data-num-tweets='#{params[2]||Settings.max_twitter_messages||3}'>#{params[1]}...</div>"
     end
   end
   

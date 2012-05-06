@@ -10,6 +10,7 @@ Wat::Application.routes.draw do
   match '/signin' => 'sessions#new', :as => :signin
   match '/signout' => 'sessions#destroy', :as => :signout
   match '/auth/failure' => 'sessions#failure'
+  match '/twitter_user/:screen_name/:max_entries' => 'twitter#user_tweets', :as => :twitter_user
   
   # Resources
   # =========

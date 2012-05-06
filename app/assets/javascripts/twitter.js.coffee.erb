@@ -1,0 +1,17 @@
+jQuery ->
+  $('.twitter-user').show ->
+    new TwitterUser($(this))
+
+class TwitterUser
+  constructor: (target) ->
+    @target = target
+    @user = target.data('screen-name')
+    @max_tweets = target.data('num-tweets')
+    @load(@target)
+  
+  load: (_target) ->
+    $.ajax "/twitter_user/#{@user}/#{@max_tweets}",
+      success  : (res, status, xhr) ->
+        _target.html(res.join("\n"))
+      error    : (xhr, status, err) ->
+        _target.html( "ERROR #{err}" )
