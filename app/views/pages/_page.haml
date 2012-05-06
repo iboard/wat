@@ -11,7 +11,8 @@
     - else
       %h2=page.title
     %article
-      = markdown(_preview)
+      - present page do |presenter|
+        = presenter.body_snippet _preview
       - if truncated
         = _link
     .clear-both

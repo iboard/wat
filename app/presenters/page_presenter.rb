@@ -14,4 +14,8 @@ class PagePresenter < BasePresenter
     interpret page.body
   end
 
+  def body_snippet body_snippet
+    interpret body_snippet
+  end
+
 end
