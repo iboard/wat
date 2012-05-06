@@ -1,29 +1,13 @@
+- present @page do |presenter|
+  .row-fluid
+    - if @page && @page.title
+      %article
+        %h1= title( presenter.title )
+        %address= presenter.created_at
+        = render 'pages_menu'
+        %hr
+        .content= presenter.body
+    - else
+      .alert.alert-error= t(:page_not_found)
 .row-fluid
-  - if @page && @page.title
-    %article
-      %h1= title( @page.title )
-      %address= localize @page.created_at
-      = render 'pages_menu'
-      %hr
-      .content= markdown( @page.body )
-  - else
-    .alert.alert-error= t(:page_not_found)
-  - if can_execute?('Admin')
-    %h3= t(:translations)
-    %table.table.table-stacked.span4
-      %thead
-        %tr
-          %th= t(:locale)
-          %th= t(:status)
-          %th &nbsp;
-      - I18n.available_locales.each do |locale|
-        %tr
-          %td= t(locale.to_s)
-          - if @page.title_translations[locale.to_s]  
-            %td= t(:available)
-            %td= icon_link_to('icon-ok-sign icon-white', 'btn btn-mini btn-success',t(:read),page_read_translation_of_path(@page,locale))
-          - else 
-            %td= t(:not_available)
-            %td= icon_link_to('icon-exclamation-sign icon-white', 'btn btn-mini btn-danger',t(:translate_to, :lang => locale.to_s), page_translate_to_path(@page,locale))
-              
-     
+  = render 'translations', page: @page   

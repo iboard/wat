@@ -5,7 +5,8 @@
     .row-fluid
       - if @hero
         =render 'pages/page_menu', page: @hero
-        = markdown( @hero.body )
+        - present @hero do |hero|
+          = hero.body
       - else
         .alert.alert-error
           %i.icon-warning-sign
