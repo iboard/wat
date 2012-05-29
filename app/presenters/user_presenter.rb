@@ -20,13 +20,13 @@ class UserPresenter < BasePresenter
   def social_media_links
     links = []
     if user.profile
-      if user.profile.twitter_handle
+      unless (user.profile.twitter_handle||'').blank?
         links << link_to( 'Twitter', "http://twitter.com/#{user.profile.twitter_handle}", target: :blank)
       end
-      if user.profile.facebook_profile
+      unless (user.profile.facebook_profile||'').blank?
         links << link_to( 'Facebook', "http://facebook.com/#{user.profile.facebook_profile}", target: :blank)
       end
-      if user.profile.google_uid
+      unless (user.profile.google_uid||'').blank?
         links << link_to( 'Google+', "https://plus.google.com/#{user.profile.google_uid}/about", target: :blank)
       end
     end
