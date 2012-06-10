@@ -1,0 +1,14 @@
+%h1= title t(:contacts)
+
+#your-contacts
+  %h2= t(:your_contacts)
+  %br/
+  = render @contacts, short: true
+
+#you-are-a-contact-of
+  - if @rcontacts.any?
+    %h3= t(:you_are_a_contact_of)
+    %br/
+    = render @rcontacts, short: true
+  - else
+    .alert.alert-info= t(:you_are_not_listed_as_a_contact_by_any_other_user)

@@ -1,4 +1,5 @@
 - present user do |presenter|
+  - short ||= false
   .well{:id => user.id.to_s}
     = presenter.options_menu
     .pull-left.shadow-img= presenter.avatar(:thumb)
@@ -8,12 +9,14 @@
         %p= _sm
       %p
         = presenter.email
-        = presenter.confirmed_at
-        %br/
-        = presenter.exists_since
-      = presenter.facilities
-      - unless params[:action] == 'show'
-        = presenter.oauth_providers
+        - unless short
+          = presenter.confirmed_at
+          %br/
+          = presenter.exists_since
+      - unless short
+        = presenter.facilities
+        - unless params[:action] == 'show'
+          = presenter.oauth_providers
     .clear-both
 
     

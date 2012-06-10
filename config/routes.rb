@@ -40,6 +40,12 @@ Wat::Application.routes.draw do
       get 'reset_password/:token' => :reset_password, as: 'reset_password'
     end
   end
+
+  # Contact
+  # -------
+  # There is no Contact-model! Contacts are handled through facilities shared
+  # between users.
+  resources :contacts 
   
 
   # Identity

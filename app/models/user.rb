@@ -166,6 +166,15 @@ class User
     UserMailer.send_password_reset_token(self).deliver
   end
 
+  # Return all consumers in all facilities (flatten)
+  def contacts
+    User.find( facilities.map(&:consumer_ids).flatten.uniq )
+  end
+
+  def reverse_contacts
+    User.where( "facilities.consumer_ids" => self.id )
+  end
+
 protected
   def clear_identity
     Identity.where(name: self.name).delete_all

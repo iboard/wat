@@ -42,4 +42,42 @@ describe Facility do
     user.can_execute?('x1','x2').should == false
   end
 
+  describe "firendship" do
+    before(:each) do
+      User.delete_all
+      @me = test_user 'Myself', 'secret', ['User']
+      @friends = (1..5).to_a.map { |f| test_user "Friend #{f}", 'secret', ['User'] }
+      User.count.should == 6
+    end
+
+    it "can store my contacts" do
+      _facility = @me.facilities.create name: 'My friends', access: 'rwx'
+      _facility.add_consumers User.where( :name => /Friend [135]{1}/ )
+      _facility.consumers.count.should == 3
+      @me.contacts.count.should == 3
+      [1,3,5].each do |f|
+        @me.contacts.should include(User.where(name: "Friend #{f}").first)
+      end
+    end
+
+    it "can find me in reverse contacts" do
+      _facility = @me.facilities.create name: 'My friends', access: 'rwx'
+      _facility.add_consumers User.where( :name => /Friend [135]{1}/ )
+      @me.save!
+      
+      # prevent from being trivial!
+      # make sure @me is not the only contact in revers_contacts
+      f2 = User.find('friend-3')
+      fa2=f2.facilities.create( name: 'My friends', access: 'rwx' )
+      fa2.add_consumers User.where( :name => /Friend [15]{1}/ )
+      f2.save!
+
+      _friend = User.find("friend-1")
+      _friend.reverse_contacts.should include(@me)
+      _friend.reverse_contacts.should include(f2)
+      _f5 = User.find("friend-5")
+      _f5.reverse_contacts.should include(f2)
+    end
+  end
+
 end

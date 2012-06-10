@@ -5,11 +5,28 @@ class Facility
   WAT_APPLICATION_FACILITIES = [[I18n.translate(:admin), 'Admin'], [I18n.translate(:author), 'Author']]
   
   field :name
-  field :access, type: String, default: "r--"
-
   validates_presence_of :name
+  field :access, type: String, default: "r--"
   
-  embedded_in :user
+  embedded_in :user  
+  field :owner_id,     type: BSON::ObjectId
+  field :consumer_ids, type: Array
+
+  def owner
+    self.owner_id ? User.find(self.owner_id) : self.user
+  end
+
+  def consumers
+    User.any_in( _id: self.consumer_ids )
+  end
+  def consumers=(user_array)
+    self.consumer_ids=user_array.map(&:_id)
+  end
+  def add_consumers(new_users)
+    self.consumer_ids ||= []
+    self.consumer_ids += new_users.map(&:_id)
+  end
+
   
   def can_read?
     self.access[0].downcase == 'r'

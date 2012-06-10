@@ -216,6 +216,10 @@ de:
   twitter_handle: Twitter Handle
   personal_contact: Persönliche Kontaktdaten
   social_media: Social Media
+  contacts: Kontakte
+  you_are_not_listed_as_a_contact_by_any_other_user: "Sie sind in niemandens Kontaktliste angeführt"
+  your_contacts: "Ihre Kontakte"
+
 
   simple_form:
     labels:

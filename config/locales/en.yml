@@ -214,6 +214,9 @@ en:
   twitter_handle: Twitter Handle
   personal_contact: Personal Contact
   social_media: Social Media
+  contacts: Contacts
+  you_are_not_listed_as_a_contact_by_any_other_user: "You're not listed as a contact by anybody else"
+  your_contacts: "Your contacts"
 
   simple_form:
     labels:

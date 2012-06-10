@@ -23,11 +23,8 @@
       %li.dropdown
         = link_to( (current_user.name + " <b class='caret'></b>").html_safe, "#", :class => 'dropdown-toggle', 'data-toggle' => 'dropdown')
         %ul.dropdown-menu
-          %li= icon_link_to 'icon-user', '', t(:edit_profile), user_path(current_user)
-          %li= icon_link_to 'icon-off', '', t(:logout), signout_path
+          = render 'shared/signed_in_menu'
       %li.dropdown
         = link_to avatar(:tiny), '#', :class => 'dropdown-toggle', 'data-toggle' => 'dropdown', style: 'margin: 0px; padding: 0px; padding-top: 5px;'
         %ul.dropdown-menu
-          %li= icon_link_to 'icon-user', '', t(:edit_profile), user_path(current_user)
-          %li= icon_link_to 'icon-off', '', t(:logout), signout_path
-
+          = render 'shared/signed_in_menu'
