@@ -230,6 +230,8 @@ en:
   you_are_a_contact_of: "You're a contact of"
   contact_removed: "Your contact '%{user} is now unlinked"
   contact_could_not_be_removed: "Your contact '%{user} couldn't be unlinked"
+  unlink_contact: Unlink contact
+  back: back
 
   simple_form:
     labels:

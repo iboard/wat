@@ -232,6 +232,8 @@ de:
   you_are_a_contact_of: "Sie sind ein Kontakt folgender Benutzer"
   contact_removed: "Die Verknüpfung mit '%{user} wurde getrennt"
   contact_could_not_be_removed: "Die Verknüpfung mit '%{user} konnte nicht gelöscht werden."
+  unlink_contact: Verknüpfung löschen
+  back: zurück
 
 
   simple_form:
