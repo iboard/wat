@@ -1,9 +1,14 @@
 %h1= title t(:contacts)
 
 #your-contacts
+  .pull-right
+    = button_link_to 'icon-envelope', 'btn btn-primary', t(:invite_contact), new_contact_path
   %h2= t(:your_contacts)
   %br/
-  = render @contacts, short: true
+  - if @contacts.any?
+    = render @contacts, short: true
+  - else
+    .alert.alert-info=t(:invate_contact_hint_if_no_contacts_exists)
 
 #you-are-a-contact-of
   - if @rcontacts.any?

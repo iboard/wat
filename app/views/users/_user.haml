@@ -17,6 +17,8 @@
         = presenter.facilities
         - unless params[:action] == 'show'
           = presenter.oauth_providers
+      - if current_user.is_contacted_with?(user)
+        = button_link_to 'icon-remove-sign', 'btn btn-danger', t(:unlink_contact), contact_path(user.id), method: :delete, confirm: t(:are_you_sure), id: "delete-facility-#{user._id}"
     .clear-both
 
     

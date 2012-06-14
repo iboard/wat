@@ -44,6 +44,8 @@ class User
   embeds_one              :profile
   embeds_one              :avatar
 
+  has_many                :contact_invitations #, as: 'sent_invitations'
+
   
   # Accessible Attributes
   attr_accessible :name, :email
@@ -167,12 +169,55 @@ class User
   end
 
   # Return all consumers in all facilities (flatten)
+  # @return Critaria for all Users which are consumers of any of self's facilities
   def contacts
-    User.find( facilities.map(&:consumer_ids).flatten.uniq )
+    @contacts ||= User.any_in( :_id => facilities.map(&:consumer_ids).flatten.uniq )
   end
 
+  # @return [Criteria] Users with a facility where self is a consumer
   def reverse_contacts
-    User.where( "facilities.consumer_ids" => self.id )
+    @reverse_contacts ||= User.where( "facilities.consumer_ids" => self.id )
+  end
+
+  # Create facility on invitation.sender
+  # @params [ContactInvitation] The received invitation
+  def accept_contact_invitation(invitation)
+    _sender = invitation.sender
+    _sender.facilities.create( name: self.name, access: 'r--', consumer_ids: [self._id] )
+    _sender.save!
+  end
+
+  # @param [User] check if this user is in contacts or reverse_contacts
+  # @return nil or the contacted user
+  def is_contacted_with?(_user)
+    self.contacts.where(_id: _user._id).only(:_id).first
+  end
+
+  # Find User in contacts and reverse_contacts and remove the facility
+  # @param [User] the user to unlink
+  # @return [Boolean] - true if contact is unlinked
+  def unlink_contact(_contact)
+    _rc = false
+    if self.contacts.detect{|c| c._id ==_contact._id}
+      _facility = self.facilities.any_in( consumer_ids: [_contact._id]).first
+      if _facility
+        _facility.delete_or_remove_consumer(_contact)
+        self.save!
+        @contacts = nil
+        _rc = true
+      end
+    end
+    if self.reverse_contacts.detect{|c| c._id ==_contact._id}  
+      _facility = _contact.facilities.any_in( consumer_ids: [self._id]).first
+      if _facility
+        _facility.delete_or_remove_consumer(self)
+        _contact.save!
+        @reverse_contacts = nil
+        _contact
+        _rc = true
+      end
+    end
+    _rc
   end
 
 protected

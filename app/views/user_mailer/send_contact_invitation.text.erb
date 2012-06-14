@@ -1,0 +1,27 @@
+CONTACT INVITATION
+==================
+
+<%= @contact_invitation.sender.name %> invites you to connect your
+user at <%= Settings.application_name || '0.0.0.0:3000' %>.
+
+If you don't have a user at <%= Settings.application_name || '0.0.0.0:3000' %>
+by now, you may sign up here: <%= signin_url %>
+
+To accept the invitation, visit:
+  <%= accept_contact_invitation_url(@contact_invitation.token) %>
+or ignore this email otherwise.
+
+EINLADUNG
+=========
+
+<%= @contact_invitation.sender.name %> hat Sie eingeladen Ihre
+Benutzer auf <%= Settings.application_name || '0.0.0.0:3000' %>
+zu verknüpfen.
+
+Wenn Sie noch keinen Account auf <%= Settings.application_name || '0.0.0.0:3000' %>
+haben, können Sie hier <%= signin_url %> einen neuen Account erstellen.
+
+Um die Einladung anzunehmen, öffnen Sie:
+  <%= accept_contact_invitation_url(@contact_invitation.token) %>
+Anderenfalls ignorieren Sie diese eMail einfach.
+

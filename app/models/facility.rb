@@ -64,6 +64,11 @@ class Facility
     access[2] = allow=="1" ? 'x' : '-'
   end
 
+  def delete_or_remove_consumer(_contact)
+    self.consumer_ids -= [_contact._id]
+    self.delete if self.consumer_ids.empty?
+  end
+
   def self.available_facilities
     @facility_select ||= if Facility::respond_to?(:extra_facilities)
       WAT_APPLICATION_FACILITIES + Facility::extra_facilities

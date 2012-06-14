@@ -12,4 +12,9 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail(:to => user.email, :subject => Settings.reset_password_subject||'Reset your password / Passwort zurücksetzen')
   end
+
+  def send_contact_invitation(contact_invitation)
+    @contact_invitation = contact_invitation
+    mail(:to => contact_invitation.recipient_email, :subject => Settings.contact_invitation_subject||'You are invited/Sie wurden eingeladen')
+  end
 end

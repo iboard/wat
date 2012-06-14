@@ -35,6 +35,21 @@ describe ContactsController do
       end
       page.should_not have_content "Asshole"
     end
+
+    it "shows an add-contact button on /contacts" do
+      @admin.facilities.where(name: 'Friends').delete_all
+      visit contacts_path
+      page.should have_link I18n.t(:invite_contact)
+      page.should have_content I18n.t(:invate_contact_hint_if_no_contacts_exists)
+    end
+
+    it "can delete a contact-facility" do
+      visit contacts_path
+      page.should have_link "delete-facility-friend-1"
+      click_link "delete-facility-friend-1"
+      page.should have_content I18n.t(:contact_removed, user: 'Friend 1')
+      page.should_not have_link "delete-facility-friend-1"
+    end
   end
 
 end

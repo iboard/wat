@@ -5,7 +5,7 @@ Models
 The 'Facility-Idea'
 -------------------
 
-A facility has a name (like 'Admin', 'Author') and an access-mask like in the unix-filesystem (rwx)
+A facility has a name (like 'Admin', 'Author') and an access-mask like the unix-filesystem (rwx)
 Facilities are embedded to the user and helper-functions like _can_execute?('Admin')_ will return true or false if the user has this facility.
 
 Next step will be: Models like 'Page' will embed Facilities too in order to support code like this:
@@ -16,6 +16,20 @@ Next step will be: Models like 'Page' will embed Facilities too in order to supp
     ...
   end
 ```
+
+A Facility can have an array of 'consumer_ids' which points to
+users. Mean's if the given User is listed in this array this user will
+be granted with :access rights.
+
+
+Facility to connect users
+-------------------------
+
+A user can embed several facilities with a list of 'consumers'/'friends'.
+E.g. a user can add a Facility named 'My Friends' with a list of other
+users. Then, the user can add this Facility to e.g. a Page to grant her friend
+'rwx'-access to this page.
+
 
 Model Page
 ----------

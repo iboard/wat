@@ -219,6 +219,19 @@ de:
   contacts: Kontakte
   you_are_not_listed_as_a_contact_by_any_other_user: "Sie sind in niemandens Kontaktliste angeführt"
   your_contacts: "Ihre Kontakte"
+  invite_contact: "Kontakt einladen"
+  invate_contact_hint_if_no_contacts_exists:
+    Sie können Freunde und Mitarbeiter per eMail einladen.
+    Der Empfänger bekommt eine eMail mit einem Link zum bestätigen der Verknüpfung.
+    Mit verknüpften Benutzern können Sie private Informationen innerhalb der
+    Anwendung austauschen.
+    Benutzerverknüpfungen können jederzeit wieder gelöscht werden.
+  send_invitation: Einladung senden
+  contact_invitation_sent: "Die Einladung wurde an %{email} gesandt."
+  your_account_is_now_connected_with: "Ihr Account ist nun mit '%{sender}' verbunden."
+  you_are_a_contact_of: "Sie sind ein Kontakt folgender Benutzer"
+  contact_removed: "Die Verknüpfung mit '%{user} wurde getrennt"
+  contact_could_not_be_removed: "Die Verknüpfung mit '%{user} konnte nicht gelöscht werden."
 
 
   simple_form:

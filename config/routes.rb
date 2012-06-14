@@ -46,7 +46,9 @@ Wat::Application.routes.draw do
   # There is no Contact-model! Contacts are handled through facilities shared
   # between users.
   resources :contacts 
-  
+  resources :contact_invitations
+  match '/accept_contact_invitation/:token' => 'contact_invitations#update', :as => :accept_contact_invitation
+
 
   # Identity
   # --------

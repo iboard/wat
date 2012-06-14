@@ -1,0 +1,6 @@
+.pull-right
+  = button_link_to 'icon-chevron-left', 'btn', t(:back), :back
+
+%h1=t(:invite_contact)
+
+=render 'form', contact_invitation: @contact_invitation

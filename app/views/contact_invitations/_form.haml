@@ -1,0 +1,3 @@
+= simple_form_for @contact_invitation do |f|
+  =f.input :recipient_email, as: :email
+  =f.button :submit, value: I18n.t(:send_invitation)

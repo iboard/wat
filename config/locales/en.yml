@@ -217,6 +217,19 @@ en:
   contacts: Contacts
   you_are_not_listed_as_a_contact_by_any_other_user: "You're not listed as a contact by anybody else"
   your_contacts: "Your contacts"
+  invite_contact: "Invite contact"
+  invate_contact_hint_if_no_contacts_exists:
+    You can invite friends and collaborators by email.
+    The user will receive an email with a link to connect his user with you.
+    Connected users will be able to share private information within this 
+    application.
+    You can remove any contact at any time through the contacts menu.
+  send_invitation: Send invitation
+  contact_invitation_sent: "The invitation was sent successfully to %{email}."
+  your_account_is_now_connected_with: "Your account is now connected with '%{sender}'"
+  you_are_a_contact_of: "You're a contact of"
+  contact_removed: "Your contact '%{user} is now unlinked"
+  contact_could_not_be_removed: "Your contact '%{user} couldn't be unlinked"
 
   simple_form:
     labels:

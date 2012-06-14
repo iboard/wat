@@ -1,0 +1,8 @@
+- if @contact_invitation
+  .hero-unit
+    %h1= t(:your_account_is_now_connected_with, sender: @contact_invitation.sender.name)
+- else
+  .alert.alert-error
+    %h1= t(:invitation_not_found)
+
+%p= button_link_to 'icon-list-alt', 'btn btn-primary', t(:contacts), contacts_path
