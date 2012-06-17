@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
             UserMailer.registration_confirmation(user).deliver
           end
         end
-        redirect_to root_url, :notice => t(:signed_in)
+        signed_in_successfully
       end
     else
       if user
@@ -64,5 +64,13 @@ class SessionsController < ApplicationController
 private
   def dirty_link_to(body,url)
     "<a href='#{url}'>#{body}</a>".html_safe
+  end
+
+  def signed_in_successfully
+    #redirect_to root_url, :notice => 'OK'
+    back_url = session[:login_for_request] || root_url
+    back_url.gsub! /[\A"|"\Z]/,''
+    redirect_to back_url, :notice => t(:signed_in)
+    session[:login_for_request] = nil
   end
 end

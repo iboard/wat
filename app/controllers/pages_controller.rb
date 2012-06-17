@@ -3,6 +3,7 @@
 class PagesController < ApplicationController
 
   before_filter :parse_search_param, only: [:index]
+  before_filter :authenticate_user!, only: [:new,:create,:edit,:update,:destroy]
 
   def index
     unless can_read?("Admin")

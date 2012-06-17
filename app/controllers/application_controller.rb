@@ -29,6 +29,8 @@ private
   
   def correct_user?
     @user = User.find(params[:id]) unless params[:id].blank?
+
+    session[:login_for_request] ||= request.fullpath.inspect unless current_user
     unless @user && current_user == @user
       redirect_to signin_path, :alert => "Access denied."
     end
@@ -36,11 +38,13 @@ private
   
   def authenticate_user!
     if !current_user
+      session[:login_for_request] ||= request.fullpath.inspect
       redirect_to signin_path, :alert => t(:you_need_to_sign_in)
     end
   end
   
   def authenticate_admin!
+    session[:login_for_request] ||= request.fullpath.inspect unless current_user
     unless current_user && current_user.can_execute?('Admin')
       redirect_to signin_path, :alert => t(:access_denied)
     end
