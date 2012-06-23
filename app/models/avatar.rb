@@ -25,14 +25,14 @@ class Avatar
   end
 
   def avatar_geometry(style = :large)
-    Paperclip::Geometry.from_file(self.avatar.path).to_s.split(/x/).map(&:to_i)
+    Paperclip::Geometry.from_file(self.avatar.path(style)).to_s.split(/x/).map(&:to_i)
   end
 
   def original
     avatar_geometry(:original).first
   end
   def large
-    300
+    avatar_geometry(:large).first
   end
   def original=(ignore)
   end
