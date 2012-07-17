@@ -80,6 +80,16 @@ class UserPresenter < BasePresenter
     end
   end
 
+  def location
+    unless user.location_token.blank?
+      if user == current_user
+        t(:your_location, location: user.location_token )
+      else
+        t(:location, location: user.location_token )
+      end
+    end
+  end
+
 private
   def provider_list
     content_tag(:ul) {

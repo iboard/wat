@@ -6,9 +6,6 @@
     - unless @users.any?
       .alert.alert-error= t(:no_user_found_for, search: @search.search_text)
     - else
-      - @users.each do |user|
-        = render 'user', :user => user
-    
-    
-    
-  
+      .each_user_show
+        - @users.each do |user|
+          = render 'user', :user => user

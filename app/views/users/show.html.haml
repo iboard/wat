@@ -10,7 +10,8 @@
 .clear-both
 
 #user-menu.row-fluid
-  = render 'user_menu', user: @user
+  .each_user_show
+    = render 'user_menu', user: @user
 
 .row-fluid
   #profile-section.span12
