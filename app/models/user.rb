@@ -38,6 +38,7 @@ class User
   field                   :confirm_email_token
   field                   :email_confirmed_at, :type => DateTime
   field                   :password_reset_token
+  field                   :location, type: Hash, spacial: true
 
   embeds_many             :authentications
   embeds_many             :facilities
@@ -48,7 +49,7 @@ class User
 
   
   # Accessible Attributes
-  attr_accessible :name, :email
+  attr_accessible :name, :email, :location_token
 
   after_destroy :clear_identity
   
@@ -218,6 +219,20 @@ class User
       end
     end
     _rc
+  end
+
+  def location_token
+    if self.location && (self.location['lat'].present? && self.location['lng'].present?)
+      "%3.4f,%3.4f" % [self.location['lat'], self.location['lng']]
+    end
+  end
+
+  def location_token=(str)
+    coordinates = str.split(",").map! { |a| a.strip.gsub(/\(|\)/,'') }
+    self.location = {
+      'lat' => coordinates[0].to_f,
+      'lng' => coordinates[1].to_f
+    }
   end
 
 protected

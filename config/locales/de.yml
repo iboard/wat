@@ -208,6 +208,13 @@ de:
   update_avatar: Avatar ändern
   delete_avatar: Avatar löschen
   upload_your_avatar: Upload Avatar
+  location_label: 'Ort (lat,long)'
+  no_location_given: 'Keine Ortsangabe gespeichert'
+  your_location: 'Ihr Heimatort: %{location}'
+  location: 'Heimatort: %{location}'
+  location_preview: 'Vorschau'
+  update_location: 'Heimatort speichern'
+  search_by_address: 'Suche nach Addresse'
   uid: Kennung
   avatar_saved_successfully: Ihr Avatar wurde gespeichert
   crop_avatar: Avatar zuschneiden
@@ -234,7 +241,6 @@ de:
   contact_could_not_be_removed: "Die Verknüpfung mit '%{user} konnte nicht gelöscht werden."
   unlink_contact: Verknüpfung löschen
   back: zurück
-
 
   simple_form:
     labels:

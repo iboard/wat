@@ -24,6 +24,17 @@ describe User do
     assert Identity.count == 0, "Identity should have been deleted"
   end
 
+  it "should store geo-location" do
+    user = User.create!(name: "Test User", email: 'user@iboard.cc')
+    user.location_token = "48.2073,14.2542"
+    user.save!
+    user.reload
+    assert user.location['lat'] == 48.2073,
+      "User's latitude should be 48.2073 but is #{user.location.inspect}"
+    assert user.location['lng'] == 14.2542
+      "User's longitude should be 14.2542 but is #{user.location.inspect}"
+  end
+
   describe "(standard user)" do
     before :each do
       User.delete_all

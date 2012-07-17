@@ -1,3 +1,42 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$color-base: #888;
+$color-shadow: darken($color-base,50%);
+
+@mixin box-shadow {
+  box-shadow: 3px 3px 3px $color-shadow;
+}
+
+#users-location-map  {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  display: block;
+  margin: 0px;
+  padding: 0px;
+}
+
+.user-location {
+  width: 150px;
+  height: 150px;
+  background: #eee;
+  @include box-shadow;
+  img {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    display: block;
+    float: left;
+    margin: 0px;
+    padding: 0px;    
+  }
+}
+
+#location-preview {
+  display: block;
+  margin: 0px;
+  padding: 0px;
+}
+

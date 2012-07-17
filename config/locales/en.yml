@@ -206,6 +206,13 @@ en:
   update_avatar: Update avatar
   delete_avatar: Delete avatar
   upload_your_avatar: Upload your avatar
+  location_label: 'Location (lat,long)'
+  no_location_given: 'No location stored'
+  your_location: 'Your location: %{location}'
+  location: 'Location: %{location}'
+  location_preview: 'Preview'
+  update_location: 'Update location'
+  search_by_address: 'Search by address'
   uid: Unique ID
   avatar_saved_successfully: Your avatar was uploaded successfully.
   crop_avatar: Crop your avatar

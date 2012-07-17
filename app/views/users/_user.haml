@@ -2,23 +2,30 @@
   - short ||= false
   .well{:id => user.id.to_s}
     = presenter.options_menu
-    .pull-left.shadow-img= presenter.avatar(:thumb)
-    .offset1
-      %h2= presenter.name
-      - unless (_sm = presenter.social_media_links).blank?
-        %p= _sm
-      %p
-        = presenter.email
+    .row-fluid
+      .span2.shadow-img
+        = presenter.avatar(:thumb)
+        &nbsp;
+      .span7
+        %h2= presenter.name
+        - unless (_sm = presenter.social_media_links).blank?
+          %p= _sm
+        %p
+          = presenter.email
+          - unless short
+            = presenter.confirmed_at
+            %br/
+            = presenter.exists_since
+            %br/
+            = presenter.location
         - unless short
-          = presenter.confirmed_at
-          %br/
-          = presenter.exists_since
-      - unless short
-        = presenter.facilities
-        - unless params[:action] == 'show'
-          = presenter.oauth_providers
-      - if current_user.is_contacted_with?(user)
-        = button_link_to 'icon-remove-sign', 'btn btn-danger', t(:unlink_contact), contact_path(user.id), method: :delete, confirm: t(:are_you_sure), id: "delete-facility-#{user._id}"
-    .clear-both
+          = presenter.facilities
+          - unless params[:action] == 'show'
+            = presenter.oauth_providers
+        - if current_user.is_contacted_with?(user)
+          = button_link_to 'icon-remove-sign', 'btn btn-danger', t(:unlink_contact), contact_path(user.id), method: :delete, confirm: t(:are_you_sure), id: "delete-facility-#{user._id}"
+      .span2{:id => "#{user.id.to_s}"}
+        - unless user.location_token.blank?
+          %div{ :class => "user-location", :value => user.location_token, :id => "location-#{user.id.to_s}"}
 
     
