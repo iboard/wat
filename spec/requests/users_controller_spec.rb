@@ -147,6 +147,19 @@ describe UsersController do
       sign_in_user name: "Twitter User", password: 'ABCdefg'
       page.should have_content "Signed in"
     end
+
+    it "adds a location to an existing user" do
+      sign_in_user name: 'Testuser', password: 'notsecret'
+      visit "/users/testuser/edit"
+      page.should have_content "Location (lat,long)"
+      page.should have_content "Search by address"
+      fill_in "user_location_token", with: "48.1572,14.0152"
+      click_button("Save")
+      page.should have_content "Your data has been updated successfully"
+      click_link "Edit"
+      assert page.find('#user_location_token').value == '48.1572,14.0152', "Location was not saved!"
+    end
+
   end
 
   describe "For a standard user with identity" do
