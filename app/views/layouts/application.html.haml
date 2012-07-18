@@ -2,7 +2,7 @@
 %html{:lang => I18n.locale.to_s}
   %head
     %meta{:charset => "utf-8"}/
-    %title= strip_tags( content_for?(:title) ? yield(:title) : "WAT (dev &alpha;)" )
+    %title= strip_tags( content_for?(:title) ? yield(:title) : Settings.application_name || 'Configure Settings.application_name' )
     = csrf_meta_tags
     / Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]

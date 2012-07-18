@@ -44,7 +44,7 @@ db/*.sqlite3
 /coverage/
 /db/*.javadb/
 /db/*.sqlite3-journal
-.yardoc/
+.yardoc/**/*
 /doc/
 /doc/api/
 /doc/app/
