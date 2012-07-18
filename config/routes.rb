@@ -66,6 +66,10 @@ Wat::Application.routes.draw do
   # Search
   resources :searches, only: [:new,:create]
 
+  # Section
+  # -------
+  resources :sections
+
 
   # Language support
   match '/switch_language/:locale' => 'sessions#switch_language', :as => :switch_language

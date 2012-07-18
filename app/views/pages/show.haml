@@ -1,3 +1,6 @@
+- if @page.section
+  = render 'section_subnav', section: @page.section
+
 - present @page do |presenter|
   .row-fluid
     - if @page && @page.title

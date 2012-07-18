@@ -32,7 +32,7 @@
           %a.brand{:href => (root_url + "#")}= (Settings.application_brand || "Please set application_brand in settings").html_safe
           .container.nav-collapse
             %ul.nav
-              %li= link_to 'README', page_path('readme')
+              = render "shared/section_menu"
             = yield(:search_bar) if content_for?(:search_bar)
             = render 'shared/navigation'
     

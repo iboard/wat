@@ -191,4 +191,49 @@ describe PagesController do
       page.should_not have_content "Ruby Is Hero"
     end
   end
+
+  describe "Supports pages in sections" do
+    before(:each) do
+      Page.delete_all
+      Section.delete_all
+      
+      @section = Section.create permalink: 'section one', title: "Section One", body: "Nothing"
+      
+      @page  = Page.create!(permalink: "First Page", title: 'First Page', body: lorem())
+      @page2 = Page.create!(permalink: "Second Page", title: 'Second Page', body: lorem())
+      @page.section = @section
+      @page2.section= @section
+      @page.save!
+      @page2.save
+
+      _usr = User.first
+      _usr.facilities.find_or_create_by( name: 'Admin', access: 'rwx' )
+      _usr.email_confirmed_at = Time.now
+      _usr.save!
+
+      sign_in_user name: 'Testuser', password: 'notsecret'
+    end
+
+    it "lists the section of a page in index" do
+      visit pages_path
+      page.find('.label.section-label').text.should == 'Section One'
+    end
+
+    it "allows to assign pages to sections" do
+      visit page_path(@page)
+      click_link "Edit page"
+      select "-- no section --", from: "page_section_id"
+      click_button "Save page"
+      page.should_not have_css('.section-label')
+      click_link "Edit page"
+      select "Section One", from: "page_section_id"
+      click_button "Save page"
+      page.find('.section-label').text.should == 'Section One'
+    end
+
+    it "shows the secion menu when viewing a page" do
+      visit page_path(@page)
+      page.should have_link "Second Page"
+    end
+  end
 end

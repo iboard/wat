@@ -1,0 +1,6 @@
+- Section.all.each do |section|
+  %li.dropdown
+    = link_to ((section.title)+"<b class='caret'></b>").html_safe, "#", :class => 'dropdown-toggle', 'data-toggle' => 'dropdown'
+    %ul.dropdown-menu
+      - section.pages.only(:title).each do |page|
+        %li= link_to page.title, page_path(page)

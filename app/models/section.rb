@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class Page
+class Section
 
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -15,15 +15,7 @@ class Page
   field :preview_length, type: Integer
   validates :preview_length, :numericality => { :only_integer => true, :greater_than => 3 }, :allow_nil => true
 
-  belongs_to :section
-
-  def is_hero?
-    permalink == 'hero'
-  end
-
-  def is_featured?
-    permalink[0] == '@'
-  end
+  has_many  :pages
 
   def preview_length_or_default
     self.preview_length || Settings.default_preview_length || 300

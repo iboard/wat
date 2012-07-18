@@ -241,6 +241,8 @@ de:
   contact_could_not_be_removed: "Die Verknüpfung mit '%{user} konnte nicht gelöscht werden."
   unlink_contact: Verknüpfung löschen
   back: zurück
+  no_section: '-- keine Sektion --'
+  select_section: '-- In Sektion anzeigen --'
 
   simple_form:
     labels:

@@ -15,6 +15,11 @@
       %ul.nav.pull-left
         %li
           %label= icon_label 'icon-exclamation-sign icon-white', 'label label-info', "FEATURED", :title => 'Shown on root-path'
+    - if page.section
+      %ul.nav.pull-left
+        %li
+          %label.label.section-label= page.section.title
+
   %p{style: 'clear: left;'}      
   
   

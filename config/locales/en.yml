@@ -239,7 +239,8 @@ en:
   contact_could_not_be_removed: "Your contact '%{user} couldn't be unlinked"
   unlink_contact: Unlink contact
   back: back
-
+  no_section: '-- no section --'
+  select_section: '-- list in section --'
   simple_form:
     labels:
       user:
