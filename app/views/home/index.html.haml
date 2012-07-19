@@ -1,17 +1,30 @@
 - title strip_tags(Settings.application_brand || t(:welcome).humanize)
 
 .row-fluid
-  .hero-unit
+  - if Section.banners.any?
     .row-fluid
-      - if @hero
+      #slides.carousel.slide
+        - first_item = true
+        .carousel-inner
+          - Section.banners.each do |banner|
+            %div{class: "banner #{first_item ? 'active item' : 'item'}"}
+              = link_to image_tag(banner.banner.url(:large)), banner.page
+              .carousel-caption=link_to banner.page.title, banner.page
+            - first_item = false
+        .carousel-control.left= link_to "&lsaquo;".html_safe, "#slides", "data-slide"=>"prev"
+        .carousel-control.right= link_to "&rsaquo;".html_safe, "#slides",  "data-slide"=>"next"
+          
+  .row-fluid
+    - if @hero
+      .hero-unit
         =render 'pages/page_menu', page: @hero
         - present @hero do |hero|
           = hero.body
-      - else
-        .alert.alert-error
-          %i.icon-warning-sign
-          %h1
-            Please create a page with permalink 'hero' which will be displayed here.
+    - else
+      .alert.alert-error
+        %i.icon-warning-sign
+        %h1
+          Please create a page with permalink 'hero' which will be displayed here.
 
 - @features.to_a.in_groups_of(2) do |row|
   .row-fluid

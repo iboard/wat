@@ -16,6 +16,10 @@ class Page
   validates :preview_length, :numericality => { :only_integer => true, :greater_than => 3 }, :allow_nil => true
 
   belongs_to :section
+  embeds_one :banner, :cascade_callbacks => true
+  accepts_nested_attributes_for :banner
+
+  before_validation :remove_banner?
 
   def is_hero?
     permalink == 'hero'
@@ -28,5 +32,22 @@ class Page
   def preview_length_or_default
     self.preview_length || Settings.default_preview_length || 300
   end
+
+  def delete_banner=(value)
+    @delete_banner = value == "1"
+  end
+
+  def delete_banner
+    @delete_banner ||= false
+  end
+
+private
+  def remove_banner?
+    if @delete_banner
+      self.banner.delete if self.banner
+      self.banner = nil
+    end
+  end
+
 
 end

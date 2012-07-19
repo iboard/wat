@@ -2,6 +2,12 @@
   = render 'section_subnav', section: @page.section
 
 - present @page do |presenter|
+  - if @page.banner && @page.banner.banner.exists?
+    .row-fluid
+      - if !@page.banner.linked_url.blank? && !(@page.banner.linked_url == '#')
+        #banner.banner= link_to image_tag(@page.banner.banner.url(:large)), @page.banner.linked_url, title: @page.banner.linked_url
+      - else
+        #banner.banner= image_tag @page.banner.banner.url(:large)
   .row-fluid
     - if @page && @page.title
       %article

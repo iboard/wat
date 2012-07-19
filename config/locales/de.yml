@@ -243,7 +243,8 @@ de:
   back: zurück
   no_section: '-- keine Sektion --'
   select_section: '-- In Sektion anzeigen --'
-
+  upload_a_banner: Upload Banner
+  check_to_remove_the_image_from_the_server: Anhacken um ein existierendes Bild zu löschen
   simple_form:
     labels:
       user:

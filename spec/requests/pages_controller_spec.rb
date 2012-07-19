@@ -69,6 +69,19 @@ describe PagesController do
       page.should have_content "Lorem ipsum"
     end
 
+    it "accepts uploading pictures for banner and links to target url" do
+      click_link "Create page"
+      fill_in "page_permalink", with: "Page with Banner"
+      fill_in "page_title", with: "Page with Banner"
+      fill_in "page_body", with: lorem()
+      banner_file = File.join(::Rails.root, "fixtures/avatar.jpg") 
+      attach_file("page_banner_banner", banner_file)
+      fill_in "page_banner_linked_url", with: "http://wwedu.com"
+      click_button "Save page"
+      page.should have_css '#banner'
+      page.should have_link "http://wwedu.com"
+    end
+
     describe "Translations" do
       before(:each) do
         visit switch_language_path(:en)
@@ -99,6 +112,7 @@ describe PagesController do
         page.should have_content "Guaaaat!"
         switch_language_path('en')
       end
+      
     end
 
     it "see the destroy-button" do

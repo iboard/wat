@@ -241,6 +241,8 @@ en:
   back: back
   no_section: '-- no section --'
   select_section: '-- list in section --'
+  upload_a_banner: Upload a banner
+  check_to_remove_the_image_from_the_server: Check to remove an existing banner
   simple_form:
     labels:
       user:

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require jquery.Jcrop
+//= require bootstrap-carousel.js
 //= require_tree .
 
 

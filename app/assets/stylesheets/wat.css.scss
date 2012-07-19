@@ -114,3 +114,30 @@ img.avatar {
             border-radius: 0;
   }
 }
+
+.banner {
+  min-width: 100%;
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+  a {
+    img {
+      width: 100%;
+      border-radius: 15px 15px 15px 15px;
+      box-shadow: 3px 3px 5px #444;
+    }
+  }
+  img {
+    width: 100%;
+    border-radius: 15px 15px 15px 15px;
+    box-shadow: 3px 3px 5px #444;
+  }
+}
+
+.carousel-caption {
+  border-radius: 0px 0px 15px 15px;
+  a {
+    color: white;
+  }
+  overflow: hidden;
+}
