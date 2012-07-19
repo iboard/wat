@@ -5,4 +5,4 @@ namespace :deploy do
   end
 end
 
-after("deploy:update_code", "deploy:build_missing_paperclip_styles")
+#after("deploy:update_code", "deploy:build_missing_paperclip_styles")
