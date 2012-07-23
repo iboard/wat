@@ -49,6 +49,62 @@ textarea {
 img.avatar {
   border-radius: 10px 10px 10px 10px;
   box-shadow: 2px 2px 5 #444;
+  left: 0;
+}
+
+.avatar_avatar {
+  width: 128px;
+  height: 128px;
+  background-image: url('/images/avatars/avatar/missing.png');
+  background-position: center;
+  background-size: 128px 128px;
+  -moz-background-size:128px 128px;
+  -webkit-background-size:128px 128px;
+  background-repeat: no-repeat;
+}
+
+.avatar_large {
+  width: 300px;
+  height: 300px;
+  background-image: url('/images/avatars/large/missing.png');
+  background-position: center;
+  background-size: 300px 300px;
+  -moz-background-size:300px 300px;
+  -webkit-background-size:300px 300px;
+  background-repeat: no-repeat;
+}
+
+.avatar_thumb {
+  width: 100px;
+  height: 100px;
+  background-image: url('/images/avatars/thumb/missing.png');
+  background-position: center;
+  background-size: 100px 100px;
+  -moz-background-size:100px 100px;
+  -webkit-background-size:100px 100px;
+  background-repeat: no-repeat;
+}
+
+.avatar_icon {
+  width: 64px;
+  height: 64px;
+  background-image: url('/images/avatars/icon/missing.png');
+  background-position: center;
+  background-size: 64px 64px;
+  -moz-background-size:64px 64px;
+  -webkit-background-size:64px 64px;
+  background-repeat: no-repeat;
+}
+
+.avatar_tiny {
+  width: 32px;
+  height: 32px;
+  background-image: url('/images/avatars/tiny/missing.png');
+  background-position: center;
+  background-size: 32px 32px;
+  -moz-background-size:32px 32px;
+  -webkit-background-size:32px 32px;
+  background-repeat: no-repeat;
 }
 
 .translation_missing {

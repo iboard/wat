@@ -65,6 +65,12 @@ describe UsersController do
     page.should have_content "Nockenfell"
   end
 
+  it "shows an default avatar in user header if no image is available" do
+    visit user_path(@user1)
+    page.should have_css(".avatar_tiny")
+    page.should have_css(".avatar_thumb")
+  end
+
   it "shows an avatar in user header", js: true do
     visit user_path(@user1)
     click_link 'Avatar'
