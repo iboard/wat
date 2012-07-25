@@ -1,0 +1,9 @@
+.pull-right
+  = button_link_to 'icon-upload', 'btn btn-success', t(:upload_file), new_user_attachment_path(@user)
+%h1= t(:users_attachments, user: @user.name)
+
+.alert.alert-info= t(:number_of_your_files, count: @attachments.count)
+
+#filelist
+  - @attachments.each do |attachment|
+    =render 'attachments/attachment', user: @user, attachment: attachment

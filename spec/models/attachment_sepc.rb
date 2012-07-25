@@ -14,9 +14,11 @@ describe Attachment do
     File.exist?(_path).should be_false
   end
 
-  it "delegates read to the ApplicationFile" do
+  it "delegates to the ApplicationFile" do
     attachment = Attachment.create(application_file: ApplicationFile.new(file: File.new( TEXT_FILE_FIXTURE )))
+
     attachment.read.should match /Testfile Signature/
+    attachment.file_name.should == File::basename( TEXT_FILE_FIXTURE )
   end
 
 end

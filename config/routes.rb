@@ -29,6 +29,7 @@ Wat::Application.routes.draw do
     end
     
     resources :facilities
+    resources :attachments
     collection do
       get 'forgot_password' => :forgot_password
       post 'send_password_reset_token' => :send_password_reset_token
@@ -40,6 +41,8 @@ Wat::Application.routes.draw do
       get 'reset_password/:token' => :reset_password, as: 'reset_password'
     end
   end
+
+  resources :attachments
 
   # Contact
   # -------

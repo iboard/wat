@@ -1,0 +1,25 @@
+%ul.nav
+  %li
+    .well{:id => attachment.user}
+      - if attachment.application_file
+        - if attachment.file.content_type =~ /image/
+          %span= image_tag attachment.application_file.file.url(:small)
+        - elsif attachment.file.content_type =~ /video/
+          %span= video_tag attachment.file.url, :size => "320x240", controls: true
+        - elsif attachment.file.content_type =~ /audio\/mp3/
+          %span= audio_tag attachment.file.url, controls: true
+        %br/
+        %span.file-name-link= link_to attachment.file_name, attachment.file.url(:original), target: :blank
+        (
+        %span.file-type= attachment.file.content_type
+        %span.file-size= humanized_filesize(attachment.file.size)
+        )
+      - else
+        %span.alert.alert-error= t(:no_file_available)
+      - unless params[:action] == 'edit'
+        .pull-right
+          = button_link_to 'icon-trash', 'btn btn-danger btn-mini', t(:delete), user_attachment_path(attachment.user, attachment), confirm: t(:are_you_sure), method: :delete
+          = button_link_to 'icon-refresh', 'btn btn-default btn-mini', t(:replace_file_button), edit_user_attachment_path(attachment.user, attachment)
+      .clear-both
+
+        

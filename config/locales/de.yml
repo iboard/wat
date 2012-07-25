@@ -254,3 +254,38 @@ de:
         dob: 'Geburtsdatum'
       avatar:
         use_gravatar: 'Gravatar benutzen'
+  users_attachments: "Dateien von %{user}"
+  number_of_bytes:
+    zero: 0 Bytes
+    one: 1 Byte
+    other: "%{count} Bytes"
+  number_of_kilobytes:
+    zero: 0 Bytes
+    one: 1 KB
+    other: "%{count} KB"
+  number_of_megabytes:
+    zero: 0 MB
+    one: 1 MB
+    other: "%{count} MB"
+  number_of_gigabytes:
+    zero: 0 GB
+    one: 1 GB
+    other: "%{count} GB"
+  number_of_terabytes:
+    zero: 0 TB
+    one: 1 TB
+    other: "%{count} TB"
+  file_deleted: "Datei '%{filename}' wurde gelöscht"
+  file_not_deleted: "Datei '%{filename}' kann nicht gelöscht werden - '%{error}'"
+  your_files: Ihre Dateien ...
+  upload_file: Datei hochladen
+  number_of_your_files: 
+    zero: Sie haben bisher keine Datein hochgeladen
+    one: Sie haben eine Datei gespeichert
+    other: "Sie haben %{count} Dateien gespeichert"
+  no_file_available: Datei nicht verfügbar
+  file_stored_successfully: Datei wurde gespeichert
+  replace_file_button: Ersetzen
+  replace_file: Datei ersetzen
+  current_file: Aktuelle Datei
+  new_file: Neue Datei

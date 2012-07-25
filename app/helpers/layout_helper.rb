@@ -138,4 +138,19 @@ module LayoutHelper
     end
   end
 
+  def humanized_filesize(bytes)
+    x = if bytes < 1.kilobyte
+      t(:number_of_bytes, count: bytes)
+    elsif bytes < 1.megabyte
+      t(:number_of_kilobytes, count: (bytes/1.kilobyte).to_i)
+    elsif bytes < 1.gigabyte
+      t(:number_of_megabytes, count: (bytes/1.megabyte).to_i)
+    elsif bytes < 1.terabyte
+      t(:number_of_gigabytes, count: (bytes/1.gigabyte).to_i)
+    else
+      t(:number_of_terabytes, count: (bytes/1.terabyte).to_i)
+    end
+    x
+  end
+
 end
