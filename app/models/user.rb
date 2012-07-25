@@ -46,6 +46,7 @@ class User
   embeds_one              :avatar
 
   has_many                :contact_invitations #, as: 'sent_invitations'
+  has_many                :attachments, class_name: "UserAttachment"
 
   
   # Accessible Attributes

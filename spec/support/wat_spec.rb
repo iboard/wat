@@ -1,5 +1,6 @@
 # wat's Spec Helper
 
+TEXT_FILE_FIXTURE = File.join(Rails.root, 'fixtures/testfile.txt')
 
 # Create a user with Identity and Facilities through database
 # @param [String] username
