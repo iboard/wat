@@ -1,7 +1,8 @@
 # wat's Spec Helper
 
 unless defined?(TEXT_FILE_FIXTURE)
-  TEXT_FILE_FIXTURE = File.join(Rails.root, 'fixtures/testfile.txt')
+  TEXT_FILE_FIXTURE   = File.join(Rails.root, 'fixtures/testfile.txt')
+  PICTURE_FILE_FIXTURE= File.join(Rails.root, 'fixtures/avatar.jpg')
 
   # Create a user with Identity and Facilities through database
   # @param [String] username

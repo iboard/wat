@@ -25,7 +25,7 @@ class AttachmentsController < ApplicationController
   end
 
   def update
-    if @attachment.application_file.file.clear && @attachment.application_file.update_attributes(params[:application_file])      
+    if @attachment.create_or_replace_file(params[:application_file])      
       redirect_to user_attachments_path(@user), notice: t(:file_stored_successfully)
     else
       render :edit
@@ -34,7 +34,7 @@ class AttachmentsController < ApplicationController
 
   def destroy
     file_name = @attachment.file_name
-    if @attachment.application_file.destroy && @attachment.delete
+    if @attachment.delete
       @user.save!
       redirect_to user_attachments_path(@user), notice: t(:file_deleted, filename: file_name)
     else

@@ -4,6 +4,7 @@ describe AttachmentsController do
 
   before(:all) do
     @test_attachments = []
+    Attachment.delete_all
     Attachment.count().should == 0
   end
 
@@ -71,8 +72,8 @@ describe AttachmentsController do
       @test_attachments << @user.attachments.last
     end
 
-    it "let the user upload a new file" do
-      @test_attachments << @user.attachments.create(file: File.new(TEXT_FILE_FIXTURE))
+    it "let the user replace file" do
+      @user.attachments.create(file: File.new(TEXT_FILE_FIXTURE))
       _path = @user.attachments.first.path
       visit user_attachments_path(@user)
       click_link "Replace"
@@ -81,7 +82,21 @@ describe AttachmentsController do
       page.should have_content 'avatar.jpg'
       page.should have_content '3 KB'
       click_link "Delete"
-      File.exist?(_path).should be_false
+      if _path
+        File.exist?(_path).should be_false
+      end
+    end
+
+    it "let the user upload NO file" do
+      @user.attachments.create()
+      _path = @user.attachments.first.path
+      _path.should be_nil
+
+      visit user_attachments_path(@user)
+      click_link "Delete"
+      page.should_not have_content "ERROR"
+      page.should have_content I18n.t(:file_deleted, filename: '')
+      Attachment.count.should == 0
     end
 
   end

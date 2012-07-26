@@ -28,6 +28,21 @@ class Attachment
     super
   end
 
+  def destroy_file!
+    unless file.nil?
+      clean_file
+    end
+    file.nil?
+  end
+
+  def create_or_replace_file(params_hash)
+    if self.application_file
+      self.application_file.update_attributes(params_hash)
+    else
+      self.create_application_file(params_hash)
+    end
+  end
+
 private
   def clean_file
     application_file.destroy if application_file
