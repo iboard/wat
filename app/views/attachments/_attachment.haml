@@ -2,18 +2,8 @@
   %li
     .well{:id => attachment.user}
       - if attachment.application_file
-        - if attachment.file.content_type =~ /image/
-          %span= image_tag attachment.application_file.file.url(:small)
-        - elsif attachment.file.content_type =~ /video/
-          %span= video_tag attachment.file.url, :size => "320x240", controls: true
-        - elsif attachment.file.content_type =~ /audio\/mp3/
-          %span= audio_tag attachment.file.url, controls: true
-        %br/
-        %span.file-name-link= link_to attachment.file_name, attachment.file.url(:original), target: :blank
-        (
-        %span.file-type= attachment.file.content_type
-        %span.file-size= humanized_filesize(attachment.file.size)
-        )
+        - present attachment do |attachment_presenter|
+          = attachment_presenter.present
       - else
         %span.alert.alert-error= t(:no_file_available)
       - unless params[:action] == 'edit'
