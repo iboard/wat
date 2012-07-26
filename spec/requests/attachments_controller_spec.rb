@@ -2,6 +2,18 @@ require 'spec_helper'
 
 describe AttachmentsController do
 
+  before(:all) do
+    @test_attachments = []
+    Attachment.count().should == 0
+  end
+
+  after(:all) do
+    @test_attachments.each do |attachment|
+      attachment.delete
+    end
+    Attachment.count().should == 0
+  end
+
   describe "for anonymous sessions" do
     it "doesn't render the index page" do
       visit attachments_path
@@ -17,7 +29,7 @@ describe AttachmentsController do
     end
 
     it "shows an index-page" do
-      @user.attachments.create(file: File.new(TEXT_FILE_FIXTURE))
+      @test_attachments << @user.attachments.create(file: File.new(TEXT_FILE_FIXTURE))
       visit user_attachments_path(@user)
       page.should have_content "#{@user.name}'s files"
       page.should have_link File::basename(TEXT_FILE_FIXTURE)
@@ -26,7 +38,7 @@ describe AttachmentsController do
     end
 
     it "displays text-file-attachments" do
-      @user.attachments.create(file: File.new(TEXT_FILE_FIXTURE))
+      @test_attachments << @user.attachments.create(file: File.new(TEXT_FILE_FIXTURE))
       visit user_attachments_path(@user)
       click_link File::basename(TEXT_FILE_FIXTURE)
       page.should have_content "Testfile Signature"
@@ -56,10 +68,11 @@ describe AttachmentsController do
       page.should have_content File::basename(TEXT_FILE_FIXTURE)
       page.click_link File.basename(TEXT_FILE_FIXTURE)
       page.should have_content "Testfile Signature"
+      @test_attachments << @user.attachments.last
     end
 
     it "let the user upload a new file" do
-      @user.attachments.create(file: File.new(TEXT_FILE_FIXTURE))
+      @test_attachments << @user.attachments.create(file: File.new(TEXT_FILE_FIXTURE))
       _path = @user.attachments.first.path
       visit user_attachments_path(@user)
       click_link "Replace"
@@ -67,6 +80,8 @@ describe AttachmentsController do
       click_button("Upload file")
       page.should have_content 'avatar.jpg'
       page.should have_content '3 KB'
+      click_link "Delete"
+      File.exist?(_path).should be_false
     end
 
   end
