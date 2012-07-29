@@ -285,3 +285,5 @@ en:
   replace_file: Replace File
   current_file: Current File
   new_file: New File
+  search_place_example: 'Greenwich, London'
+  search_place_hint: 'Address is not stored but used to search coordinates only'
