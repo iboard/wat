@@ -5,7 +5,7 @@ class AttachmentsController < ApplicationController
   before_filter :load_resources
 
   def index
-    @attachments = @user.attachments
+    @attachments = Attachment.where( user_id: @user._id )
   end
 
   def new

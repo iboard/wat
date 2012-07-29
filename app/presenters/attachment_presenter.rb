@@ -31,7 +31,11 @@ private
 
   def file_info(attachment)
     content_tag :span, class: 'file-info' do
-      attachment.file.content_type + ", " + humanized_filesize(attachment.file.size)
+      if attachment.file.content_type
+        attachment.file.content_type + ", " + humanized_filesize(attachment.file.size)
+      else
+        'unknown'
+      end
     end
   end
 end
