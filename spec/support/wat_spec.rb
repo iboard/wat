@@ -68,4 +68,9 @@ unless defined?(TEXT_FILE_FIXTURE)
     }.strip
   end
 
+  def enable_user(user)
+    user.email_confirmed_at = Time.now
+    user.save!
+  end
+
 end

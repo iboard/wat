@@ -94,14 +94,20 @@ describe UsersController do
       avatar_file = File.join(::Rails.root, "fixtures/avatar.jpg") 
       attach_file("avatar_avatar", avatar_file)
       click_button("Update avatar")
-      page.should have_content "Your avatar was uploaded successfully."
+      page.should have_content "Crop"
+      click_button "Crop"
+      @user1.reload
+      page.all('img', src: @user1.avatar.avatar.path(:tiny) ).first.should_not be_nil
     end
 
     it "offers a crop avatar form", js: true do
       avatar_file = File.join(::Rails.root, "fixtures/avatar.jpg") 
       attach_file("avatar_avatar", avatar_file)
       click_button("Update avatar")
-      page.should have_content "Your avatar was uploaded successfully"
+      page.should have_content "Crop"
+      click_button "Crop"
+      @user1.reload
+      page.all('img', src: @user1.avatar.avatar.path(:tiny) ).first.should_not be_nil
     end
 
   end
