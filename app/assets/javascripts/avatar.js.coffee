@@ -1,4 +1,4 @@
-jQuery ->
+$('#cropbox').ready ->
   new AvatarCropper()
 
 class AvatarCropper
@@ -11,13 +11,14 @@ class AvatarCropper
       onChange: @update
     
   update: (coords) =>
-    unless $('#avatar_original').val() <= 100
-      scale = parseInt($('#avatar_original').val()) / parseInt($('#avatar_large').val())
-      $('#crop_x').val(coords.x*scale)
-      $('#crop_y').val(coords.y*scale)
-      $('#crop_w').val(coords.w*scale)
-      $('#crop_h').val(coords.h*scale)
-      @updatePreview(coords)
+    if $('#avatar_original').val() <= 100
+      alert "<= 100"
+    scale = parseInt($('#avatar_original').val()) / parseInt($('#avatar_large').val())
+    $('#crop_x').val(coords.x*scale)
+    $('#crop_y').val(coords.y*scale)
+    $('#crop_w').val(coords.w*scale)
+    $('#crop_h').val(coords.h*scale)
+    @updatePreview(coords)
   
   updatePreview: (coords) =>
     $('#preview').css
