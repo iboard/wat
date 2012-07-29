@@ -2,7 +2,7 @@ class Attachment
   include Mongoid::Document
   embeds_one :application_file, cascade_callbacks: true
   accepts_nested_attributes_for :application_file
-  
+
   def file
     self.application_file.file if self.application_file
   end
@@ -24,12 +24,15 @@ class Attachment
   end
 
   def delete
-    clean_file
-    super
+    if allow_destroy?
+      super.tap do
+        clean_file
+      end
+    end
   end
 
   def destroy_file!
-    unless file.nil?
+    if allow_destroy?
       clean_file
     end
     file.nil?
@@ -45,7 +48,15 @@ class Attachment
 
 private
   def clean_file
-    application_file.destroy if application_file
+    application_file.destroy if file && application_file
+  end
+
+  # before_destroy filters doesn' work in MongoID 2.4.x
+  # https://github.com/mongoid/mongoid/issues/1997
+  # The allow_destroy? call is a workarround for this bug
+  # and allows to overwrite allow_destroy? in derivations.
+  def allow_destroy?
+    true
   end
 
 end
