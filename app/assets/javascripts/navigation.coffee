@@ -1,6 +1,6 @@
 jQuery ->
 
-  if $('.subnav') != 'undefined'
+  if $('.subnav').length > 0
     $(document).scroll ->
       if !$('.subnav').attr('data-top')
         unless $('.subnav').hasClass('subnav-fixed')

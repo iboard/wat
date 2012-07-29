@@ -6,6 +6,9 @@
       .span2.shadow-img
         = presenter.avatar(:thumb)
         &nbsp;
+        - if user == current_user
+          %br/
+          = link_to( t(:edit_avatar),user_avatar_path(user), remote: true)
       .span7
         %h2= presenter.name
         - unless (_sm = presenter.social_media_links).blank?
