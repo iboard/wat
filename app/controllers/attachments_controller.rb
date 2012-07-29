@@ -5,7 +5,7 @@ class AttachmentsController < ApplicationController
   before_filter :load_resources
 
   def index
-    @attachments = Attachment.where( user_id: @user._id )
+    @attachments ||= Attachment.where( user_id: @user._id )
   end
 
   def new
@@ -45,6 +45,6 @@ class AttachmentsController < ApplicationController
 private
   def load_resources
     @user = current_user
-    @attachment = @user.attachments.find(params[:id]) if params[:id].present?
+    @attachment = Attachment.where(user_id: @user.id).find(params[:id]) if params[:id].present?
   end
 end
