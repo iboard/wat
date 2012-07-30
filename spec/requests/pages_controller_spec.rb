@@ -87,7 +87,7 @@ describe PagesController do
       fill_in "page_banner_linked_url", with: "http://wwedu.com"
       click_button "Save page"
       page.should have_css '#banner'
-      page.should have_link "http://wwedu.com"
+      page.all('a', href: "http://wwedu.com").first.should_not be_nil
     end
 
     describe "Translations" do

@@ -1,9 +1,10 @@
 - top_menu do
-  %ul{:class=>"nav nav-tabs"}
-    %li= ("&nbsp;"*8).html_safe
-    %li= link_to t(:you), @user
-    %li.active= link_to t(:edit), edit_user_path(@user)
-    %li= link_to t(:listing_users), users_path
+  .subnav
+    %ul{:class=>"nav nav-tabs"}
+      %li= ("&nbsp;"*8).html_safe
+      %li= link_to t(:you), @user
+      %li.active= link_to t(:edit), edit_user_path(@user)
+      %li= link_to t(:listing_users), users_path
 
 = simple_form_for(@user,:html=>{:class=>"form-vertical"}) do |f|
   %legend= title( "Edit User '#{@user.name}'")

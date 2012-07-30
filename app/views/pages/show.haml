@@ -11,7 +11,10 @@
     - if @page 
       %article
         - unless Settings.supress_page_title == true
-          %h1=presenter.title
+          - if @page.banner && (@page.banner.linked_url != '#')
+            %h1=link_to presenter.title, @page.banner.linked_url
+          - else
+            %h1=presenter.title
         = render 'pages_menu'
         .content= presenter.body
     - else

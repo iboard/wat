@@ -6,7 +6,7 @@
       .span2.shadow-img
         = presenter.avatar(:thumb)
         &nbsp;
-        - if user == current_user
+        - if user == current_user && params[:action] != 'index'
           %br/
           %br/
           = link_to( t(:edit_avatar),user_avatar_path(user), remote: true)
