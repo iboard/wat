@@ -16,8 +16,7 @@ class AvatarsController < ApplicationController
     @user.save!
     respond_to do |format|
       format.html {
-        #redirect_to user_path(@user), notice: t(:avatar_saved_successfully)
-        render :crop_avatar
+        crop_or_show
       }
       format.js {}
     end
@@ -26,7 +25,12 @@ class AvatarsController < ApplicationController
   def create
     @avatar = @user.create_avatar params[:avatar]
     @user.save!
-    redirect_to user_path(@user), notice: t(:avatar_saved_successfully)
+    respond_to do |format|
+      format.html {
+        crop_or_show
+      }
+      format.js {}
+    end
   end
 
   def crop_avatar
@@ -58,5 +62,12 @@ private
     params[:avatar][:crop_w] && params[:avatar][:crop_h]
   end
 
+  def crop_or_show
+    if params[:avatar][:avatar].present?
+      render :crop_avatar
+    else
+      redirect_to user_path(@user)
+    end
+  end
 
 end

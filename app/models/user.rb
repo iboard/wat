@@ -46,6 +46,7 @@ class User
   embeds_one              :avatar
 
   has_many                :contact_invitations #, as: 'sent_invitations'
+  has_many                :attachments, class_name: "UserAttachment"
 
   
   # Accessible Attributes
@@ -224,6 +225,8 @@ class User
   def location_token
     if self.location && (self.location['lat'].present? && self.location['lng'].present?)
       "%3.4f,%3.4f" % [self.location['lat'], self.location['lng']]
+    else
+      "51.4771,0" # Greenwich Park, London
     end
   end
 

@@ -16,7 +16,8 @@
           = f.label :location_token, t(:location_label)
           = f.text_field :location_token
           = f.label :search_by_address, t(:search_by_address)
-          = text_field_tag "address"
+          = text_field_tag "address", '', placeholder: t(:search_place_example)
+          %div{style: 'font-size: smaller'}= t(:search_place_hint)
     .span2{:id => 'location-preview'}
   .form-actions
     =f.button( :submit, t(:save), class: 'btn btn-primary')

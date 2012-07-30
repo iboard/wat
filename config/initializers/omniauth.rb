@@ -4,7 +4,9 @@ require 'openid/store/filesystem'
 
 Rails.application.config.middleware.use OmniAuth::Builder do
 
-  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+  unless defined?(OpenSSL::SSL::VERIFY_PEER)
+    OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+  end
 
   configure do |config|
     config.path_prefix = '/auth' if Rails.env == 'production'

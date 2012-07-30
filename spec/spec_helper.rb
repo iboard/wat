@@ -14,11 +14,12 @@ Spork.prefork do
   require "selenium-webdriver"
   require 'email_spec'
   require 'rspec/autorun'
-
+  require "paperclip/matchers"
+  
   RSpec.configure do |config|
       config.include(EmailSpec::Helpers)
       config.include(EmailSpec::Matchers)
-      
+      config.include(Paperclip::Shoulda::Matchers)
       # config.fixture_path = "#{::Rails.root}/spec/fixtures"
       # config.use_transactional_fixtures = true
       # config.infer_base_class_for_anonymous_controllers = true

@@ -2,7 +2,9 @@
 class Facility
   include Mongoid::Document
 
-  WAT_APPLICATION_FACILITIES = [[I18n.translate(:admin), 'Admin'], [I18n.translate(:author), 'Author']]
+  unless defined?(WAT_APPLICATION_FACILITIES)
+    WAT_APPLICATION_FACILITIES = [[I18n.translate(:admin), 'Admin'], [I18n.translate(:author), 'Author']]
+  end
   
   field :name
   validates_presence_of :name

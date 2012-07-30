@@ -1,0 +1,12 @@
+%h1= title t(:replace_file)
+
+%br/
+%br/
+= errors_for @attachment
+
+%h3=t(:current_file)
+= render 'attachments/attachment', user: @user, attachment: @attachment
+
+%h3=t(:new_file)
+
+= render 'form'

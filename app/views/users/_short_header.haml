@@ -1,5 +1,6 @@
 - present user do |u|
   #user-name
-    .pull-right= u.avatar(:tiny)
+    .pull-right
+      = link_to( u.avatar(:tiny),user_avatar_path(user), remote: true)
     %h3= link_to u.name, user_path(user)
   .clear-both

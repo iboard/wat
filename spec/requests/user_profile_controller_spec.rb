@@ -65,6 +65,12 @@ describe UsersController do
     page.should have_content "Nockenfell"
   end
 
+  it "shows an default avatar in user header if no image is available" do
+    visit user_path(@user1)
+    page.should have_css(".avatar_tiny")
+    page.should have_css(".avatar_thumb")
+  end
+
   it "shows an avatar in user header", js: true do
     visit user_path(@user1)
     click_link 'Avatar'
@@ -88,14 +94,20 @@ describe UsersController do
       avatar_file = File.join(::Rails.root, "fixtures/avatar.jpg") 
       attach_file("avatar_avatar", avatar_file)
       click_button("Update avatar")
-      page.should have_content "Your avatar was uploaded successfully."
+      page.should have_content "Crop"
+      click_button "Crop"
+      @user1.reload
+      page.all('img', src: @user1.avatar.avatar.path(:tiny) ).first.should_not be_nil
     end
 
     it "offers a crop avatar form", js: true do
       avatar_file = File.join(::Rails.root, "fixtures/avatar.jpg") 
       attach_file("avatar_avatar", avatar_file)
       click_button("Update avatar")
-      page.should have_content "Your avatar was uploaded successfully"
+      page.should have_content "Crop"
+      click_button "Crop"
+      @user1.reload
+      page.all('img', src: @user1.avatar.avatar.path(:tiny) ).first.should_not be_nil
     end
 
   end

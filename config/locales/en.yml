@@ -250,3 +250,41 @@ en:
         password: 'Password'
       profile:
         dob: 'Date of birth'
+  users_attachments: "User %{user}'s files"
+  number_of_bytes:
+    zero: 0 Bytes
+    one: 1 Byte
+    other: "%{count} Bytes"
+  number_of_kilobytes:
+    zero: 0 Bytes
+    one: 1 KB
+    other: "%{count} KB"
+  number_of_megabytes:
+    zero: 0 MB
+    one: 1 MB
+    other: "%{count} MB"
+  number_of_gigabytes:
+    zero: 0 GB
+    one: 1 GB
+    other: "%{count} GB"
+  number_of_terabytes:
+    zero: 0 TB
+    one: 1 TB
+    other: "%{count} TB"
+  file_deleted: "File '%{filename}' deleted"
+  file_not_deleted: "Can't delete '%{filename}' - '%{error}'"
+  your_files: Your files ...
+  upload_file: Upload file
+  number_of_your_files: 
+    zero: You have no files uploaded yet
+    one: You have one stored file
+    other: "You have %{count} stored files"
+  no_file_available: File not available
+  file_stored_successfully: File stored successfully
+  replace_file_button: Replace
+  replace_file: Replace File
+  current_file: Current File
+  new_file: New File
+  search_place_example: 'Greenwich, London'
+  search_place_hint: 'Address is not stored but used to search coordinates only'
+  edit_avatar: Edit

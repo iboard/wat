@@ -1,9 +1,0 @@
-# -*- encoding : utf-8 -*-
-
-#
-# GLOBAL WAT DEFAULTS
-#
-application_name: "eMPACT.at"
-default_preview_length: 300 # Chracters
-image_magick_path: "/usr/local/bin"
-max_twitter_messages: 3
