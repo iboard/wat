@@ -1,4 +1,7 @@
 = link_to image_tag(banner.banner.url(:large)), banner.page
 %div{class: "carousel-caption layout-#{banner.page.banner_text_position || 'right'}"}
-  %h2=banner.page.banner_title
+  - if banner.linked_url != '#'
+    %h2=link_to banner.linked_url, banner.linked_url, target: :blank
+  - else
+    %h2=banner.page.banner_title
   %p=banner.page.banner_text

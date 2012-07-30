@@ -1,3 +1,4 @@
+- title @page.title
 - present @page do |presenter|
   - if @page.banner && @page.banner.banner.exists?
     .row-fluid
@@ -9,11 +10,13 @@
   .row-fluid
     - if @page 
       %article
+        - unless Settings.supress_page_title == true
+          %h1=presenter.title
         = render 'pages_menu'
         .content= presenter.body
     - else
       .alert.alert-error= t(:page_not_found)
 
-- if can_execute?('Admin')
+- unless Settings.multilanguage == false
   .row-fluid
     = render 'translations', page: @page   

@@ -12,7 +12,7 @@ class AvatarCropper
     
   update: (coords) =>
     if $('#avatar_original').val() <= 100
-      alert "<= 100"
+      alert "WARNING: Image is to small min 100px!"
     scale = parseInt($('#avatar_original').val()) / parseInt($('#avatar_large').val())
     $('#crop_x').val(coords.x*scale)
     $('#crop_y').val(coords.y*scale)

@@ -80,7 +80,7 @@ describe AttachmentsController do
       attach_file("application_file_file", File.join(Rails.root,'fixtures', 'avatar.jpg'))
       click_button("Upload file")
       page.should have_content 'avatar.jpg'
-      page.should have_content '3 KB'
+      page.should have_content '117 KB'
       click_link "Delete"
       if _path
         File.exist?(_path).should be_false

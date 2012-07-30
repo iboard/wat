@@ -12,3 +12,6 @@ smtp_default_from: "noreply@example.com"
 application_brand: "WAT-HOME"
 application_mail_signature: WAT TEST APPLICATION
 application_mail_subject_prefix: "WAT: "
+
+supress_page_title: false
+multilanguage: true

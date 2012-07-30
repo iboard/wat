@@ -55,7 +55,7 @@ class SessionsController < ApplicationController
   end
 
   def switch_language
-    if Settings.multilanuage == true
+    if Settings.multilanuage != false
       session[:locale] = params[:locale].to_sym
       cookies.permanent[:locale] = params[:locale].to_sym
       _msg = {:notice => t(:language_changed_to, :lang => t(params[:locale].to_sym))}
@@ -72,7 +72,6 @@ private
   end
 
   def signed_in_successfully
-    #redirect_to root_url, :notice => 'OK'
     back_url = session[:login_for_request] || root_url
     back_url.gsub! /[\A"|"\Z]/,''
     redirect_to back_url, :notice => t(:signed_in)

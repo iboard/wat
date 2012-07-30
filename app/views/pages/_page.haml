@@ -6,9 +6,9 @@
   
   %div{:style=> params[:controller]=='home' ? 'min-height: 200px;' : ''}
     = render 'pages/page_menu', page: page
-    - if truncated      
+    - if truncated && Settings.supress_page_title != true
       %h2= link_to page.title, page
-    - else
+    - elsif Settings.supress_page_title != true
       %h2=page.title
     %article
       - present page do |presenter|

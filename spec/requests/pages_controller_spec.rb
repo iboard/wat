@@ -40,7 +40,7 @@ describe PagesController do
       _usr.facilities.find_or_create_by( name: 'Admin', access: 'rwx' )
       _usr.email_confirmed_at = Time.now
       _usr.save!
-      visit switch_language_path(:en)
+      visit switch_language_path(:en) if Settings.multilanguage == true
       visit page_path(@page)
     end
 
@@ -49,7 +49,11 @@ describe PagesController do
       fill_in "page_body", with: "This is a modified page."
       
       click_button "Save page"
-      page.should have_content @page.title
+      if Settings.supress_page_title != true
+        page.all('article h1', text: @page.title).first.should_not be_nil
+      else
+        page.all('article h1', text: @page.title).first.should be_nil
+      end
       page.should have_content "This is a modified page"
     end
 
@@ -65,7 +69,11 @@ describe PagesController do
       fill_in "page_body", with: lorem()
       click_button "Save page"
       page.should have_content "Page successfully created"
-      page.should have_content "A new page for WAT"
+      if Settings.supress_page_title != true
+        page.all('h1', text: "A new page for WAT").first.should_not be_nil
+      else
+        page.all('h1', text: "A new page for WAT").first.should_not be_nil
+      end
       page.should have_content "Lorem ipsum"
     end
 
@@ -83,6 +91,7 @@ describe PagesController do
     end
 
     describe "Translations" do
+
       before(:each) do
         visit switch_language_path(:en)
         click_link "Create page"
