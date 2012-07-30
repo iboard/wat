@@ -25,6 +25,7 @@ config/settings.yml
 # bundler state
 /.bundle
 /vendor/bundle/
+/.rvmrc
 
 # minimal Rails specific artifacts
 db/*.sqlite3
