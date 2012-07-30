@@ -1,4 +1,6 @@
-%ul.nav.nav-tabs.subnav
-  %li= link_to section.title+" : ", section.pages.first, class: 'bold', disabled: true
-  - section.pages.only(:title).each do |page|
-    %li{class: page == @page ? 'active' : ''}=link_to page.title, page
+- if section.pages.count > 1
+  %div{class: "subnav #{section._id}" }
+    %ul{class: "nav nav-pills"}
+      - section.pages.only(:title).each do |page|
+        %li{class: page == @page ? 'active' : ''}=link_to page.title, page, id: "link_to_#{page.id}"
+  %hr/

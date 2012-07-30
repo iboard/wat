@@ -8,8 +8,7 @@
         .carousel-inner
           - Section.banners.each do |banner|
             %div{class: "banner #{first_item ? 'active item' : 'item'}"}
-              = link_to image_tag(banner.banner.url(:large)), banner.page
-              .carousel-caption=link_to banner.page.title, banner.page
+              = render 'pages/banner', banner: banner
             - first_item = false
         .carousel-control.left= link_to "&lsaquo;".html_safe, "#slides", "data-slide"=>"prev"
         .carousel-control.right= link_to "&rsaquo;".html_safe, "#slides",  "data-slide"=>"next"
@@ -26,10 +25,11 @@
         %h1
           Please create a page with permalink 'hero' which will be displayed here.
 
-- @features.to_a.in_groups_of(2) do |row|
+- @features.to_a.in_groups_of( _columns=(Settings.columns_startpage||2) ) do |row|
   .row-fluid
-    .span6
-      = render row[0] if row[0]
-    .span6
-      = render row[1] if row[1]
+    - span_width =  (12 / _columns).to_i
+    - raise "Settings.columns_startpage must be <= 6" if _columns > 6
+    - (0..(_columns-1)).to_a.each do |col|
+      %div{class: "span#{span_width}"}
+        = render row[col] if row[col]
 

@@ -19,6 +19,10 @@ class Page
   embeds_one :banner, :cascade_callbacks => true
   accepts_nested_attributes_for :banner
 
+  field  :banner_title
+  field  :banner_text
+  field  :banner_text_position, default: 'left'
+
   before_validation :remove_banner?
 
   def is_hero?

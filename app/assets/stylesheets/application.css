@@ -4,5 +4,14 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
  *= require jquery.Jcrop
- *= require_tree .
+ *= require application
+ *= require attachment
+ *= require bootstrap_and_overrides
+ *= require facilities
+ *= require forms
+ *= require highlight
+ *= require home
+ *= require twitter
+ *= require users
+ *= require wat
 */
