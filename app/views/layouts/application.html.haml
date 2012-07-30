@@ -62,12 +62,15 @@
             
       
     %footer
-      %div{style: "text-align: center"}
+      .container
+        = render 'shared/section_footer'
+        %hr/
         = render 'shared/copyright'
-        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-        = render 'shared/language_selection'
-        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-        = render 'shared/footer_right'
+        - if Settings.multilanguage == true
+          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+          = render 'shared/language_selection'
+          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+          = render 'shared/footer_right'
         
     /
       Le javascript

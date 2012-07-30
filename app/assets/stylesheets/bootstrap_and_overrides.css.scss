@@ -12,6 +12,7 @@ $linkColorHover:        darken($linkColor, 15%);
 $primaryButtonBackground: #0088cc;
 
 @import "bootstrap";
+@import "empact";
 @import "bootstrap_marko";
 
 body {
