@@ -12,9 +12,16 @@ $linkColorHover:        darken($linkColor, 15%);
 $primaryButtonBackground: #0088cc;
 
 @import "bootstrap";
-@import "empact";
-@import "bootstrap_marko";
 
+// default WAT css remark this line if you wanna use your own
+@import "wat";
+
+// enable your own imports here if not using wat.css.scss
+// @import "empact";
+// @import "bootstrap_marko";
+
+
+// adjust top of content if not using wat.css.scss
 body {
      padding-top: 80px;
      padding-bottom: 40px;
