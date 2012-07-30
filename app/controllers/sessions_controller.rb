@@ -55,10 +55,15 @@ class SessionsController < ApplicationController
   end
 
   def switch_language
-    session[:locale] = params[:locale].to_sym
-    cookies.permanent[:locale] = params[:locale].to_sym
+    if Settings.multilanuage == true
+      session[:locale] = params[:locale].to_sym
+      cookies.permanent[:locale] = params[:locale].to_sym
+      _msg = {:notice => t(:language_changed_to, :lang => t(params[:locale].to_sym))}
+    else
+      _msg = {:alert => t(:cannot_change_language)}
+    end
     _path =  request.env['HTTP_REFERER'].present? ? :back : root_path
-    redirect_to _path, :notice => t(:language_changed_to, :lang => t(params[:locale].to_sym))
+    redirect_to _path, _msg
   end
 
 private

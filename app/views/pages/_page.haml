@@ -4,7 +4,7 @@
   - truncated = _preview.length < page.body.length
     
   
-  .well{:style=> params[:controller]=='home' ? 'min-height: 200px;' : ''}
+  %div{:style=> params[:controller]=='home' ? 'min-height: 200px;' : ''}
     = render 'pages/page_menu', page: page
     - if truncated      
       %h2= link_to page.title, page

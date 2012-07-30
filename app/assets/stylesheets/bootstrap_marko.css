@@ -145,6 +145,18 @@ background-image: -webkit-gradient(
 
 }
 
+
+
+.navbar .nav .active > a,
+.navbar .nav .active > a:hover {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: transparent;
+  background-image: none;
+}
+
+
+
 .navbar .nav {
 	margin: 0;
 }
@@ -529,6 +541,10 @@ footer  hr {
   border-color: rgba(200, 200, 200, 0.5) 	rgba(0, 0, 0, 0.1) 
   rgba(0, 0, 0, 0.0);
 
+}
+footer h1 {
+	font-size:14px;
+	color:#fff;
 }
 
 footer  ul {

@@ -64,6 +64,7 @@ private
   
   def ensure_locale
     set_locale = I18n.default_locale
+    return unless Settings.multilanuage == true
     session[:locale] ||= cookies[:locale]
     if session[:locale]
       set_locale = session[:locale]
