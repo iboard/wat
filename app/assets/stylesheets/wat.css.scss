@@ -9,19 +9,28 @@ html {
 }
 
 footer {
-  margin-top: 120px;
+  margin-top: 0px;
   margin-bottom: 0px;
   margin-left: auto;
   margin-left: auto;
   padding: 10px;
   border-top: 1px solid #ddd;
-  background: #444;
   color: white;
   a {
     color: white;
     &:hover {
       color: yellow;
     }
+  }
+  h1 {
+    color: #ddd;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    text-shadow: 2px 2px 1px #000;
+  }
+  hr {
+    border: 0px;
+    border-bottom: 1px solid #888;
   }
 }
 
@@ -188,6 +197,7 @@ img.avatar {
   min-width: 100%;
   padding: 0px;
   margin: 0px;
+  margin-top: 10px;
   overflow: hidden;
   a {
     img {

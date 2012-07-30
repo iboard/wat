@@ -35,31 +35,31 @@
               = render "shared/section_menu"
             = yield(:search_bar) if content_for?(:search_bar)
             = render 'shared/navigation'
-    
-    .container.main
-      - if content_for?(:top_menu)
-        %div=content_for(:top_menu)
-      - if flash.any?
+    .main-background
+      .container.main
+        - if content_for?(:top_menu)
+          %div=content_for(:top_menu)
+        - if flash.any?
+          .row-fluid
+            .span12
+              - flash.each do |type,msg|
+                .alert{:class => "alert alert-#{flash_alert(type)}"}
+                  = close_icon 
+                  %strong= flash_title(type).html_safe
+                  %br/
+                  = msg
         .row-fluid
-          .span12
-            - flash.each do |type,msg|
-              .alert{:class => "alert alert-#{flash_alert(type)}"}
-                = close_icon 
-                %strong= flash_title(type).html_safe
-                %br/
-                = msg
-      .row-fluid
-        - if content_for?(:content_menu)
-          .span9= yield
-          .span3
-            .sidebar-nav
-              %h1 &nbsp;
-              %ul.well.nav.nav-list
-                = yield(:content_menu)
-        - else
-          .span12
-            = yield
-            
+          - if content_for?(:content_menu)
+            .span9= yield
+            .span3
+              .sidebar-nav
+                %h1 &nbsp;
+                %ul.well.nav.nav-list
+                  = yield(:content_menu)
+          - else
+            .span12
+              = yield
+              
       
     %footer
       .container

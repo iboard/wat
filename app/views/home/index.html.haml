@@ -15,9 +15,10 @@
           
   .row-fluid
     - if @hero
-      =render 'pages/page_menu', page: @hero
-      - present @hero do |hero|
-        = hero.body.html_safe
+      .well
+        =render 'pages/page_menu', page: @hero
+        - present @hero do |hero|
+          = hero.body.html_safe
     - else
       .alert.alert-error
         %i.icon-warning-sign
@@ -29,6 +30,8 @@
     - span_width =  (12 / _columns).to_i
     - raise "Settings.columns_startpage must be <= 6" if _columns > 6
     - (0..(_columns-1)).to_a.each do |col|
-      %div{class: "span#{span_width}"}
-        = render row[col] if row[col]
+      - if row[col]
+        %div{class: "span#{span_width}"}
+          .well
+            = render row[col]
 
