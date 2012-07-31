@@ -1,0 +1,9 @@
+.row-fluid
+  .well
+    - present section do |presenter|
+      .pull-right
+        = button_link_to 'icon-edit', 'btn btn-primary btn-mini', t(:edit), edit_section_path(section)
+        = button_link_to 'icon-trash', 'btn btn-danger btn-mini', t(:delete), section_path(section), method: :delete, confirm: t(:are_you_sure)
+      %h1=presenter.title
+      %p=presenter.description
+      %blockquote=presenter.page_links

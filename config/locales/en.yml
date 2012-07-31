@@ -289,3 +289,12 @@ en:
   search_place_hint: 'Address is not stored but used to search coordinates only'
   edit_avatar: Edit
   cannot_change_language: "This is a single language configuration. Lanuage can't be changed"
+  
+  sections: Sections
+  create_section: Create Section
+  new_section: New Section
+  edit_section: Edit Section
+  section_successfully_created: Section successfully created
+  section_successfully_updated: Section successfully updated
+  section_successfully_destroyed: Section successfully deleted
+  section_successfully_deleted: "Section successfully deleted (Anyhow, pages of this sections are not deleted but now are orphaned and doesn't belong to a section any longer.)"

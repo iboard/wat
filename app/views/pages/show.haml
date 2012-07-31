@@ -4,6 +4,9 @@
     .row-fluid
       - if @page.banner
         #banner.banner.carousel= render 'banner', banner: @page.banner
+
+      .clear-both
+      %br/
   - if @page.section
     = render 'section_subnav', section: @page.section
 
