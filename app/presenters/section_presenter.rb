@@ -2,11 +2,11 @@ class SectionPresenter < BasePresenter
   presents :section
 
   def title
-    section.title || 'unnamed'
+    section.title || translate_link 
   end
 
   def description
-    markdown( section.body )
+    markdown( section.body || translate_link )
   end
 
   def page_links
@@ -16,5 +16,10 @@ class SectionPresenter < BasePresenter
       end
     rc += "</ul>"
     rc.html_safe
+  end
+
+private
+  def translate_link
+    link_to( t(:please_translate_to, :lang => I18n.locale), edit_section_path(section) )
   end
 end

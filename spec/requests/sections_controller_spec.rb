@@ -94,6 +94,17 @@ describe SectionsController do
       page.should have_content "I am here"
     end
 
+    it "prevents non-admins from edit,create,new,update,and destroy" do
+      section = Section.create( permalink: "S1", title: "Section One", body: lorem())
+      visit signout_path
+      visit edit_section_path(section)
+      page.should have_content "Access denied"
+      visit new_section_path
+      page.should have_content "Access denied"
+      visit sections_path
+      page.should have_content "Access denied"
+    end
+
 
   end
 

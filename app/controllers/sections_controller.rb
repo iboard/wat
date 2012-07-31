@@ -1,5 +1,6 @@
 class SectionsController < ApplicationController
 
+  before_filter :authenticate_admin!, except: [:show]
 
   def new
     @section = Section.new(permalink: Time.now.strftime("%Y%m%d%H%M%S"))
