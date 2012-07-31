@@ -29,6 +29,20 @@ describe ApplicationController do
       page.should have_link Settings.application_brand
     end
 
+    it "renders a carousel including all pages with banners" do
+      p1 = Page.create( permalink: 'page one with banner', title: 'First Banner', body: 'Banner ONE', banner_title: 'Title Banner One')
+      b1 = p1.create_banner
+      b1.update_attributes(banner: File.new(PICTURE_FILE_FIXTURE))
+      p1.save!
+      p2 = Page.create( permalink: 'page two with banner', title: 'Second Banner', body: 'Banner TWO', banner_title: 'Title Banner Two')
+      b2 = p2.create_banner
+      b2.update_attributes(banner: File.new(PICTURE_FILE_FIXTURE))
+      p2.save!
+      visit root_path
+      page.should have_content("Title Banner One")
+      page.should have_content("Title Banner Two")
+    end
+
     describe "When not logged in" do
 
       it "has a link to 'Sign in'" do

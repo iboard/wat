@@ -1,17 +1,18 @@
 - title strip_tags(Settings.application_brand || t(:welcome).humanize)
 
 .row-fluid
-  - if Section.banners.any?
+  - if Page.with_banner.any?
     .row-fluid
       #slides.carousel.slide
         - first_item = true
         .carousel-inner
-          - Section.banners.each do |banner|
+          - (_banner_pages=Page.with_banner).all.each do |page|
             %div{class: "banner #{first_item ? 'active item' : 'item'}"}
-              = render 'pages/banner', banner: banner
+              = render 'pages/banner', banner: page.banner
             - first_item = false
-        .carousel-control.left= link_to "&lsaquo;".html_safe, "#slides", "data-slide"=>"prev"
-        .carousel-control.right= link_to "&rsaquo;".html_safe, "#slides",  "data-slide"=>"next"
+        - if _banner_pages.count > 1
+          .carousel-control.left= link_to "&lsaquo;".html_safe, "#slides", "data-slide"=>"prev"
+          .carousel-control.right= link_to "&rsaquo;".html_safe, "#slides",  "data-slide"=>"next"
           
   .row-fluid
     - if @hero

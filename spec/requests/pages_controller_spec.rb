@@ -33,6 +33,12 @@ describe PagesController do
     page.should have_link "Edit page"
   end
 
+  it "allows new/edit/create/update for Authors only" do
+    visit signout_path
+    visit new_page_path
+    page.should have_content I18n.t(:you_need_to_sign_in)
+  end
+
   describe "Let an admin" do
 
     before(:each) do
