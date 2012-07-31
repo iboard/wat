@@ -1,0 +1,13 @@
+%br/
+
+- if current_user.try(:can_read?, 'Admin','Author' )
+  .pull-right
+    = button_link_to 'icon-plus-sign', 'btn btn-success', t(:create_section), new_section_path
+
+%h1= title t(:sections)
+
+%hr/
+%br/
+
+=render @sections
+

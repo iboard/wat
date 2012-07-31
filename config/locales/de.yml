@@ -292,3 +292,12 @@ de:
   search_place_example: 'Schloß Schönbrunn, Wien'
   search_place_hint: 'Die Adresse wird nicht gespeichert sondern nur zum Suchen der Koordinaten benutzt.'
   edit_avatar: "Bearbeiten"
+  sections: Abschnitte
+  create_section: Neuer Abschnitt
+  new_section: Neuer Abschnitt
+  edit_section: Abschnitt bearbeiten
+  section_successfully_created: Abschnitt wurde erzeugt
+  section_successfully_updated: Abschnitt wurde gespeichert
+  section_successfully_destroyed: Abschnitt wurde gelöscht
+  section_successfully_deleted: "Der Abschnitt wurde gelöscht (Seiten, die zu diesem Abschnitt gehörten blieben erhalten und gehören nun zu keinem Abschnitt mehr!)"
+  please_translate_to: "Bitte für %{lang} übersetzen"

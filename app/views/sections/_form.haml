@@ -1,0 +1,10 @@
+.row-fluid
+  %br/
+  =simple_form_for section, html: {class: 'well full-width form-horizontal'},  :defaults => { :input_html => { :class => 'full-width' } }  do |f|
+    %fieldset
+      =f.input :permalink, disabled: !section.new_record?
+      =f.input :title
+      =f.input :body, as: :text, input_html: { rows: 5 }
+    .form-actions
+      =f.button :submit, class: 'btn btn-primary'
+      =button_link_to 'icon-remove-sign', 'btn', t(:cancel), :back

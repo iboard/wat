@@ -18,12 +18,15 @@ class Page
   belongs_to :section
   embeds_one :banner, :cascade_callbacks => true
   accepts_nested_attributes_for :banner
-
   field  :banner_title
   field  :banner_text
-  field  :banner_text_position, default: 'left'
+  field  :banner_text_position, default: 'right'
 
   before_validation :remove_banner?
+
+  def self.with_banner 
+    self.excludes( banner: nil).excludes( :'banner.banner_file_size' => nil )
+  end
 
   def is_hero?
     permalink == 'hero'

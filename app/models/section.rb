@@ -4,8 +4,8 @@ class Section
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  key  :permalink
-  validates_presence_of :permalink
+  key                     :permalink
+  validates_presence_of   :permalink
   validates_uniqueness_of :permalink
 
   field :title, type: String, :localize => true
