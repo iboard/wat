@@ -17,26 +17,15 @@ $primaryButtonBackground: #0088cc;
 @import "wat";
 
 // enable your own imports here if not using wat.css.scss
-// @import "empact";
-// @import "bootstrap_marko";
+@import "empact";
+@import "bootstrap_marko";
 
 
 // adjust top of content if not using wat.css.scss
+
 body {
-  padding-top: 43px;
-  padding-bottom: 40px;
-  background: #444;
-  .main-background {
-background: rgb(255,255,255); /* Old browsers */
-background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(47%,rgba(246,246,246,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%); /* IE10+ */
-background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
-}
-  margin: 0px;
+     padding-top: 80px;
+     padding-bottom: 40px;
 }
 
 @import "bootstrap-responsive";
