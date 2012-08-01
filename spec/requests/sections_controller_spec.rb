@@ -8,7 +8,7 @@ describe SectionsController do
 
   before(:each) do
     Section.delete_all
-    @section = Section.create!(permalink: "section one", title: 'Section ONE', body: lorem())
+    @section = Section.create!(permalink: "sectionone", title: 'Section ONE', body: lorem())
     @section.save!
     @page1 = @section.pages.create(:permalink => 'page 1', :title => 'Page One', body: 'Page one body')
     @page2 = @section.pages.create(:permalink => 'page 2', :title => 'Page Two', body: 'Page two body')
@@ -37,7 +37,7 @@ describe SectionsController do
   
   it "section with only one page doesn't show subnav" do
     Section.delete_all
-    _section = Section.create!(permalink: "section two", title: 'Section TWO', body: lorem())
+    _section = Section.create!(permalink: "sectiontwo", title: 'Section TWO', body: lorem())
     _section.pages.create(:permalink => 'page 1.1', :title => 'SubPage One', body: 'Page one body')
     _section.save!
     _section.reload
@@ -63,7 +63,7 @@ describe SectionsController do
     it "allows to create a new section" do
       visit sections_path
       click_link "Create Section"
-      fill_in "section_permalink", with: "section one"
+      fill_in "section_permalink", with: "sectionone"
       fill_in "section_title", with: "First Section"
       fill_in "section_body", with: lorem()
       click_button "Create Section"

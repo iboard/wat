@@ -226,7 +226,7 @@ describe PagesController do
       Page.delete_all
       Section.delete_all
       
-      @section = Section.create permalink: 'section one', title: "Section One", body: "Nothing"
+      @section = Section.create permalink: 'sectionone', title: "Section One", body: "Nothing"
       
       @page  = Page.create!(permalink: "First Page", title: 'First Page', body: lorem())
       @page2 = Page.create!(permalink: "Second Page", title: 'Second Page', body: lorem())
