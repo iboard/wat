@@ -2,10 +2,10 @@
 $iconSpritePath: image-path('glyphicons-halflings.png');
 $iconWhiteSpritePath: image-path('glyphicons-halflings-white.png');
 
-//$navbarBackground: #555;
-//$navbarBackgroundHighlight: #888;
-//$navbarText: #eee;
-//$navbarLinkColor: #eee;
+$navbarBackground: #35556B;
+$navbarBackgroundHighlight: #68889E;
+$navbarText: #eee;
+$navbarLinkColor: #eee;
 
 $linkColor:             #000088;
 $linkColorHover:        darken($linkColor, 15%);
@@ -17,14 +17,14 @@ $primaryButtonBackground: #0088cc;
 @import "wat";
 
 // enable your own imports here if not using wat.css.scss
-@import "empact";
-@import "bootstrap_marko";
+//@import "empact";
+//@import "bootstrap_marko";
 
 
 // adjust top of content if not using wat.css.scss
 
 body {
-     padding-top: 80px;
+     padding-top: 60px;
      padding-bottom: 40px;
 }
 

@@ -1,14 +1,55 @@
 $tableBorderColor: #ccc;
 
+@import url(http://fonts.googleapis.com/css?family=Bitter);
+@import url(http://fonts.googleapis.com/css?family=Lobster);
+
 html {
-  background: #444;
+  height: 100%; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#53666e", endColorstr="#2b353a");
+  background: $navbarBackground;
+  border-top: 1px solid #DDDDDD;
+}
+
+body {
+  background: $navbarBackground;
+}
+
+.main-background {
+  background-image: linear-gradient(bottom, rgb(221,229,236) 23%, rgb(255,255,255) 62%, rgb(221,229,236) 81%);
+  background-image: -o-linear-gradient(bottom, rgb(221,229,236) 23%, rgb(255,255,255) 62%, rgb(221,229,236) 81%);
+  background-image: -moz-linear-gradient(bottom, rgb(221,229,236) 23%, rgb(255,255,255) 62%, rgb(221,229,236) 81%);
+  background-image: -webkit-linear-gradient(bottom, rgb(221,229,236) 23%, rgb(255,255,255) 62%, rgb(221,229,236) 81%);
+  background-image: -ms-linear-gradient(bottom, rgb(221,229,236) 23%, rgb(255,255,255) 62%, rgb(221,229,236) 81%);
+
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.23, rgb(221,229,236)),
+    color-stop(0.62, rgb(255,255,255)),
+    color-stop(0.81, rgb(221,229,236))
+  );
 }
 
 .inline {
   display: inline;
 }
 
+.navbar-fixed-top {
+  font-family: Lobster;
+  font-size: 1.2em;
+  .dropdown-menu {
+    font-family: Helvetica, Arial, sans-serif;
+  }
+}
+
+
 footer {
+  background: $navbarBackground;
+  background-image: linear-gradient(bottom, $navbarBackground 23%, darken($navbarBackgroundHighlight,15%) 62%, $navbarBackgroundHighlight 81%);
+  background-image: -webkit-linear-gradient(bottom, $navbarBackground 23%, darken($navbarBackgroundHighlight,15%) 62%, $navbarBackgroundHighlight 81%);
+  background-image: -moz-linear-gradient(bottom, $navbarBackground 23%, darken($navbarBackgroundHighlight,15%) 62%, $navbarBackgroundHighlight 81%);
+  background-image: -ms-linear-gradient(bottom, $navbarBackground 23%, darken($navbarBackgroundHighlight,15%) 62%, $navbarBackgroundHighlight 81%);
+  background-image: -o-linear-gradient(bottom, $navbarBackground 23%, darken($navbarBackgroundHighlight,15%) 62%, $navbarBackgroundHighlight 81%);
   margin-top: 0px;
   margin-bottom: 0px;
   margin-left: auto;
@@ -23,9 +64,10 @@ footer {
     }
   }
   h1 {
-    color: #ddd;
+    color: lighten($navbarBackgroundHighlight,25%);
     margin-bottom: 10px;
     font-size: 1.5em;
+    font-family: Lobster, Helvetica, sans-serif;
     text-shadow: 2px 2px 1px #000;
   }
   hr {
@@ -124,6 +166,7 @@ img.avatar {
   border-radius: 3px;
 }
 
+
 .shadow-img img {
   box-shadow: 2px 2px 4px #444;
 }
@@ -149,11 +192,29 @@ img.avatar {
   font-weight: bold;
 }
 
+.subnav .nav.nav-pills {
+  background: $navbarBackground;
+  border-color: #d5d5d5;
+  border-width: 0 0 1px; /* drop the border on the fixed edges */
+  border-radius: 5px;
+  a {
+    color: white;
+    &:hover {
+      color: #444;
+    }
+  }
+  li.active a {
+    background: $navbarBackgroundHighlight;
+    box-shadow: 1px 2px 2px #444;
+    text-shadow: 1px 1px 1px #000;
+  }
+}
+
 @media (min-width: 980px) {
   .subnav-fixed {
-    background: #eee;
+    background: $navbarBackground;
     position: fixed;
-    top: 30px;
+    top: 35px;
     left: 0;
     right: 0;
     z-index: 1020; /* 10 less than .navbar-fixed to prevent any overlap */
@@ -182,15 +243,9 @@ img.avatar {
     margin-top: 5px;
     padding: 0 1px;
     padding-left: 70px;
-    background: #444;
+    background: $navbarBackground;
   }
 
-  .subnav .nav > li:first-child > a,
-  .subnav .nav > li:first-child > a:hover {
-    -webkit-border-radius: 0;
-       -moz-border-radius: 0;
-            border-radius: 0;
-  }
 }
 
 .banner {
@@ -231,6 +286,10 @@ img.avatar {
 
 .search-query {
   width: 100px;
+}
+
+#search-button {
+  display: none;
 }
 
 .full-width {
