@@ -12,31 +12,7 @@ class SessionsController < ApplicationController
     user = User.find_or_create_with_omniauth(auth,current_user)
 
     if user && user.valid?
-      
-      session[:user_id] = user.id
-      
-      if user.email.present? && auth['provider'] !~ /identity/i
-        user.email_confirmed_at ||= Time.now
-        user.save!
-        _send_notification = false
-      else
-        _send_notification = true
-      end
-      
-      if user.email.blank? 
-        redirect_to edit_user_path(user.id.to_s), :info => t(:please_enter_your_email_address)
-      else
-        unless user.email_confirmed?
-          flash[:message] = t(:email_not_confirmed_yet, email: user.email, 
-            confirm_link: dirty_link_to(I18n.t(:resend_confirmation_mail), resend_confirmation_mail_user_path(user))
-          ).html_safe
-
-          if _send_notification
-            UserMailer.registration_confirmation(user).deliver
-          end
-        end
-        signed_in_successfully
-      end
+      send_confirm_mail_if_account_is_local(user,auth)
     else
       if user
         flash[:message] = t(:create_a_local_user_first_and_connect, provider: auth[:provider].humanize).html_safe
@@ -76,5 +52,33 @@ private
     back_url.gsub! /[\A"|"\Z]/,''
     redirect_to back_url, :notice => t(:signed_in)
     session[:login_for_request] = nil
+  end
+
+  def send_confirm_mail_if_account_is_local(user,auth)
+    session[:user_id] = user.id      
+    _send_notification = need_to_send_mail?(user,auth)       
+    if user.email.blank? 
+      redirect_to edit_user_path(user.id.to_s), :info => t(:please_enter_your_email_address)
+    else
+      unless user.email_confirmed?
+        flash[:message] = t(:email_not_confirmed_yet, email: user.email, 
+          confirm_link: dirty_link_to(I18n.t(:resend_confirmation_mail), resend_confirmation_mail_user_path(user))
+        ).html_safe
+       if _send_notification
+         UserMailer.registration_confirmation(user).deliver
+       end
+     end
+     signed_in_successfully
+    end
+  end
+
+  def need_to_send_mail?(user,auth)
+    if user.email.present? && auth['provider'] !~ /identity/i
+      user.email_confirmed_at ||= Time.now
+      user.save!
+      false
+    else
+      true
+    end
   end
 end

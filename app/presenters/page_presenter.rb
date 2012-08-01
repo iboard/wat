@@ -18,4 +18,10 @@ class PagePresenter < BasePresenter
     interpret body_snippet
   end
 
+  def banner_preview
+    if page.banner_exist?
+      image_tag page.banner.banner.url(:preview), class: 'pull-right banner-preview' 
+    end
+  end
+
 end

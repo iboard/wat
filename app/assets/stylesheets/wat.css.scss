@@ -213,12 +213,24 @@ img.avatar {
   }
 }
 
+.banner-preview {
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  margin: 10px;
+  margin-right: 0px;
+}
+
 .carousel-caption {
   border-radius: 0px 0px 15px 15px;
   a {
     color: white;
   }
   overflow: hidden;
+}
+
+.search-query {
+  width: 100px;
 }
 
 .full-width {

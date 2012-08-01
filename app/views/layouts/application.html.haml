@@ -33,8 +33,12 @@
           .container.nav-collapse
             %ul.nav
               = render "shared/section_menu"
-            = yield(:search_bar) if content_for?(:search_bar)
             = render 'shared/navigation'
+            %ul.nav.pull-right
+              - ensure_default_search_box
+              = yield(:search_bar) 
+            
+            
     .main-background
       .container.main
         - if content_for?(:top_menu)

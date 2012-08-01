@@ -1,4 +1,10 @@
-$('#result').html('<%= escape_javascript( 
+if ($('#result').length > 0) {
+  var _target = '#result'
+} else {
+  var _target = '.container.main'
+}
+
+$(_target).html('<br/><h1 id="search-header"><%= t(:search_results, count: @pages.count) -%>...</h1><%= link_to t(:home), root_path -%><br/><br/><%= escape_javascript( 
     if @pages.any?
       render( @pages )
     else

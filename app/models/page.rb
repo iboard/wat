@@ -40,6 +40,10 @@ class Page
     self.preview_length || Settings.default_preview_length || 300
   end
 
+  def banner_exist?
+    self.banner && (self.banner.banner_file_size||0) > 0
+  end
+
   def delete_banner=(value)
     @delete_banner = value == "1"
   end
