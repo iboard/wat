@@ -61,6 +61,7 @@ class SectionsController < ApplicationController
   end
 
 private
+  # @todo: this works only with onewordpermakey not with one-word-permakey unless all params have the same count of dashes!
   def analyze_params
     ordered_items = []
     items = params

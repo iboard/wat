@@ -306,3 +306,4 @@ de:
     one: 'Ein Treffer'
     other: '%{count} Treffer'
   sort_sections: "Abschnitte sortieren"
+  numbers_and_letters_only: "Es sind nur Buchstaben und Zahlen erlaubt."

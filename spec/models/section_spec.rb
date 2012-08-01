@@ -14,6 +14,15 @@ describe Section do
     assert _section.eql?(section), "Section should be addressed by key"
   end
 
+  it "doesn't allow chars other than A-Z/0-9 in permalink" do
+    invalid1 = Section.new(:permalink => 'this is invalid', :title => "Invalid")
+    invalid2 = Section.new(:permalink => 'this-is-invalid', :title => "Invalid Too")
+    valid    = Section.new(:permalink => '123abc45ZYX', :title => "valid")
+    invalid1.should_not be_valid
+    invalid2.should_not be_valid
+    valid.should be_valid
+  end
+
   it "has many pages" do
     section = Section.new(:permalink => 'about', :title => "About Sections")
     section.save!

@@ -7,6 +7,7 @@ class Section
   key                     :permalink
   validates_presence_of   :permalink
   validates_uniqueness_of :permalink
+  validates_format_of     :permalink, :with => VALIDATE_PERMALINK_REGEX, :message => I18n.t(:numbers_and_letters_only)
 
   field :title, type: String, :localize => true
   validates_presence_of :title

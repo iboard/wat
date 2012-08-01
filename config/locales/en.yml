@@ -303,3 +303,4 @@ en:
     one: 'Found one'
     other: 'Found %{count}'
   sort_sections: "Sort Sections"
+  numbers_and_letters_only: "Only digits and letters are allowed"
