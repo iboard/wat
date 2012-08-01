@@ -52,15 +52,31 @@ class SectionsController < ApplicationController
   end
 
   def update_sort
-    params.delete('action')
-    params.each_with_index do |id,idx|
-      full_param_name = id.flatten.flatten.flatten.join("-")
-      _id = id.join('-').gsub /ordered_items./, ''
-      section = Section.find(_id)
+    analyze_params.each_with_index do |id,idx|
+      section = Section.find(id)
       section.position = idx
       section.save!
     end
     render :nothing => true
+  end
+
+private
+  def analyze_params
+    ordered_items = []
+    items = params
+    items.delete(:action)
+    items.delete(:controller)
+    items.each do |key, item|
+      name = key.gsub(/ordered_items_/,'')
+      if item.count == 1
+        name += "-" + item.first
+        ordered_items += [name]
+      else
+        ordered_items += item
+      end
+    end
+    Rails.logger.info "SORTED #{ordered_items.inspect}"
+    ordered_items
   end
   
 end
