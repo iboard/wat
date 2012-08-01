@@ -1,6 +1,7 @@
 - if can_execute?('Admin')
   - content_for :top_menu do
     .pull-right
+      %br/
       .btn-group
         .btn= icon_link_to 'icon-list', '', t(:listing_pages), pages_path
         .btn.btn-success= icon_link_to 'icon-plus-sign icon-white', '', t(:create_page), new_page_path

@@ -301,3 +301,7 @@ de:
   section_successfully_destroyed: Abschnitt wurde gelöscht
   section_successfully_deleted: "Der Abschnitt wurde gelöscht (Seiten, die zu diesem Abschnitt gehörten blieben erhalten und gehören nun zu keinem Abschnitt mehr!)"
   please_translate_to: "Bitte für %{lang} übersetzen"
+  search_results:
+    zero: 'Nichts gefunden'
+    one: 'Ein Treffer'
+    other: '%{count} Treffer'

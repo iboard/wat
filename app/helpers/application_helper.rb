@@ -28,4 +28,11 @@ module ApplicationHelper
     presenter
   end
 
+  def ensure_default_search_box
+    unless content_for?(:search_bar) || Settings.supress_global_search == true
+      @search ||= Search.new search_text: '', search_controller: 'pages'
+      render "shared/search"
+    end
+  end
+
 end

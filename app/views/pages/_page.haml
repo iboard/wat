@@ -4,14 +4,15 @@
   - truncated = _preview.length < page.body.length
     
   
-  %div{:style=> params[:controller]=='home' ? 'min-height: 200px;' : ''}
-    = render 'pages/page_menu', page: page
-    - if truncated && Settings.supress_page_title != true
-      %h2= link_to page.title, page
-    - elsif Settings.supress_page_title != true
-      %h2=page.title
-    %article
-      - present page do |presenter|
+  .well{:style=> params[:controller]=='home' ? 'min-height: 200px;' : ''}
+    - present page do |presenter|
+      = render 'pages/page_menu', page: page
+      = presenter.banner_preview
+      - if truncated && Settings.supress_page_title != true
+        %h2= link_to page.title, page
+      - elsif Settings.supress_page_title != true
+        %h2=page.title
+      %article
         = presenter.body_snippet _preview
       - if truncated
         = _link

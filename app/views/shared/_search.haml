@@ -1,6 +1,7 @@
-- content_for :search_bar do
-  = form_for @search, html: {class:'navbar-search'} do |f|
-    .controlls
-      =f.hidden_field  :search_controller
-      =f.text_field    :search_text, placeholder: t(:search)+"...", class: "search-query"
-      =f.submit t(:search), id: 'search-button'
+- unless content_for?(:search_bar)
+  - content_for :search_bar do
+    = form_for @search, html: {class:'navbar-search'} do |f|
+      .controlls
+        =f.hidden_field  :search_controller
+        =f.text_field    :search_text, placeholder: t(:search)+"...", class: "search-query"
+        =f.submit t(:search), id: 'search-button'

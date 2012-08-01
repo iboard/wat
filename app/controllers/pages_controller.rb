@@ -3,14 +3,11 @@
 class PagesController < ApplicationController
 
   before_filter :parse_search_param, only: [:index]
-  before_filter :authenticate_user!, except: [:show]
+  _allow_index_actions = Settings.supress_global_search != true ? [:show, :index] : [:show]
+  before_filter :authenticate_user!, except: _allow_index_actions
 
   def index
-    unless can_read?("Admin")
-      redirect_to root_path, :alert => t(:access_denied)
-    else
-      @pages ||= Page.asc(:title)
-    end
+    @pages ||= Page.asc(:title)
   end
   
   def show

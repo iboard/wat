@@ -298,3 +298,7 @@ en:
   section_successfully_destroyed: Section successfully deleted
   section_successfully_deleted: "Section successfully deleted (Anyhow, pages of this sections are not deleted but now are orphaned and doesn't belong to a section any longer.)"
   please_translate_to: "Please translate to %{lang}"
+  search_results:
+    zero: 'Nothing found'
+    one: 'Found one'
+    other: 'Found %{count}'

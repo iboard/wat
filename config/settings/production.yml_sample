@@ -1,4 +1,10 @@
-# Production Settings
+#
+# Production Settings Example
+# Copy this file to config/settings/development.yml
+#
+
+# Mailserver
+
 smtp_server: mail.domain.com
 smtp_port: 25
 smtp_domain: domain.com
@@ -6,9 +12,20 @@ smtp_user: username
 smtp_password: 'secret'
 smtp_authentication: plain
 smtp_enable_starttls_auto: true
-smtp_host: "www.domain.com"
+smtp_host: "localhost:3000"
 smtp_default_from: "noreply@domain.com"
+
+
+# Application
 
 application_brand: "&alpha;WAT"
 application_mail_signature: [W]eb[A]pplication[Template] http://gitbub.com/iboard/wat
 application_mail_subject_prefix: "WAT: "
+developer_mail_address: "developer@example.com"
+
+# ENABE THIS CONFIGS IF YOU'RE NOT HAPPY WITH THIS DEFAULTS
+# columns_startpage: 2
+# multilanguage: true
+# supress_page_title: false
+# show_user_menu: true
+# supress_global_search: false
