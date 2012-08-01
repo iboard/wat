@@ -2,7 +2,11 @@
 
 - if current_user.try(:can_read?, 'Admin','Author' )
   .pull-right
-    = button_link_to 'icon-plus-sign', 'btn btn-success', t(:create_section), new_section_path
+    .btn-toolbar
+      .btn-group
+        .btn= icon_link_to 'icon-indent-left', '', t(:sort_sections), sort_sections_path
+        .btn.btn-success= icon_link_to 'icon-plus-sign icon-white', '', t(:create_section), new_section_path
+        
 
 %h1= title t(:sections)
 

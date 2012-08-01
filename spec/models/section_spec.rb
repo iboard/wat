@@ -39,4 +39,11 @@ describe Section do
     Section.banners.should include(banner1,banner2)
   end
 
+  it "sorts sections by position by default" do
+    section2 = Section.create(:permalink => 'Banners', :title => "About Banners", position: 2)
+    section1 = Section.create(:permalink => 'Pages', :title => "About Pages", position: 1)
+    section3 = Section.create(:permalink => 'Sections', :title => "About Section", position: 3)
+    Section.all.map(&:permalink).should == ['Pages', 'Banners', 'Sections']
+  end
+
 end

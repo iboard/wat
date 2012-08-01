@@ -15,6 +15,9 @@ class Section
   field :preview_length, type: Integer
   validates :preview_length, :numericality => { :only_integer => true, :greater_than => 3 }, :allow_nil => true
 
+  field :position, type: Integer, default: 0
+  default_scope asc(:position)
+
   has_many  :pages, :dependent => :nullify
 
   def preview_length_or_default

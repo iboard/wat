@@ -12,9 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require bootstrap
 //= require jquery.Jcrop
-//= require bootstrap-carousel.js
+//= require bootstrap-carousel
+//= require jsort_sortable
 //= require_tree .
 
 

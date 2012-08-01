@@ -41,12 +41,26 @@ class SectionsController < ApplicationController
     end
     redirect_to sections_path, msg
   end
-
-
   
   def show
     @section = Section.find(params[:id])
     redirect_to @section.pages.first || root_path
+  end
+
+  def sort
+    @sections = Section.all
+  end
+
+  def update_sort
+    params.delete('action')
+    params.each_with_index do |id,idx|
+      full_param_name = id.flatten.flatten.flatten.join("-")
+      _id = id.join('-').gsub /ordered_items./, ''
+      section = Section.find(_id)
+      section.position = idx
+      section.save!
+    end
+    render :nothing => true
   end
   
 end

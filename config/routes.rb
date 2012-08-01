@@ -71,7 +71,12 @@ Wat::Application.routes.draw do
 
   # Section
   # -------
-  resources :sections
+  resources :sections do
+    collection do
+      get  'sort' => :sort
+      post 'update_sort' => :update_sort
+    end
+  end
 
 
   # Language support

@@ -76,6 +76,9 @@ group :development do
   gem "syntax"
 end
 
+# Andi's GEMs
+gem "jsort", "~> 0.0.1"
+
 # Application
 gem "bson_ext", ">= 1.5.2"
 gem "mongoid", ">= 2.4.4"
