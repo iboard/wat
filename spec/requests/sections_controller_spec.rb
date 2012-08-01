@@ -105,6 +105,15 @@ describe SectionsController do
       page.should have_content "Access denied"
     end
 
+    it "provides a sort-page" do
+      section1 = Section.create( permalink: "S1", title: "Section One", body: lorem())
+      section3 = Section.create( permalink: "S3", title: "Section Three", body: lorem())
+      section2 = Section.create( permalink: "S2", title: "Section Two", body: lorem())
+      visit sections_path
+      click_link "Sort Sections"
+      page.should have_content "Sort Sections"
+    end
+
 
   end
 

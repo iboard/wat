@@ -302,3 +302,4 @@ en:
     zero: 'Nothing found'
     one: 'Found one'
     other: 'Found %{count}'
+  sort_sections: "Sort Sections"

@@ -305,3 +305,4 @@ de:
     zero: 'Nichts gefunden'
     one: 'Ein Treffer'
     other: '%{count} Treffer'
+  sort_sections: "Abschnitte sortieren"
