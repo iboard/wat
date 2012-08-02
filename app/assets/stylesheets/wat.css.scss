@@ -30,15 +30,19 @@ body {
   );
 }
 
+.main.container {
+  padding-bottom: 20px;
+}
+
 .inline {
   display: inline;
 }
 
 .navbar-fixed-top {
-  font-family: Lobster;
+  font-family: Lobster, Verdana, Helvetica, Arial, sans-serif;
   font-size: 1.2em;
   .dropdown-menu {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
   }
 }
 
@@ -50,7 +54,7 @@ footer {
   background-image: -moz-linear-gradient(bottom, $navbarBackground 23%, darken($navbarBackgroundHighlight,15%) 62%, $navbarBackgroundHighlight 81%);
   background-image: -ms-linear-gradient(bottom, $navbarBackground 23%, darken($navbarBackgroundHighlight,15%) 62%, $navbarBackgroundHighlight 81%);
   background-image: -o-linear-gradient(bottom, $navbarBackground 23%, darken($navbarBackgroundHighlight,15%) 62%, $navbarBackgroundHighlight 81%);
-  margin-top: 0px;
+  margin-top: 1px;
   margin-bottom: 0px;
   margin-left: auto;
   margin-left: auto;
@@ -67,7 +71,6 @@ footer {
     color: lighten($navbarBackgroundHighlight,25%);
     margin-bottom: 10px;
     font-size: 1.5em;
-    font-family: Lobster, Helvetica, sans-serif;
     text-shadow: 2px 2px 1px #000;
   }
   hr {
@@ -208,13 +211,62 @@ img.avatar {
     box-shadow: 1px 2px 2px #444;
     text-shadow: 1px 1px 1px #000;
   }
+  padding-left: 2px;
+}
+
+@media (max-width: 480px) {
+  
+}
+
+@media (max-width: 767px) {
+  body {
+    padding: 0px;
+    margin: 0px;
+  }
+  #new_student_registration {
+    padding-right: 15px;
+  }
+  .main-background {
+    background-image: linear-gradient(bottom, rgb(221,229,236) 23%, rgb(255,255,255) 62%, rgb(221,229,236) 81%);
+    background-image: -o-linear-gradient(bottom, rgb(221,229,236) 23%, rgb(255,255,255) 62%, rgb(221,229,236) 81%);
+    background-image: -moz-linear-gradient(bottom, rgb(221,229,236) 23%, rgb(255,255,255) 62%, rgb(221,229,236) 81%);
+    background-image: -webkit-linear-gradient(bottom, rgb(221,229,236) 23%, rgb(255,255,255) 62%, rgb(221,229,236) 81%);
+    background-image: -ms-linear-gradient(bottom, rgb(221,229,236) 23%, rgb(255,255,255) 62%, rgb(221,229,236) 81%);
+  
+      background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.23, rgb(221,229,236)),
+        color-stop(0.62, rgb(255,255,255)),
+        color-stop(0.81, rgb(221,229,236))
+    );
+    margin: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  footer {
+    margin: 0px;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .container.main {
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+    padding-bottom: 20px;
+  }
 }
 
 @media (min-width: 980px) {
   .subnav-fixed {
     background: $navbarBackground;
     position: fixed;
-    top: 35px;
+    top: 40px;
     left: 0;
     right: 0;
     z-index: 1020; /* 10 less than .navbar-fixed to prevent any overlap */

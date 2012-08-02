@@ -1,7 +1,9 @@
 jQuery ->
-  $('.twitter-user').show ->
-    new TwitterUser($(this))
 
+  $(document).ready ->
+    $('.twitter-user').each ->
+      new TwitterUser($(this))
+      
 class TwitterUser
   constructor: (target) ->
     @target = target
