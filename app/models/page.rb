@@ -25,7 +25,7 @@ class Page
   before_validation :remove_banner?
 
   def self.with_banner 
-    self.excludes( banner: nil).excludes( :'banner.banner_file_size' => nil )
+    self.excludes( banner: nil).excludes( :'banner.banner_file_size' => nil ).desc(:updated_at)
   end
 
   def is_hero?
