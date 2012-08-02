@@ -17,9 +17,10 @@
   .row-fluid
     - if @hero
       .hero
-        =render 'pages/page_menu', page: @hero
-        - present @hero do |hero|
-          = hero.body.html_safe
+        .well
+          =render 'pages/page_menu', page: @hero
+          - present @hero do |hero|
+            = hero.body.html_safe
     - else
       .alert.alert-error
         %i.icon-warning-sign
