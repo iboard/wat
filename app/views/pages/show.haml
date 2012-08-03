@@ -1,7 +1,7 @@
 - title @page.title
 - present @page do |presenter|
   - if @page.banner && @page.banner.banner.exists?
-    #scroll-to{ :"data-offset" => Settings.page_banner_offset||200}
+    #scroll-to{ :"data-offset" => Settings.page_banner_offset||50}
     .row-fluid
       - if @page.banner
         #banner.banner.carousel= render 'banner', banner: @page.banner
