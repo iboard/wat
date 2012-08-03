@@ -4,7 +4,7 @@ jQuery ->
     $('#scroll-to').ready ->
       $('#banner').ready ->
         offset = $('#scroll-to').data('offset')
-        y = $('.carousel-caption').position().top + offset
+        y = $('#scroll-to').position().top + offset
         setTimeout("skipBanner(#{y})",500)
 
   self.skipBanner = (y) ->
