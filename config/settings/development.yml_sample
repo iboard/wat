@@ -38,4 +38,4 @@ developer_mail_address: "developer@example.com"
 # If a page has a banner: on PagesController::show the page 
 # will scroll to the caption of the banner - :page_banner_offset
 # 
-# page_banner_offset: 50
+# page_banner_offset: 20
