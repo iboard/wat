@@ -94,6 +94,7 @@ describe PagesController do
       click_button "Save page"
       page.should have_css '#banner'
       page.all('a', href: "http://wwedu.com").first.should_not be_nil
+      page.should have_css '#scroll-to'
     end
 
     describe "Translations" do
