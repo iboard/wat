@@ -24,8 +24,18 @@ application_mail_subject_prefix: "WAT: "
 developer_mail_address: "developer@example.com"
 
 # ENABE THIS CONFIGS IF YOU'RE NOT HAPPY WITH THIS DEFAULTS
+
+# BEHAVIOR
+
 # columns_startpage: 2
 # multilanguage: true
 # supress_page_title: false
 # show_user_menu: true
 # supress_global_search: false
+
+# LAYOUT
+
+# If a page has a banner: on PagesController::show the page 
+# will scroll to the caption of the banner - :page_banner_offset
+# 
+# page_banner_offset: 50

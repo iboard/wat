@@ -35,7 +35,7 @@ describe Page do
     page3.create_banner(banner_file_name: 'avatar.jpg')
     page3.save!
     
-    Page.with_banner.map(&:_id).should == ['this-is-page-one', 'this-is-page-two']
+    Page.with_banner.map(&:_id).should == ['this-is-page-two', 'this-is-page-one' ]
   end
 
 end
