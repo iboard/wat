@@ -90,6 +90,8 @@ gem 'nokogiri'
 gem 'simple_form'
 gem 'rails_config'
 gem 'capistrano'
+gem "ckeditor", "~> 3.7.1"
+
 
 # Authentication
 gem "omniauth", ">= 1.0.2"

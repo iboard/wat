@@ -1,0 +1,8 @@
+de:
+  ckeditor:
+    page_title: "CKEditor Datei Manager"
+    confirm_delete: "Datei löschen?"
+    buttons:
+      cancel: "Abbrechen"
+      upload: "Upload"
+      delete: "Löschen"

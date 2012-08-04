@@ -4,5 +4,5 @@
     %h2.white-link=link_to banner.page.banner_title||banner.page.title, banner.linked_url, target: :blank
   - else
     %h2.white-link=banner.page.banner_title||banner.page.title
-  %p=banner.page.banner_text
+  %p=(banner.page.banner_text||'').html_safe
 

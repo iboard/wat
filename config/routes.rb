@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 Wat::Application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
+
   # Default
   root :to => "home#index"
 

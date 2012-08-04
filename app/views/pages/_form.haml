@@ -1,10 +1,11 @@
+- @load_javascript_on_top = true
 =simple_form_for page, class: 'form-vertical', html: { multipart: true } do |f|
   .controls
     =f.input :permalink, :disabled => !page.new_record?, :hint => icon_label( 'icon-exclamation-sign', '', t(:permalink_can_not_be_changed_once_created) ), :input_html => {:style => "width: 100%;"}, :placeholder => t(:page_title_hint)
     =f.input :title, :input_html => {:style => "width: 100%;"}
     =f.input :section_id, :collection => Section.all, prompt: t(:select_section), include_blank: t(:no_section)
     =f.input :banner_title, input_html: {:style => "width: 100%" }
-    =f.input :banner_text, :as => :text, input_html: {:style => "width: 100%", rows: 5 }
+    =f.input :banner_text, :as => :ckeditor, input_html: {:style => "width: 100%", rows: 5 }
     =f.input :banner_text_position, :collection => ['left', 'right'] 
     .well
       =f.simple_fields_for page.banner||page.build_banner do |fb|
@@ -14,7 +15,7 @@
             =f.input :delete_banner, as: :boolean, label: false, hint: ("&nbsp;".html_safe+t(:check_to_remove_the_image_from_the_server))
         =fb.input :banner, as: :file,  :label => t(:upload_a_banner)
         =fb.input :linked_url, as: :url
-    =f.input :body, :as => :text, :input_html => { :style => "width: 100%" }, placeholder: t(:page_body_hint)
+    =f.input :body, as: :ckeditor, label: false, input_html: {toolbar:'Full'}, placeholder: t(:page_body_hint)
     =f.input :preview_length, :as => :integer, hint: t(:default_preview_hint) + ". " + t(:default_preview_length, length: Settings.default_preview_length||300)
     =f.button :submit, t(:save_page), class: 'btn btn-primary'
     = button_link_to 'icon-remove', 'btn', t(:cancel), pages_path
