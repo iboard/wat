@@ -36,6 +36,12 @@ namespace :deploy do
   end
   after "deploy:setup", "deploy:setup_config"
 
+  desc "Create shared path for CKEditor"
+  task :create_shared_path_for_ckeditor do
+    run "mkdir -p #{shared_path}/ckeditor_assets"
+  end
+  after "deploy:setup", "deploy:create_shared_path_for_ckeditor"
+
   desc "Symlink config-files after update"
   task :symlink_config, roles: :app do
     run "ln -nfs #{shared_path}/config/mongoid.yml #{release_path}/config/mongoid.yml"
@@ -44,6 +50,12 @@ namespace :deploy do
     run "ln -nfs #{shared_path}/config/settings/production.yml #{release_path}/config/settings/production.yml"
   end
   after "deploy:finalize_update", "deploy:symlink_config"
+
+  desc "Symlink CKEditor-assets"
+  task :symlink_ckeditor_asset_path do
+    run "ln -nfs #{shared_path}/ckeditor_assets #{release_path}/public/ckeditor_assets"
+  end
+  after "deploy:finalize_update", "deploy:symlink_ckeditor_asset_path"
 
   [:start, :stop, :restart].each do |t|
     desc "#{t} task is a no-op with proxy_balancer"
