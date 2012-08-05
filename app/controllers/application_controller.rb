@@ -49,6 +49,13 @@ private
       redirect_to signin_path, :alert => t(:access_denied)
     end
   end
+
+  def authenticate_author!
+    session[:login_for_request] ||= request.fullpath.inspect unless current_user
+    unless current_user && current_user.can_execute?('Admin', 'Author')
+      redirect_to signin_path, :alert => t(:access_denied)
+    end
+  end
   
   def can_read?(what)
     current_user && current_user.can_read?(what)
@@ -99,5 +106,18 @@ private
     end
     set_locale
   end
+
+protected
+
+
+  def ckeditor_authenticate
+    authenticate_author!
+  end
+
+  # Set current_user as assetable
+  # def ckeditor_before_create_asset(asset)
+  #   asset.assetable = current_user
+  #   return true
+  # end
 
 end
