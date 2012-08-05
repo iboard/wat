@@ -7,6 +7,9 @@ class Page
   key  :permalink
   validates_presence_of :permalink
   validates_uniqueness_of :permalink
+  field :position, type: Integer, default: 0
+
+  default_scope -> { asc(:position) }
 
   field :title, type: String, :localize => true
   validates_presence_of :title

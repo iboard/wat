@@ -38,4 +38,12 @@ describe Page do
     Page.with_banner.map(&:_id).sort.should == ['this-is-page-one', 'this-is-page-two' ]
   end
 
+  it "supports position and sorting (within a section)" do
+    Page.delete_all
+    page2 = Page.create(permalink: 'two', title: 'Page Two', position: 1, body: 'Second Body')
+    page3 = Page.create(permalink: 'three', title: 'Page tree', position: 2, body: 'Third Body')
+    page1 = Page.create(permalink: 'one', title: 'Page One', position: 0, body: 'First Body')
+    Page.all.map(&:permalink).should == %w(one two three)
+  end
+
 end
