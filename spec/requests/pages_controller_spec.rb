@@ -97,6 +97,24 @@ describe PagesController do
       page.should have_css '#scroll-to'
     end
 
+    it "sort pages" do
+      Page.delete_all
+      page2 = Page.create(permalink: 'two', title: 'Page Two', position: 1, body: 'Second Body')
+      page3 = Page.create(permalink: 'three', title: 'Page tree', position: 2, body: 'Third Body')
+      page1 = Page.create(permalink: 'one', title: 'Page One', position: 0, body: 'First Body')
+      visit pages_path
+      page.should have_link "Sort Pages"
+      click_link "Sort Pages"
+      page.should have_css "#ordered_pages"
+    end
+
+    it "restricts access to sort for admins only" do
+      visit signout_path
+      visit sort_pages_path
+      page.should have_content "You need to sign in for access to this page"
+      page.should_not have_content "Sort pages"
+    end
+
     describe "Translations" do
 
       before(:each) do

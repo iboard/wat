@@ -1,0 +1,29 @@
+- @load_javascript_on_top = true
+%br/
+%h1=title t(:sort_pages)
+%br/
+%br/
+
+.row-fluid
+  .span8
+   
+    .well
+      - jsort(@pages,'ordered_pages', update_sort_pages_path, {sortable_id: :sorting_id }) do |page|
+        %span{style: "background: #{cycle('#eee', 'transparent')}; padding: 5px;"}
+          .sort-title= link_to page.title, page_path(page)
+          .sort-edit-link= button_link_to 'icon-edit', 'btn btn-mini', "", edit_page_path(page)
+          .sort-section-label
+            - if page.section
+              .label.label-info= page.section.title
+            - else
+              .label.label-warning= t(:orphaned)
+    
+    %br/
+    %br/
+
+  .span4
+    .alert.alert-info
+      =t(:sort_pages_hint)
+      %hr/
+      = button_link_to 'icon-ok-sign', 'btn', t(:done), pages_path
+    

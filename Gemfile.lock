@@ -1,3 +1,9 @@
+PATH
+  remote: /Users/aa/Development/R31/gems/jsort
+  specs:
+    jsort (0.0.4)
+      jquery-rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -122,8 +128,6 @@ GEM
       railties (>= 3.2.0, < 5.0)
       thor (~> 0.14)
     json (1.6.5)
-    jsort (0.0.3)
-      jquery-rails
     launchy (2.1.0)
       addressable (~> 2.2.6)
     libv8 (3.3.10.4)
@@ -310,7 +314,7 @@ DEPENDENCIES
   haml (>= 3.1.4)
   haml-rails (>= 0.3.4)
   jquery-rails
-  jsort (~> 0.0.1)
+  jsort (~> 0.0.4)!
   launchy
   mongoid (>= 2.4.4)
   mongoid-paperclip

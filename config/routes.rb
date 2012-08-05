@@ -66,6 +66,10 @@ Wat::Application.routes.draw do
   resources :pages do
     get 'translate_to/:locale' => :translate_to, :as => 'translate_to'
     get 'read_translation_of/:locale' => :read_translation_of, :as => 'read_translation_of'
+    collection do
+      get  'sort' => :sort
+      post 'update_sort' => :update_sort
+    end
   end
 
   # Search

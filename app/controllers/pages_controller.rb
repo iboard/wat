@@ -83,6 +83,22 @@ class PagesController < ApplicationController
     render action: :show
   end
 
+  def sort
+    @pages = Page.all
+    @pages.each_with_index do |p,i|
+      p.sorting_id = i
+    end
+  end
+
+  def update_sort
+    params[:ordered_pages].each_with_index do |sid,idx|
+      _page = Page.where(sorting_id: sid).first
+      _page.position = idx
+      _page.save!
+    end
+    render :nothing => true
+  end
+
 private
   def parse_search_param
     if params[:search].present?

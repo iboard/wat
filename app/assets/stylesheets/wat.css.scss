@@ -397,3 +397,26 @@ img.avatar {
     }
   }
 }
+
+.sort-title, .sort-edit-link, .sort-section-label {
+  display: inline-block;
+  height: 35px;
+  padding: 0px;
+  margin: 0px;
+  .label {
+    width: 150px;
+    max-width: 150px;
+    overflow: hidden;
+    display: inline-block;
+  }
+}
+
+.sort-title {
+  width: 300px;
+  max-width: 300px;
+  overflow: hidden;
+}
+
+.sort-edit-link {
+  width: 60px;
+}

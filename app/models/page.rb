@@ -8,6 +8,9 @@ class Page
   validates_presence_of :permalink
   validates_uniqueness_of :permalink
   field :position, type: Integer, default: 0
+  field :sorting_id
+  validates_uniqueness_of :sorting_id
+  
 
   default_scope -> { asc(:position) }
 
@@ -26,6 +29,7 @@ class Page
   field  :banner_text_position, default: 'right'
 
   before_validation :remove_banner?
+  before_validation :generate_sorting_id
 
   def self.with_banner 
     self.excludes( banner: nil).excludes( :'banner.banner_file_size' => nil ).desc(:updated_at)
@@ -63,5 +67,7 @@ private
     end
   end
 
-
+  def generate_sorting_id
+    self.sorting_id ||= SecureRandom::hex(21)
+  end
 end

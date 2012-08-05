@@ -307,3 +307,6 @@ de:
     other: '%{count} Treffer'
   sort_sections: "Abschnitte sortieren"
   numbers_and_letters_only: "Es sind nur Buchstaben und Zahlen erlaubt."
+  sort_pages: Seiten sortieren
+  sort_pages_hint: "Sortieren Sie die Seiten mit Drag & Drop und klicken Sie anschließend den Button done"
+  orphaned: verwaist

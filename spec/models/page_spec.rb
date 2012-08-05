@@ -38,6 +38,11 @@ describe Page do
     Page.with_banner.map(&:_id).sort.should == ['this-is-page-one', 'this-is-page-two' ]
   end
 
+  it "generates a random sorting_id before save" do
+    page = Page.create(permalink: 'sortme', title: 'Sort Me', body: 'Second Body')
+    page.sorting_id.length.should == 42
+  end
+
   it "supports position and sorting (within a section)" do
     Page.delete_all
     page2 = Page.create(permalink: 'two', title: 'Page Two', position: 1, body: 'Second Body')
