@@ -77,7 +77,7 @@ group :development do
 end
 
 # Andi's GEMs
-gem "jsort", "~> 0.0.4", path: "/Users/aa/Development/R31/gems/jsort"
+gem "jsort", "~> 0.0.4"
 
 # Application
 gem "bson_ext", ">= 1.5.2"
