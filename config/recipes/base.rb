@@ -53,7 +53,7 @@ namespace :deploy do
 
   desc "Symlink CKEditor-assets"
   task :symlink_ckeditor_asset_path do
-    run "ln -nfs #{shared_path}/ckeditor_assets #{release_path}/public/ckeditor_assets"
+    run "ln -nfs #{shared_path}/ckeditor_assets #{release_path}/public/"
   end
   after "deploy:finalize_update", "deploy:symlink_ckeditor_asset_path"
 
