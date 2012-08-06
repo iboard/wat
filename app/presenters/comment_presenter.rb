@@ -28,7 +28,7 @@ private
   def avatar
     _class = 'floating-avatar avatar-tiny'
     if comment.user
-      image_tag comment.user.picture(:icon).first, class: _class
+      image_tag comment.user.picture(:icon), class: _class
     else
       image_tag '/images/avatars/tiny/missing.png', class: _class
     end

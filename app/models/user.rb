@@ -257,7 +257,7 @@ class User
 
   def picture(size)
     if self.avatar && (self.avatar.use_gravatar)
-      self.gravatar_path(size)
+      gravatar_path(size).first
     elsif self.avatar && self.avatar.avatar
       self.avatar.avatar.url(size)
     else
