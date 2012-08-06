@@ -310,3 +310,26 @@ de:
   sort_pages: Seiten sortieren
   sort_pages_hint: "Sortieren Sie die Seiten mit Drag & Drop und klicken Sie anschließend den Button done"
   orphaned: verwaist
+  number_of_comments:
+    zero: Keine Kommentare
+    one: Ein Kommentar
+    other: "%{count} Kommentare"
+  comments_for:
+    zero: "Keine Kommentare zu %{class} '%{title}'"
+    one: "Ein Kommentar zu %{class} '%{title}'"
+    other: "%{count} Kommentare zu %{class} '%{title}'"
+  anonymous: Anonym
+  age_in_words: "%{distance} alt"
+  post_comment: 'Kommentar speichern'
+  new_record: Neuer Eintrag
+  new_comment: Neuer Kommentar
+  comment_successfully_posted: Kommentar wurde gesandt.
+  comment_successfully_updated: Änderungen wurden gespeichert. 
+  comment_successfully_deleted: Kommentar wurde gelöscht.
+  you_can_use_markdown: Sie können hier 'Markdown' benutzen.
+  your_comment: Ihr Kommentar
+  delete_comment: Kommentar löschen
+  update_comment: 'Änderungen speichern'
+  edit_comment: 'Kommentar bearbeiten'
+  enable_comments: Schalten sie diese Option aus wenn keine Kommentare erlaubt sind.
+  login_to_comment: Melden Sie sich bitte an um Kommentare zu hinterlassen.

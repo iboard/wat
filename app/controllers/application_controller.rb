@@ -12,6 +12,9 @@ class ApplicationController < ActionController::Base
   helper_method :can_read?
   helper_method :can_write?
   helper_method :can_execute?
+  helper_method :param_to_class
+  helper_method :class_to_param
+
 
 private
   def current_user
@@ -106,6 +109,16 @@ private
     end
     set_locale
   end
+
+  def class_to_param(_object)
+    _object.class.to_s.underscore
+  end
+
+  def param_to_class(param)
+    param.camelize.constantize
+  end
+
+
 
 protected
 

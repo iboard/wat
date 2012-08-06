@@ -3,6 +3,7 @@ class Page
 
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Commentable
 
   key  :permalink
   validates_presence_of :permalink

@@ -420,3 +420,83 @@ img.avatar {
 .sort-edit-link {
   width: 60px;
 }
+
+
+.avatar-avatar {
+  width: 128px;
+  height: 128px;
+}
+
+.avatar-large {
+  width: 300px;
+  height: 300px;
+}
+
+.avatar-thumb {
+  width: 100px;
+  height: 100px;
+}
+
+.avatar-icon {
+  width: 64px;
+  height: 64px;
+}
+
+.avatar-tiny {
+  width: 32px;
+  height: 32px;
+}
+
+img.floating-avatar {
+  vertical-align: middle;
+  margin-right: 20px;
+  background: #eee;
+  padding: 2px;
+  border-radius: 2em 2em 2em 2em;
+  box-shadow: 2px 2px 2px #444;
+}
+
+.comment-preview {
+  border-radius: 0.5em 0.5em 0.5em 0.5em;
+  padding: 5px;
+  padding-left: 1em;
+  box-shadow: 1px 1px 1px #333;
+  background: #2388AE;
+  color: white;
+  width: 120px; 
+  a {
+    color: white;
+  }
+}
+
+.comment {
+  background: #ddd;
+  color: #444;
+  padding: 10px;
+  border-radius: 5px 5px 5px 5px;
+  margin-bottom: 5px;
+}
+
+.comment-user {
+  height: auto;
+  margin: 0px;
+  font-style: italic;
+  color: #888;
+}
+
+.comment-timestamp {
+  color: #888;
+}
+.comment-body {
+  margin-left: 55px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+}
+
+.comment-delete-button {
+  margin: 0px;
+  margin-top: -10px;
+  margin-bottom: 5px;
+  margin-left: 55px;
+
+}

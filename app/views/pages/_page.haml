@@ -14,6 +14,8 @@
         %h2=page.title
       %article
         = presenter.body_snippet _preview
+        = render "comments/comments_preview", commentable: page
+        %br/
       - if truncated
         = _link
     .clear-both

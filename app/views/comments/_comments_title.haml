@@ -1,0 +1,4 @@
+- if commentable.is_commentable
+  %br/
+  %h4= title t(:comments_for, class: t(class_to_param(commentable).to_sym), count: comments.count, title: commentable.try(:title) )
+  %br/

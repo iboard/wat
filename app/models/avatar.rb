@@ -24,6 +24,11 @@ class Avatar
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
   end
 
+  # Avatar or Gravatar path
+  def picture(style=:icon)
+    self.use_gravatar ? gravatar_path(style) : avatar.url(style)
+  end
+
   def avatar_geometry(style = :large)
     Paperclip::Geometry.from_file(self.avatar.path(style)).to_s.split(/x/).map(&:to_i)
   end
@@ -44,5 +49,4 @@ private
     avatar.reprocess!
   end
 
-  
 end

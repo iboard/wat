@@ -88,12 +88,7 @@ class UserPresenter < BasePresenter
 
 private
   def user_gravatar(size=:avatar)
-    _url = "http://gravatar.com/avatar/#{gravatar_id}.png?cache=#{(user.updated_at||Time.now).strftime('%Y%m%d%H%M%S')}"
-    if size == :tiny
-      options = "width: 32px; height32px;"
-    else
-      options = ''
-    end
+    _url, options = user.gravatar_path(size)
     image_tag _url, class: 'avatar', style: options
   end
 
@@ -159,7 +154,7 @@ private
   end
 
   def gravatar_id
-    Digest::MD5.hexdigest(user.email.downcase) if user.email
+    user.gravatar_id
   end
 
 

@@ -21,6 +21,9 @@
             %h1=presenter.title
         = render 'pages_menu'
         .content= presenter.body
+        - if @page.is_commentable
+          .comments-block{id: "comments-for-#{@page.to_param}"}
+            = render 'comments/comments_preview', commentable: @page
     - else
       .alert.alert-error= t(:page_not_found)
 

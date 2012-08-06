@@ -238,7 +238,35 @@ class User
     }
   end
 
+  def gravatar_id
+    Digest::MD5.hexdigest(self.email.downcase) if self.email
+  end
+
+  def gravatar_path(size)
+    _url = "http://gravatar.com/avatar/#{gravatar_id}.png?cache=#{(self.updated_at||Time.now).strftime('%Y%m%d%H%M%S')}"
+    case size 
+    when :tiny
+      options = "width: 32px; height: 32px;"
+    when :icon
+      options = 'width: 63px; height: 64px;'
+    else
+      options = 'width: 128px; height: 128px;'
+    end
+    [_url, options]
+  end
+
+  def picture(size)
+    if self.avatar && (self.avatar.use_gravatar)
+      self.gravatar_path(size)
+    elsif self.avatar && self.avatar.avatar
+      self.avatar.avatar.url(size)
+    else
+      "/images/avatars/#{size.to_s}/missing.png"
+    end
+  end
+
 protected
+
   def clear_identity
     Identity.where(name: self.name).delete_all
   end

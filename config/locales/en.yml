@@ -307,3 +307,26 @@ en:
   sort_pages: Sort Pages
   sort_pages_hint: "Sort pages using drag & drop. When done click the button below."
   orphaned: orphaned
+  number_of_comments:
+    zero: No comments
+    one: One comment
+    other: "%{count} comments"
+  comments_for:
+    zero: "No comments for %{class} '%{title}'"
+    one: "One comment for %{class} '%{title}'"
+    other: "%{count} comments for %{class} '%{title}'"
+  anonymous: Anonymous
+  age_in_words: "%{distance} ago"
+  post_comment: Post comment
+  new_record: 'New record'
+  new_comment: 'New comment'
+  comment_successfully_posted: Comment successfully posted.
+  comment_successfully_updated: Comment successfully updated. 
+  comment_successfully_destroyed: Comment successfully destroyed. 
+  you_can_use_markdown: You can use 'Markdown' here.
+  your_comment: Your Comment
+  delete_comment: Delete comment
+  update_comment: Update comment 
+  edit_comment: Edit comment
+  enable_comments: Switch off this option to disable comments
+  login_to_comment: Please log in to post a new comment

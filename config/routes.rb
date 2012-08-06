@@ -70,6 +70,7 @@ Wat::Application.routes.draw do
       get  'sort' => :sort
       post 'update_sort' => :update_sort
     end
+    resources :comments
   end
 
   # Search
@@ -83,7 +84,6 @@ Wat::Application.routes.draw do
       post 'update_sort' => :update_sort
     end
   end
-
 
   # Language support
   match '/switch_language/:locale' => 'sessions#switch_language', :as => :switch_language

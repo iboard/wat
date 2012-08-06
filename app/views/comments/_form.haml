@@ -1,0 +1,9 @@
+#new-comment-form
+  - @load_javascript_on_top = true
+  = simple_form_for( [commentable, comment], html: {class: 'form-vertical'}) do |c|
+    = c.simple_fields_for comment do |f|
+      = f.input :comment, as: :text, label: t(:your_comment), input_html: {rows: 5, class: "full-width"}, placeholder: t(:you_can_use_markdown)
+    - if comment.new_record?
+      = c.submit t(:post_comment), class: 'btn btn-primary'
+    - else
+      = c.submit t(:update_comment), class: 'btn btn-primary'

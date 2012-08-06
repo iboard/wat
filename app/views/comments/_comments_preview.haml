@@ -1,0 +1,4 @@
+.comment-preview
+  %i.icon-comment.icon-white
+  &nbsp;
+  = link_to t(:number_of_comments, count: commentable.comments.count), commentable_comments_path(commentable)+"#new-comment-form"
