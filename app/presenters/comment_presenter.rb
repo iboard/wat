@@ -20,7 +20,7 @@ class CommentPresenter < BasePresenter
   end
 
   def body
-    strip_blank_paragraphs(interpret (comment.comment||''))
+    interpret (comment.comment||'')
   end
 
 
