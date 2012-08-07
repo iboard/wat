@@ -14,19 +14,17 @@ class PagePresenter < BasePresenter
     interpret (page.body||translate_link)
   end
 
-  def body_snippet body_snippet
-    if body_snippet == page.body
-      interpret( body_snippet || translate_link )
+  def body_snippet _body_snippet
+    if _body_snippet == page.body
+      interpret( _body_snippet || translate_link )
+    elsif _body_snippet
+      _txt = ""
+      _txt = tile if Settings.supress_page_title == true
+      _txt += strip_tags _body_snippet
+      _txt += "<div class='clear-both'></div>"
+      _txt.html_safe
     else
-      if body_snippet
-        _txt = ""
-        _txt = tile if Settings.supress_page_title == true
-        _txt += strip_tags body_snippet
-        _txt += "<div class='clear-both'></div>"
-        _txt.html_safe
-      else
-        translate_link
-      end
+      translate_link
     end
   end
 
