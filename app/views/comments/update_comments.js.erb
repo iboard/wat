@@ -1,0 +1,4 @@
+$("#comments-for-page-<%= @commentable.to_param -%>").html('<%= j render "comments_with_new_form" -%>');
+$("#comment_comment_comment").val('');
+$("#comment-<%= @comment.to_param -%>-for-<%= class_to_param(@commentable) -%>").effect("highlight", {}, 2000);
+$("#comments-for-page-<%= @commentable.to_param -%>-link").html('<%= j render "comments/comments_link", commentable: @commentable -%>');

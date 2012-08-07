@@ -1,6 +1,6 @@
 #new-comment-form
   - @load_javascript_on_top = true
-  = simple_form_for( [commentable, comment], html: {class: 'form-vertical'}) do |c|
+  = simple_form_for( [commentable, comment], html: {class: 'form-vertical'}, remote: true) do |c|
     = c.simple_fields_for comment do |f|
       = f.input :comment, as: :text, label: t(:your_comment), input_html: {rows: 5, class: "full-width"}, placeholder: t(:you_can_use_markdown)
     - if comment.new_record?

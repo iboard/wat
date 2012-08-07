@@ -1,4 +1,6 @@
 .comment-preview
   %i.icon-comment.icon-white
   &nbsp;
-  = link_to t(:number_of_comments, count: commentable.comments.count), commentable_comments_path(commentable)+"#new-comment-form"
+  = render "comments/comments_link", commentable: commentable
+%div{id: "comments-for-#{class_to_param(commentable)}-#{commentable.id.to_s}"}
+= render "comments/comments_close_button"

@@ -5,19 +5,35 @@ class CommentsController < ApplicationController
   before_filter :initialize_new_comment, only: [:index,:new]
 
   def index
+    respond_to do |format|
+      format.js   { }
+      format.html { }
+    end
   end
 
   def new
+    render :index
   end
 
   def edit
+    respond_to do |format|
+      format.html {}
+      format.js {}
+    end
   end
 
   def update
     _params = params[:comment][:comment].merge(user_id: current_user.to_param, posted_from_ip: request.remote_ip)
     @comment.update_attributes(_params)
     if @commentable.save
-      redirect_to @commentable, notice: t(:comment_successfully_posted)
+      respond_to do |format|
+        format.js { 
+          initialize_new_comment        
+        }
+        format.html {
+          redirect_to @commentable, notice: t(:comment_successfully_posted)
+        }
+      end
     else
       render :edit
     end
@@ -27,16 +43,31 @@ class CommentsController < ApplicationController
     _params = params[:comment][:comment].merge(user_id: current_user.to_param, posted_from_ip: request.remote_ip)
     @comment =  @commentable.comments.create(_params)
     if @commentable.save
-      redirect_to @commentable, notice: t(:comment_successfully_posted)
+      respond_to do |format|
+        format.js {
+          initialize_new_comment
+          render 'update_comments'
+        }
+        format.html {
+          redirect_to @commentable, notice: t(:comment_successfully_posted)
+        }
+      end
     else
-      render :new
+      render :index
     end
   end
 
   def destroy
     @comment.delete
     @commentable.save
-    redirect_to commentable_comments_path(@commentable), notice: t(:comment_successfully_deleted)
+    respond_to do |format|
+      format.js {
+        initialize_new_comment
+      }
+      format.html {
+        redirect_to commentable_comments_path(@commentable), notice: t(:comment_successfully_deleted)
+      }
+    end
   end
 
 

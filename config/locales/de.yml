@@ -333,3 +333,6 @@ de:
   edit_comment: 'Kommentar bearbeiten'
   enable_comments: Schalten sie diese Option aus wenn keine Kommentare erlaubt sind.
   login_to_comment: Melden Sie sich bitte an um Kommentare zu hinterlassen.
+  close: 'schliessen'
+  comment_deleted_msg: "Wir haben Ihren gelöschten Kommentar in das Eingabefel unten gestellt. Senden sie ihn erneut, falls er versehentlich gelöscht wurde."
+  repost_comment: Erneut senden

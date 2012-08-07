@@ -1,0 +1,10 @@
+#comments
+  =render @comments
+
+  -if current_user
+    %hr/
+    =render 'form', commentable: @commentable, comment: @comment
+  -else
+    .label.label-warning
+      %i.icon-warning-sign.icon-white
+      =t(:login_to_comment)

@@ -5,8 +5,8 @@
       - if comment.allow_delete?(current_user)
         .comment-delete-button.pull-right
           %br/
-          =button_link_to 'icon-edit', 'btn btn-primary btn-mini', t(:edit_comment), edit_commentable_comment_path(comment.commentable,comment)
-          =button_link_to 'icon-trash', 'btn btn-danger btn-mini', t(:delete_comment), commentable_comment_delete_path(comment), method: :delete, confirm: t(:are_you_sure)
+          =button_link_to 'icon-edit', 'btn btn-primary btn-mini', t(:edit_comment), edit_commentable_comment_path(comment.commentable,comment), remote: true
+          =button_link_to 'icon-trash', 'btn btn-danger btn-mini', t(:delete_comment), commentable_comment_delete_path(comment), method: :delete, confirm: t(:are_you_sure), remote: true
       
       %span.comment-user
         %strong>=presenter.posted_by

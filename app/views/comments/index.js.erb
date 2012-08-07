@@ -1,0 +1,2 @@
+$("#comments-for-page-<%= @commentable.to_param -%>").html('<%= j render "comments_with_new_form" -%>');
+$("#comments-for-page-<%= @commentable.to_param -%>").next().show();

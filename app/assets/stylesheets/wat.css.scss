@@ -463,7 +463,7 @@ img.floating-avatar {
   box-shadow: 1px 1px 1px #333;
   background: #2388AE;
   color: white;
-  width: 120px; 
+  width: 150px; 
   a {
     color: white;
   }
@@ -475,6 +475,10 @@ img.floating-avatar {
   padding: 10px;
   border-radius: 5px 5px 5px 5px;
   margin-bottom: 5px;
+}
+
+.comment-preview-link {
+  display: inline-block;
 }
 
 .comment-user {
@@ -499,4 +503,8 @@ img.floating-avatar {
   margin-bottom: 5px;
   margin-left: 55px;
 
+}
+
+.close-comments-button {
+  display: none;
 }

@@ -330,3 +330,6 @@ en:
   edit_comment: Edit comment
   enable_comments: Switch off this option to disable comments
   login_to_comment: Please log in to post a new comment
+  close: close
+  comment_deleted_msg: "We put your deleted message into the form below. Repost it if you did deleted it accidently."
+  repost_comment: Repost comment

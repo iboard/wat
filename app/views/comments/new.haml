@@ -1,8 +1,0 @@
-= render @commentable
-
-=render "comments_title", commentable: @commentable, comments: @comments
-
-#comments
-  = render @comments
-  %br/
-  = render 'form', commentable: @commentable, comment: @comment
