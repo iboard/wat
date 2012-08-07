@@ -13,7 +13,7 @@
       - elsif Settings.supress_page_title != true
         %h2=page.title
       %article
-        = presenter.body_snippet _preview
+        = presenter.body_snippet strip_tags(_preview)
         = render "comments/comments_preview", commentable: page
         %br/
       - if truncated

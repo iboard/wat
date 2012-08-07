@@ -15,7 +15,15 @@ class PagePresenter < BasePresenter
   end
 
   def body_snippet body_snippet
-    interpret( body_snippet || translate_link )
+    if body_snippet == page.body
+      interpret( body_snippet || translate_link )
+    else
+      if body_snippet
+        strip_tags body_snippet
+      else
+        translate_link
+      end
+    end
   end
 
   def banner_preview

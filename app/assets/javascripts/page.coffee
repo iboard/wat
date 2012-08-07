@@ -9,3 +9,9 @@ jQuery ->
 
   self.skipBanner = (y) ->
     $('body').animate( {scrollTop : y  },'slow')
+
+
+  if $('#toggle-section-banner').length > 0
+    $('#toggle-section-banner').click ->
+      event.preventDefault()
+      $("#section-and-banner").toggle()
