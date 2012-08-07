@@ -16,6 +16,8 @@
 //= require bootstrap
 //= require jquery.Jcrop
 //= require bootstrap-carousel
+//= require bootstrap-datepicker
+//= require datepicker
 //= require jsort_sortable
 //= require ckeditor/init
 //= require_tree .

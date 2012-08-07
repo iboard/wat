@@ -19,8 +19,12 @@
           =fb.input :banner, as: :file,  :label => t(:upload_a_banner)
           =fb.input :linked_url, as: :url
     =f.input :body, as: :ckeditor, input_html: {toolbar:'Full'}, placeholder: t(:page_body_hint)
-    =f.input :preview_length, :as => :integer, hint: t(:default_preview_hint) + ". " + t(:default_preview_length, length: Settings.default_preview_length||300)
-    =f.input :is_commentable, as: :boolean, :hint => "&nbsp;".html_safe+t(:enable_comments)
+    =icon_link_to 'icon-chevron-right', '',  t(:other_options), '#', id: 'toggle-page-options'
+    #page-options
+      =f.input :preview_length, as: :integer, hint: t(:default_preview_hint) + ". " + t(:default_preview_length, length: Settings.default_preview_length||300)
+      =f.input :is_commentable, as: :boolean, hint: "&nbsp;".html_safe+t(:enable_comments)
+      =f.input :use_publish_at, as: :boolean, hint: t(:publish_on_hint).html_safe + datepicker( 'page[publish_on]', page.publish_at).html_safe
+      =f.input :use_expire_at,  as: :boolean, hint: t(:expire_on_hint).html_safe + datepicker( 'page[expire_on]', page.expire_at).html_safe
     %br/
     .form-actions
       =f.button :submit, t(:save_page), class: 'btn btn-primary'

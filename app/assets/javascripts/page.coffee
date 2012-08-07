@@ -15,3 +15,8 @@ jQuery ->
     $('#toggle-section-banner').click ->
       event.preventDefault()
       $("#section-and-banner").toggle()
+
+  if $('#toggle-page-options').length > 0
+    $('#toggle-page-options').click ->
+      event.preventDefault()
+      $("#page-options").toggle()

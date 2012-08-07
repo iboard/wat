@@ -334,3 +334,6 @@ en:
   comment_deleted_msg: "We put your deleted message into the form below. Repost it if you did deleted it accidently."
   repost_comment: Repost comment
   section_and_banner: Section and Banner
+  other_options: Other options
+  publish_on_hint: "&nbsp;Do not check if always publish or check and set date"
+  expire_on_hint: "&nbsp;Do not check if never expires or check and set date"

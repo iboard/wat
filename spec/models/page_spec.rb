@@ -51,4 +51,44 @@ describe Page do
     Page.all.map(&:permalink).should == %w(one two three)
   end
 
+  describe "supports publish_at and expire_at:" do
+
+    before(:each) do
+      Page.delete_all
+      Page.create(permalink: 'always', title: 'Always online')
+      Page.create(permalink: 'published', title: 'Published', publish_at: Time.now-1.day)
+      Page.create(permalink: 'will publish', title: 'Will publish', publish_at: Time.now+1.day)
+      Page.create(permalink: 'will expire', title: 'Will expire', expire_at: Time.now+1.day)
+      Page.create(permalink: 'expired', title: 'Expired', expire_at: Time.now-1.day)
+      Page.create(permalink: 'in range', title: 'In range', publish_at: Time.now-1.day, expire_at: Time.now+1.day)
+      Page.create(permalink: 'to early', title: 'To early', publish_at: Time.now+1.day, expire_at: Time.now+2.days)
+      Page.create(permalink: 'to late', title: 'To late', publish_at: Time.now-2.days, expire_at: Time.now-1.day)
+    end
+
+    it "unscoped - lists all pages in unscoped" do
+      Page.unscoped.map(&:permalink).count.should    == 8
+    end
+
+    it "published - lists only pages with no publish_at or publish_at already passed" do
+      Page.published.map(&:permalink).sort.should    == ['always','expired','in range','published','to late', 'will expire']
+    end
+
+    it "will publish - lists pages which has a published_at set and will be published in future" do
+      Page.will_publish.map(&:permalink).sort.should == ['to early', 'will publish']
+    end
+
+    it "will expire - lists pages which has an expire_at set and will expire in future" do
+      Page.will_expire.map(&:permalink).sort.should == ['in range', 'to early', 'will expire']
+    end
+
+    it "expired - lists expired pages" do
+      Page.expired.map(&:permalink).sort.should == ['expired', 'to late']
+    end
+
+    it "online - lists pages with boundaries nil or in range" do
+      Page.online.map(&:permalink).sort.should == ['always','in range','published','will expire']
+    end
+
+  end
+
 end

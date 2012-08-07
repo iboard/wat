@@ -26,8 +26,8 @@ describe Section do
   it "has many pages" do
     section = Section.new(:permalink => 'about', :title => "About Sections")
     section.save!
-    section.pages.create(:permalink => 'page 1', :title => 'Page One', body: 'Page one body')
-    section.pages.create(:permalink => 'page 2', :title => 'Page Two', body: 'Page two body')
+    section.pages.create(:permalink => 'page 1', position: 1, :title => 'Page One', body: 'Page one body')
+    section.pages.create(:permalink => 'page 2', position: 2, :title => 'Page Two', body: 'Page two body')
     section.save!
     section.reload
     section.pages.count.should == 2

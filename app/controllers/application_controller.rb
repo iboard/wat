@@ -60,16 +60,16 @@ private
     end
   end
   
-  def can_read?(what)
-    current_user && current_user.can_read?(what)
+  def can_read?(*what)
+    current_user && current_user.can_read?(*what)
   end
   
-  def can_write?(what)
-    current_user && current_user.can_write?(what)
+  def can_write?(*what)
+    current_user && current_user.can_write?(*what)
   end
   
-  def can_execute?(what)
-    current_user && current_user.can_execute?(what)
+  def can_execute?(*what)
+    current_user && current_user.can_execute?(*what)
   end
   
   def ensure_locale

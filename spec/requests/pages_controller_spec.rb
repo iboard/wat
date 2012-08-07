@@ -284,4 +284,31 @@ describe PagesController do
       page.should have_link "Second Page"
     end
   end
+
+  describe "Timed limitation for non-admins" do
+     before(:each) do
+      Page.delete_all
+      Page.create(permalink: 'always', title: 'Always online')
+      Page.create(permalink: 'published', title: 'Published', publish_at: Time.now-1.day)
+      Page.create(permalink: 'will publish', title: 'Will publish', publish_at: Time.now+1.day)
+      Page.create(permalink: 'will expire', title: 'Will expire', expire_at: Time.now+1.day)
+      Page.create(permalink: 'expired', title: 'Expired', expire_at: Time.now-1.day)
+      Page.create(permalink: 'in range', title: 'In range', publish_at: Time.now-1.day, expire_at: Time.now+1.day)
+      Page.create(permalink: 'to early', title: 'To early', publish_at: Time.now+1.day, expire_at: Time.now+2.days)
+      Page.create(permalink: 'to late', title: 'To late', publish_at: Time.now-2.days, expire_at: Time.now-1.day)
+      visit pages_path
+    end
+
+    it "doesn't show expired and not published pages for non-admins" do
+      page.should have_content "Always online"
+      page.should have_content "Published"
+      page.should have_content "Will expire"
+      page.should have_content "In range"
+
+      page.should_not have_content "Expired"
+      page.should_not have_content "Will publish"
+      page.should_not have_content "To late"
+      page.should_not have_content "To early"
+    end
+  end
 end

@@ -1,10 +1,12 @@
-- if page.title
-  - _preview = truncate(page.body,length: page.preview_length_or_default, omission: "... ")
-  - _link = icon_link_to( "icon-eye-open", "btn", t(:read_more), page)
-  - truncated = _preview.length < page.body.length
-    
-  
-  .well{:style=> params[:controller]=='home' ? 'min-height: 200px;' : ''}
+.well{:style=> params[:controller]=='home' ? 'min-height: 200px;' : '', :class => page.date_range}
+  - if !page.title
+    .alert.alert-error
+      t(:page_has_no_title)
+  - else
+    - _preview = truncate((page.body||''),length: page.preview_length_or_default, omission: "... ")
+    - _link = icon_link_to( "icon-eye-open", "btn", t(:read_more), page)
+    - truncated = _preview.length < (page.body||'').length
+
     - present page do |presenter|
       = render 'pages/page_menu', page: page
       = presenter.banner_preview
@@ -18,4 +20,4 @@
         %br/
       - if truncated
         = _link
-    .clear-both
+  .clear-both

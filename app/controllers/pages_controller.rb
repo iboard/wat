@@ -7,12 +7,12 @@ class PagesController < ApplicationController
   before_filter :authenticate_user!, except: _allow_index_actions
 
   def index
-    @pages ||= Page.asc(:title)
+    @pages ||= permitted_pages
   end
   
   def show
     begin
-      @page = Page.find(params[:id])
+      @page = permitted_pages.find(params[:id])
     rescue => e
       @page = nil
     end
@@ -38,14 +38,14 @@ class PagesController < ApplicationController
   end
 
   def edit
-    @page = Page.find(params[:id])
+    @page = permitted_pages.find(params[:id])
     unless can_write?('Admin')
       redirect_to @page, :alert => t(:you_not_allowed_to_edit_this_page)
     end
   end
 
   def update
-    @page = Page.find(params[:id])
+    @page = permitted_pages.find(params[:id])
     if params[:commit] == t(:cancel)
       redirect_to @page, :notice => t(:nothing_changed)
       return
@@ -63,7 +63,7 @@ class PagesController < ApplicationController
   end
 
   def destroy
-    @page = Page.find(params[:id])
+    @page = permitted_pages.find(params[:id])
     unless can_execute?('Admin')
       redirect_to @page, :notice => t(:access_denied)
     else
@@ -78,7 +78,7 @@ class PagesController < ApplicationController
   end
 
   def read_translation_of
-    @page = Page.find(params[:page_id])
+    @page = permitted_pages.find(params[:page_id])
     I18n.locale = params[:locale].to_sym
     render action: :show
   end
@@ -100,11 +100,16 @@ class PagesController < ApplicationController
   end
 
 private
+
+  def permitted_pages
+    can_read?('Admin', 'Maintainer') ? Page.all : Page.online
+  end
+
   def parse_search_param
     if params[:search].present?
       _p = params[:search].is_a?(String) ? JSON.parse( params[:search] ) : params[:search]
       @search = Search.new( search_text: _p['search_text'], search_controller: _p['search_controller'] )
-      @pages = Page.any_of(
+      @pages = permitted_pages.any_of(
         {title: /#{@search.search_text}/i}, 
         {body: /#{@search.search_text}/i}
       ).asc(:title)

@@ -21,9 +21,9 @@ class Section
 
   has_many  :pages, :dependent => :nullify
 
-  def preview_length_or_default
-    self.preview_length || Settings.default_preview_length || 300
-  end
+  #def preview_length_or_default
+  #  self.preview_length || Settings.default_preview_length || 300
+  #end
 
   def self.banners
     banners = []

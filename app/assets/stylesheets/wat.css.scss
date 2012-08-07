@@ -517,3 +517,26 @@ img.floating-avatar {
   background: white;
   margin-bottom: 10px;
 }
+
+#page-options {
+  display: none;
+  border: 1px solid #555;
+  border-radius: 1em;
+  padding: 10px;
+  background: white;
+  margin-bottom: 10px;
+}
+
+.online {
+
+}
+
+.expired {
+  background: #EC847D;
+  opacity: 0.5;
+}
+
+.queued {
+  background: #F6D98E;
+  opacity: 0.7;
+}

@@ -337,3 +337,6 @@ de:
   comment_deleted_msg: "Wir haben Ihren gelöschten Kommentar in das Eingabefel unten gestellt. Senden sie ihn erneut, falls er versehentlich gelöscht wurde."
   repost_comment: Erneut senden
   section_and_banner: Abschnitt und Banner
+  other_options: Sonstige Einstellungen
+  publish_on_hint: "&nbsp;Nicht anhacken wenn immer veröffentlicht oder Hacken setzen und Datum angeben"
+  expire_on_hint: "&nbsp;Nicht anhacken wenn Eintrag nicht abläuft oder Hacken setzen und Datum angeben"
