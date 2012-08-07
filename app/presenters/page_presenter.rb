@@ -19,7 +19,7 @@ class PagePresenter < BasePresenter
       interpret( _body_snippet || translate_link )
     elsif _body_snippet
       _txt = ""
-      _txt = tile if Settings.supress_page_title == true
+      _txt = title if Settings.supress_page_title == true
       _txt += strip_tags _body_snippet
       _txt += "<div class='clear-both'></div>"
       _txt.html_safe
