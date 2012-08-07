@@ -8,7 +8,5 @@ class HomeController < ApplicationController
       @hero = Page.online.where(_id: 'hero').first
       @features = Page.online.where(permalink: /^\@/)
     end
-
-    
   end
 end

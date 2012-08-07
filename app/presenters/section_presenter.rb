@@ -10,8 +10,9 @@ class SectionPresenter < BasePresenter
   end
 
   def page_links
+    range = can_read?('Admin', 'Maintainer') ? section.pages : section.pages.online
     rc = "<ul class='nav nav-pills'>"
-      section.pages.only(:title).each do |page|
+      range.only(:title).each do |page|
         rc += "<li>" + link_to(page.title,page) + "</li>"
       end
     rc += "</ul>"

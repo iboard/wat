@@ -1,9 +1,10 @@
 .row
   - Section.all.each do |section|
-    -if section.pages.any?
+    - _range = can_read?('Admin', 'Maintainer') ? section.pages : section.pages.online
+    -if _range.any?
       .span2
         %h1=section.title
         %ul
-          - section.pages.each do |page|
+          - _range.each do |page|
             %li=link_to page.title, page
       

@@ -8,13 +8,18 @@ class PagesController < ApplicationController
 
   def index
     @pages ||= permitted_pages
+    redirect_to signin_path, alert: t(:you_need_to_sign_in) unless @pages && @pages.any?
   end
   
   def show
     begin
       @page = permitted_pages.find(params[:id])
     rescue => e
-      @page = nil
+      if Page.find(params[:id])
+        redirect_to signin_path, alert: t(:you_need_to_sign_in)
+      else
+        raise e
+      end
     end
   end
 
