@@ -21,11 +21,6 @@
           =render 'pages/page_menu', page: @hero
           - present @hero do |hero|
             = hero.body.html_safe
-    - else
-      .alert.alert-error
-        %i.icon-warning-sign
-        %h1
-          Please create a page with permalink 'hero' which will be displayed here.
 
 - @features.to_a.in_groups_of( _columns=(Settings.columns_startpage||2) ) do |row|
   .row-fluid

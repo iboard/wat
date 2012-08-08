@@ -28,39 +28,45 @@ class Page
 
   field  :publish_at, type: Time
   field  :expire_at, type: Time
+  field  :is_online, type: Boolean, default: true
 
   before_validation :remove_banner?
   before_validation :generate_sorting_id
   before_validation :set_dates
+  before_save :set_is_online
 
 
   # SCOPES
 
-  default_scope -> { asc(:position) }
+  default_scope  -> { asc(:position) }
+  scope :online, -> { where(is_online: true) }
+  scope :offline,-> { where(is_online: false) }
 
-  def self.published
+  scope :published,-> {
     any_of( {:publish_at.lte => Time.now},{publish_at: nil} ).only(:_id,:permalink)
-  end
+  }
 
-  def self.will_publish
+  scope :will_publish,-> {
     where( :publish_at.gt => Time.now ).only(:_id).only(:_id,:permalink)
-  end
+  }
 
-  def self.expired
+  scope :expired,-> {
     where( :expire_at.lte => Time.now, :expire_at.ne => nil ).only(:_id,:permalink)
-  end
+  }
 
-  def self.will_expire
+  scope :will_expire,-> {
     where( :expire_at.gt => Time.now, :expire_at.ne => nil ).only(:_id,:permalink)
+  }
+
+  scope :with_banner,-> {
+    excludes( banner: nil).excludes( :'banner.banner_file_size' => nil ).desc(:updated_at)
+  }
+
+  def self.permitted(is_admin)  
+    is_admin ? unscoped : where(:is_online => true)
   end
 
-  def self.online
-    any_in( :_id => (published - expired).map(&:_id) )
-  end
-
-  def self.with_banner 
-    self.excludes( banner: nil).excludes( :'banner.banner_file_size' => nil ).desc(:updated_at)
-  end
+  # FLAGS & STATE
 
   def is_hero?
     permalink == 'hero'
@@ -147,6 +153,7 @@ private
   def set_dates
     set_publish_dates
     set_expire_dates
+    true
   end
 
   def set_publish_dates
@@ -155,6 +162,7 @@ private
     elsif @use_publish_at == "0"
       self.publish_at = nil
     end
+    true
   end
 
   def set_expire_dates
@@ -163,5 +171,12 @@ private
     elsif @use_expire_at == "0"
       self.expire_at = nil
     end
+    true
+  end
+
+  def set_is_online
+    self.is_online = (self.expire_at == nil || self.expire_at > Time.now)  &&
+                     (self.publish_at == nil || self.publish_at <= Time.now)
+    true
   end
 end

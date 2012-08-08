@@ -55,10 +55,10 @@ describe ApplicationController do
         page.should have_content "This is the hero"
       end
 
-      it "shows a message to create the hero-page if not exists" do
+      it "no longer shows a message to create the hero-page if not exists" do
         Page.delete_all
         visit root_path
-        page.should have_content "Please create a page with permalink 'hero' which will be displayed here."
+        page.should_not have_content "Please create a page with permalink 'hero' which will be displayed here."
       end
 
       it "shows pages prefixed by @" do

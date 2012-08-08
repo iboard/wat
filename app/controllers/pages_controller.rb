@@ -8,7 +8,7 @@ class PagesController < ApplicationController
 
   def index
     @pages ||= permitted_pages
-    redirect_to signin_path, alert: t(:you_need_to_sign_in) unless @pages && @pages.any?
+    redirect_to signin_path, alert: t(:you_need_to_sign_in) if !@pages
   end
   
   def show
@@ -106,10 +106,6 @@ class PagesController < ApplicationController
 
 private
 
-  def permitted_pages
-    can_read?('Admin', 'Maintainer') ? Page.all : Page.online
-  end
-
   def parse_search_param
     if params[:search].present?
       _p = params[:search].is_a?(String) ? JSON.parse( params[:search] ) : params[:search]
@@ -117,10 +113,14 @@ private
       @pages = permitted_pages.any_of(
         {title: /#{@search.search_text}/i}, 
         {body: /#{@search.search_text}/i}
-      ).asc(:title)
+    )
     else
       @search = Search.new search_text: '', search_controller: 'pages'
     end
-  end      
+  end
+
+  def permitted_pages
+    can_read?('Admin', 'Maintainer') ? Page.unscoped : Page.online
+  end
 
 end

@@ -89,6 +89,10 @@ describe Page do
       Page.online.map(&:permalink).sort.should == ['always','in range','published','will expire']
     end
 
+    it "offline - lists pages off boundaries" do
+      Page.offline.map(&:permalink).sort.should == ["expired", "to early", "to late", "will publish"]
+    end
+
   end
 
 end

@@ -13,7 +13,7 @@ describe ApplicationController do
     visit switch_language_path(:en)
     page.should have_css "#search_search_text"
     fill_in "search_search_text", with: "Body One"
-    page.should have_content "Page ONE"
+    wait_until { page.has_content?("Page ONE") }
     page.should have_no_content "Page TWO"
   end
 
