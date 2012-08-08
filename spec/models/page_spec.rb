@@ -93,6 +93,44 @@ describe Page do
       Page.offline.map(&:permalink).sort.should == ["expired", "to early", "to late", "will publish"]
     end
 
+  describe "supports versioning" do
+    before(:each) do
+      Page.delete_all
+    end
+
+    it "stores two versions and each can be fetched individually" do
+      page = Page.create permalink: 'verions', title: 'I have versions', body: "This is Version One"
+      page.body = "This is Version Two"
+      page.title = "I have two versions"
+      page.save!
+      page.body.should == "This is Version Two"
+      page.version.should == 2
+      page.get_version_of_fields(0,:en,:body).should == "This is Version One"
+      page.get_version_of_fields(0,:en,:title,:body).should == ['I have versions', 'This is Version One']
+    end
+
+    it "drops version greater 5" do
+      _page = Page.create permalink: 'verions', title: 'Version 1', body: "This is Version 1"
+      9.times do |n|
+        _page.title = "Version #{n+2}"
+        _page.body  = "This is Version #{n+2}"
+        _page.save
+      end
+      
+      _page.version.should == 10
+      _page.title.should == 'Version 10'
+      
+      [4,3,2,1,0].each do |n|
+        _version = _page.get_version_of_fields(n,:en, :title, :body)
+        _version.should == ["Version #{5+n}", "This is Version #{5+n}"]
+      end
+
+      _page.get_version_of_fields(0,:en,:title).should == 'Version 5'
+      _page.get_version_of_fields(4,:en,:title).should == 'Version 9'
+      expect { _page.get_version_of_fields(5,:en,:title) }.should raise_error(Versions::VersionError)
+    end
+  end
+
   end
 
 end

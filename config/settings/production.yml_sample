@@ -39,3 +39,9 @@ developer_mail_address: "developer@example.com"
 # will scroll to the caption of the banner - :page_banner_offset
 # 
 # page_banner_offset: 20
+
+
+# OTHER PLACES WHERE YOU CAN MODIFY WAT's BEHAVIOR
+#
+# rails_config.rb (several constants)
+# model/page.rb (max_versions)
