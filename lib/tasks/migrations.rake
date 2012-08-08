@@ -1,7 +1,7 @@
 namespace :migrations do
 
   desc "Modify data between versions > August 8, 2012 "
-  task :localize_banner_fields do
+  task :localize_banner_fields => :environment do
     Page.all.each do |page|
       page.versionless do |_page|
         _old_title = _page.banner_title_translations
