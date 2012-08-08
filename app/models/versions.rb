@@ -19,6 +19,10 @@ module Versions
   def self.included(base)
     base.class_eval do
 
+      def available_versions
+        self.versions.map(&:version) + [self.version]
+      end
+
       def get_version_of_fields(version,locale,*fields)
         if fields.count == 1
           get_version_of_field(version,locale,fields.first)

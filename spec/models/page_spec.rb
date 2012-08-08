@@ -129,6 +129,31 @@ describe Page do
       _page.get_version_of_fields(4,:en,:title).should == 'Version 9'
       expect { _page.get_version_of_fields(5,:en,:title) }.should raise_error(Versions::VersionError)
     end
+
+    describe "wraps an object in class Version" do 
+
+      before(:each) do
+        @page = Page.create permalink: 'verions', title: 'I have versions', body: "This is Version One"
+        @page.update_attributes title: 'More Versions', body: "This is the second Version" 
+      end
+
+      it "lists available versions" do
+        @page.available_versions.should == [1,2]
+      end
+      
+      it "raises an error if initialized with unavailable version" do
+        expect { Version.new(@page,4,:en) }.should raise_error(Versions::VersionError)
+      end
+      
+      it "delegates request of fields to the specified version" do
+        old_page     = Version.new(@page,1,:en)
+        current_page = Version.new(@page,2,:en)
+
+        current_page.title.should == 'More Versions'
+        old_page.title.should == 'I have versions'
+      end
+      
+    end
   end
 
   end
