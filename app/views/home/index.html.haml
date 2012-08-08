@@ -6,7 +6,7 @@
       #slides.carousel.slide
         - first_item = true
         .carousel-inner
-          - (_banner_pages=Page.with_banner).all.each do |page|
+          - (_banner_pages= (can_read?('Admin', 'Maintainer') ? Page.with_banner : Page.with_banner.online)).all.each do |page|
             %div{class: "banner #{first_item ? 'active item' : 'item'}"}
               = render 'pages/banner', banner: page.banner
             - first_item = false

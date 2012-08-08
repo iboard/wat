@@ -214,9 +214,24 @@ img.avatar {
   padding-left: 2px;
 }
 
-@media (max-width: 480px) {
-  
+.banner, #banner {
+  min-width: 100%;
+  padding: 0px;
+  margin: 0px;
+  margin-top: 10px;
+  overflow: hidden;
+  a {
+    img {
+      width: 100%;
+      border-radius: 15px 15px 15px 15px;
+    }
+  }
+  img {
+    width: 100%;
+    border-radius: 15px 15px 15px 15px;
+  }
 }
+
 
 @media (max-width: 767px) {
   body {
@@ -300,25 +315,26 @@ img.avatar {
 
 }
 
-.banner {
-  min-width: 100%;
-  padding: 0px;
-  margin: 0px;
-  margin-top: 10px;
-  overflow: hidden;
-  a {
+@media (max-width: 480px) {
+  .banner, #banner {
+    min-width: 100%;
+    padding: 0px;
+    margin: 0px;
+    margin-top: 10px;
+    overflow: hidden;
+    a {
+      img {
+        width: 100%;
+        border-radius: 15px 15px 0px 0px;
+      }
+    }
     img {
       width: 100%;
-      border-radius: 15px 15px 15px 15px;
-      box-shadow: 3px 3px 5px #444;
+      border-radius: 15px 15px 0px 0px;
     }
   }
-  img {
-    width: 100%;
-    border-radius: 15px 15px 15px 15px;
-    box-shadow: 3px 3px 5px #444;
-  }
 }
+
 
 .banner-preview {
   border-radius: 5px;
@@ -329,11 +345,11 @@ img.avatar {
 }
 
 .carousel-caption {
+  opacity: 0.7;
   border-radius: 0px 0px 15px 15px;
   a {
     color: white;
   }
-  overflow: hidden;
 }
 
 .search-query {
