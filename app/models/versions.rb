@@ -35,6 +35,33 @@ module Versions
         end
       end
 
+      def restore_version(_new_current_version)
+        _update_hash = {}
+        self.attributes.reject{|k,v| %w(_id banner versions position).include?(k)}.each do |key, value|
+          _new_value = _new_current_version.version.send(key.to_sym)
+          if self.class.localized_fields.include?(key)
+            _new_value = _new_current_version.send(key.to_sym)
+            if _new_value
+              begin
+                _update_hash[key.to_sym] = eval(_new_value)
+              rescue SyntaxError
+                puts "CAN NOT INTERPRET #{_new_value.inspect}"
+              rescue => e
+                _update_hash[key.to_sym] = _new_value
+              end
+            else
+              _update_hash[key.to_sym] = nil
+            end
+          else
+            _update_hash[key.to_sym] = _new_value
+          end
+        end
+        Rails.logger.warn "RESTORE VERSION #{_new_current_version.version.version}: UPDATE_HASH=#{_update_hash.inspect}"
+        self.update_attributes(_update_hash)
+      end
+
+
+
       private
       def get_version_of_field(version,locale,field)
         _version = eval self.versions[version].send(field.to_sym)

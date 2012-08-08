@@ -1,0 +1,19 @@
+- if presenter.vpage 
+  %article
+    - unless Settings.supress_page_title == true
+      - if presenter.vpage.banner && (presenter.vpage.banner.linked_url != '#')
+        %h1=link_to presenter.title, presenter.vpage.banner.linked_url
+      - else
+        %h1=presenter.title
+    - if presenter.latest_version?
+      =  render 'pages_menu'
+    - elsif presenter.vpage.section.present?
+      .label.label-warning.section-label=presenter.vpage.section.title
+      %br/
+    .content= presenter.body
+    
+    - if presenter.vpage.is_commentable
+      .comments-block{id: "comments-for-#{presenter.page._id}"}
+        = render 'comments/comments_preview', commentable: presenter.page
+- else
+  .alert.alert-error= t(:page_not_found)

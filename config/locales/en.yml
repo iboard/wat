@@ -337,3 +337,12 @@ en:
   other_options: Other options
   publish_on_hint: "&nbsp;Do not check if always publish or check and set date"
   expire_on_hint: "&nbsp;Do not check if never expires or check and set date"
+  this_version_has_no_translation_of: "This verion of the document has no translation of %{lang}"
+  versions_of_this_document: "Available versions of this document"
+  file_not_found: "File '%{file}' not found"
+  pictures_not_versionized: "Pictures of old versions are not saved"
+  filename_of_version_was: "The filename of this version was"
+  unknown: unknown
+  restore_version: "Restore version #%{version}"
+  version_restored: "Version #%{version} restored. Please note: Banner-files are not restored and sorting stays untouched"
+  current_version: Current version

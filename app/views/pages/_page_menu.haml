@@ -18,7 +18,7 @@
     - if page.section
       %ul.nav.pull-left
         %li
-          %label.label.section-label= page.section.title
+          %label.label.section-label= defined?(section_label) ? section_label : page.section.title
   .clear-both
   
   

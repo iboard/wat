@@ -70,6 +70,9 @@ Wat::Application.routes.draw do
       get  'sort' => :sort
       post 'update_sort' => :update_sort
     end
+    member do
+      get 'restore_version/:version' => :restore_version, :as => 'restore_version'
+    end
     resources :comments
   end
 

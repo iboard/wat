@@ -5,6 +5,7 @@ class PagesController < ApplicationController
   before_filter :parse_search_param, only: [:index]
   _allow_index_actions = Settings.supress_global_search != true ? [:show, :index] : [:show]
   before_filter :authenticate_user!, except: _allow_index_actions
+  before_filter :authenticate_admin!, except: [:index, :show]
 
   def index
     @pages ||= permitted_pages
@@ -97,11 +98,18 @@ class PagesController < ApplicationController
 
   def update_sort
     params[:ordered_pages].each_with_index do |sid,idx|
-      _page = Page.where(sorting_id: sid).first
-      _page.position = idx
-      _page.save!
+      Page.where(sorting_id: sid).first.versionless do |_page|
+        _page.update_attributes position: idx
+      end
     end
     render :nothing => true
+  end
+
+  def restore_version
+    @page = Page.find(params[:id])
+    v = Version.new(@page,params[:version].to_i,I18n.locale)
+    @page.restore_version(v)
+    redirect_to @page, notice: t(:version_restored, version: params[:version])
   end
 
 private

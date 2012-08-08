@@ -24,8 +24,8 @@ class Page
   belongs_to :section
   embeds_one :banner, :cascade_callbacks => true
   accepts_nested_attributes_for :banner
-  field  :banner_title
-  field  :banner_text
+  field  :banner_title, :localize => true
+  field  :banner_text, :localize => true
   field  :banner_text_position, default: 'right'
 
   field  :publish_at, type: Time
@@ -38,6 +38,9 @@ class Page
   before_save :set_is_online
 
   max_versions 5
+  def self.localized_fields
+    %w(title body banner_title banner_text)
+  end
 
   # SCOPES
 

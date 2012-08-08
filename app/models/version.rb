@@ -17,8 +17,16 @@ class Version
     if current_version
       object.send(*args, &block)
     else
-      _field = eval version.send(args.first.to_sym)
-      _field[locale.to_s]
+      begin
+        begin
+          _field = eval( version.send(args.first.to_sym) )
+          _field[locale.to_s]
+        rescue SyntaxError => e
+          Rails.logger.warning(e.inspect)
+        end
+      rescue
+        _field = version.send(args.first.to_sym)
+      end
     end
   end
 

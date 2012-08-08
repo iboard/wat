@@ -46,7 +46,7 @@ describe PagesController do
       _usr.facilities.find_or_create_by( name: 'Admin', access: 'rwx' )
       _usr.email_confirmed_at = Time.now
       _usr.save!
-      visit switch_language_path(:en) if Settings.multilanguage == true
+      visit switch_language_path(:en) if Settings.multilanguage != false
       visit page_path(@page)
     end
 
@@ -113,40 +113,6 @@ describe PagesController do
       visit sort_pages_path
       page.should have_content "You need to sign in for access to this page"
       page.should_not have_content "Sort pages"
-    end
-
-    describe "Translations" do
-
-      before(:each) do
-        visit switch_language_path(:en)
-        click_link "Create page"
-        fill_in "page_permalink", with: "what we eat"
-        fill_in "page_title", with: "Fish'n'Chips"
-        fill_in "page_body", with: "ugly!"
-        click_button "Save page"
-      end
-      
-      it "displays translation-links after create" do
-        page.should have_link "Translate for 'de'"
-        page.should have_link "read"
-      end
-
-      it "lets read the available translation" do
-        visit page_path(Page.find('what-we-eat'))
-        click_link "read"
-        page.should have_content "Fish'n'Chips"
-      end
-  
-      it "lets the author edit the missing translation" do
-        visit page_path(Page.find('what-we-eat'))
-        click_link "Translate for 'de'"
-        fill_in "page_title", with: "A Gulasch und a Bier"
-        fill_in "page_body", with: "Guaaaat!"
-        click_button "Seite speichern"
-        page.should have_content "Guaaaat!"
-        switch_language_path('en')
-      end
-      
     end
 
     it "see the destroy-button" do
@@ -238,6 +204,73 @@ describe PagesController do
       page.should have_content "You catched me!"
       page.should_not have_content "Ruby Is Hero"
     end
+
+    describe "Translations" do
+
+      before(:each) do
+        visit switch_language_path(:en)
+        click_link "Create page"
+        fill_in "page_permalink", with: "what we eat"
+        fill_in "page_title", with: "Fish'n'Chips"
+        fill_in "page_body", with: "ugly!"
+        click_button "Save page"
+      end
+      
+      it "displays translation-links after create" do
+        page.should have_link "Translate for 'de'"
+        page.should have_link "read"
+      end
+
+      it "lets read the available translation" do
+        visit page_path(Page.find('what-we-eat'))
+        click_link "read"
+        page.should have_content "Fish'n'Chips"
+      end
+  
+      it "lets the author edit the missing translation" do
+        visit page_path(Page.find('what-we-eat'))
+        click_link "Translate for 'de'"
+        fill_in "page_title", with: "A Gulasch und a Bier"
+        fill_in "page_body", with: "Guaaaat!"
+        click_button "Seite speichern"
+        page.should have_content "Guaaaat!"
+        switch_language_path('en')
+      end     
+    end
+
+    describe "manage versions" do
+
+      it "creates versions on save but hides versions from non-admins" do
+        _page = Page.create(permalink: 'testversions', title: 'Initial Version', body: 'Initial Body')
+        visit edit_page_path(_page)
+        fill_in "page_title", with: "This is the new version"
+        fill_in "page_body", with: "A modified Body"
+        click_button "Save page"
+        _page.reload
+        visit page_path(_page)
+        page.should have_content "Available versions of this document"
+        page.should have_link "#{Time.now.strftime('%Y-%m-%d %H:%M')}less than a minute agoThis is the new version"
+        page.should have_link "#{Time.now.strftime('%Y-%m-%d %H:%M')}less than a minute agoInitial Version"
+
+        visit signout_path
+        visit page_path(_page)
+        page.should_not have_content "Available versions of this document"
+        page.should_not have_link "#{Time.now.strftime('%Y-%m-%d %H:%M')}less than a minute agoThis is the new version"
+        page.should_not have_link "#{Time.now.strftime('%Y-%m-%d %H:%M')}less than a minute agoInitial Version"
+
+      end
+
+      it "can restore older version" do
+        _page = Page.create( permalink: 'test page one', title: 'Test Page 1', body: 'initial body', banner_title: 'first banner', banner_text: 'first banner text')
+        _page.update_attributes( title: 'Test Page 2')
+        _page.save
+        visit page_path(_page)
+        page.all("h1",:text =>"Test Page 2").first.should_not be_nil
+        click_link "Restore version #1"
+        page.all("h1",:text =>"Test Page 1").first.should_not be_nil
+      end
+
+    end
   end
 
   describe "Supports pages in sections" do
@@ -286,7 +319,7 @@ describe PagesController do
   end
 
   describe "Timed limitation for non-admins" do
-     before(:each) do
+    before(:each) do
       Page.delete_all
       Page.create(permalink: 'always', title: 'Always online')
       Page.create(permalink: 'published', title: 'Published', publish_at: Time.now-1.day)

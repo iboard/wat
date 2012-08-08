@@ -1,32 +1,24 @@
-- title @page.title
 - present @page do |presenter|
-  - if @page.banner && @page.banner.banner.exists?
+
+  - title @page.title
+
+  - if presenter.vpage.banner
     #scroll-to{ :"data-offset" => Settings.page_banner_offset||200}
     .row-fluid
-      - if @page.banner
-        #banner.banner.carousel= render 'banner', banner: @page.banner
-
+      #banner.banner.carousel= render 'banner', banner: presenter.vpage.banner
       .clear-both
       %br/
-  - if @page.section
-    = render 'section_subnav', section: @page.section
+
+  - if presenter.vpage.section
+    = render 'section_subnav', section: presenter.vpage.section
+  
+  - unless presenter.version_links.nil?
+    .alert.alert-info
+      = presenter.version_links
 
   .row-fluid
-    - if @page 
-      %article
-        - unless Settings.supress_page_title == true
-          - if @page.banner && (@page.banner.linked_url != '#')
-            %h1=link_to presenter.title, @page.banner.linked_url
-          - else
-            %h1=presenter.title
-        = render 'pages_menu'
-        .content= presenter.body
-        - if @page.is_commentable
-          .comments-block{id: "comments-for-#{@page.to_param}"}
-            = render 'comments/comments_preview', commentable: @page
-    - else
-      .alert.alert-error= t(:page_not_found)
+    = render 'article', presenter: presenter
 
-- unless Settings.multilanguage == false
-  .row-fluid
-    = render 'translations', page: @page   
+  - unless Settings.multilanguage == false
+    .row-fluid
+      = render 'translations', page: presenter.vpage   
