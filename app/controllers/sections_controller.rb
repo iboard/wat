@@ -44,7 +44,11 @@ class SectionsController < ApplicationController
   
   def show
     @section = Section.find(params[:id])
-    redirect_to @section.pages.first || root_path
+    if can_read?('Admin', 'Maintainer')
+      redirect_to @section.pages.first || root_path
+    else
+      redirect_to @section.pages.online.first || root_path
+    end
   end
 
   def sort

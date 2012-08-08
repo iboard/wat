@@ -1,6 +1,7 @@
 - if section.pages.count > 1
   .subnav
     %ul{class: "nav nav-pills section-menu #{section._id}"}
-      - section.pages.only(:title).each do |page|
+      - _pages = can_read?('Admin','Maintainer') ? section.pages : section.pages.online
+      - _pages.only(:title).each do |page|
         %li{class: page == @page ? 'active' : 'inactive'}=link_to page.title, page, id: "link_to_#{page.id}"
   %hr/
