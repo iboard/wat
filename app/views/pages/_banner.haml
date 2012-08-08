@@ -1,20 +1,20 @@
-- if banner.banner.path && File.exists?(banner.banner.path)
-  = link_to( image_tag(banner.banner.url(:large)), banner.page)
+- if page.banner.banner.try(:path) && File.exists?(page.banner.banner.path)
+  = link_to( image_tag(page.banner.banner.url(:large)), page_path(page,version: page.version))
 - else
   .div
     .alert.alert-info
       %h1= t(:pictures_not_versionized)
       %h2= t(:filename_of_version_was)
-      = link_to( t(:file_not_found, file: banner.banner.path ? File.basename(banner.banner.path) : t(:unkown)), banner.page) 
+      = link_to( t(:file_not_found, file: page.banner.banner.path ? File.basename(page.banner.banner.path) : t(:unkown)), page_path(page,version: page.version)) 
       %p &nbsp;
       %p &nbsp;
       %p &nbsp;
       %p &nbsp;
       %p &nbsp;
-%div{class: "carousel-caption layout-#{banner.page.banner_text_position || 'right'}"}
-  - if banner.linked_url != '#'
-    %h2.white-link=link_to banner.page.banner_title||banner.page.title, banner.linked_url, target: :blank
+%div{class: "carousel-caption layout-#{page.banner_text_position || 'right'}"}
+  - if page.banner.linked_url != '#'
+    %h2.white-link=link_to page.banner_title||page.title, page.banner.linked_url, target: :blank
   - else
-    %h2.white-link=banner.page.banner_title||banner.page.title
-  %p=(banner.page.banner_text||'').html_safe
+    %h2.white-link=page.banner_title||page.title
+  %p=(page.banner_text||'').html_safe
 

@@ -8,7 +8,7 @@
         .carousel-inner
           - (_banner_pages= (can_read?('Admin', 'Maintainer') ? Page.with_banner : Page.with_banner.online)).all.each do |page|
             %div{class: "banner #{first_item ? 'active item' : 'item'}"}
-              = render 'pages/banner', banner: page.banner
+              = render 'pages/banner', page: page
             - first_item = false
         - if _banner_pages.count > 1
           .carousel-control.left= link_to "&lsaquo;".html_safe, "#slides", "data-slide"=>"prev"

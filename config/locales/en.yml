@@ -346,3 +346,4 @@ en:
   restore_version: "Restore version #%{version}"
   version_restored: "Version #%{version} restored. Please note: Banner-files are not restored and sorting stays untouched"
   current_version: Current version
+  version_number: "Version #%{version}"

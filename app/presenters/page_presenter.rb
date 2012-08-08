@@ -78,14 +78,16 @@ private
 
   def restore_link(v)
     return "PREVERSION" unless v
-    if v != page.version
+    if v != page.version && v != params[:version].to_i
       button_link_to( 'icon-repeat icon-white', 'btn btn-danger btn-mini span2', 
         t(:restore_version, version: v), restore_version_page_path(page,v), confirm: t(:are_you_sure)
       )
-    else
+    elsif v == page.version 
       button_link_to( 'icon-asterisk', 'btn btn-success btn-mini span2', 
         t(:current_version), page
       )
+    else
+      button_link_to( 'icon-cog', 'btn btn-mini span2', t(:version_number, version: v), page_path(page,version: v) )
     end
   end
 

@@ -5,7 +5,7 @@
   - if presenter.vpage.banner
     #scroll-to{ :"data-offset" => Settings.page_banner_offset||200}
     .row-fluid
-      #banner.banner.carousel= render 'banner', banner: presenter.vpage.banner
+      #banner.banner.carousel= render 'banner', page: presenter.vpage
       .clear-both
       %br/
 

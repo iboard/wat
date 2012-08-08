@@ -349,3 +349,4 @@ de:
   restore_version: "Version #%{version} wiederherstellen. Beachten Sie bitte, dass die Banner-Datei nicht wiederhergestellt werden kann und die Sortierung unverändert bleibt."
   version_restored: "Version #%{version} wurde wiederhergestellt"
   current_version: Aktuelle Version
+  version_number: "Version #%{version}"
