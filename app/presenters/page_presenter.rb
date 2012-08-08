@@ -77,6 +77,7 @@ private
   end
 
   def restore_link(v)
+    return "PREVERSION" unless v
     if v != page.version
       button_link_to( 'icon-repeat icon-white', 'btn btn-danger btn-mini span2', 
         t(:restore_version, version: v), restore_version_page_path(page,v), confirm: t(:are_you_sure)
@@ -89,6 +90,7 @@ private
   end
 
   def link_to_version(v)
+    return "PREVERSION" unless v
     _vpage = Version.new(page,v,I18n.locale.to_sym)
     (
       "<li class=\"row-fluid #{ v == version ? 'label label-info current-version' : 'label label-message'}\">" +
