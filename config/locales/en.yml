@@ -340,10 +340,12 @@ en:
   this_version_has_no_translation_of: "This verion of the document has no translation of %{lang}"
   versions_of_this_document: "Available versions of this document"
   file_not_found: "File '%{file}' not found"
-  pictures_not_versionized: "Pictures of old versions are not saved"
-  filename_of_version_was: "The filename of this version was"
+  pictures_not_versionized: "Pictures of old versions are not saved. Below you see the banner of the current version"
+  filename_of_version_was: "The filename of this version was %{filename}"
   unknown: unknown
   restore_version: "Restore version #%{version}"
   version_restored: "Version #%{version} restored. Please note: Banner-files are not restored and sorting stays untouched"
   current_version: Current version
   version_number: "Version #%{version}"
+  show_version_number: "Show version #%{version}"
+  no_image_in_this_version: "This version had no image attached"

@@ -1,20 +1,14 @@
-- if page.banner.banner.try(:path) && File.exists?(page.banner.banner.path)
-  = link_to( image_tag(page.banner.banner.url(:large)), page_path(page,version: page.version))
-- else
-  .div
-    .alert.alert-info
-      %h1= t(:pictures_not_versionized)
-      %h2= t(:filename_of_version_was)
-      = link_to( t(:file_not_found, file: page.banner.banner.path ? File.basename(page.banner.banner.path) : t(:unkown)), page_path(page,version: page.version)) 
-      %p &nbsp;
-      %p &nbsp;
-      %p &nbsp;
-      %p &nbsp;
-      %p &nbsp;
-%div{class: "carousel-caption layout-#{page.banner_text_position || 'right'}"}
-  - if page.banner.linked_url != '#'
-    %h2.white-link=link_to page.banner_title||page.title, page.banner.linked_url, target: :blank
-  - else
-    %h2.white-link=page.banner_title||page.title
-  %p=(page.banner_text||'').html_safe
+- root_version = @page||page
+- if root_version.banner.banner.try(:path) && File.exists?(root_version.banner.banner.path)
+  - _deprecated_class = root_version.banner.banner.try(:path) != page.banner.banner.try(:path) ? 'deprecated-image' : ''
+  - unless _deprecated_class.blank?
+    .alert.alert-error
+      %strong=t(:pictures_not_versionized)
+  = link_to( image_tag(root_version.banner.banner.url(:large)), page_path(page,version: page.version), class: _deprecated_class)
+  %div{class: "carousel-caption layout-#{page.banner_text_position || 'right'}"}
+    - if page.banner.linked_url != '#'
+      %h2.white-link=link_to page.banner_title||page.title, page.banner.linked_url, target: :blank
+    - else
+      %h2.white-link=page.banner_title||page.title
+    %p=(page.banner_text||'').html_safe
 

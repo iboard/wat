@@ -1,4 +1,4 @@
-- if can_execute?('Admin')
+- if can_execute?('Admin') && !params[:version].present?
   %br/
   %hr/
   %h3= t(:translations)

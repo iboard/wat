@@ -343,10 +343,12 @@ de:
   this_version_has_no_translation_of: "Für diese Version des Dokuments gibt es keine Übersetzung für %{lang}"
   versions_of_this_document: "Verfügbare Versionen dieses Dokuments"
   file_not_found: "Datei '%{file}' nicht gefunden"
-  pictures_not_versionized: "Bilder alter Versionen werden nicht gespeichert"
-  filename_of_version_was: "Der Dateiname dieser Version war"
+  pictures_not_versionized: "Bilder alter Versionen werden nicht gespeichert. Hier sehen sie das Banner der aktuellen Version"
+  filename_of_version_was: "Der Dateiname dieser Version war %{filename}"
   unknown: unbekannt
   restore_version: "Version #%{version} wiederherstellen. Beachten Sie bitte, dass die Banner-Datei nicht wiederhergestellt werden kann und die Sortierung unverändert bleibt."
   version_restored: "Version #%{version} wurde wiederhergestellt"
   current_version: Aktuelle Version
   version_number: "Version #%{version}"
+  show_version_number: "Version #%{version} anzeigen"
+  no_image_in_this_version: "Diese Version hatte kein Bild"

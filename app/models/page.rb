@@ -37,11 +37,12 @@ class Page
   before_validation :set_dates
   before_save :set_is_online
 
-  max_versions 5
-  def self.localized_fields
-    %w(title body banner_title banner_text)
+  max_versions 10
+  def self.ignore_fields_on_restore
+    %w(_id permalink banner version versions position updated_at created_at)
   end
 
+  
   # SCOPES
 
   default_scope  -> { asc(:position) }

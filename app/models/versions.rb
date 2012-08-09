@@ -5,17 +5,25 @@
 #
 module Versions
 
+  # Version exception
+
   class VersionError < RuntimeError
+
     def initialize( version, _object )
       @requested_version = version
       @version = _object.version
       @versions = _object.versions.map(&:version)
     end
+    
     def message
       "VERSION #{@requested_version} NOT FOUND: current-version: #{@version} - #available: #{@versions}"
     end
+
   end
-  
+
+
+  # Monkey-pactch the base
+
   def self.included(base)
     base.class_eval do
 
@@ -23,51 +31,56 @@ module Versions
         self.versions.map(&:version) + [self.version]
       end
 
-      def get_version_of_fields(version,locale,*fields)
-        if fields.count == 1
-          get_version_of_field(version,locale,fields.first)
-        else
-          _fields = []
-          for field in fields
-            _fields << get_version_of_field(version,locale,field)
-          end
-          _fields
-        end
-      end
-
-      def restore_version(_new_current_version)
+      def restore_version(_version)
         _update_hash = {}
-        self.attributes.reject{|k,v| %w(_id banner versions position).include?(k)}.each do |key, value|
-          _new_value = _new_current_version.version.send(key.to_sym)
-          if self.class.localized_fields.include?(key)
-            _new_value = _new_current_version.send(key.to_sym)
-            if _new_value
-              begin
-                _update_hash[key.to_sym] = eval(_new_value)
-              rescue SyntaxError
-                puts "CAN NOT INTERPRET #{_new_value.inspect}"
-              rescue => e
-                _update_hash[key.to_sym] = _new_value
-              end
-            else
-              _update_hash[key.to_sym] = nil
-            end
-          else
-            _update_hash[key.to_sym] = _new_value
-          end
+        self.attributes.reject {|k,v| self.class.ignore_fields_on_restore.include?(k)}.each do |key, value|
+          _update_hash.merge! get_restore_hash(_version,key,value)
         end
-        Rails.logger.warn "RESTORE VERSION #{_new_current_version.version.version}: UPDATE_HASH=#{_update_hash.inspect}"
         self.update_attributes(_update_hash)
       end
 
 
+    private
 
-      private
-      def get_version_of_field(version,locale,field)
-        _version = eval self.versions[version].send(field.to_sym)
-        _version[locale.to_s]
-      rescue => e
-        raise VersionError.new version, self
+      def get_restore_hash(_version, key, value)
+        _new_value = _version.send(key.to_sym)
+        _field = eval( "#{self.class}.fields[key]" )
+        if _field && _field.localized?
+          _hash_or_value = eval("_version.#{key}_translations")
+          { "#{key}_translations".to_sym => prepare_translation_hash(_hash_or_value) }
+        else
+          { key.to_sym => eval_value(_new_value) }
+        end
+
+      end
+
+      def eval_value(_new_value)
+        begin
+          eval(_new_value)
+        rescue SyntaxError
+          # NOOP
+        rescue => e
+          _new_value
+        end
+      end
+
+      # MongoId will returns a nested String as:
+      #   '{ XY => "{ en: ...., de: ....}"'
+      # XY is the current locale I18n.locale and we don't care about
+      # 1. eval the outer string to hash _temp
+      # 2. eval the value of _temp to get the hash we're looking for
+      # F*CK
+      def prepare_translation_hash(_input)
+        _temp =  _input.class == String ?  eval(_input) : _input
+        _hash = {}
+        begin
+          _hash = eval(_temp.first[1])
+        rescue SyntaxError
+          #noop
+        rescue
+          _hash = _temp
+        end
+        _hash
       end
 
     end

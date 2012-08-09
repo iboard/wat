@@ -100,34 +100,34 @@ describe Page do
 
     it "stores two versions and each can be fetched individually" do
       page = Page.create permalink: 'verions', title: 'I have versions', body: "This is Version One"
-      page.body = "This is Version Two"
       page.title = "I have two versions"
       page.save!
-      page.body.should == "This is Version Two"
+      page.title.should == "I have two versions"
       page.version.should == 2
-      page.get_version_of_fields(0,:en,:body).should == "This is Version One"
-      page.get_version_of_fields(0,:en,:title,:body).should == ['I have versions', 'This is Version One']
+      v1 = Version.new(page,1)
+      v2 = Version.new(page,2)
+      v1.title.should == "I have versions"
+      v2.title.should == "I have two versions"
     end
 
     it "drops version greater 5" do
       _page = Page.create permalink: 'verions', title: 'Version 1', body: "This is Version 1"
-      9.times do |n|
+      11.times do |n|
         _page.title = "Version #{n+2}"
         _page.body  = "This is Version #{n+2}"
         _page.save
       end
       
-      _page.version.should == 10
-      _page.title.should == 'Version 10'
+      _page.version.should == 12
+      _page.title.should == 'Version 12'
       
-      [4,3,2,1,0].each do |n|
-        _version = _page.get_version_of_fields(n,:en, :title, :body)
-        _version.should == ["Version #{5+n}", "This is Version #{5+n}"]
+      [9,8,7,6,5,4,3,2,1,0].each do |n|
+        _version = Version.new(_page,11-n)
+        [_version.title, _version.body].should == ["Version #{11-n}", "This is Version #{11-n}"]
       end
 
-      _page.get_version_of_fields(0,:en,:title).should == 'Version 5'
-      _page.get_version_of_fields(4,:en,:title).should == 'Version 9'
-      expect { _page.get_version_of_fields(5,:en,:title) }.should raise_error(Versions::VersionError)
+      expect { Version.new(_page,13) }.should raise_error(Versions::VersionError)
+      expect { Version.new(_page,1) }.should raise_error(Versions::VersionError)
     end
 
     describe "wraps an object in class Version" do 
@@ -142,12 +142,12 @@ describe Page do
       end
       
       it "raises an error if initialized with unavailable version" do
-        expect { Version.new(@page,4,:en) }.should raise_error(Versions::VersionError)
+        expect { Version.new(@page,4) }.should raise_error(Versions::VersionError)
       end
       
       it "delegates request of fields to the specified version" do
-        old_page     = Version.new(@page,1,:en)
-        current_page = Version.new(@page,2,:en)
+        old_page     = Version.new(@page,1)
+        current_page = Version.new(@page,2)
 
         current_page.title.should == 'More Versions'
         old_page.title.should == 'I have versions'

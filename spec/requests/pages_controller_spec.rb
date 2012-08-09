@@ -260,14 +260,33 @@ describe PagesController do
 
       end
 
-      it "can restore older version" do
-        _page = Page.create( permalink: 'test page one', title: 'Test Page 1', body: 'initial body', banner_title: 'first banner', banner_text: 'first banner text')
-        _page.update_attributes( title: 'Test Page 2')
-        _page.save
-        visit page_path(_page)
-        page.all("h1",:text =>"Test Page 2").first.should_not be_nil
-        click_link "Restore version #1"
-        page.all("h1",:text =>"Test Page 1").first.should_not be_nil
+      describe "can restore older version" do
+
+        before(:each) do
+          @page = Page.create( permalink: 'test page one', title: 'Test Page 1', body: 'initial body', banner_title: 'first banner', banner_text: 'first banner text')
+          @page.update_attributes( title: 'Test Page 2')
+          @page.save!
+          visit page_path(@page)
+        end
+
+        it "shows lates version by default" do
+          page.all("h1",:text =>"Test Page 2").first.should_not be_nil
+        end
+
+        it "user has to show version before restoring" do
+          click_link "Show version #1"
+          page.all("h1",:text =>"Test Page 1").first.should_not be_nil
+        end
+
+        it "can restore currently displayed version" do
+          visit restore_version_page_path(@page,1)
+          page.all("h1",:text =>"Test Page 1").first.should_not be_nil
+        
+          # Now this version should be the default
+          visit page_path(@page)
+          page.all("h1",:text =>"Test Page 1").first.should_not be_nil
+        end
+
       end
 
     end
