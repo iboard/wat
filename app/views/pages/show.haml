@@ -14,7 +14,9 @@
   
   - unless presenter.version_links.nil?
     .alert.alert-info
-      = presenter.version_links
+      = icon_link_to 'icon-chevron-right', '', t(:versions_of_this_document), '#', id: 'toggle-versions-list'
+      #version-list 
+        = presenter.version_links
 
   .row-fluid
     = render 'article', presenter: presenter

@@ -20,3 +20,8 @@ jQuery ->
     $('#toggle-page-options').click ->
       event.preventDefault()
       $("#page-options").toggle()
+
+  if $('#toggle-versions-list').length > 0
+    $('#toggle-versions-list').click ->
+      event.preventDefault()
+      $('#version-list').toggle(250)
