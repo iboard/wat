@@ -41,7 +41,7 @@ class Version
     else
       @version= @object.versions.detect { |_v| _v.version == _version }
     end
-    raise Versions::VersionError.new( _version, _object) unless @version
+    raise Versionizer::VersionError.new( _version, _object) unless @version
   end
 
   def current_version?
