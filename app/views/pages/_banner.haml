@@ -4,7 +4,8 @@
   - unless _deprecated_class.blank?
     .alert.alert-error
       %strong=t(:pictures_not_versionized)
-  = link_to( image_tag(root_version.banner.banner.url(:large)), page_path(page,version: page.version), class: _deprecated_class)
+  - _version = params[:version].present? && can_read?('Admin', 'Maintainer') ? {version: params[:version] } : {}
+  = link_to( image_tag(root_version.banner.banner.url(:large)), page_path(page._id,_version), class: _deprecated_class)
   %div{class: "carousel-caption layout-#{page.banner_text_position || 'right'}"}
     - if page.banner.linked_url != '#'
       %h2.white-link=link_to page.banner_title||page.title, page.banner.linked_url, target: :blank

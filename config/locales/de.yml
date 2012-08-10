@@ -346,8 +346,9 @@ de:
   pictures_not_versionized: "Bilder alter Versionen werden nicht gespeichert. Hier sehen sie das Banner der aktuellen Version"
   filename_of_version_was: "Der Dateiname dieser Version war %{filename}"
   unknown: unbekannt
-  restore_version: "Version #%{version} wiederherstellen. Beachten Sie bitte, dass die Banner-Datei nicht wiederhergestellt werden kann und die Sortierung unverändert bleibt."
-  version_restored: "Version #%{version} wurde wiederhergestellt"
+  restore_version: "Version #%{version} wiederherstellen"
+  version_restored: "Version #%{version} wurde wiederhergestellt. Beachten Sie bitte, dass die Banner-Datei nicht wiederhergestellt werden kann und die Sortierung unverändert bleibt."
+  version_not_restored: "Version #%{version} konnte nicht wiederhergestellt werden."
   current_version: Aktuelle Version
   version_number: "Version #%{version}"
   show_version_number: "Version #%{version} anzeigen"

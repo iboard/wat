@@ -110,7 +110,7 @@ describe Page do
       v2.title.should == "I have two versions"
     end
 
-    it "drops version greater 5" do
+    it "drops old versions" do
       _page = Page.create permalink: 'verions', title: 'Version 1', body: "This is Version 1"
       11.times do |n|
         _page.title = "Version #{n+2}"
@@ -151,6 +151,45 @@ describe Page do
 
         current_page.title.should == 'More Versions'
         old_page.title.should == 'I have versions'
+      end
+
+      describe "and handles localized and not localized fields correct" do
+        before(:each) do
+          Page.delete_all
+          @page = Page.create permalink: 'versions', title: 'Initial Title :en', body: '1st body',
+            banner: { linked_url: 'urlONE', banner: File.new(PICTURE_FILE_FIXTURE) }
+          @page.version.should == 1
+          @page.new_record?.should == false
+
+          @page.update_attributes title: "Second Title :en", body: '2nd body', banner: { linked_url: 'urlTWO'}
+          @page.version.should == 2
+        end
+
+        it "stores versions of primary locale correct" do
+          _page = Page.first
+          _page.version.should == 2
+          _page.title.should == 'Second Title :en'
+          _page.body.should  == '2nd body'
+          _page.banner.linked_url.should == 'urlTWO'
+
+          _page.update_attributes title: "Third Title :en", body: '3rd body', banner: { linked_url: 'urlTHREE'}
+          _page.version.should == 3
+        end
+
+        it "can restore previous version " do
+          v1 = Version.new(@page,1)
+          v1.version.version.should == 1
+          v1.title.should == 'Initial Title :en'
+          v1.body.should  == '1st body'
+          v1.banner.linked_url.should == 'urlONE'
+
+          v1.restore.should == true
+          
+          @page.version.should == 3
+          @page.title.should == 'Initial Title :en'
+          @page.body.should  == '1st body'
+          @page.banner.linked_url.should == 'urlONE'
+        end
       end
       
     end

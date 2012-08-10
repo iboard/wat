@@ -39,7 +39,10 @@ class Page
 
   max_versions 10
   def self.ignore_fields_on_restore
-    %w(_id permalink banner version versions position updated_at created_at)
+    %w(_id permalink attributes version versions position updated_at created_at)
+  end
+  def self.parameterize_fields
+    %w(banner)
   end
 
   

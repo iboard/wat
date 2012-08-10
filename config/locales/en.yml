@@ -345,6 +345,7 @@ en:
   unknown: unknown
   restore_version: "Restore version #%{version}"
   version_restored: "Version #%{version} restored. Please note: Banner-files are not restored and sorting stays untouched"
+  version_not_restored: "Version #%{version} COULDN'T be restored"
   current_version: Current version
   version_number: "Version #%{version}"
   show_version_number: "Show version #%{version}"

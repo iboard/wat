@@ -74,7 +74,7 @@ private
     return "PREVERSION" unless v
     _vpage = Version.new(page,v)
     (
-      "<li class=\"row-fluid #{ v == version ? 'label label-info current-version' : 'label label-message'}\">" +
+      "<li class=\"row-fluid #{ v == version ? 'current-version' : ''}\">" +
           ( 
             versionlink_format % [
               (_vpage.updated_at||Time.now).strftime('%Y-%m-%d %H:%M'), 
@@ -82,7 +82,7 @@ private
               _vpage.title||'NOT TRANSLATED YET',
               restore_link(v)
             ]
-          ) + 
+          ) +
       "</li>"
     ).html_safe
   end

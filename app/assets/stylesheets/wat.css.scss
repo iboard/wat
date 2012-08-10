@@ -563,10 +563,17 @@ ul.versions {
   li {
     margin-top: 3px;
     height: auto;
+    border-bottom: 1px solid #444;
+    padding-top: 3px;
+    padding-bottom: 2px;
   }
 }
+
 .current-version {
   font-weight: bold;
+  background: #0088AF;
+  border-radius: 1em;
+  a { color: #000; }
 }
 
 .deprecated-image {

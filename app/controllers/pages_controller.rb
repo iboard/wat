@@ -108,8 +108,11 @@ class PagesController < ApplicationController
   def restore_version
     @page = Page.find(params[:id])
     v = Version.new(@page,params[:version].to_i)
-    @page.restore_version(v)
-    redirect_to @page, notice: t(:version_restored, version: params[:version])
+    if v.restore
+      redirect_to @page, notice:  t(:version_restored, version: params[:version])
+    else
+      redirect_to @page,  alert:  t(:version_not_restored, version: params[:version])
+    end
   end
 
 private
