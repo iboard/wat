@@ -1,8 +1,9 @@
 = render 'shared/search'
-
 = render 'pages_menu'
-
-%h1= title( t(:pages))
+%h1.pull-right= title( t(:pages))
+%br/
+%hr/
+%br/
 
 #result
   =render @pages

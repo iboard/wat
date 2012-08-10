@@ -350,3 +350,4 @@ en:
   version_number: "Version #%{version}"
   show_version_number: "Show version #%{version}"
   no_image_in_this_version: "This version had no image attached"
+  edit_email_and_location: "Email & Location"

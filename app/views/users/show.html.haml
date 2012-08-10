@@ -1,10 +1,6 @@
-- top_menu do
-  .subnav
-    %ul{:class=>"nav nav-tabs"}
-      %li= ("&nbsp;"*8).html_safe
-      %li.active= link_to t(:you)
-      %li= link_to t(:edit), edit_user_path(@user)
-      %li= link_to( t(:listing_users), users_path) if can_read?('Admin')
+- content_for :top_menu do
+  %br/
+  = render 'shared/user'
     
 = render 'user', :user => @user
 

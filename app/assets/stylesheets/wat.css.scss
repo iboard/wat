@@ -195,8 +195,9 @@ img.avatar {
   font-weight: bold;
 }
 
-.subnav .nav.nav-pills {
-  background: $navbarBackground;
+
+@mixin subnav-defaults {
+  background-color:  $navbarBackground;
   border-color: #d5d5d5;
   border-width: 0 0 1px; /* drop the border on the fixed edges */
   border-radius: 5px;
@@ -212,6 +213,15 @@ img.avatar {
     text-shadow: 1px 1px 1px #000;
   }
   padding-left: 2px;
+}
+
+.subnav .nav.nav-pills {
+  @include subnav-defaults;  
+}
+
+.nav-inline {
+  @include subnav-defaults;   
+  background-color: lighter($navbarBackgroundHighlight,10%);
 }
 
 .banner, #banner {

@@ -1,0 +1,11 @@
+- if can_execute?('Admin','Maintainer')
+  - content_for :top_menu do
+    %br/
+    .subnav
+      .row-fluid
+        .span8
+          %ul.nav.nav-pills
+            %li.active= icon_link_to 'icon-user icon-white', '', t(:listing_users), users_path
+        .span4
+          %ul.nav.nav-pills
+            =render 'shared/admin_menu', active: 'users'

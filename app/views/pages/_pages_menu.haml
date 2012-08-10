@@ -1,11 +1,18 @@
-- if can_execute?('Admin')
+- if can_execute?('Admin','Maintainer')
   - content_for :top_menu do
-    .pull-right
-      %br/
-      .btn-group
-        .btn= icon_link_to 'icon-list', '', t(:listing_pages), pages_path
-        .btn= icon_link_to 'icon-indent-left', '', t(:sort_pages), sort_pages_path
-        .btn.btn-success= icon_link_to 'icon-plus-sign icon-white', '', t(:create_page), new_page_path
+    %br/
+    .subnav
+      .row-fluid
+        .span8
+          %ul.nav.nav-pills
+            %li= icon_link_to 'icon-list icon-white', '', t(:listing_pages), pages_path
+            %li= icon_link_to 'icon-indent-left icon-white', '', t(:sort_pages), sort_pages_path
+            %li= icon_link_to 'icon-plus-sign icon-white', '', t(:create_page), new_page_path
+        .span4
+          %ul.nav.nav-pills
+            =render 'shared/admin_menu', active: 'pages'
+
+
   - unless params[:action] == 'index'
     - if @page && !@page.new_record?
       = render 'pages/page_menu', page: @page

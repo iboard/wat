@@ -1,0 +1,13 @@
+- if can_execute?('Admin','Maintainer')
+  - content_for :top_menu do
+    %br/
+    .subnav
+      .row-fluid
+        .span8
+          %ul.nav.nav-pills
+            %li= icon_link_to 'icon-indent-left icon-white', '', t(:sort_sections), sort_sections_path
+            %li= icon_link_to 'icon-plus-sign icon-white', '', t(:create_section), new_section_path
+        .span4
+          %ul.nav.nav-pills
+            =render 'shared/admin_menu', active: 'sections'
+  

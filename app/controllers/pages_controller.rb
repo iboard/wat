@@ -74,7 +74,7 @@ class PagesController < ApplicationController
       redirect_to @page, :notice => t(:access_denied)
     else
       @page.delete
-      redirect_to root_path, :notice => t(:page_successfully_deleted)
+      redirect_to pages_path, :notice => t(:page_successfully_deleted)
     end
   end
 
