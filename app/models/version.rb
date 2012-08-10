@@ -1,6 +1,35 @@
 # -*- encoding : utf-8 -*-
 
 # Wraps a Mongoid::Dcoument with Mongoid::Versioning
+#
+# Example:
+# 
+#   online_version = Page.find('page-id') #=> Mongoid::Document Page
+#   online_version.version                #=> 9
+#   online_version.versions_available     #=> [8,7,6,5]
+#
+#   v6 = Version.new(online_version,6)
+#
+#   online_version.title #=> 'Current online title'
+#   v6.title             #=> 'Old title'
+#
+#   v6.restore           #=> true
+#     updates online_version-attributes with v6-attributes
+#
+#     Define the following methods in your class (here Page):
+#       max_versions 10 # see Mongoid-documentation
+#
+#       # Attributes mentioned here will not be restored
+#       def self.ignore_fields_on_restore
+#         %w(_id permalink attributes version versions position updated_at created_at)
+#       end
+#
+#       # Attributes mentioned here (mostly embedded objects) will be parameterized
+#       # in call to update_attributes on the current version.
+#       def self.parameterize_fields
+#         %w(banner)
+#       end
+#
 class Version
 
   attr_reader :object, :version, :current_version

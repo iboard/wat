@@ -4,7 +4,7 @@ class Page
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Versioning
-  include Versions
+  include Versionizer
   include Commentable
 
   key  :permalink
@@ -36,6 +36,7 @@ class Page
   before_validation :generate_sorting_id
   before_validation :set_dates
   before_save :set_is_online
+
 
   max_versions 10
   def self.ignore_fields_on_restore
