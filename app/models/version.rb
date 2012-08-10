@@ -37,8 +37,6 @@ class Version
         _field_translations = eval_localized_string(args.first)
         if args.first !~ /_translations\Z/
           _field = _field_translations[I18n.locale.to_s]
-        else
-          _field_translations
         end
       else
         version.send(*args, &block)
@@ -50,8 +48,7 @@ private
 
   def localized?(key)
     return true if key =~ /_translations\Z/
-    _field = field_type_of_key(key)
-    _field.class == Mongoid::Fields::Internal::Localized
+    field_type_of_key(key).class == Mongoid::Fields::Internal::Localized
   end
 
   def field_type_of_key(key)
@@ -68,10 +65,9 @@ private
   # @return String of the current locale eg 'english' of { en: 'english', de: 'deutsch' }
   def eval_localized_string(key)
     key = key.to_s + "_translations" unless key =~ /_translations\Z/
-    _field_translations = version.send("#{key}".to_sym)
-    _hash = eval_value(_field_translations)
-    _entry = eval_value(_hash.first)
-    eval_value(_entry[1])
+    _hash = eval_value( version.send("#{key}".to_sym) ) #=> String "{ xy => "'{ en: xxx, de: yyy }'"}"
+    _entry = eval_value(_hash.first)                    #=> Hash    { xy => "{en: xxx, de: yyy }" }
+    eval_value(_entry[1])                               #=> Hash    { en: xxx, de: yyy }
   end
 
   # We need a hash of embedded objects if the field is mentioned
@@ -79,15 +75,15 @@ private
   def parameterize(hash)
     _hash = {}
     hash.each do |k,v|
-      if object.class.parameterize_fields.include?(k.to_s)
-        _hash[k.to_sym] = attributes_to_hash(v)
-      else
-        _hash[k.to_sym] = v
-      end
+      _hash[k.to_sym] = parameterized?(k) ? attributes_to_hash(v) : v
     end
     _hash
   end
   
+  def parameterized?(key)
+    object.class.parameterize_fields.include?(key.to_s)
+  end
+
   def attributes_to_hash(v)
     _hash = {}
     v.attributes.each do |k,v|
