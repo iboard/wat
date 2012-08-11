@@ -107,7 +107,7 @@ describe UsersController do
       test_user 'New User', 'secret'
       sign_in_user name: 'New User', password: 'secret'
       click_link "Edit profile"
-      click_link "Edit"
+      click_link "Email & Location"
       fill_in "Email", with: "user1@iboard.cc"
       click_button "Save"
       last_email.to.should include('user1@iboard.cc')
@@ -153,10 +153,10 @@ describe UsersController do
       visit "/users/testuser/edit"
       page.should have_content "Location (lat,long)"
       page.should have_content "Search by address"
-      fill_in "user_location_token", with: "48.1572,14.0152"
+      fill_in "user[location_token]", with: "48.1572,14.0152"
       click_button("Save")
       page.should have_content "Your data has been updated successfully"
-      click_link "Edit"
+      click_link "Email & Location"
       assert page.find('#user_location_token').value == '48.1572,14.0152', "Location was not saved!"
     end
 
