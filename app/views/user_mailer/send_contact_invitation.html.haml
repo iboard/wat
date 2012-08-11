@@ -6,6 +6,10 @@
   user at 
   = Settings.application_name || '0.0.0.0:3000'
 
+- unless @contact_invitation.message.blank?
+  %p= @contact_invitation.message
+  %hr/
+
 %p
   If you don't have a user at 
   = Settings.application_name || '0.0.0.0:3000'
@@ -25,6 +29,10 @@
   Benutzer auf 
   = Settings.application_name || '0.0.0.0:3000' 
   zu verknüpfen.
+
+- unless @contact_invitation.message.blank?
+  %p= @contact_invitation.message
+  %hr/
 
 %p 
   Wenn Sie noch keinen Account auf 

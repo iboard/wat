@@ -4,7 +4,7 @@ if ($('#result').length > 0) {
   var _target = '.container.main'
 }
 
-$(_target).html('<br/><h1 id="search-header"><%= t(:search_results, count: @pages.count) -%>...</h1><%= link_to t(:home), root_path -%><br/><br/><%= escape_javascript( 
+$(_target).html('<BR/><span class="pull-right"><%= icon_link_to "icon-home", "", t(:home), root_path -%></span><h3 id="search-header"><%= t(:search_results, count: @pages.count) -%>...</h3><br/><br/><%= escape_javascript( 
     if @pages.any?
       render( @pages )
     else

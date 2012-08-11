@@ -20,16 +20,17 @@ describe ContactInvitation do
   end
 
   it "generates a mail to the recipient" do
-    invitation = ContactInvitation.create( sender: @user, recipient_email: 'egon.schiele@example.com' )
+    invitation = ContactInvitation.create( sender: @user, recipient_email: 'egon.schiele@example.com', message: "Lorem Ipsum my friend" )
     last_email.to.should include('egon.schiele@example.com')
     last_email.parts.first.body.should  match /#{@user.name} invites you/
     last_email.parts.first.body.should  match /#{invitation.token}/
+    last_email.parts.first.body.should  match "Lorem Ipsum my friend"
   end
 
   it "connects two users with user.accept_contact_invitation" do
     test_user "My Friend", "secret"
     friend = User.find('my-friend')
-    invitation = ContactInvitation.create( sender: @user, recipient_email: 'my.friend@example.com' )
+    invitation = ContactInvitation.create( sender: @user, recipient_email: 'my.friend@example.com')
     friend.accept_contact_invitation(invitation)
     @user.reload
     friend.reload

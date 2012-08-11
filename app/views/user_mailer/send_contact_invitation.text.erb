@@ -4,6 +4,11 @@ CONTACT INVITATION
 <%= @contact_invitation.sender.name %> invites you to connect your
 user at <%= Settings.application_name || '0.0.0.0:3000' %>.
 
+
+<% unless @contact_invitation.message.blank? %>
+  <%= @contact_invitation.message %>
+<% end %>
+
 If you don't have a user at <%= Settings.application_name || '0.0.0.0:3000' %>
 by now, you may sign up here: <%= signin_url %>
 
@@ -17,6 +22,10 @@ EINLADUNG
 <%= @contact_invitation.sender.name %> hat Sie eingeladen Ihre
 Benutzer auf <%= Settings.application_name || '0.0.0.0:3000' %>
 zu verknüpfen.
+
+<% unless @contact_invitation.message.blank? %>
+  <%= @contact_invitation.message %>
+<% end %>
 
 Wenn Sie noch keinen Account auf <%= Settings.application_name || '0.0.0.0:3000' %>
 haben, können Sie hier <%= signin_url %> einen neuen Account erstellen.

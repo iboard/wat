@@ -1,3 +1,4 @@
 = simple_form_for @contact_invitation do |f|
-  =f.input :recipient_email, as: :email
+  =f.input :recipient_email, as: :email, placeholder: 'your@friend.at'
+  =f.input :message,as: :text, input_html: { rows: 8, class: 'full-width'}, placeholder: t(:invitation_message)
   =f.button :submit, value: I18n.t(:send_invitation)

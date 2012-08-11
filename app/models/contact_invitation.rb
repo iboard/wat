@@ -6,6 +6,8 @@ class ContactInvitation
   field  :recipient_email
   validates_format_of  :recipient_email, :with => ::VALIDATE_EMAIL_REGEX, :allow_nil => false
 
+  field  :message
+
   field   :sender_id, class: BSON::ObjectId
   def sender
     User.find(self.sender_id)

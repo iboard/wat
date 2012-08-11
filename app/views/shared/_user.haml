@@ -2,8 +2,9 @@
   .row-fluid
     .span8
       %ul.nav.nav-pills
-        %li= icon_link_to 'icon-user icon-white', '', t(:you), @user
-        %li= icon_link_to 'icon-home icon-white', '', t(:edit_email_and_location), edit_user_path(@user)
+        %li= icon_link_to 'icon-user icon-white', '', t(:you), @user || user
+        %li= icon_link_to 'icon-home icon-white', '', t(:edit_email_and_location), edit_user_path(@user||user)
+        %li= icon_link_to 'icon-share icon-white','', t(:contacts), contacts_path 
         = yield(:user_menu_extras)
     - if can_read?('Admin','Maintainer')
       .span4
