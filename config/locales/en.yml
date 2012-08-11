@@ -352,3 +352,7 @@ en:
   no_image_in_this_version: "This version had no image attached"
   edit_email_and_location: "Email & Location"
   invitation_message: Append a message ...
+  message_from_user_to_count_receivers: 
+    zero: "%{sender} says, '%{message}'"
+    one: "%{sender} to %{receiver}, '%{message}'"
+    other: "%{sender} to %{count} users, '%{message}'"

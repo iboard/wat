@@ -355,3 +355,7 @@ de:
   no_image_in_this_version: "Diese Version hatte kein Bild"
   edit_email_and_location: 'E-Mail & Location'
   invitation_message: Hängen sie eine Nachricht an ...
+  message_from_user_to_count_receivers: 
+    zero: "%{sender} sagt: '%{message}'"
+    one: "%{sender} an %{receiver}: '%{message}'"
+    other: "%{sender} an %{count} andere Benutzer: '%{message}'"

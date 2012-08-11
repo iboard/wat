@@ -52,6 +52,7 @@ class User
   # Accessible Attributes
   attr_accessible :name, :email, :location_token
 
+  # Callbacks
   after_destroy :clear_identity
   
   # Add an authentication to this user
