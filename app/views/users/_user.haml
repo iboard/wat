@@ -31,5 +31,6 @@
       .span2{:id => "#{user.id.to_s}"}
         - unless user.location_token.blank?
           %div{ :class => "user-location", :value => user.location_token, :id => "location-#{user.id.to_s}"}
+    .clear-both
 
     

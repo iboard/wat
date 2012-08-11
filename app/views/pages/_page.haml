@@ -1,4 +1,4 @@
-.well{:style=> params[:controller]=='home' ? 'min-height: 200px;' : '', :class => page.date_range}
+.well{:style=> params[:controller]=='home' ? 'min-height: 200px;' : 'min-height: 165px;', :class => page.date_range}
   - if !page.title
     .alert.alert-error
       t(:page_has_no_title)
@@ -14,10 +14,10 @@
         %h2= link_to page.title, page
       - elsif Settings.supress_page_title != true
         %h2=page.title
-      %article
-        = presenter.body_snippet strip_tags(_preview)
+      %div
+        %strong= presenter.body_snippet strip_tags(_preview)
+        %br/
         = render "comments/comments_preview", commentable: page
         %br/
-      - if truncated
-        = _link
-  .clear-both
+        - if truncated
+          = _link
