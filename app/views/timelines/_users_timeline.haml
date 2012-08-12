@@ -1,6 +1,8 @@
 #timeline
   .toggle-timeline
     = link_to t(:timeline), toggle_timelines_path, remote: true
-    = link_to "<i id='timeline-display' class='#{@timeline_display} icon-white timeline-toggle'></i>".html_safe, toggle_timelines_path, remote: true                   |
+    = link_to "<i id='timeline-display' class='#{@timeline_display} icon-white timeline-toggle'></i>".html_safe, toggle_timelines_path, remote: true
+  #post-message-form
+    = render "timelines/post_message"
   #entries
     = render "timelines/events", events: Doorkeeper.events

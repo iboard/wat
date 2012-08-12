@@ -1,11 +1,15 @@
 module Doorkeeper
 
+  def self.public_timeline
+    @public_timeline ||= Timeline.find_or_create_by(name: 'doorkeeper')
+  end
+
   def self.timeline
     Timeline.find_or_create_by(name: 'doorkeeper')
   end
 
   def self.events
-    timeline.events.reverse
+    timeline.events
   end
 
   def self.login(user_id,ip='0.0.0.0')

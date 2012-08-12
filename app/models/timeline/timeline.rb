@@ -7,13 +7,14 @@ class Timeline
   validates_uniqueness_of :name
 
   embeds_many  :timeline_events
+  accepts_nested_attributes_for :timeline_events
 
   def self.find_by(options)
     where(options).first
   end
 
   def events
-    self.timeline_events
+    self.timeline_events.desc(:created_at).limit(128)
   end
 
   def since(time=nil)

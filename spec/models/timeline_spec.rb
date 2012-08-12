@@ -28,7 +28,7 @@ describe Timeline do
       event2 = @timeline.create_event( message: 'new entry')
 
       @timeline.since( Time.now-1.day ).map(&:message).should == ['new entry']
-      @timeline.since( Time.now-2.years ).map(&:message).should == ['old entry', 'new entry']
+      @timeline.since( Time.now-2.years ).map(&:message).should == ['new entry', 'old entry']
     end
 
     describe UserMessage do
@@ -53,7 +53,7 @@ describe Timeline do
       end
 
       it "formats it's output in method text()" do
-        @timeline.events.first.text.should == "Sender to 2 users, 'From Sender to Receivers'"
+        @timeline.events.first.text.should match /Sender to 2 users, 'From Sender to Receivers'/
       end
 
     end

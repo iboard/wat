@@ -94,6 +94,7 @@ Wat::Application.routes.draw do
   # Timeline and Subscriptions
   # --------------------------
   resources :timelines do
+    resources :timeline_events
     collection do
       get 'user/:id' => :user, as: :user
       get 'toggle'   => :toggle, as: :toggle

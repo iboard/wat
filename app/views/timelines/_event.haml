@@ -4,5 +4,5 @@
   - else
     .timeline-avatar
       %i.icon-comment
-  .text= event.text.html_safe
+  .text= markdown(strip_tags(sanitize(event.text)))
   .clear-both

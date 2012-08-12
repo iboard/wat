@@ -353,9 +353,9 @@ en:
   edit_email_and_location: "Email & Location"
   invitation_message: Append a message ...
   message_from_user_to_count_receivers: 
-    zero: "%{sender} says, '%{message}'"
-    one: "%{sender} to %{receiver}, '%{message}'"
-    other: "%{sender} to %{count} users, '%{message}'"
+    zero: "<em>%{time}</em>: %{sender} says, '%{message}'"
+    one: "<em>%{time}</em>: %{sender} to %{receiver}, '%{message}'"
+    other: "<em>%{time}</em>: %{sender} to %{count} users, '%{message}'"
   logged_in: 'signed in'
   logged_out: 'signed out'
   user_action_event: "%{user} %{action}, %{time} ago"
@@ -363,3 +363,5 @@ en:
   timeline: Timeline
   hide: hide
   show: show
+  post_your_message_here: 'Your public message ...'
+  message_sent: 'Message sent.'

@@ -1,3 +1,2 @@
-%center= I18n.l(Time.now, format: "%H:%M.%S")
-- events.reverse.each_with_index do |event, idx|
+- events.each_with_index do |event, idx|
   = render 'timelines/event', event: event, index: idx

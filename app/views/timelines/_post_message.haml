@@ -1,0 +1,4 @@
+#post-message-form
+  =simple_form_for [Doorkeeper::public_timeline,Doorkeeper::public_timeline.timeline_events.new()] , remote: true do |f|
+    - f.simple_fields_for :timeline_event do |e|
+      = e.input :message, as: :string, label: false, placeholder: t(:post_your_message_here), input_html: { maxlength: 140 }
