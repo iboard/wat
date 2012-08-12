@@ -22,6 +22,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    Doorkeeper::logout(session[:user_id],request.remote_addr)
     reset_session
     redirect_to root_url, :notice => t(:signed_out)
   end
@@ -52,6 +53,7 @@ private
     back_url.gsub! /[\A"|"\Z]/,''
     redirect_to back_url, :notice => t(:signed_in)
     session[:login_for_request] = nil
+    Doorkeeper::login(session[:user_id],request.remote_addr)
   end
 
   def send_confirm_mail_if_account_is_local(user,auth)

@@ -32,7 +32,10 @@ module Wat
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
-    config.autoload_paths += %W(#{config.root}/lib #{config.root}/app/models/ckeditor)
+    config.autoload_paths += %W(#{config.root}/lib 
+                                #{config.root}/app/models/ckeditor
+                                #{config.root}/app/models/timeline
+                             )
 
 
     # Only load the plugins named here, in the order given (default is alphabetical).

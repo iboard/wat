@@ -359,3 +359,10 @@ de:
     zero: "%{sender} sagt: '%{message}'"
     one: "%{sender} an %{receiver}: '%{message}'"
     other: "%{sender} an %{count} andere Benutzer: '%{message}'"
+  logged_in: 'angemeldet'
+  logged_out: 'abgemeldet'
+  user_action_event: "Vor %{time} hat sich %{user} %{action}"
+  subscriptions: "Abonnierte Timelines"
+  timeline: Timeline
+  hide: verbergen
+  show: zeigen

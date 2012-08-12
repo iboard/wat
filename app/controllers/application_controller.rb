@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :ensure_locale
+  before_filter :setup_timeline
 
   helper_method :current_user
   helper_method :user_signed_in?
@@ -116,6 +117,11 @@ private
 
   def param_to_class(param)
     param.camelize.constantize
+  end
+
+  def setup_timeline
+    session[:timeline] ||= { display: :show, timelines: :all }
+    @timeline_display = session[:timeline][:display] == :show ? 'icon-chevron-down' : 'icon-chevron-up'
   end
 
 

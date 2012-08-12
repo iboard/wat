@@ -91,5 +91,15 @@ Wat::Application.routes.draw do
   # Language support
   match '/switch_language/:locale' => 'sessions#switch_language', :as => :switch_language
 
+  # Timeline and Subscriptions
+  # --------------------------
+  resources :timelines do
+    collection do
+      get 'user/:id' => :user, as: :user
+      get 'toggle'   => :toggle, as: :toggle
+      get 'update_timeline'   => :update_timeline, as: :update_timeline
+    end
+  end
+
   
 end

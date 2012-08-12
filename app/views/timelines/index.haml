@@ -1,0 +1,9 @@
+%br/
+%h1=t(:timeline)
+
+.row-fluid
+  #events.span8
+    = render 'events', events: @events
+  .span4
+    .well
+      = render 'timeline_subscriptions', timelines: @timelines

@@ -16,5 +16,9 @@ class TimelineEvent
     message.strip
   end
 
+  def current?
+    self.created_at > Time.now-10.seconds
+  end
+
   
 end
