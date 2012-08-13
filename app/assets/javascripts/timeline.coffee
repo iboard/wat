@@ -7,6 +7,7 @@ jQuery ->
       showTimeline()
 
   self.hideTimeline = ->
+    $('#input-text').hide(150)
     $('#timeline').animate( height: '25px', 500)
     $('#timeline #events').hide()
     $('#timeline-display').attr('class','icon-chevron-up icon-white timeline-toggle')
@@ -15,13 +16,16 @@ jQuery ->
     $('#timeline #events').show()
     $('#timeline').animate( height: '300px', 500)
     $('#timeline-display').attr('class','icon-chevron-down icon-white timeline-toggle')
+    $('#input-text').show(500)
 
 
   $('#timeline-display').ready ->
     _state = $('#timeline-display').attr('class')
     if _state == "icon-chevron-down icon-white timeline-toggle"
       restartTimelineUpdater()
-      $('#timeline').animate( height: '300px', 250)
+      $('#timeline').animate( height: '300px', 200)
+      $('#input-text').show(250)
+
 
   self.restartTimelineUpdater = () ->
     $.ajax "/timelines/update_timeline",
