@@ -47,7 +47,7 @@
     .main-background
       .container.main
         - if content_for?(:top_menu)
-          %div=content_for(:top_menu)
+          =content_for(:top_menu)
         - if flash.any?
           .row-fluid
             .span12

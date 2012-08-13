@@ -311,8 +311,6 @@ img.avatar {
         color: #444;
       }
     }
-    padding-left: 90px;
-
   }
 
   .subnav-fixed .nav {
@@ -322,6 +320,10 @@ img.avatar {
     padding: 0 1px;
     padding-left: 70px;
     background: $navbarBackground;
+  }
+
+  .subnav.subnav-fixed .span8 .nav.nav-pills > li:first-child > a {
+    margin-left: 120px;
   }
 
 }
