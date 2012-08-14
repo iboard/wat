@@ -9,7 +9,7 @@ module Doorkeeper
   end
 
   def self.events
-    timeline.events
+    timeline.events.desc(:created_at)
   end
 
   def self.login(user_id,ip='0.0.0.0')
