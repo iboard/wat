@@ -314,17 +314,17 @@ img.avatar {
   }
 
   .subnav-fixed .nav {
-    width: auto;
-    margin: auto;
-    margin-top: 5px;
-    padding: 0 1px;
-    padding-left: 70px;
-    background: $navbarBackground;
+      width: auto;
+      margin: auto;
+      margin-top: 5px;
+      padding: 0 1px;
+      background-color: $navbarBackground;
   }
-
-  .subnav.subnav-fixed .span8 .nav.nav-pills > li:first-child > a {
-    margin-left: 120px;
-  }
+  
+  //.subnav-fixed .left li:first-child {
+  //  margin-left: 0px;
+  //}
+  
 
 }
 
