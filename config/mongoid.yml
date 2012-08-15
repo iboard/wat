@@ -1,13 +1,13 @@
 # -*- encoding : utf-8 -*-
 development:
-  host: localhost
+  #host: localhost
   database: wat_development
 
 test:
-  host: localhost
+  #host: localhost
   database: wat_test
 
 # set these environment variables on your prod server
 production:
-  host: localhost
+  #host: localhost
   database: wat_development

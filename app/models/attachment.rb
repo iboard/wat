@@ -51,9 +51,9 @@ private
     application_file.destroy if file && application_file
   end
 
-  # before_destroy filters doesn' work in MongoID 2.4.x
+  # before_destroy filters doesn't work in MongoID 2.4.x
   # https://github.com/mongoid/mongoid/issues/1997
-  # The allow_destroy? call is a workarround for this bug
+  # The allow_destroy? call is a workaround for this bug
   # and allows to overwrite allow_destroy? in derivations.
   def allow_destroy?
     true

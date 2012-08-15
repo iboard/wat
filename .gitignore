@@ -93,3 +93,16 @@ README.html
 public/assets/*
 public/ckeditor_assets
 public/ckeditor_assets/*
+
+
+# RubyMine IDE
+.idea/
+.idea/**/*
+.idea/.name
+.idea/.rakeTasks
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/scopes/scope_settings.xml
+.idea/vcs.xml
+.idea/wat.iml
