@@ -1,2 +1,2 @@
-- events.each_with_index do |event, idx|
-  = render 'timelines/event', event: event, index: idx
+- events.all.each_with_index do |_event, idx|
+  = render 'timelines/event', event: _event, index: idx

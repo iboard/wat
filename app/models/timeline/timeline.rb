@@ -14,7 +14,7 @@ class Timeline
   end
 
   def events
-    self.timeline_events.desc(:created_at).limit(128)
+    self.timeline_events.desc(:created_at)
   end
 
   def since(time=nil)

@@ -23,7 +23,7 @@ class TimelinesController < ApplicationController
 private
   def load_timelines
     @timelines = Timeline.all
-    @events = Timeline.first.events.limit(60)
+    @events = Doorkeeper.events.limit(60)
   end
 
 end

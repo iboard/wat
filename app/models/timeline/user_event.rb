@@ -3,12 +3,6 @@ class UserEvent < TimelineEvent
   field    :sender_id
 
   def sender
-    begin
-      @sender ||= User.find(self.sender_id)
-    rescue
-      nil
-    end
+    @sender ||= User.where(_id: self.sender_id).first if self.sender_id
   end
-
-
 end

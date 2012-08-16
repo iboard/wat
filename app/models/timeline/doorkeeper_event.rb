@@ -4,7 +4,6 @@ class DoorkeeperEvent < UserEvent
 
   field  :ip
 
-
   def text
     I18n.t( :user_action_event, 
        user: self.sender.name, 

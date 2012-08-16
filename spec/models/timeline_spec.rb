@@ -41,7 +41,7 @@ describe Timeline do
           { sender_id: @sender._id,
             receiver_ids: [@receiver1._id, @receiver2._id],
             message: "From Sender to Receivers"
-          },UserMessage 
+          }, UserMessage
         )
         @timeline.events.count.should == 1
       end
@@ -53,7 +53,7 @@ describe Timeline do
       end
 
       it "formats it's output in method text()" do
-        @timeline.events.first.text.should match /Sender to 2 users, 'From Sender to Receivers'/
+        @timeline.events.first.text.should =~ /Sender to 2 users, 'From Sender to Receivers'/
       end
 
     end

@@ -2,9 +2,11 @@
 = render 'shared/user', user: current_user
 .pull-left
   = button_link_to 'icon-envelope', 'btn btn-primary', t(:invite_contact), new_contact_path
+
 %h1.pull-right= title t(:contacts)
 %br/
 %hr/
+
 #your-contacts
   %h2= t(:your_contacts)
   %br/
@@ -13,7 +15,6 @@
   - else
     .alert.alert-info
       =t(:invate_contact_hint_if_no_contacts_exists)
-      
 
 #you-are-a-contact-of
   - if @rcontacts.any?

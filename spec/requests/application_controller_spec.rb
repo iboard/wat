@@ -23,24 +23,24 @@ describe ApplicationController do
     page.should have_no_css "#search_search_text"
   end
 
-  pending "TODO: HOWTO mock Settings? => unauthorized access to pages#index is configurable" do
-   
-    before(:each) do
-      visit signout_path
-    end
-
-    it "access is enabled by default" do
-      Settings.supress_gloabl_search=false
-      visit pages_path
-      page.should have_no_content "You need to sign in for access to this page"
-    end
-
-    it "can be set in Settings.supress_global_search" do
-      Settings.supress_gloabl_search=true
-      visit pages_path
-      page.should have_content "You need to sign in for access to this page"
-    end
-  end
+  # pending "TODO: HOWTO mock Settings? => unauthorized access to pages#index is configurable" do
+  #
+  #   before(:each) do
+  #     visit signout_path
+  #   end
+  #
+  #   it "access is enabled by default" do
+  #     Settings.supress_gloabl_search=false
+  #     visit pages_path
+  #     page.should have_no_content "You need to sign in for access to this page"
+  #   end
+  #
+  #   it "can be set in Settings.supress_global_search" do
+  #     Settings.supress_gloabl_search=true
+  #     visit pages_path
+  #     page.should have_content "You need to sign in for access to this page"
+  #   end
+  # end
 
   
 end
