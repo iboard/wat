@@ -9,12 +9,10 @@ class Timeline
   embeds_many  :timeline_events
   accepts_nested_attributes_for :timeline_events
 
+  has_many :timeline_subscriptions
+
   def self.find_by(options)
     where(options).first
-  end
-
-  def events
-    self.timeline_events.desc(:created_at)
   end
 
   def since(time=nil)

@@ -122,6 +122,10 @@ private
   def setup_timeline
     session[:timeline] ||= { display: :show, timelines: :all }
     @timeline_display = session[:timeline][:display] == :show ? 'icon-chevron-down' : 'icon-chevron-up'
+    Doorkeeper.configure do |doorkeeper|
+      doorkeeper.doorkeeper = Doorkeeper::TimelineLogger.new
+      doorkeeper.timeline.reload
+    end
   end
 
 

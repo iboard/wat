@@ -1,67 +1,68 @@
 module Doorkeeper
 
+  class DoorkeeperError < RuntimeError
+
+    def initialize( _timeline, _message='' )
+      timeline = _timeline
+      @error_message = _message
+    end
+
+    def message
+      "TimelineError #{timeline.inspect} #{@error_message}"
+    end
+
+  end
+
   DOORKEEPER_TIMELINE = 'doorkeeper'
 
-  def self.login(*args)
-    @doorkeeper.login(*args)
-  end
+  class << self
 
-  def self.logout(*args)
-    @doorkeeper.logout(*args)
-  end
+    def configure
+      yield self
+    end
 
-  def self.public_timeline
-    @doorkeeper.public_timeline
-  end
+    def doorkeeper=(_new)
+      @doorkeeper = _new
+    end
 
-  def self.timeline
-    @doorkeeper.timeline
-  end
+    def doorkeeper
+      @doorkeeper ||= TimelineLogger.new
+    end
 
-  def self.events
-    @doorkeeper.events
-  end
+    def timeline
+      doorkeeper.timeline
+    end
 
-  def self.latest_event
-    @doorkeeper.latest_event
+    def method_missing(*args, &block)
+      doorkeeper.send(*args, &block) unless args.first == "*"
+    end
   end
 
 
   class TimelineLogger
 
-    attr_reader :timeline, :public_timeline
+    attr_reader :timeline
 
     def initialize
-      @public_timeline ||= Timeline.find_or_create_by(name: DOORKEEPER_TIMELINE)
-      @timeline ||= Timeline.find_or_create_by(name: DOORKEEPER_TIMELINE)
+      @timeline = Timeline.find_or_create_by(name: DOORKEEPER_TIMELINE)
     end
 
-    def events(limit=60)
-      timeline.timeline_events.desc(:created_at).limit(limit)
+    def events(_limit=60)
+      timeline.timeline_events.limit(_limit)
     end
 
     def latest_event
-      timeline.timeline_events.desc(:created_at).first
+      timeline.timeline_events.first
     end
 
-    def clear_timeline
-      timeline.events.delete_all
-      timeline.save
+    def login(user_id, ip='0.0.0.0')
+      timeline.create_event({sender_id: user_id, message: 'logged_in', ip: ip}, DoorkeeperEvent)
     end
 
-    def login(user_id,ip='0.0.0.0')
-      event = timeline.create_event( { sender_id: user_id, message: 'logged_in', ip: ip}, DoorkeeperEvent)
-      timeline.save ? event : nil
-    end
-
-    def logout(user_id,ip='0.0.0.0')
-      event = timeline.create_event( { sender_id: user_id, message: 'logged_out', ip: ip}, DoorkeeperEvent)
-      timeline.save ? event : nil
+    def logout(user_id, ip='0.0.0.0')
+      timeline.create_event({sender_id: user_id, message: 'logged_out', ip: ip}, DoorkeeperEvent)
     end
 
   end
-
-
-  @doorkeeper ||= TimelineLogger.new
 
 end

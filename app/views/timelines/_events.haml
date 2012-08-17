@@ -1,2 +1,5 @@
-- events.all.each_with_index do |_event, idx|
-  = render 'timelines/event', event: _event, index: idx
+- begin
+  - events.all.each_with_index do |_event, idx|
+    = render 'timelines/event', event: _event, index: idx
+- rescue
+  = t(:not_available)

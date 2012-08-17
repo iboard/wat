@@ -15,33 +15,37 @@ Spork.prefork do
   require 'email_spec'
   require 'rspec/autorun'
   require "paperclip/matchers"
-  
+
   RSpec.configure do |config|
-      config.include(EmailSpec::Helpers)
-      config.include(EmailSpec::Matchers)
-      config.include(Paperclip::Shoulda::Matchers)
-      # config.fixture_path = "#{::Rails.root}/spec/fixtures"
-      # config.use_transactional_fixtures = true
-      # config.infer_base_class_for_anonymous_controllers = true
-      config.mock_with :rspec
-    
-      Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
-    
-      # Clean up the database
-      require 'database_cleaner'
-      config.before(:suite) do
-        DatabaseCleaner.strategy = :truncation
-        DatabaseCleaner.orm = "mongoid"
-        Capybara.javascript_driver = :webkit
-      end
+    config.include(EmailSpec::Helpers)
+    config.include(EmailSpec::Matchers)
+    config.include(Paperclip::Shoulda::Matchers)
+    # config.fixture_path = "#{::Rails.root}/spec/fixtures"
+    # config.use_transactional_fixtures = true
+    # config.infer_base_class_for_anonymous_controllers = true
+    config.mock_with :rspec
 
-      config.include(MailerMacros)    
+    Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
-      config.before(:each) do
-        DatabaseCleaner.clean
-        reset_email
+    # Clean up the database
+    require 'database_cleaner'
+    config.before(:suite) do
+      DatabaseCleaner.strategy = :truncation
+      DatabaseCleaner.orm = "mongoid"
+      Capybara.javascript_driver = :webkit
+    end
+
+    config.include(MailerMacros)
+
+    config.before(:each) do
+      DatabaseCleaner.clean
+      reset_email
+
+      Doorkeeper.configure do |doorkeeper|
+        doorkeeper.doorkeeper ||= Doorkeeper::TimelineLogger.new
       end
-    
+    end
+
   end
 end
 
@@ -51,9 +55,14 @@ Spork.each_run do
 
   # Reload Settings
   Settings.reload_from_files(
-    Rails.root.join("config", "settings.yml").to_s,
-    Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
-    Rails.root.join("config", "environments", "#{Rails.env}.yml").to_s
+      Rails.root.join("config", "settings.yml").to_s,
+      Rails.root.join("config", "settings", "#{Rails.env}.yml").to_s,
+      Rails.root.join("config", "environments", "#{Rails.env}.yml").to_s
   )
+
+  Doorkeeper.configure do |doorkeeper|
+    doorkeeper.doorkeeper ||= Doorkeeper::TimelineLogger.new
+  end
+
 end
 

@@ -27,63 +27,66 @@
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
-  
-  key                     :name
-  validates_presence_of   :name
+
+  key :name
+  validates_presence_of :name
   validates_uniqueness_of :name
 
-  field                   :email, :type => String 
-  validates_format_of     :email, :with => ::VALIDATE_EMAIL_REGEX, :allow_nil => true
+  field :email, :type => String
+  validates_format_of :email, :with => ::VALIDATE_EMAIL_REGEX, :allow_nil => true
 
-  field                   :confirm_email_token
-  field                   :email_confirmed_at, :type => DateTime
-  field                   :password_reset_token
-  field                   :location, type: Hash, spacial: true
+  field :confirm_email_token
+  field :email_confirmed_at, :type => DateTime
+  field :password_reset_token
+  field :location, type: Hash, spacial: true
 
-  embeds_many             :authentications
-  embeds_many             :facilities
-  embeds_one              :profile
-  embeds_one              :avatar
+  embeds_many :authentications
+  embeds_many :facilities
+  embeds_one :profile
+  embeds_one :avatar
 
-  has_many                :contact_invitations #, as: 'sent_invitations'
-  has_many                :attachments, class_name: "UserAttachment"
+  has_many :contact_invitations #, as: 'sent_invitations'
+  has_many :attachments, class_name: "UserAttachment"
 
-  
+  # field :timeline_subscription_ids, type: Array, default: []
+  has_many :timeline_subscriptions
+
   # Accessible Attributes
   attr_accessible :name, :email, :location_token
 
   # Callbacks
   after_destroy :clear_identity
-  
+
+
   # Add an authentication to this user
   # @param [Hash] auth - as provided by omni-auth
   def add_omniauth(auth)
-    self.authentications.find_or_create_by( 
-      provider: auth['provider'],
-      uid: auth['uid'].to_s
+    self.authentications.find_or_create_by(
+        provider: auth['provider'],
+        uid: auth['uid'].to_s
     )
   end
 
   # Create a new user using omniauth information
   # @param [Hash] auth The hash returned by omniauth-provider
   # @return User or nil if it can't be found nor created.
-  def self.find_or_create_with_omniauth(auth,current_user)
-    
+  def self.find_or_create_with_omniauth(auth, current_user)
+
     _name = auth['info']['name']
-    _uid  = auth['uid']
+    _uid = auth['uid']
     _provider = auth['provider']
     _email = auth['info']['email'].present? ? auth['info']['email'] : nil
     _first_name = auth['info']['first_name'].present? ? auth['info']['first_name'] : ''
     _last_name = auth['info']['last_name'].present? ? auth['info']['last_name'] : ''
     # e.g. Foursquare doesn't fill 'info[:name]'
     # in this case join first_name and last_name
-    _name ||= [_first_name , _lastname].join(" ")
-    
-    _user = User.find_with_authentication(_provider, _uid) || current_user || create(name: _name) 
+    _name ||= [_first_name, _lastname].join(" ")
+
+    _user = User.find_with_authentication(_provider, _uid) || current_user || create(name: _name)
     if _user
       _user.email ||= _email
       _user.save
-      _user.authentications.find_or_create_by(provider: _provider, uid: _uid )
+      _user.authentications.find_or_create_by(provider: _provider, uid: _uid)
     end
 
     _user
@@ -94,7 +97,7 @@ class User
   # @param [String] uid of this user at this provider
   # @return [User] or nil if not found by authentication
   def self.find_with_authentication(provider, uid)
-    User.where(:authentications.matches => { provider: provider, uid: uid.to_s}).first
+    User.where(:authentications.matches => {provider: provider, uid: uid.to_s}).first
   end
 
   # Adds an authentication to this user
@@ -138,7 +141,7 @@ class User
   # @return [String] - if no block given
   def facilities_string(&block)
     if self.facilities.any?
-      _string = I18n.translate(:facilities, list: self.facilities.map{|f| "#{f.name} (#{f.access})"}.join(", "))
+      _string = I18n.translate(:facilities, list: self.facilities.map { |f| "#{f.name} (#{f.access})" }.join(", "))
       if block_given?
         yield _string
       else
@@ -167,26 +170,26 @@ class User
   # Send a reset_password_token to email on file
   def reset_password
     self.password_reset_token = SecureRandom::uuid
-    save! 
+    save!
     UserMailer.send_password_reset_token(self).deliver
   end
 
   # Return all consumers in all facilities (flatten)
   # @return Critaria for all Users which are consumers of any of self's facilities
   def contacts
-    @contacts ||= User.any_in( :_id => facilities.map(&:consumer_ids).flatten.uniq )
+    @contacts ||= User.any_in(:_id => facilities.map(&:consumer_ids).flatten.uniq)
   end
 
   # @return [Criteria] Users with a facility where self is a consumer
   def reverse_contacts
-    @reverse_contacts ||= User.where( "facilities.consumer_ids" => self.id )
+    @reverse_contacts ||= User.where("facilities.consumer_ids" => self.id)
   end
 
   # Create facility on invitation.sender
   # @params [ContactInvitation] The received invitation
   def accept_contact_invitation(invitation)
     _sender = invitation.sender
-    _sender.facilities.create( name: self.name, access: 'r--', consumer_ids: [self._id] )
+    _sender.facilities.create(name: self.name, access: 'r--', consumer_ids: [self._id])
     _sender.save!
   end
 
@@ -201,8 +204,8 @@ class User
   # @return [Boolean] - true if contact is unlinked
   def unlink_contact(_contact)
     _rc = false
-    if self.contacts.detect{|c| c._id ==_contact._id}
-      _facility = self.facilities.any_in( consumer_ids: [_contact._id]).first
+    if self.contacts.detect { |c| c._id ==_contact._id }
+      _facility = self.facilities.any_in(consumer_ids: [_contact._id]).first
       if _facility
         _facility.delete_or_remove_consumer(_contact)
         self.save!
@@ -210,8 +213,8 @@ class User
         _rc = true
       end
     end
-    if self.reverse_contacts.detect{|c| c._id ==_contact._id}  
-      _facility = _contact.facilities.any_in( consumer_ids: [self._id]).first
+    if self.reverse_contacts.detect { |c| c._id ==_contact._id }
+      _facility = _contact.facilities.any_in(consumer_ids: [self._id]).first
       if _facility
         _facility.delete_or_remove_consumer(self)
         _contact.save!
@@ -232,10 +235,10 @@ class User
   end
 
   def location_token=(str)
-    coordinates = str.split(",").map! { |a| a.strip.gsub(/\(|\)/,'') }
+    coordinates = str.split(",").map! { |a| a.strip.gsub(/\(|\)/, '') }
     self.location = {
-      'lat' => coordinates[0].to_f,
-      'lng' => coordinates[1].to_f
+        'lat' => coordinates[0].to_f,
+        'lng' => coordinates[1].to_f
     }
   end
 
@@ -245,13 +248,13 @@ class User
 
   def gravatar_path(size)
     _url = "http://gravatar.com/avatar/#{gravatar_id}.png?cache=#{(self.updated_at||Time.now).strftime('%Y%m%d%H%M%S')}"
-    case size 
-    when :tiny
-      options = "width: 32px; height: 32px;"
-    when :icon
-      options = 'width: 63px; height: 64px;'
-    else
-      options = 'width: 128px; height: 128px;'
+    case size
+      when :tiny
+        options = "width: 32px; height: 32px;"
+      when :icon
+        options = 'width: 63px; height: 64px;'
+      else
+        options = 'width: 128px; height: 128px;'
     end
     [_url, options]
   end
@@ -266,7 +269,36 @@ class User
     end
   end
 
-protected
+  def subscribe_timelines(*timelines)
+    timelines.each do |_timeline|
+      raise Doorkeeper::DoorkeeperError.new( nil, "TIMELINE IS NIL IN #{__FILE__}:#{__LINE__}") if _timeline.nil?
+      self.timeline_subscriptions.find_or_create_by( user_id: self._id, timeline_id: _timeline._id )
+    end
+    self.save!
+  end
+
+
+  def events
+    all_events = []
+    self.timeline_subscriptions.each do  |subscription|
+      all_events += subscription.timeline.events
+    end
+    puts "EVENTS = #{all_events.inspect}"
+    all_events.flatten.compact.sort {|b,a|
+      puts "SORTING a(#{a.inpsect}) <=> b(.inspect)"
+      a._id <=> b._id
+    }
+  end
+
+  def timeline
+    unless @timeline
+      @timeline ||= Timeline.find_or_create_by(name: "user-posts-%s" % [self._id])
+      subscribe_timelines(@timeline)
+    end
+    @timeline
+  end
+
+  protected
 
   def clear_identity
     Identity.where(name: self.name).delete_all

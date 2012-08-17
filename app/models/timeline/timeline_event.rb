@@ -3,10 +3,9 @@ class TimelineEvent
   include Mongoid::Timestamps
 
   embedded_in :timeline
+  default_scope -> { desc(:_id) }
 
   field :message
-
-  default_scope -> {desc(:created_at)}
 
   def self.since(time)
     where(:created_at.gte => time)
@@ -17,8 +16,7 @@ class TimelineEvent
   end
 
   def current?
-    self.created_at > Time.now-10.seconds
+    (self.created_at||self.updated_at||Time.now) > Time.now-10.seconds
   end
 
-  
 end

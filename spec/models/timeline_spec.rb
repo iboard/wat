@@ -2,10 +2,6 @@ require 'spec_helper'
 
 describe Timeline do
 
-  before(:each) do
-    Timeline.delete_all
-  end
-
   it "stores with a unique name" do
     Timeline.create name: 'System Timeline'
     Timeline.find_by(name: 'System Timeline').name.should == 'System Timeline'

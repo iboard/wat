@@ -1,1 +1,1 @@
-var latest_events= '<%= j render "events", events: @events -%>';
+var latest_events= '<%= j Time.now().strftime("%H:%M.%S") -%>'+'<%= j render "events", events: @events -%>';
