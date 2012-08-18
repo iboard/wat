@@ -61,7 +61,7 @@ describe TimelinesController do
     sign_in_user name: 'testuser', password: 'secret'
     fill_in "timeline_event[timeline_event][message]", with: "Hello World!"
     click_button "Post"
-    wait_until {  Doorkeeper::timeline.reload.events.map(&:text).join(" ") =~ /testuser says/ }
+    wait_until {  Doorkeeper::timeline.reload.timeline_events.map(&:text).join(" ") =~ /testuser says/ }
     Doorkeeper.latest_event.text.should =~ /testuser says, 'Hello World!'/
   end
 

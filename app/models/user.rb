@@ -281,12 +281,18 @@ class User
   def events
     all_events = []
     self.timeline_subscriptions.each do  |subscription|
-      all_events += subscription.timeline.events
+      all_events += subscription.timeline.timeline_events
     end
-    puts "EVENTS = #{all_events.inspect}"
-    all_events.flatten.compact.sort {|b,a|
-      puts "SORTING a(#{a.inpsect}) <=> b(.inspect)"
-      a._id <=> b._id
+    all_events.flatten.sort {|a,b|
+      as = a._id.to_s
+      bs = b._id.to_s
+      if as < bs
+        -1
+      elsif as == bs
+        0
+      else
+        1
+      end
     }
   end
 

@@ -16,7 +16,7 @@ describe Timeline do
 
     it "can be embedded in a timeline" do
       event = @timeline.create_event( message: 'Timeline started' )
-      @timeline.events.last.should == event
+      @timeline.timeline_events.last.should == event
     end
 
     it "can list events since a given time" do
@@ -24,7 +24,7 @@ describe Timeline do
       event2 = @timeline.create_event( message: 'new entry')
 
       @timeline.since( Time.now-1.day ).map(&:message).should == ['new entry']
-      @timeline.since( Time.now-2.years ).map(&:message).should == ['new entry', 'old entry']
+      @timeline.since( Time.now-2.years ).map(&:message).should == ['old entry','new entry']
     end
 
     describe UserMessage do
@@ -39,7 +39,7 @@ describe Timeline do
             message: "From Sender to Receivers"
           }, UserMessage
         )
-        @timeline.events.count.should == 1
+        @timeline.timeline_events.count.should == 1
       end
   
       it "has a sender and a receiver" do
@@ -49,7 +49,7 @@ describe Timeline do
       end
 
       it "formats it's output in method text()" do
-        @timeline.events.first.text.should =~ /Sender to 2 users, 'From Sender to Receivers'/
+        @timeline.timeline_events.last.text.should =~ /Sender to 2 users, 'From Sender to Receivers'/
       end
 
     end

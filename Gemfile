@@ -32,14 +32,14 @@ case HOST_OS
     gem 'ruby_gntp', :group => :development
     #gem 'libnotify', :group => :development
     #gem 'rb-inotify', :group => :development
-    gem 'therubyracer', :group => :assets
+    gem 'therubyracer', '~> 0.10.2', :group => :assets
  
 
   when /linux/i
     # Original for app-template
     # gem 'libnotify', :group => :development
     # gem 'rb-inotify', :group => :development
-    # gem 'therubyracer', :group => :assets
+    # gem 'therubyracer', '~> 0.10.2', :group => :assets
 
     # changed for capistrano
     gem 'rb-fsevent', :group => :development
@@ -47,7 +47,7 @@ case HOST_OS
     gem 'ruby_gntp', :group => :development
     #gem 'libnotify', :group => :development
     #gem 'rb-inotify', :group => :development
-    gem 'therubyracer', :group => :assets
+    gem 'therubyracer', '~> 0.10.2', :group => :assets
  
   when /mswin|windows/i
     gem 'rb-fchange', :group => :development

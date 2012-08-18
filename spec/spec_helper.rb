@@ -51,7 +51,7 @@ end
 
 Spork.each_run do
   # Check if any model changed
-  Dir.glob("#{Rails.root}/app/models/*.rb").sort.each { |file| load file }
+  Dir.glob("#{Rails.root}/app/models/**/*.rb").sort.each { |file| load file }
 
   # Reload Settings
   Settings.reload_from_files(

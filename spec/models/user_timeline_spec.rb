@@ -16,7 +16,7 @@ describe User do
     @doorkeeper.create_event({sender_id: @user._id, message: 'logged_out', created_at: _t + 2.second}, DoorkeeperEvent)
     @contentkeeper.create_event(message: 'Event Two', created_at: _t + 3.second)
     @user.reload
-    @user.events.map(&:message).should == ['Event Two', 'logged_out', 'Event One', 'logged_in']
+    @user.events.map(&:message).should == ['logged_in', 'Event One', 'logged_out', 'Event Two' ]
   end
 
   it "has it's own timeline" do

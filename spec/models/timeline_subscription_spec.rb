@@ -4,7 +4,7 @@ describe TimelineSubscription do
 
   before(:each) do
     @user = test_user 'Mr. Test', 'secret'
-    @public_timeline= Doorkeeper::timeline
+    @public_timeline= Timeline.find_or_create_by(name: 'doorkeeper')
     @contentkeeper = Timeline.create(name: 'content-timeline')
   end
 

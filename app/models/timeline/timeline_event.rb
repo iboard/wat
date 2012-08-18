@@ -3,7 +3,6 @@ class TimelineEvent
   include Mongoid::Timestamps
 
   embedded_in :timeline
-  default_scope -> { desc(:_id) }
 
   field :message
 
