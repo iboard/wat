@@ -366,3 +366,7 @@ en:
   post_your_message_here: 'Your public message ...'
   message_sent: 'Message sent.'
   unsupported_image_type: "unsupported image type. Please use %{available}"
+  action_saved: saved
+  action_created: created
+  action_delete: deleted
+  page_event: "Page '%{page}' %{action} by %{user}, %{time} ago"

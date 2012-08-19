@@ -197,4 +197,19 @@ describe Page do
 
   end
 
+  describe PageEvent do
+
+    before( :each ) do
+      Page.create permalink: 'a new page', title: 'A new page', body: 'Lorem ipsum', last_modified_by: test_user( "Andi A", "secret" )._id
+    end
+
+    it "Creates a PageEvent when a new page is created" do
+      latest_doorkeeper_event.text.should == "Page '[A new page](/pages/a-new-page)' created by Andi A, less than a minute"
+    end
+
+    it "Creates a PageEvent when a page is modified" do
+      Page.last.update_attributes title: "Nobody changes a page without notification"
+      latest_doorkeeper_event.text.should == "Page '[Nobody changes a page without notification](/pages/a-new-page)' saved by Andi A, less than a minute"
+    end
+  end
 end

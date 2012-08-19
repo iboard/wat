@@ -369,3 +369,7 @@ de:
   post_your_message_here: 'Ihre öffentliche Nachricht ...'
   message_sent: 'Mitteilung wurde gesandt.'
   unsupported_image_type: "Nicht unterstütztes Bildformat. Verwendbare Formate: %{available}"
+  action_saved: gespeichert
+  action_created: erzeugt
+  action_delete: gelöscht
+  page_event: "Vor %{time} hat %{user} die Seite '%{page}' %{action}"

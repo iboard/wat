@@ -33,7 +33,6 @@ case HOST_OS
     #gem 'libnotify', :group => :development
     #gem 'rb-inotify', :group => :development
     gem 'therubyracer', '~> 0.10.2', :group => :assets
- 
 
   when /linux/i
     # Original for app-template

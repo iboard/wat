@@ -6,6 +6,7 @@ class PagesController < ApplicationController
   _allow_index_actions = Settings.supress_global_search != true ? [:show, :index] : [:show]
   before_filter :authenticate_user!, except: _allow_index_actions
   before_filter :authenticate_admin!, except: [:index, :show]
+  before_filter :set_last_modifier, only: [:create, :update]
 
   def index
     @pages ||= permitted_pages
@@ -134,4 +135,7 @@ private
     can_read?('Admin', 'Maintainer') ? Page.unscoped : Page.online
   end
 
+  def set_last_modifier
+    params[:page].merge! last_modified_by: current_user._id
+  end
 end

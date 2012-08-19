@@ -32,10 +32,14 @@ class Page
   field  :expire_at, type: Time
   field  :is_online, type: Boolean, default: true
 
+  field  :last_modified_by
+
   before_validation :remove_banner?
   before_validation :generate_sorting_id
   before_validation :set_dates
   before_save :set_is_online
+  after_create :fire_page_created_event
+  after_update :fire_page_modified_event
 
 
   max_versions 10
@@ -196,5 +200,17 @@ private
     self.is_online = (self.expire_at == nil || self.expire_at > Time.now)  &&
                      (self.publish_at == nil || self.publish_at <= Time.now)
     true
+  end
+
+  def fire_page_created_event
+    Doorkeeper.create_event(
+        {message: 'action_created', sender_id: self.last_modified_by, page_id: self._id}, PageEvent
+    ) if is_online
+  end
+
+  def fire_page_modified_event
+    Doorkeeper.create_event(
+        {message: 'action_saved', sender_id: self.last_modified_by, page_id: self._id}, PageEvent
+    ) if is_online
   end
 end

@@ -73,4 +73,7 @@ unless defined?(TEXT_FILE_FIXTURE)
     user.save!
   end
 
+  def latest_doorkeeper_event
+    Timeline.find_or_create_by(name: Doorkeeper::DOORKEEPER_TIMELINE).timeline_events.last
+  end
 end
