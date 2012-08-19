@@ -46,6 +46,7 @@ describe Commentable do
         fill_in "comment_comment_comment", with: "XXXX " + lorem_text()
         click_button "Post comment"
         page.should have_content "Comment successfully posted"
+        latest_doorkeeper_event.text.should == "'[First Page](/pages/first-page)' was commented by Testuser, less than a minute ago"
         click_link "2 comments"
         page.should have_content "2 comments for Page 'First Page'"
         page.should have_content "This is a cool feature"

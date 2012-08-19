@@ -204,12 +204,12 @@ describe Page do
     end
 
     it "Creates a PageEvent when a new page is created" do
-      latest_doorkeeper_event.text.should == "Page '[A new page](/pages/a-new-page)' created by Andi A, less than a minute"
+      latest_doorkeeper_event.text.should == "Page '[A new page](/pages/a-new-page)' created by Andi A, less than a minute ago"
     end
 
     it "Creates a PageEvent when a page is modified" do
-      Page.last.update_attributes title: "Nobody changes a page without notification"
-      latest_doorkeeper_event.text.should == "Page '[Nobody changes a page without notification](/pages/a-new-page)' saved by Andi A, less than a minute"
+      Page.last.update_attributes title: "Nobody changes a page without notification", saved_from_controller: true
+      latest_doorkeeper_event.text.should == "Page '[Nobody changes a page without notification](/pages/a-new-page)' saved by Andi A, less than a minute ago"
     end
   end
 end

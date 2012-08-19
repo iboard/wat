@@ -16,7 +16,7 @@ class Page
 
   field :title, type: String, localize: true
   validates_presence_of :title
-  
+
   field :body, type: String, localize: true
   field :preview_length, type: Integer
   validates :preview_length, numericality: { only_integer: true, greater_than: 3 }, allow_nil: true
@@ -50,7 +50,7 @@ class Page
     %w(banner)
   end
 
-  
+
   # SCOPES
 
   default_scope  -> { asc(:position) }
@@ -77,7 +77,7 @@ class Page
     excludes( banner: nil).excludes( :'banner.banner_file_size' => nil ).desc(:updated_at)
   }
 
-  def self.permitted(is_admin)  
+  def self.permitted(is_admin)
     is_admin ? unscoped : where(:is_online => true)
   end
 
@@ -132,9 +132,14 @@ class Page
     @new_expire_on = new_date
   end
 
+  # see [fire_page_modified_event]
+  # @param [Object] value - Set this to any value except false or nil to get a PageEvent fired on update
+  def saved_from_controller=(value)
+    @saved_from_controller = value
+  end
 
 
-  # HELPERS 
+  # HELPERS
 
   def preview_length_or_default
     self.preview_length || Settings.default_preview_length || 300
@@ -211,6 +216,7 @@ private
   def fire_page_modified_event
     Doorkeeper.create_event(
         {message: 'action_saved', sender_id: self.last_modified_by, page_id: self._id}, PageEvent
-    ) if is_online
+    ) if is_online && @saved_from_controller
   end
+
 end

@@ -61,6 +61,7 @@ class PagesController < ApplicationController
     unless can_write?('Admin')
       redirect_to @page, :alert => t(:you_not_allowed_to_edit_this_page)
     else
+      params[:page].merge! saved_from_controller: true
       if @page.update_attributes(params[:page])
         redirect_to @page, :notice => t(:page_successfully_updated)
       else

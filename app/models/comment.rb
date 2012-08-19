@@ -10,11 +10,24 @@ class Comment
   field :user_id
   field :posted_from_ip
 
+  after_create :fire_comment_event
+
   def user
     User.find(self.user_id) if self.user_id
   end
   
   def allow_delete?(_user)
     _user  && ((self.user && self.user == _user) || _user.can_execute?('Admin', 'Moderator', 'Maintainer'))
+  end
+
+  private
+  def fire_comment_event
+    Doorkeeper.create_event(
+        {  message: 'commented', sender_id: self.user_id,
+           ip: self.posted_from_ip,
+           commentable_id: self.commentable._id, commentable_type: self.commentable.class.to_s
+        }, CommentEvent
+    ) if [true, nil].include?(commentable.try(:is_online))
+    true
   end
 end

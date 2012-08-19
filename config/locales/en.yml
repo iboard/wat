@@ -370,3 +370,4 @@ en:
   action_created: created
   action_delete: deleted
   page_event: "Page '%{page}' %{action} by %{user}, %{time} ago"
+  comment_event: "'%{commentable_link}' was commented by %{user}, %{time} ago"

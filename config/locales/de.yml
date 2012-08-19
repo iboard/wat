@@ -373,3 +373,4 @@ de:
   action_created: erzeugt
   action_delete: gelöscht
   page_event: "Vor %{time} hat %{user} die Seite '%{page}' %{action}"
+  comment_event: "'%{commentable_link}' wurde vor %{time} von %{user} kommentiert"
