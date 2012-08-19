@@ -80,7 +80,6 @@ private
         ordered_items += item
       end
     end
-    Rails.logger.info "SORTED #{ordered_items.inspect}"
     ordered_items
   end
   

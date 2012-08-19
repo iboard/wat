@@ -65,7 +65,7 @@ class Version
       if localized?(args.first)
         _field_translations = eval_localized_string(args.first)
         if args.first !~ /_translations\Z/
-          _field = _field_translations[I18n.locale.to_s]
+          _field_translations[I18n.locale.to_s]
         end
       else
         version.send(*args, &block)

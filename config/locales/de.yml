@@ -368,3 +368,4 @@ de:
   show: zeigen
   post_your_message_here: 'Ihre öffentliche Nachricht ...'
   message_sent: 'Mitteilung wurde gesandt.'
+  unsupported_image_type: "Nicht unterstütztes Bildformat. Verwendbare Formate: %{available}"

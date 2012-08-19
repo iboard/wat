@@ -12,9 +12,9 @@ class Search
     false
   end
   
-  # Don't start search if we have not 3 chars at least.
+  # Don't start search if we have not 3 chars min.
   def valid?
-    self.search_text && self.search_text.length > 0
+    self.search_text && self.search_text.length > (Settings.start_search_at_min_chars || 3)
   end
   
 end

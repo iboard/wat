@@ -1,6 +1,6 @@
 %ul.nav
   %li
-    .well{:id => attachment.user}
+    .well{id: attachment.user}
       - if attachment.application_file
         - present attachment do |attachment_presenter|
           = attachment_presenter.present

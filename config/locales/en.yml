@@ -365,3 +365,4 @@ en:
   show: show
   post_your_message_here: 'Your public message ...'
   message_sent: 'Message sent.'
+  unsupported_image_type: "unsupported image type. Please use %{available}"

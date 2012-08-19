@@ -7,23 +7,19 @@ class Section
   key                     :permalink
   validates_presence_of   :permalink
   validates_uniqueness_of :permalink
-  validates_format_of     :permalink, :with => VALIDATE_PERMALINK_REGEX, :message => I18n.t(:numbers_and_letters_only)
+  validates_format_of     :permalink, with: VALIDATE_PERMALINK_REGEX, message: I18n.t(:numbers_and_letters_only)
 
-  field :title, type: String, :localize => true
+  field :title, type: String, localize: true
   validates_presence_of :title
   
-  field :body, type: String, :localize => true
+  field :body, type: String, localize: true
   field :preview_length, type: Integer
-  validates :preview_length, :numericality => { :only_integer => true, :greater_than => 3 }, :allow_nil => true
+  validates :preview_length, numericality: { only_integer: true, greater_than: 3 }, allow_nil: true
 
   field :position, type: Integer, default: 0
   default_scope asc(:position)
 
-  has_many  :pages, :dependent => :nullify
-
-  #def preview_length_or_default
-  #  self.preview_length || Settings.default_preview_length || 300
-  #end
+  has_many  :pages, dependent: :nullify
 
   def self.banners
     banners = []

@@ -118,7 +118,7 @@ private
 
   def strip_preview(_body_snippet)
     _txt = ""
-    _txt = vpage.title if Settings.supress_page_title == true
+    _txt = "<h3>" + vpage.title + "</h3>" if Settings.supress_page_title == true
     _txt += strip_tags _body_snippet
     _txt += "<div class='clear-both'></div>"
     _txt.html_safe

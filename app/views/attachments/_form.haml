@@ -5,4 +5,4 @@
       - app_file.input :file, as: :file
   .form-actions
     = f.button :submit, t(:upload_file), class: 'btn-primary'
-    = "&nbsp;[&nbsp;#{link_to t(:cancel), :back}&nbsp;]".html_safe
+    = link_to t(:cancel), :back, class: 'btn'

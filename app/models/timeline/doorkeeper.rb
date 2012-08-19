@@ -1,3 +1,6 @@
+# Doorkeeper is aimed to handle a 'global' Timeline
+# @todo Needs review regarding thread-safety.
+# @todo TimelineEvents should be listed bottom-top but sorting embedded objects doesn't work with curren mongoid-version
 module Doorkeeper
 
   class DoorkeeperError < RuntimeError

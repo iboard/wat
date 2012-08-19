@@ -32,11 +32,11 @@ class User
   validates_presence_of :name
   validates_uniqueness_of :name
 
-  field :email, :type => String
-  validates_format_of :email, :with => ::VALIDATE_EMAIL_REGEX, :allow_nil => true
+  field :email
+  validates_format_of :email, with: ::VALIDATE_EMAIL_REGEX, allow_nil: true
 
   field :confirm_email_token
-  field :email_confirmed_at, :type => DateTime
+  field :email_confirmed_at, type: DateTime
   field :password_reset_token
   field :location, type: Hash, spacial: true
 
@@ -48,7 +48,6 @@ class User
   has_many :contact_invitations #, as: 'sent_invitations'
   has_many :attachments, class_name: "UserAttachment"
 
-  # field :timeline_subscription_ids, type: Array, default: []
   has_many :timeline_subscriptions
 
   # Accessible Attributes
@@ -69,6 +68,7 @@ class User
 
   # Create a new user using omniauth information
   # @param [Hash] auth The hash returned by omniauth-provider
+  # @param [User] current_user
   # @return User or nil if it can't be found nor created.
   def self.find_or_create_with_omniauth(auth, current_user)
 
@@ -80,7 +80,7 @@ class User
     _last_name = auth['info']['last_name'].present? ? auth['info']['last_name'] : ''
     # e.g. Foursquare doesn't fill 'info[:name]'
     # in this case join first_name and last_name
-    _name ||= [_first_name, _lastname].join(" ")
+    _name ||= [_first_name, _last_name].join(" ")
 
     _user = User.find_with_authentication(_provider, _uid) || current_user || create(name: _name)
     if _user

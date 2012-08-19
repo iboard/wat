@@ -2,11 +2,11 @@ class Comment
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  embedded_in :commentable, polymorphic: true, :inverse_of => :comments
+  embedded_in :commentable, polymorphic: true, inverse_of: :comments
 
   field :comment
   validates_presence_of :comment
-  validates_length_of :comment, :minimum => 20
+  validates_length_of :comment, minimum: 20
   field :user_id
   field :posted_from_ip
 

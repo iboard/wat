@@ -14,18 +14,18 @@ class Page
   field :sorting_id
   validates_uniqueness_of :sorting_id
 
-  field :title, type: String, :localize => true
+  field :title, type: String, localize: true
   validates_presence_of :title
   
-  field :body, type: String, :localize => true
+  field :body, type: String, localize: true
   field :preview_length, type: Integer
-  validates :preview_length, :numericality => { :only_integer => true, :greater_than => 3 }, :allow_nil => true
+  validates :preview_length, numericality: { only_integer: true, greater_than: 3 }, allow_nil: true
 
   belongs_to :section
-  embeds_one :banner, :cascade_callbacks => true
+  embeds_one :banner, cascade_callbacks: true
   accepts_nested_attributes_for :banner
-  field  :banner_title, :localize => true
-  field  :banner_text, :localize => true
+  field  :banner_title, localize: true
+  field  :banner_text, localize: true
   field  :banner_text_position, default: 'right'
 
   field  :publish_at, type: Time
@@ -94,14 +94,17 @@ class Page
   def use_publish_at
     !self.publish_at.nil?
   end
+
   def use_publish_at=(_publish)
     @use_publish_at = _publish
   end
+
   def publish_on
     if self.publish_at
       self.publish_at.strformat("%Y.%M.%D")
     end
   end
+
   def publish_on=(new_date)
     @new_publish_on = new_date
   end
@@ -110,14 +113,17 @@ class Page
   def use_expire_at
     !self.expire_at.nil?
   end
+
   def use_expire_at=(_expire)
     @use_expire_at = _expire
   end
+
   def expire_on
     if self.expire_at
       self.expire_at.strformat("%Y.%M.%D")
     end
   end
+
   def expire_on=(new_date)
     @new_expire_on = new_date
   end
@@ -155,6 +161,7 @@ private
       self.banner.delete if self.banner
       self.banner = nil
     end
+    true
   end
 
   def generate_sorting_id

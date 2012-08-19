@@ -35,7 +35,7 @@ describe Page do
     page3.create_banner(banner_file_name: 'avatar.jpg')
     page3.save!
 
-    Page.with_banner.map(&:_id).sort.should == ['this-is-page-one', 'this-is-page-two']
+    Page.with_banner.map(&:_id).sort.should == %w(this-is-page-one this-is-page-two)
   end
 
   it "generates a random sorting_id before save" do
@@ -45,9 +45,9 @@ describe Page do
 
   it "supports position and sorting (within a section)" do
     Page.delete_all
-    page2 = Page.create(permalink: 'two', title: 'Page Two', position: 1, body: 'Second Body')
-    page3 = Page.create(permalink: 'three', title: 'Page tree', position: 2, body: 'Third Body')
-    page1 = Page.create(permalink: 'one', title: 'Page One', position: 0, body: 'First Body')
+    Page.create(permalink: 'two', title: 'Page Two', position: 1, body: 'Second Body')
+    Page.create(permalink: 'three', title: 'Page tree', position: 2, body: 'Third Body')
+    Page.create(permalink: 'one', title: 'Page One', position: 0, body: 'First Body')
     Page.all.map(&:permalink).should == %w(one two three)
   end
 

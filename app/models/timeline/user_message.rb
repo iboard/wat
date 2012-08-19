@@ -1,3 +1,4 @@
+# A timeline-event from one sender to an array of receivers
 class UserMessage < UserEvent
 
   field    :receiver_ids, type: Array, default: []
