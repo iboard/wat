@@ -13,6 +13,7 @@
 # IMPORTANT! Never push this files to a public repo!
 
 /config/mongoid.yml
+config/mongoid.yml
 /config/settings.yml
 config/settings.yml
 /config/settings/development.yml
