@@ -596,3 +596,23 @@ ul.versions {
 #version-list {
   display: none;
 }
+
+.timeline-checkboxes {
+  height: auto;
+  padding: 5px;
+  input {
+    background: red;
+    height: auto;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  label {
+    height: auto;
+    display: inline;
+    width: 120px;
+  }
+}
+
+.disabled {
+  opacity: 0.5;
+}

@@ -29,7 +29,6 @@ Wat::Application.routes.draw do
         put :crop_avatar
       end
     end
-    
     resources :facilities
     resources :attachments
     collection do
@@ -41,6 +40,7 @@ Wat::Application.routes.draw do
       get 'resend_confirmation_mail' => :resend_confirmation_mail, :as => 'resend_confirmation_mail'
       get 'auth_providers' => :auth_providers
       get 'reset_password/:token' => :reset_password, as: 'reset_password'
+      get 'timeline_subscription/:timeline_id/:timeline_action' => :subscribe_timeline, as: 'subscribe_timeline'
     end
   end
 

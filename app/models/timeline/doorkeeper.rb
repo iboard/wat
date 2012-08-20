@@ -1,6 +1,9 @@
 # Doorkeeper is aimed to handle a 'global' Timeline
 # @todo Needs review regarding thread-safety.
 # @todo TimelineEvents should be listed bottom-top but sorting embedded objects doesn't work with curren mongoid-version
+#
+# YOU'LL HAVE TO RESTART SPORK, RAILS-SERVER IN ORDER TO LOAD CHANGES IN THIS FILE!
+#
 module Doorkeeper
 
   class DoorkeeperError < RuntimeError
@@ -23,6 +26,15 @@ module Doorkeeper
     def self.create_event(*args)
       _tl = Timeline.find_or_create_by(name: DOORKEEPER_TIMELINE)
       _tl.create_event *args
+    end
+
+    def self.latest_event
+      _tl = Timeline.find_or_create_by(name: DOORKEEPER_TIMELINE)
+      _tl.timeline_events.last
+    end
+
+    def self.timeline
+      Timeline.find_or_create_by(name: DOORKEEPER_TIMELINE)
     end
 
     class << self

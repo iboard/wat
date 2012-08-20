@@ -1,0 +1,3 @@
+#post-message-form
+  =simple_form_for [Doorkeeper::timeline,Doorkeeper::timeline.timeline_events.new()] , remote: true do |f|
+    = render 'timelines/post_message_fields', f: f

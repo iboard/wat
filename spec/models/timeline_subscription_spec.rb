@@ -14,4 +14,18 @@ describe TimelineSubscription do
     @user.timeline_subscriptions.map(&:timeline).should == [@public_timeline,@contentkeeper]
   end
 
+  it "can be removed from a user" do
+    @user.subscribe_timelines(@public_timeline,@contentkeeper)
+    @user.timeline_subscriptions.map(&:timeline).should == [@public_timeline,@contentkeeper]
+    @user.unsubscribe_timelines(@public_timeline)
+    @user.timeline_subscriptions.count.should == 1
+    @user.timeline_subscriptions.map(&:timeline).should == [@contentkeeper]
+  end
+
+  it "can be asekd if user subscribed" do
+    @user.subscribe_timelines(@public_timeline)
+    @user.subscribed_to?(@public_timeline).should be_true
+    @user.subscribed_to?(@contentkeeper).should be_false
+  end
+
 end

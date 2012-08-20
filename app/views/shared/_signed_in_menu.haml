@@ -1,5 +1,6 @@
 %li= icon_link_to 'icon-user', '', t(:edit_profile), user_path(current_user)
 %li= icon_link_to 'icon-list', '', t(:contacts), contacts_path
 %li= icon_link_to 'icon-file', '', t(:your_files), user_attachments_path(current_user)
+%li= icon_link_to 'icon-comment', '', t(:timeline_subscriptions), timelines_path
 %li.nav-seperator
 %li= icon_link_to 'icon-off', '', t(:logout), signout_path

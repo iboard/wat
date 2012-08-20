@@ -39,7 +39,37 @@ jQuery ->
                                       Im Augenblick ist keine Timeline verfügbar.") 
         setTimeout( "restartTimelineUpdater()", 60000 )
 
-      
 
-    
+  if $('#hide-timeline').length > 0
+    $('#hide-timeline').ready ->
+      hideTimeline()
+
+  if $('.subsribe-timeline-by-email-checkbox').length > 0
+    $('.subsribe-timeline-by-email-checkbox').change ->
+      event.preventDefault()
+      alert "This function is not implemented yet<br/>Die Funktion ist noch nicht implementiert."
+
+  if $('.subsribe-timeline-on-screen-checkbox').length > 0
+    $('.subsribe-timeline-on-screen-checkbox').change ->
+      event.preventDefault()
+      subscribeUserTimeline($(this))
+
+  self.subscribeUserTimeline = (checkbox) ->
+    timelineId = $(checkbox).data('id')
+    userId = $(checkbox).data('user')
+    newState = $(checkbox).attr('checked')
+    _path =  "/users/" + userId + "/timeline_subscription/" + timelineId + "/"
+    if newState == 'checked'
+      _path += 'subscribe.js'
+    else
+      _path += 'unsubscribe.js'
+    $.ajax _path,
+      success  : (res, status, xhr) ->
+        $('#timeline #entries').html(latest_events)
+        $('#timeline #entries .latest-timeline-event').effect('highlight', {}, 4000)
+        $('#events').html(latest_events)
+        $('#response').html( "<div class='alert alert-info'>" + message + "</div>")
+      error    : (xhr, status, err) ->
+        alert "Can't change subscription for this timeline / Abo kann nicht geändert werden\n\nError: " + err + "\n" + _path
+
 

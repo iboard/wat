@@ -4,7 +4,11 @@
 .row-fluid
   .span8
     #post-message-form
-      = render 'post_message'
+      - if is_action?('index')
+        .well
+          = render 'timelines/post_message_http'
+      - else
+        = render 'timelines/post_message_ajax'
     #events
       = render 'events', events: @events
   .span4

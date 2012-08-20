@@ -1,0 +1,5 @@
+= f.simple_fields_for :timeline_event do |e|
+  #input-text
+    = e.input :message, as: :string, label: false, placeholder: t(:post_your_message_here), input_html: { maxlength: 140 }.merge(post_message_css_options)
+  -if Rails.env.test?
+    = f.submit "Post"

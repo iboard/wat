@@ -47,6 +47,14 @@ describe User do
       last_email.to.should include('the.pirate@example.com')
       last_email.parts.first.body.should  match /requeset to reset your password/
     end
+
+    it "should be subscribed to 'doorkeeper' when created" do
+      timeline = Timeline.find_or_create_by(name: 'doorkeeper')
+      user = test_user 'Frank Zappa', 'Secret Word of Today'
+      user.timeline_subscriptions.count.should == 1
+      user.timelines.first.name.should == 'doorkeeper'
+    end
+
   end
 
 end

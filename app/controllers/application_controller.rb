@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   helper_method :can_execute?
   helper_method :param_to_class
   helper_method :class_to_param
+  helper_method :is_action?
 
 
 private
@@ -128,7 +129,9 @@ private
     end
   end
 
-
+  def is_action?(what)
+    params[:action] == what.to_s.underscore
+  end
 
 protected
 

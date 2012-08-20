@@ -110,6 +110,24 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET '/user/:id/timeline_subscription/:timeline_id/:timeline_action'
+  def subscribe_timeline
+    @user = User.find(params[:id])
+    if @user != current_user
+      redirect_to root_path, alert: t(:access_denied)
+    else
+      subscribe_or_unsubscribe_timeline
+      respond_to do |format|
+        format.html {
+          Rails.logger.info "VIA HTTP"
+          redirect_to root_path, alert: t(:only_ajax) }
+        format.js   {
+          Rails.logger.info "VIA AJAX"
+        }
+      end
+    end
+  end
+
 private
   def parse_search_param
     if params[:search].present?
@@ -158,5 +176,17 @@ private
     end
     @user.password_reset_token = nil
     @user.save!
+  end
+
+  def subscribe_or_unsubscribe_timeline
+    _tl = Timeline.where(_id: params[:timeline_id]).first
+    if params[:timeline_action] == 'subscribe'
+      current_user.subscribe_timelines(_tl)
+      @message = t(:you_are_now_receiving_messages_of_timeline, timeline: _tl.name)
+    elsif params[:timeline_action] == 'unsubscribe'
+      current_user.unsubscribe_timelines(_tl)
+      @message = t(:you_are_no_longer_receiving_messages_of_timeline, timeline: _tl.name)
+    end
+    @events = current_user.events
   end
 end

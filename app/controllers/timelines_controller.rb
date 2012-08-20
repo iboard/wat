@@ -22,8 +22,8 @@ class TimelinesController < ApplicationController
 
 private
   def load_timelines
-    @timelines = Timeline.all
-    @events = Doorkeeper.events.limit(60)
+    @timelines = current_user.timeline_subscriptions.map(&:timeline)
+    @events = current_user.events
   end
 
 end

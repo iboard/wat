@@ -55,6 +55,7 @@ class User
 
   # Callbacks
   after_destroy :clear_identity
+  after_create  :subscribe_doorkeeper_timeline
 
 
   # Add an authentication to this user
@@ -269,12 +270,29 @@ class User
     end
   end
 
+  def available_timelines
+    timeline #make sure user's own timeline is created
+    Timeline.asc(:name)
+  end
+
   def subscribe_timelines(*timelines)
     timelines.each do |_timeline|
       raise Doorkeeper::DoorkeeperError.new( nil, "TIMELINE IS NIL IN #{__FILE__}:#{__LINE__}") if _timeline.nil?
       self.timeline_subscriptions.find_or_create_by( user_id: self._id, timeline_id: _timeline._id )
     end
     self.save!
+  end
+
+  def unsubscribe_timelines(*timelines)
+    timelines.each do |_timeline|
+      _tls = self.timeline_subscriptions.where(timeline_id: _timeline._id ).first
+      self.timeline_subscriptions.delete _tls
+    end
+    self.save!
+  end
+
+  def subscribed_to?(timeline)
+    self.timeline_subscriptions.only(:timeline_id).map(&:timeline_id).include?(timeline._id)
   end
 
 
@@ -302,6 +320,14 @@ class User
       subscribe_timelines(@timeline)
     end
     @timeline
+  end
+
+  def timelines
+    Timeline.any_in( _id:  self.timeline_subscriptions.map(&:timeline_id) )
+  end
+
+  def subscribe_doorkeeper_timeline
+    self.timeline_subscriptions.create user_id: self._id, timeline_id: Timeline.find_or_create_by( name: Doorkeeper::DOORKEEPER_TIMELINE )._id
   end
 
   protected

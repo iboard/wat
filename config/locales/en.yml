@@ -371,3 +371,12 @@ en:
   action_delete: deleted
   page_event: "Page '%{page}' %{action} by %{user}, %{time} ago"
   comment_event: "'%{commentable_link}' was commented by %{user}, %{time} ago"
+  message_couldnt_be_sent: "Sorry, your message couldn't be posted"
+  post: Post
+  on_screen: On screen
+  by_email: By email
+  only_ajax: This request is available through AJAX only
+  you_are_now_receiving_messages_of_timeline: "You're now receiving messages from '%{timeline}'"
+  you_are_no_longer_receiving_messages_of_timeline: "You will not receive new messages from '%{timeline}'"
+  timeline_subscription_help: In order to see messages from several Timelines listed below, check or uncheck their checkboxes.
+  timeline_subscriptions: Timelines ...

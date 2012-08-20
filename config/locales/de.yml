@@ -374,3 +374,12 @@ de:
   action_delete: gelöscht
   page_event: "Vor %{time} hat %{user} die Seite '%{page}' %{action}"
   comment_event: "'%{commentable_link}' wurde vor %{time} von %{user} kommentiert"
+  message_couldnt_be_sent: "Ihre Nachricht konnte leider nicht versandt werden."
+  post: "Senden"
+  on_screen: Im Browser
+  by_email: Per E-Mail
+  only_ajax: Diese Anfrage kann nur via AJAX ausgeführt werden.
+  you_are_now_receiving_messages_of_timeline: "Sie erhalten nun Nachrichten von '%{timeline}'"
+  you_are_no_longer_receiving_messages_of_timeline: "Sie erhalten von '%{timeline}' keine Nachrichten mehr"
+  timeline_subscription_help: Um Nachrichten von verschiedenen Timelines zu erhalten, setzen sie die Checkboxen unten entsprechend.
+  timeline_subscriptions: Timelines ...

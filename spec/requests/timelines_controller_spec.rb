@@ -56,7 +56,7 @@ describe TimelinesController do
     assert page.all('#entries', :visible => true) != nil, 'Timeline should be open'
   end
 
-  it "Works but is untestable by now => allows a user to post messages", js: true do
+  it "allows a user to post messages", js: true do
     visit switch_language_path(:en)
     sign_in_user name: 'testuser', password: 'secret'
     fill_in "timeline_event[timeline_event][message]", with: "Hello World!"

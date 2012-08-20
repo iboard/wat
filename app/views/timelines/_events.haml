@@ -1,5 +1,6 @@
 - begin
-  - events.all.reverse.each_with_index do |_event, idx|
-    = render 'timelines/event', event: _event, index: idx
-- rescue
-  = t(:not_available)
+  - events.map{|e| e}.reverse.each_with_index do |_event, idx|
+    - unless _event.new_record?
+      = render 'timelines/event', event: _event, index: idx
+- rescue => e
+  = t(:not_available) + " => #{e.inspect}"
