@@ -81,10 +81,12 @@ describe UsersController do
       page.should have_content "Facilities: Admin"
     end
   
-    it "shows facilities in user-list" do
+    it "shows facilities and Google-map in user-list" do
       sign_in_user name: 'Testuser', password: 'notsecret'
       visit users_path
       page.should have_content "Facilities: Admin"
+      page.should have_content "Your location: 51.4771,0" # (default if not set) Greenwich Park, London
+      assert page.all( 'div', :class => 'user-location' ).count > 0, "Should show Google-map, but doesn't"
     end
   
     it "should not show foreign users unless current_user is admin" do
@@ -241,6 +243,7 @@ describe UsersController do
       click_button "Search"
       page.should have_content "Admin"
       page.should_not have_content "Hidden user"
+      assert page.all( '.user-location div' ).count == 0, "Should not show Google-map while search"
     end
 
     it "finds users using the search-form with JS", js: true do
@@ -251,6 +254,7 @@ describe UsersController do
       page.should_not have_button "Search"
       page.should have_content "Find Me"
       page.should_not have_content "admin@iboard.cc"
+      assert page.all( '.user-location div' ).count == 0, "Should not show Google-map while search"
     end
 
   end
