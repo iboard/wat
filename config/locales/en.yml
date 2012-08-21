@@ -1,7 +1,6 @@
 # -*- encoding : utf-8 -*-
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
   en: English
   de: Deutsch
@@ -45,11 +44,11 @@ en:
   user_successfully_deleted: "User successfully deleted. We hope to see you again."
   provider_added: "Provider <strong>%{provider}</strong> added to your account."
   last_authentication_cannot_be_deleted: Your last authentication can't be deleted!
-  home_info_logged_in: 
+  home_info_logged_in:
     Signed in. In this template-application you see a list of registered users
     where your own user is decorated with 'Edit-account' and 'Cancel-account' buttons.
     When editing your account you can add and remove Authentication-providers.
-  home_info_logged_out: 
+  home_info_logged_out:
     You are not logged in. Sign in or create a new account. This is a template-application
     cloned from http://github.com/iboard/wat
   home: Home
@@ -136,7 +135,7 @@ en:
   email_confirmed: Thank you! Your e-mail is confirmed now.
   token_not_found: Token not found. Maybe your e-mail-address is confirmed already.
   email_not_found: Email not found
-  email_not_confirmed_yet: 
+  email_not_confirmed_yet:
     Your email is not confirmed by now. Please check your mailbox for %{email}.
     <br/>
     No mail received? %{confirm_link}
@@ -228,7 +227,7 @@ en:
   invate_contact_hint_if_no_contacts_exists:
     You can invite friends and collaborators by email.
     The user will receive an email with a link to connect his user with you.
-    Connected users will be able to share private information within this 
+    Connected users will be able to share private information within this
     application.
     You can remove any contact at any time through the contacts menu.
   send_invitation: Send invitation
@@ -275,7 +274,7 @@ en:
   file_not_deleted: "Can't delete '%{filename}' - '%{error}'"
   your_files: Your files ...
   upload_file: Upload file
-  number_of_your_files: 
+  number_of_your_files:
     zero: You have no files uploaded yet
     one: You have one stored file
     other: "You have %{count} stored files"
@@ -321,12 +320,12 @@ en:
   new_record: 'New record'
   new_comment: 'New comment'
   comment_successfully_posted: Comment successfully posted.
-  comment_successfully_updated: Comment successfully updated. 
-  comment_successfully_destroyed: Comment successfully destroyed. 
+  comment_successfully_updated: Comment successfully updated.
+  comment_successfully_destroyed: Comment successfully destroyed.
   you_can_use_markdown: You can use 'Markdown' here.
   your_comment: Your Comment
   delete_comment: Delete comment
-  update_comment: Update comment 
+  update_comment: Update comment
   edit_comment: Edit comment
   enable_comments: Switch off this option to disable comments
   login_to_comment: Please log in to post a new comment
@@ -352,7 +351,7 @@ en:
   no_image_in_this_version: "This version had no image attached"
   edit_email_and_location: "Email & Location"
   invitation_message: Append a message ...
-  message_from_user_to_count_receivers: 
+  message_from_user_to_count_receivers:
     zero: "<em>%{time}</em>: %{sender} says, '%{message}'"
     one: "<em>%{time}</em>: %{sender} to %{receiver}, '%{message}'"
     other: "<em>%{time}</em>: %{sender} to %{count} users, '%{message}'"
@@ -380,3 +379,9 @@ en:
   you_are_no_longer_receiving_messages_of_timeline: "You will not receive new messages from '%{timeline}'"
   timeline_subscription_help: In order to see messages from several Timelines listed below, check or uncheck their checkboxes.
   timeline_subscriptions: Timelines ...
+  users_profile: "%{name}'s Profile"
+  maintainer: Maintainer
+  remove_check_if_profile_is_not_public: uncheck this check box to hide your profile from other users except admins.
+  public: public
+  hidden: hidden
+  this_profile_is_not_public: This profile is not public

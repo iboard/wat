@@ -383,3 +383,9 @@ de:
   you_are_no_longer_receiving_messages_of_timeline: "Sie erhalten von '%{timeline}' keine Nachrichten mehr"
   timeline_subscription_help: Um Nachrichten von verschiedenen Timelines zu erhalten, setzen sie die Checkboxen unten entsprechend.
   timeline_subscriptions: Timelines ...
+  users_profile: '%{name} - Profil'
+  maintainer: 'Verwaltung'
+  remove_check_if_profile_is_not_public: Schalten Sie diese Check-box aus um Ihr Profil von anderen Benutzern (außer Administratoren) zu verbergen.
+  public: Öffentlich
+  hidden: Versteckt
+  this_profile_is_not_public: Dieses Profil ist nicht öffentlich

@@ -4,14 +4,14 @@
     = presenter.options_menu
     .row-fluid
       .span2.shadow-img
-        = presenter.avatar(:thumb)
+        = presenter.avatar(:icon)
         &nbsp;
         - if user == current_user && params[:action] != 'index'
           %br/
           %br/
           = link_to( t(:edit_avatar),user_avatar_path(user), remote: true)
       .span7
-        %h2= presenter.name
+        %h2= presenter.name_and_profile_link
         - unless (_sm = presenter.social_media_links).blank?
           %p= _sm
         %p

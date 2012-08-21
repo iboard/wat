@@ -6,12 +6,20 @@ class UserPresenter < BasePresenter
       option_dropdown
     end
   end
-  
+
   def name
-    unless user.respond_to?(:name)
-      content_tag( :span, class: 'none_given') {
-          I18n.t(:no_name_given) 
-        }
+    if !user.respond_to?(:name)
+      content_tag( :span, class: 'none_given') { I18n.t(:no_name_given) }
+    else
+      user.name
+    end
+  end
+
+  def name_and_profile_link
+    if !user.respond_to?(:name)
+      content_tag( :span, class: 'none_given') { I18n.t(:no_name_given) }
+    elsif user.profile && (user.profile.is_public || user == current_user)
+      link_to user.name, user_profile_path(user)
     else
       user.name
     end
@@ -21,16 +29,16 @@ class UserPresenter < BasePresenter
     links = []
     if user.profile
       unless (user.profile.twitter_handle||'').blank?
-        links << link_to( 'Twitter', "http://twitter.com/#{user.profile.twitter_handle}", target: :blank)
+        links << link_to( '<i class="icon-share icon-white"></i> Twitter'.html_safe, "http://twitter.com/#{user.profile.twitter_handle}", target: :blank, class: 'btn btn-mini btn-warning')
       end
       unless (user.profile.facebook_profile||'').blank?
-        links << link_to( 'Facebook', "http://facebook.com/#{user.profile.facebook_profile}", target: :blank)
+        links << link_to( '<i class="icon-share icon-white"></i> Facebook'.html_safe, "http://facebook.com/#{user.profile.facebook_profile}", target: :blank, class: 'btn btn-mini btn-warning')
       end
       unless (user.profile.google_uid||'').blank?
-        links << link_to( 'Google+', "https://plus.google.com/#{user.profile.google_uid}/about", target: :blank)
+        links << link_to( '<i class="icon-share icon-white"></i> Google+'.html_safe, "https://plus.google.com/#{user.profile.google_uid}/about", target: :blank, class: 'btn btn-mini btn-warning')
       end
     end
-    links.join(", ").html_safe
+    links.join(" ").html_safe
   end
 
   def email
@@ -65,15 +73,7 @@ class UserPresenter < BasePresenter
   end
     
   def avatar(size=:avatar)
-    if user.avatar 
-      if user.avatar.use_gravatar
-        user_gravatar(size)
-      else
-        user_avatar(size)
-      end
-    else
-      no_avatar(size)
-    end
+    image_tag( user.picture(size), class: 'avatar', style: Avatar::css_size_for(size))
   end
 
   def location

@@ -12,4 +12,6 @@ class Profile
   field :facebook_profile
   field :google_uid
 
+  field :is_public, type: Boolean, default: true
+
 end

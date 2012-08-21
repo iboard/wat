@@ -4,6 +4,21 @@ class Avatar
   include Mongoid::Paperclip
 
 
+  def self.css_size_for(_size)
+    case _size
+      when :avatar
+        "width: 128px; height: 128px;"
+      when :large
+        "width: 300px; height: 300px;"
+      when :thumb
+        "width: 100px; height: 100px;"
+      when :icon
+        "width: 64px; height: 64px;"
+      else
+        "width: 32px; height: 32px;"
+    end
+  end
+
   field :use_gravatar, type: Boolean, default: false
   embedded_in :user
 

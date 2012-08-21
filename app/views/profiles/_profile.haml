@@ -1,4 +1,5 @@
 %h2= t(:your_profile)
+%strong= user.profile.is_public ? t(:public) : t(:hidden)
 
 - if user.profile.new_record?
   .well

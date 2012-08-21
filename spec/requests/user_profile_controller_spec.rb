@@ -67,8 +67,7 @@ describe UsersController do
 
   it "shows an default avatar in user header if no image is available" do
     visit user_path(@user1)
-    page.should have_css(".avatar_tiny")
-    page.should have_css(".avatar_thumb")
+    page.should have_css(".avatar")
   end
 
   it "shows an avatar in user header", js: true do
@@ -112,4 +111,32 @@ describe UsersController do
 
   end
 
+  describe "Public Profile" do
+    before(:each) do
+      @user1.profile.delete if @user1.profile
+      @user1.create_profile(firstname: 'Fritz', lastname: 'Cat', dob: DateTime.parse("1964-08-31 06:00"),
+                            phone_number: '+43 123 4567890', mobile: '+43 699 0987654321', twitter_handle: '@nickendell',
+                            facebook_profile: 'fritz.the.cat', google_uid: '1234567890ABCDEFGH'
+      )
+    end
+
+    it "shows the user' profile" do
+      visit user_profile_path(@user1)
+      page.should have_content "Fritz"
+      page.should have_content "Cat"
+      page.should have_content "+43 123 4567890"
+      page.should have_content "+43 699 0987654321"
+      page.should have_link "Twitter"
+      page.should have_link "Facebook"
+      page.should have_link "Google+"
+    end
+
+    it "checks show_public_flag" do
+      @user1.profile.is_public=false
+      @user1.save!
+      visit signout_path
+      visit user_profile_path(@user1)
+      page.should have_content "This profile is not public"
+    end
+  end
 end

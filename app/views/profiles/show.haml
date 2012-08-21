@@ -1,0 +1,23 @@
+- present @user.profile do |presenter|
+  %br/
+  %h1= title presenter.profile_page_title
+  %br/
+  %hr/
+  .row-fluid
+    .span2.profile-avatar
+      = presenter.user_presenter.avatar(:avatar)
+    .span10.profile-details
+      %h3= presenter.firstname + " " + presenter.lastname
+      - if @user.profile.is_public || (@user == current_user)
+        %p= presenter.dob
+        %p= presenter.user_presenter.email
+        %p= presenter.phone_number unless @user.profile.phone_number.blank?
+        %p= presenter.mobile unless @user.profile.mobile.blank?
+        %p= presenter.user_presenter.social_media_links
+      - else
+        .alert.alert-info
+          %h4.stamped
+            %i.icon-exclamation-sign
+            =t(:this_profile_is_not_public)
+
+

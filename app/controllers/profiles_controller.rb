@@ -2,9 +2,16 @@
 
 class ProfilesController < ApplicationController
 
-  before_filter :ensure_user
+  before_filter :ensure_user, except: [:show]
 
   def show
+    @user = User.find(params[:user_id])
+    respond_to do |format|
+      format.html { }
+      format.js {
+        render nothing: true unless current_user && @user == current_user
+      }
+    end
   end
 
   def edit

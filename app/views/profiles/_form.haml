@@ -13,6 +13,12 @@
       = f.input :facebook_profile, placeholder: 'firstname.lastname', autocorrect: false
       = f.input :google_uid, placeholder: '116071098827301487282'
   .row-fluid
+    .span12
+      .check-box-with-label
+        = f.input :is_public, as: :boolean, label: false
+        = f.label :is_public, t(:remove_check_if_profile_is_not_public)
+  .row-fluid
     .form-actions
+      %br/
       = f.button :submit, t(:save), class: "btn btn-primary"
       = button_link_to 'icon-remove','btn', t(:cancel), user_profile_path(user), id: 'personal_information', remote: true, "data-user-id" => user.id.to_s

@@ -253,7 +253,11 @@ class User
       when :tiny
         options = "width: 32px; height: 32px;"
       when :icon
-        options = 'width: 63px; height: 64px;'
+        options = 'width: 64px; height: 64px;'
+      when :large
+        options = 'width: 300px; height: 300px;'
+      when :thumb
+        options = 'width: 100px; height: 100px;'
       else
         options = 'width: 128px; height: 128px;'
     end
@@ -298,20 +302,22 @@ class User
 
   def events
     all_events = []
-    self.timeline_subscriptions.each do  |subscription|
-      all_events += subscription.timeline.timeline_events
-    end
-    all_events.flatten.sort {|a,b|
-      as = a._id.to_s
-      bs = b._id.to_s
-      if as < bs
-        -1
-      elsif as == bs
-        0
-      else
-        1
+    if self.timeline_subscriptions
+      self.timeline_subscriptions.each do  |subscription|
+        all_events += subscription.timeline.timeline_events if subscription.timeline
       end
-    }
+      all_events.flatten.sort {|a,b|
+        as = a._id.to_s
+        bs = b._id.to_s
+        if as < bs
+          -1
+        elsif as == bs
+          0
+        else
+          1
+        end
+      }
+    end
   end
 
   def timeline

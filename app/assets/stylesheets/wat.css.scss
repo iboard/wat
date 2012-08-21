@@ -616,3 +616,14 @@ ul.versions {
 .disabled {
   opacity: 0.5;
 }
+
+.check-box-with-label {
+  display: block;
+  .control-group {
+    display: inline;
+  }
+  label {
+    display: inline;
+    margin-left: 5px;
+  }
+}
