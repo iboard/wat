@@ -1,7 +1,6 @@
 - present user do |presenter|
   - short ||= false
   .well{:id => user.id.to_s}
-    = presenter.options_menu
     .row-fluid
       .span2.shadow-img
         = presenter.avatar(:icon)
@@ -10,7 +9,8 @@
           %br/
           %br/
           = link_to( t(:edit_avatar),user_avatar_path(user), remote: true)
-      .span7
+      .span10
+        = presenter.options_menu
         %h2= presenter.name_and_profile_link
         - unless (_sm = presenter.social_media_links).blank?
           %p= _sm
@@ -28,9 +28,6 @@
             = presenter.oauth_providers
         - if current_user.is_contacted_with?(user)
           = button_link_to 'icon-remove-sign', 'btn btn-danger', t(:unlink_contact), contact_path(user.id), method: :delete, confirm: t(:are_you_sure), id: "delete-facility-#{user._id}"
-      .span2{:id => "#{user.id.to_s}"}
-        - unless user.location_token.blank? || (params[:search] && !(params[:search]['search_text'] == "search_text"))
-          %div{ :class => "user-location", :value => user.location_token, :id => "location-#{user.id.to_s}"}
     .clear-both
 
     

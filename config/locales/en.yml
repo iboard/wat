@@ -385,3 +385,4 @@ en:
   public: public
   hidden: hidden
   this_profile_is_not_public: This profile is not public
+  user_profile: "User's profile"

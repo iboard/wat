@@ -16,13 +16,16 @@ class UserPresenter < BasePresenter
   end
 
   def name_and_profile_link
+    _rc = ""
     if !user.respond_to?(:name)
-      content_tag( :span, class: 'none_given') { I18n.t(:no_name_given) }
-    elsif user.profile && (user.profile.is_public || user == current_user)
-      link_to user.name, user_profile_path(user)
+      _rc += content_tag( :span, class: 'none_given') { I18n.t(:no_name_given) }
     else
-      user.name
+      _rc += user.name
     end
+    if user.profile && (user.profile.is_public || user == current_user)
+      _rc += "&nbsp;"*4 + button_link_to( 'icon-share icon-white', 'btn btn-primary', t(:user_profile),  user_profile_path(user) )
+    end
+    _rc.html_safe
   end
 
   def social_media_links
