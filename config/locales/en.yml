@@ -387,3 +387,7 @@ en:
   this_profile_is_not_public: This profile is not public
   user_profile: "User's profile"
   featured_checkbox_hint: "Show on start-page."
+  publish_at: Publish on
+  expire_on: Expire on
+  publish_at: Publish on
+  expire_at: Expire on

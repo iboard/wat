@@ -391,3 +391,5 @@ de:
   this_profile_is_not_public: Dieses Profil ist nicht öffentlich
   user_profile: 'Benutzerprofil'
   featured_checkbox_hint: "Auf der Startseite anzeigen"
+  publish_at: Veröffentlichen am
+  expire_at: Anzeigen bis

@@ -16,7 +16,15 @@
     %br/
   .row-fluid
     .span6
-      =f.input :use_publish_at, as: :boolean, hint: t(:publish_on_hint).html_safe + datepicker( 'page[publish_on]', page.publish_at).html_safe
+      %strong=t(:publish_at)
+      .check-box-with-label
+        =f.input( :use_publish_at, as: :boolean, label: false )
+        =f.label :use_publish_at, t(:publish_on_hint).html_safe
+      = datepicker( 'page[publish_on]', page.publish_at).html_safe
     .span6
-      =f.input :use_expire_at,  as: :boolean, hint: t(:expire_on_hint).html_safe + datepicker( 'page[expire_on]', page.expire_at).html_safe
+      %strong=t(:expire_at)
+      .check-box-with-label
+        =f.input( :use_expire_at,  as: :boolean, label: false)
+        =f.label :use_expire_at, t(:expire_on_hint).html_safe
+      = datepicker( 'page[expire_on]', page.expire_at).html_safe
 %br/
