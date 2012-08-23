@@ -1,6 +1,7 @@
-.comment-preview
-  %i.icon-comment.icon-white
-  &nbsp;
-  = render "comments/comments_link", commentable: commentable
-%div{id: "comments-for-#{class_to_param(commentable)}-#{commentable.id.to_s}"}
-= render "comments/comments_close_button"
+- if can_execute?('Admin','Maintainer') || (defined?(commentable.is_commentable) ? commentable.is_commentable : true)
+  .comment-preview
+    %i.icon-comment.icon-white
+    &nbsp;
+    = render "comments/comments_link", commentable: commentable
+  %div{id: "comments-for-#{class_to_param(commentable)}-#{commentable.id.to_s}"}
+  = render "comments/comments_close_button"

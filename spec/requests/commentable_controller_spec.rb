@@ -5,7 +5,7 @@ describe Commentable do
 
     before(:each) do
       Page.delete_all
-      @page = Page.create!(permalink: "First Page", title: 'First Page', body: lorem_text())
+      @page = Page.create!(permalink: "First Page", title: 'First Page', body: lorem_text(), is_commentable: true)
       User.delete_all
       Identity.delete_all
       visit switch_language_path(:en)
@@ -30,6 +30,25 @@ describe Commentable do
         visit page_path(@page)
         page.should have_link "One comment"
       end
+
+      it "doesn't show the bubble if is_commentable is defined but not true in the commentable" do
+        @page.is_commentable = false
+        @page.save!
+        @page.reload
+        visit page_path(@page)
+        page.should_not have_link "One comment"
+      end
+
+      it "doesn't show the bubble, not even on the start-page" do
+        @page.is_commentable = false, @page.featured = true
+        @page.save!
+        @page.reload
+        visit signout_path
+        visit root_path
+        page.should_not have_link "One comment"
+      end
+
+
 
       it "shows comments when click on 'comments-link'" do
         page.should_not have_content "This is a cool feature"

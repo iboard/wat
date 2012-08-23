@@ -1,8 +1,9 @@
-= link_to( t(:number_of_comments, count: commentable.comments.count), |
-  commentable_comments_path(commentable)+"#new-comment-form",         |
-  :"data-commentable-type" => class_to_param(commentable),            |
-  :"data-commentable-id"  => commentable.id.to_s,                     |
-  :class => 'comment-preview-link',                                   |
-  :id => "comments-for-#{class_to_param(commentable)}-#{ commentable.to_param }-link", |
-  remote: true                                                        |
-)                                                                     |
+- if can_execute?('Admin','Maintainer') || (defined?(commentable.is_commentable) ? commentable.is_commentable : true)
+  = link_to( t(:number_of_comments, count: commentable.comments.count), |
+    commentable_comments_path(commentable)+"#new-comment-form",         |
+    :"data-commentable-type" => class_to_param(commentable),            |
+    :"data-commentable-id"  => commentable.id.to_s,                     |
+    :class => 'comment-preview-link',                                   |
+    :id => "comments-for-#{class_to_param(commentable)}-#{ commentable.to_param }-link", |
+    remote: true                                                        |
+  )                                                                     |
