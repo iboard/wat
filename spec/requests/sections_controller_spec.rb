@@ -8,7 +8,7 @@ describe SectionsController do
 
   before(:each) do
     Section.delete_all
-    @section = Section.create!(permalink: "sectionone", title: 'Section ONE', body: lorem())
+    @section = Section.create!(permalink: "sectionone", title: 'Section ONE', body: lorem(), top_menu: true)
     @section.save!
     @page1 = @section.pages.create(:permalink => 'page 1', :title => 'Page One', body: 'Page one body')
     @page2 = @section.pages.create(:permalink => 'page 2', :title => 'Page Two', body: 'Page two body')
@@ -27,7 +27,7 @@ describe SectionsController do
     visit root_path
     page.should have_link "Section ONE"
   end
-  
+
   it "shows a submenu if more than one page on the section-root-path" do
     visit page_path(@page1)
     page.should have_content "Page one body"

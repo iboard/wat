@@ -393,3 +393,5 @@ de:
   featured_checkbox_hint: "Auf der Startseite anzeigen"
   publish_at: Veröffentlichen am
   expire_at: Anzeigen bis
+  footer_menu_checkbox: Am Seitenende anzeigen
+  top_menu_checkbox: Im Hauptmenü anzeigen

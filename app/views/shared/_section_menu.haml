@@ -1,3 +1,4 @@
-- Section.all.each do |section|
-  %li{class: "ebtn #{section._id}"}
-    = link_to section.title, section_path(section)
+- Section.top_menu_sections.each do |section|
+  - if section.pages.online.any? || (can_read?('Admin', 'Maintainer') && section.pages.any?)
+    %li{class: "ebtn #{section._id}"}
+      = link_to section.title, section_path(section)

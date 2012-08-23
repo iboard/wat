@@ -19,7 +19,18 @@ class Section
   field :position, type: Integer, default: 0
   default_scope asc(:position)
 
+  field :top_menu, type: Boolean, default: false
+  field :footer_menu, type: Boolean, default: false
+
   has_many  :pages, dependent: :nullify
+
+  def self.top_menu_sections
+    where(top_menu: true)
+  end
+
+  def self.footer_sections
+    where(footer_menu: true)
+  end
 
   def self.banners
     banners = []

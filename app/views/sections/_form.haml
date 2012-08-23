@@ -5,6 +5,8 @@
       =f.input :permalink, disabled: !section.new_record?
       =f.input :title
       =f.input :body, as: :text, input_html: { rows: 5 }
+      =f.input :top_menu, as: :boolean, label: t(:top_menu_checkbox)
+      =f.input :footer_menu, as: :boolean, label:  t(:footer_menu_checkbox)
     .form-actions
       =f.button :submit, class: 'btn btn-primary'
       =button_link_to 'icon-remove-sign', 'btn', t(:cancel), :back

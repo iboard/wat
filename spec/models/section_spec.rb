@@ -55,4 +55,24 @@ describe Section do
     Section.all.map(&:permalink).should == ['Pages', 'Banners', 'Sections']
   end
 
+  describe  "scopes sections for top menu" do
+    before(:each) do
+      Section.delete_all
+      Section.create( position: 1, permalink: "intop", title: "In Top", top_menu: true)
+      Section.create( position: 2, permalink: "infooter", title: "In Footer", footer_menu: true)
+      Section.create( position: 3, permalink: 'bothmenus', title: "Both Menus", top_menu: true, footer_menu: true)
+      Section.create( position: 4, permalink: 'innomenu', title: "Listed nowhere")
+      Section.count.should == 4
+    end
+
+    it "scopes sections for topmenu" do
+      Section.top_menu_sections.count.should == 2
+      Section.top_menu_sections.all.map(&:title).should == ["In Top", "Both Menus"]
+    end
+
+    it "scopes sections for footer" do
+      Section.footer_sections.all.map(&:title).should == ["In Footer", "Both Menus"]
+    end
+
+  end
 end

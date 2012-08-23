@@ -43,6 +43,32 @@ describe ApplicationController do
       page.should have_content("Title Banner Two")
     end
 
+    describe "Lists sections in top-menu and footer" do
+      before(:each) do
+        Section.delete_all
+        Page.delete_all
+        @s1 = Section.create( position: 1, permalink: "intop", title: "In Top", top_menu: true)
+        @s1a= Section.create( position: 1, permalink: "empty", title: "In Top but empty", top_menu: true, footer_menu: true)
+        @s2 = Section.create( position: 2, permalink: "infooter", title: "In Footer", footer_menu: true)
+        @s3 = Section.create( position: 3, permalink: 'bothmenus', title: "Both Menus", top_menu: true, footer_menu: true)
+        @s4 = Section.create( position: 4, permalink: 'innomenu', title: "Listed nowhere")
+        Section.count.should == 5
+        @s1.pages.create( permalink: "p1", title: "Page One")
+        @s2.pages.create( permalink: "p2", title: "Page Two")
+        @s3.pages.create( permalink: "p3", title: "Page Three")
+        @s4.pages.create( permalink: "p4", title: "Page Four")
+        visit root_path
+      end
+
+      it "Lists top-menu sections" do
+        page.should have_link "In Top"
+        page.should have_link "In Footer"
+        page.should have_link "Both Menus"
+        page.should_not have_link "Listed nowehere"
+        page.should_not have_link "In Top but empty"
+      end
+    end
+
     describe "When not logged in" do
 
       it "has a link to 'Sign in'" do

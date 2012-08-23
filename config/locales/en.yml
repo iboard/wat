@@ -391,3 +391,5 @@ en:
   expire_on: Expire on
   publish_at: Publish on
   expire_at: Expire on
+  footer_menu_checkbox: Show in footer
+  top_menu_checkbox: Show in top-menu
