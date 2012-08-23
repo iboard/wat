@@ -31,10 +31,10 @@ class PagePresenter < BasePresenter
   end
 
   def body_snippet _body_snippet
-    if _body_snippet == vpage.body
+    if (_body_snippet||'').strip == (vpage.body||'').strip
       interpret( _body_snippet || translate_link )
     elsif _body_snippet
-      strip_preview(_body_snippet)
+      strip_preview(strip_tags(_body_snippet))
     else
       translate_link
     end
@@ -119,7 +119,7 @@ private
   def strip_preview(_body_snippet)
     _txt = ""
     _txt = "<h3>" + vpage.title + "</h3>" if Settings.supress_page_title == true
-    _txt += strip_tags _body_snippet
+    _txt += "<div class='snippet-preview'>" + strip_tags( _body_snippet ) + "</div>"
     _txt += "<div class='clear-both'></div>"
     _txt.html_safe
   end

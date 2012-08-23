@@ -1,0 +1,22 @@
+=icon_link_to 'icon-chevron-right', '',  t(:other_options), '#', id: 'toggle-page-options'
+#page-options
+  .row-fluid
+    .span6
+      .integer=f.input :preview_length, as: :integer, hint: t(:default_preview_hint) + ". " + t(:default_preview_length, length: Settings.default_preview_length||300)
+    .span6
+      %p
+        %br/
+      .check-box-with-label
+        =f.input :is_commentable, as: :boolean, label: false
+        =f.label :is_commentable, t(:enable_comments)
+      .check-box-with-label
+        =f.input :featured, as: :boolean, label: false
+        =f.label :featured, t(:featured_checkbox_hint)
+  %p
+    %br/
+  .row-fluid
+    .span6
+      =f.input :use_publish_at, as: :boolean, hint: t(:publish_on_hint).html_safe + datepicker( 'page[publish_on]', page.publish_at).html_safe
+    .span6
+      =f.input :use_expire_at,  as: :boolean, hint: t(:expire_on_hint).html_safe + datepicker( 'page[expire_on]', page.expire_at).html_safe
+%br/

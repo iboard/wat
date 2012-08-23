@@ -115,7 +115,7 @@ de:
   admin: Administrator
   author: Autor
   moderator: Moderator
-  page_title_hint: 'Beginne mit @ um diese Seite auf der Startseite anzuzeigen'
+  page_title_hint: 'Wird als Teil der URL benutz; am besten beschränken sie sich auf a-z, leer, 0-9'
   page_body_hint: "Sie können Markdown benutzen. Siehe rechte Box"
   back_to_user_list: 'Zurück zur Benutzerliste'
   edit_facilities_or: "Kompetenzen bearbeiten oder ..."
@@ -331,7 +331,7 @@ de:
   delete_comment: Kommentar löschen
   update_comment: 'Änderungen speichern'
   edit_comment: 'Kommentar bearbeiten'
-  enable_comments: Schalten sie diese Option aus wenn keine Kommentare erlaubt sind.
+  enable_comments: Kommentare erlauben.
   login_to_comment: Melden Sie sich bitte an um Kommentare zu hinterlassen.
   close: 'schliessen'
   comment_deleted_msg: "Wir haben Ihren gelöschten Kommentar in das Eingabefel unten gestellt. Senden sie ihn erneut, falls er versehentlich gelöscht wurde."
@@ -390,3 +390,4 @@ de:
   hidden: Versteckt
   this_profile_is_not_public: Dieses Profil ist nicht öffentlich
   user_profile: 'Benutzerprofil'
+  featured_checkbox_hint: "Auf der Startseite anzeigen"

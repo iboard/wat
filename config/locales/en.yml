@@ -112,7 +112,7 @@ en:
   admin: Admin
   author: Author
   moderator: Moderator
-  page_title_hint: 'Begin with @ to show this page on the start page'
+  page_title_hint: 'will be used as part of the URL; best use simple words, numbers, blanks, but not any other chars.'
   page_body_hint: "You can use Markdown here. See sidebar on the right"
   back_to_user_list: 'Back to user listing'
   edit_facilities_or: "Edit user's facilities or ..."
@@ -327,7 +327,7 @@ en:
   delete_comment: Delete comment
   update_comment: Update comment
   edit_comment: Edit comment
-  enable_comments: Switch off this option to disable comments
+  enable_comments: Allow comments
   login_to_comment: Please log in to post a new comment
   close: close
   comment_deleted_msg: "We put your deleted message into the form below. Repost it if you did deleted it accidently."
@@ -386,3 +386,4 @@ en:
   hidden: hidden
   this_profile_is_not_public: This profile is not public
   user_profile: "User's profile"
+  featured_checkbox_hint: "Show on start-page."

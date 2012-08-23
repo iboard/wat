@@ -177,7 +177,7 @@ describe PagesController do
     end
 
     it "labels featured-articles" do
-      Page.create permalink: "@feature1", title: '@feature1', body: "Ruby Is Hero"
+      Page.create permalink: "@feature1", title: '@feature1', body: "Ruby Is Hero", featured: true
       visit pages_path
       page.should have_content "FEATURED"
     end
@@ -204,6 +204,17 @@ describe PagesController do
       page.should_not have_button "Search"
       page.should have_content "You catched me!"
       page.should_not have_content "Ruby Is Hero"
+    end
+
+    it "let change featured on/off" do
+      visit edit_page_path(@page)
+      check "Show on start-page."
+      click_button "Save page"
+      Page.featured.where(_id: @page._id).first.should_not be_nil
+      visit edit_page_path(@page)
+      uncheck "Show on start-page."
+      click_button "Save page"
+      Page.featured.where(id: @page._id).first.should be_nil
     end
 
     describe "Translations" do
@@ -352,7 +363,7 @@ describe PagesController do
       visit pages_path
     end
 
-    it "doesn't show expired and not published pages for non-admins" do
+    it "doesn't show expired nor published pages for non-admins" do
       page.should have_content "Always online"
       page.should have_content "Published"
       page.should have_content "Will expire"

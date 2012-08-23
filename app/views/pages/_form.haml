@@ -3,29 +3,9 @@
   .controls
     =f.input :permalink, :disabled => !page.new_record?, :hint => icon_label( 'icon-exclamation-sign', '', t(:permalink_can_not_be_changed_once_created) ), :input_html => {:style => "width: 100%;"}, :placeholder => t(:page_title_hint)
     =f.input :title, :input_html => {:style => "width: 100%;"}
-    =icon_link_to 'icon-chevron-right', '',  t(:section_and_banner), '#', id: 'toggle-section-banner'
-    %br/
-    #section-and-banner
-      =f.input :section_id, :collection => Section.all, prompt: t(:select_section), include_blank: t(:no_section)
-      =f.input :banner_title, input_html: {:style => "width: 100%" }
-      =f.input :banner_text, :as => :ckeditor, input_html: {:style => "width: 100%", rows: 5 }
-      =f.input :banner_text_position, :collection => ['left', 'right'] 
-      .well
-        =f.simple_fields_for page.banner||page.build_banner do |fb|
-          - if page.banner && page.banner.banner.exists?
-            .pull-right
-              =image_tag page.banner.banner.url(:preview)
-              =f.input :delete_banner, as: :boolean, label: false, hint: ("&nbsp;".html_safe+t(:check_to_remove_the_image_from_the_server))
-          =fb.input :banner, as: :file,  :label => t(:upload_a_banner)
-          =fb.input :linked_url, as: :url
+    = render 'section_and_banner_fields', f: f, page: page
     =f.input :body, as: :ckeditor, input_html: {toolbar:'Full'}, placeholder: t(:page_body_hint)
-    =icon_link_to 'icon-chevron-right', '',  t(:other_options), '#', id: 'toggle-page-options'
-    #page-options
-      =f.input :preview_length, as: :integer, hint: t(:default_preview_hint) + ". " + t(:default_preview_length, length: Settings.default_preview_length||300)
-      =f.input :is_commentable, as: :boolean, hint: "&nbsp;".html_safe+t(:enable_comments)
-      =f.input :use_publish_at, as: :boolean, hint: t(:publish_on_hint).html_safe + datepicker( 'page[publish_on]', page.publish_at).html_safe
-      =f.input :use_expire_at,  as: :boolean, hint: t(:expire_on_hint).html_safe + datepicker( 'page[expire_on]', page.expire_at).html_safe
-    %br/
+    = render 'option_fields', f: f, page: page
     .form-actions
       =f.button :submit, t(:save_page), class: 'btn btn-primary'
       = button_link_to 'icon-remove', 'btn', t(:cancel), pages_path

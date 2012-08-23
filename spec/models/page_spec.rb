@@ -197,6 +197,16 @@ describe Page do
 
   end
 
+  describe "scopes" do
+    it "lists featured pages" do
+      %w( @featured featured not_featured ).each do |title|
+        Page.create permalink: title, title: title, body: "lorem #{title} ipsum"
+      end
+      Page.first.update_attributes( featured: true )
+      Page.featured.only(:title).map(&:title).should == ['@featured']
+    end
+  end
+
   describe PageEvent do
 
     before( :each ) do

@@ -31,6 +31,7 @@ class Page
   field  :publish_at, type: Time
   field  :expire_at, type: Time
   field  :is_online, type: Boolean, default: true
+  field  :featured, type: Boolean, default: false
 
   field  :last_modified_by
 
@@ -77,6 +78,10 @@ class Page
     excludes( banner: nil).excludes( :'banner.banner_file_size' => nil ).desc(:updated_at)
   }
 
+  scope :featured, -> {
+    where :featured => true
+  }
+
   def self.permitted(is_admin)
     is_admin ? unscoped : where(:is_online => true)
   end
@@ -88,7 +93,7 @@ class Page
   end
 
   def is_featured?
-    permalink[0] == '@'
+    self.featured
   end
 
   # VIRTUAL ATTRIBUTE

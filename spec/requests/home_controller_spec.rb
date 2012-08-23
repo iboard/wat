@@ -61,8 +61,8 @@ describe ApplicationController do
         page.should_not have_content "Please create a page with permalink 'hero' which will be displayed here."
       end
 
-      it "shows pages prefixed by @" do
-        Page.create permalink: '@header1', title: '@header1', body: "This is for the homepage"
+      it "shows featured pages" do
+        Page.create permalink: 'header1', title: 'header1', body: "This is for the homepage", featured: true
         visit root_path
         page.should have_content "This is for the homepage"
       end
@@ -82,7 +82,7 @@ describe ApplicationController do
       end
 
       it "shows pages with defined preview-length on the homepage" do
-        Page.create permalink: "@10", title: "10 Characters preview", body: "lorem ipsum dolores", preview_length: 10
+        Page.create permalink: "@10", title: "10 Characters preview", body: "lorem ipsum dolores", preview_length: 10, featured: true
         visit root_path
         page.should have_content "lorem ..."
         page.should have_link I18n.translate(:read_more)
@@ -90,7 +90,7 @@ describe ApplicationController do
       end
 
       it "shows default preview length if no value is given" do
-        Page.create permalink: "@full length", title: "Longer preview", body: lorem_text
+        Page.create permalink: "@full length", title: "Longer preview", body: lorem_text, featured: true
         visit root_path
         page.should have_content "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in ..."
       end

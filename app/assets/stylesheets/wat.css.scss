@@ -554,6 +554,15 @@ img.floating-avatar {
   padding: 10px;
   background: white;
   margin-bottom: 10px;
+  padding-left: 20px;
+  padding-top: 20px;
+  .help-block {
+    margin: 0px;
+    margin-top: -8px;
+    padding: 0px;
+    display: block;
+    font-size: 0.8em;
+  }
 }
 
 .online {
@@ -617,13 +626,33 @@ ul.versions {
   opacity: 0.5;
 }
 
+.integer {
+  input {
+    type: number;
+    min-value: 0;
+    size: 5;
+    max-length: 5;
+    max-width: 100px;
+  }
+}
+
 .check-box-with-label {
-  display: block;
+  margin: 0px;
+  margin-left: 20px;
+  padding: 0px;
+  padding-right: 40px;
+  display: inline-block;
   .control-group {
     display: inline;
+    label {
+      display: inline;
+    }
   }
-  label {
-    display: inline;
-    margin-left: 5px;
-  }
+}
+
+.snippet-preview {
+  font-weight: 100;
+  font-size: 1.8em;
+  letter-spacing: 1px;
+  line-height: 140%;
 }

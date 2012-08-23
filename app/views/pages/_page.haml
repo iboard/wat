@@ -15,7 +15,7 @@
       - elsif Settings.supress_page_title != true
         %h2=page.title
       %div
-        %strong= presenter.body_snippet strip_tags(_preview)
+        %strong= presenter.body_snippet(_preview)
         %br/
         = render "comments/comments_preview", commentable: page
         %br/
