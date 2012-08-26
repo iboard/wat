@@ -32,6 +32,14 @@ body {
 
 .main.container {
   padding-bottom: 20px;
+  .profile-avatar {
+    img {
+      width: 100px;
+      height: 100px;
+      max-height: 100px;
+      max-width: 100px;
+    }
+  }
 }
 
 .inline {
@@ -267,8 +275,8 @@ img.avatar {
         color-stop(0.81, rgb(221,229,236))
     );
     margin: 0px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   footer {
@@ -287,7 +295,21 @@ img.avatar {
   }
 }
 
+
+@media (min-width: 790px) {
+  .profile-avatar {
+    img {
+      width: 100px;
+      height: 100px;
+      max-height: 100px;
+      max-width: 100px;
+    }
+  }
+}
+
+
 @media (min-width: 980px) {
+
   .subnav-fixed {
     background: $navbarBackground;
     position: fixed;
@@ -329,11 +351,13 @@ img.avatar {
 }
 
 @media (max-width: 480px) {
+
   .banner, #banner {
     min-width: 100%;
     padding: 0px;
     margin: 0px;
     margin-top: 10px;
+
     overflow: hidden;
     a {
       img {
@@ -620,6 +644,10 @@ ul.versions {
     display: inline;
     width: 120px;
   }
+}
+
+#timeline_name {
+  width: 100%;
 }
 
 .disabled {

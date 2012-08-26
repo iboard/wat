@@ -28,7 +28,7 @@ class ProfilePresenter < BasePresenter
   end
 
   def dob
-    I18n.l(profile.dob)
+    I18n.l(profile.dob) if profile.dob
   end
 
   def phone_number
