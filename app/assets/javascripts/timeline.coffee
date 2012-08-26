@@ -1,11 +1,14 @@
 jQuery ->
 
   $(document).ready ->
-    _state = $('#timeline-display').attr('class')
-    if _state == "icon-chevron-down icon-white timeline-toggle"
+    if $('#timeline-display').length > 0
+      _state = $('#timeline-display').attr('class')
+      if _state == "icon-chevron-down icon-white timeline-toggle"
+        restartTimelineUpdater()
+        $('#timeline').height(300)
+        $('#input-text').show(-10)
+    else if $('#events').length > 0
       restartTimelineUpdater()
-      $('#timeline').height(300)
-      $('#input-text').show(-10)
 
 
   self.toggleTimeline = (state) ->

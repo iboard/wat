@@ -327,7 +327,11 @@ class User
   end
 
   def create_personal_timeline
-    self.create_timeline( name: self.name )
+    _name = self.name
+    while _found =  Timeline.find_by(name: _name )
+      _name = "%s %d"  % [self.name, Timeline.where(name: _name).count + 1]
+    end
+    self.create_timeline( name: _name )
   end
 
   def subscribe_doorkeeper_timeline
