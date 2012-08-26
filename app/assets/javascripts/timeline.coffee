@@ -1,5 +1,13 @@
 jQuery ->
 
+  $(document).ready ->
+    _state = $('#timeline-display').attr('class')
+    if _state == "icon-chevron-down icon-white timeline-toggle"
+      restartTimelineUpdater()
+      $('#timeline').height(300)
+      $('#input-text').show(-10)
+
+
   self.toggleTimeline = (state) ->
     if state == 'hidden'
       hideTimeline()
@@ -18,31 +26,20 @@ jQuery ->
     $('#timeline-display').attr('class','icon-chevron-down icon-white timeline-toggle')
     $('#input-text').show(500)
 
-
-  $('#timeline-display').ready ->
-    _state = $('#timeline-display').attr('class')
-    if _state == "icon-chevron-down icon-white timeline-toggle"
-      restartTimelineUpdater()
-      $('#timeline').animate( height: '300px', 200)
-      $('#input-text').show(250)
-
-
   self.restartTimelineUpdater = () ->
     $.ajax "/timelines/update_timeline",
       success  : (res, status, xhr) ->
         $('#timeline #entries').html(latest_events)
-        $('#timeline #entries .latest-timeline-event').effect('highlight', {}, 4000)
+        $('#timeline #entries .latest-timeline-event').effect('highlight', {}, 30000)
         setTimeout( "restartTimelineUpdater()", 5000 )
+        if $('#events').length > 0
+          $('#events').html(latest_events)
+          $('.latest-timeline-event').effect('highlight', {}, 30000)
       error    : (xhr, status, err) ->
         $('#timeline #entries').html( "<div class='alert alert-info'>
                                        No Timeline available at the moment.<hr/>
                                       Im Augenblick ist keine Timeline verfügbar.") 
         setTimeout( "restartTimelineUpdater()", 60000 )
-
-
-  if $('#hide-timeline').length > 0
-    $('#hide-timeline').ready ->
-      hideTimeline()
 
   if $('.subsribe-timeline-by-email-checkbox').length > 0
     $('.subsribe-timeline-by-email-checkbox').change ->

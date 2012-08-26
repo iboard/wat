@@ -395,3 +395,8 @@ de:
   expire_at: Anzeigen bis
   footer_menu_checkbox: Am Seitenende anzeigen
   top_menu_checkbox: Im Hauptmenü anzeigen
+  personal_timeline: Persönliche Timeline
+  public_timeline_hint: öffentlich anzeigen?
+  enable_timeline_hint: Persönliche Timeline aktivieren?
+  timeline_updated: Timeline wurde gespeichert
+  error_updating_timeline: "Timeline konnte nicht gespichert werden"

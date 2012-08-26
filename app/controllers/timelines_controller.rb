@@ -2,9 +2,25 @@ class TimelinesController < ApplicationController
 
   before_filter  :load_timelines
 
+  # GET /timelines
+  # Sets no_timeline to prevent timeline-view (in corner) on this page
   def index
+    @no_timeline = true
   end
 
+  # User updates "personal timeline" in timelines_path
+  def update
+    user = User.find(params[:user_id])
+    timeline = user.timeline
+    redirect_to root_path, alert: t(:access_denied) unless user == current_user || current_user.can_execute?('Admin')
+    if timeline.update_attributes(params[:timeline])
+      redirect_to timelines_path, notice: t(:timeline_updated)
+    else
+      redirect_to timelines_path, alert: (t(:error_updating_timeline) + ":<br/>" + timeline.errors.full_messages.join("<br/>")).html_safe
+    end
+  end
+
+  # user clicks on show/hide timeline
   def toggle
     @timeline_display = session[:timeline][:display] == :hidden ? :show : :hidden
     session[:timeline][:display] = @timeline_display
@@ -16,6 +32,7 @@ class TimelinesController < ApplicationController
     end
   end
 
+  # Ajax request called every 5 seconds from timeline.coffee
   def update_timeline
   end
 

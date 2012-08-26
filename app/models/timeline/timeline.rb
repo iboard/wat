@@ -6,10 +6,18 @@ class Timeline
   validates_presence_of   :name
   validates_uniqueness_of :name
 
+  field                   :enabled, type: Boolean, default: true
+  field                   :public,  type: Boolean, default: true
+
   embeds_many  :timeline_events
   accepts_nested_attributes_for :timeline_events
 
+  belongs_to :user
+
   has_many :timeline_subscriptions
+
+  scope :enabled, -> { where(enabled: true) }
+  scope :public,  -> { where(public: true)  }
 
   def self.find_by(options)
     where(options).first

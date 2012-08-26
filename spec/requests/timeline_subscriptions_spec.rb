@@ -42,7 +42,23 @@ describe TimelineSubscriptionsController do
       visit timelines_path
       page.should have_content "Subscriptions"
       page.should have_content "Doorkeeper"
-      page.should have_content "User-posts-frank-zapp"
+      page.should have_content "Frank Zappa"
+    end
+
+    it "shows an edit-box for own timeline" do
+      visit timelines_path
+      page.should have_content "Personal Timeline"
+    end
+
+    it "doesn't list disabled or non-public timelines" do
+      other_user = test_user "Mr. Nowhere", "secret"
+      other_user.timeline.update_attributes(public: false)
+      Timeline.create( name: 'Disabled Timeline', enabled: false )
+      visit timelines_path
+      page.find("#timeline_subscriptions_message_#{@user.timeline._id}").should_not be_nil
+      page.find("#timeline_subscriptions_message_#{doorkeeper_timeline._id}").should_not be_nil
+      page.should_not have_content "Mr. Nowhere"
+      page.should_not have_content "Disabled Timeline"
     end
 
     it "allows to change the subscription by clicking the checkbox on/off", js: true do

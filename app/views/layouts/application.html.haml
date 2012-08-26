@@ -43,7 +43,7 @@
               - ensure_default_search_box
               = yield(:search_bar) 
             
-    = render "timelines/users_timeline", user: current_user if current_user
+    = render "timelines/users_timeline", user: current_user if current_user && !@no_timeline
     .main-background
       .container.main
         - if content_for?(:top_menu)

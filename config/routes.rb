@@ -42,6 +42,7 @@ Wat::Application.routes.draw do
       get 'reset_password/:token' => :reset_password, as: 'reset_password'
       get 'timeline_subscription/:timeline_id/:timeline_action' => :subscribe_timeline, as: 'subscribe_timeline'
     end
+    resource :timeline
   end
 
   resources :attachments
@@ -96,7 +97,9 @@ Wat::Application.routes.draw do
   resources :timelines do
     resources :timeline_events
     collection do
-      get 'user/:id' => :user, as: :user
+      get 'user/:user_id' => :user, as: :user
+      post 'user/:user_id' => :update, as: :update_user_timeline
+      put  'user/:user_id' => :update
       get 'toggle'   => :toggle, as: :toggle
       get 'update_timeline'   => :update_timeline, as: :update_timeline
     end

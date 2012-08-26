@@ -393,3 +393,8 @@ en:
   expire_at: Expire on
   footer_menu_checkbox: Show in footer
   top_menu_checkbox: Show in top-menu
+  personal_timeline: Personal Timeline
+  public_timeline_hint: Should your timeline be public visible?
+  enable_timeline_hint: Enable personal timeline
+  timeline_updated: Timeline successfully updated
+  error_updating_timeline: "Timeline couldn't be updated"

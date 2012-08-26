@@ -8,6 +8,12 @@ describe Timeline do
     Timeline.create(name: 'System Timeline').errors[:name].should include('is already taken')
   end
 
+  it "belongs to a user" do
+    user = test_user "Mr. Nice", "secret"
+    timeline = user.create_timeline name: 'My Timeline'
+    timeline.user.should == user
+  end
+
   describe TimelineEvent do
 
     before(:each) do

@@ -22,4 +22,9 @@ namespace :migrations do
       end
     end
   end
+
+  desc "Set default timeline-flags public, enabled to true > August 26, 2012"
+  task :timeline_flags_public_enabled => :environment do
+    Timeline.all.each { |_tl| _tl.update_attributes public: true, enabled: true }
+  end
 end

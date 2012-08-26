@@ -48,6 +48,8 @@ class User
   has_many :contact_invitations #, as: 'sent_invitations'
   has_many :attachments, class_name: "UserAttachment"
 
+  has_one  :timeline
+  accepts_nested_attributes_for :timeline
   has_many :timeline_subscriptions
 
   # Accessible Attributes
@@ -55,6 +57,7 @@ class User
 
   # Callbacks
   after_destroy :clear_identity
+  after_create  :create_personal_timeline
   after_create  :subscribe_doorkeeper_timeline
 
 
@@ -275,8 +278,7 @@ class User
   end
 
   def available_timelines
-    timeline #make sure user's own timeline is created
-    Timeline.asc(:name)
+    Timeline.enabled.public.asc(:name)
   end
 
   def subscribe_timelines(*timelines)
@@ -320,20 +322,16 @@ class User
     end
   end
 
-  def timeline
-    unless @timeline
-      @timeline ||= Timeline.find_or_create_by(name: "user-posts-%s" % [self._id])
-      subscribe_timelines(@timeline)
-    end
-    @timeline
-  end
-
   def timelines
     Timeline.any_in( _id:  self.timeline_subscriptions.map(&:timeline_id) )
   end
 
+  def create_personal_timeline
+    self.create_timeline( name: self.name )
+  end
+
   def subscribe_doorkeeper_timeline
-    self.timeline_subscriptions.create user_id: self._id, timeline_id: Timeline.find_or_create_by( name: Doorkeeper::DOORKEEPER_TIMELINE )._id
+    self.timeline_subscriptions.find_or_create_by user_id: self._id, timeline_id: Timeline.find_or_create_by( name: Doorkeeper::DOORKEEPER_TIMELINE )._id
   end
 
   protected

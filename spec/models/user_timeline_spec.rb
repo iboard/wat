@@ -20,7 +20,7 @@ describe User do
   end
 
   it "has it's own timeline" do
-    @user.timeline.name.should == "user-posts-%s" % [@user._id]
+    @user.timeline.name.should == @user.name
   end
 
 end
