@@ -1,8 +1,6 @@
-%div{class: "bubble timeline-event " + (event.current? ? 'latest-timeline-event' : '')}
-  - if event.respond_to?(:sender) && event.sender
-    .timeline-avatar=image_tag event.sender.picture(:tiny), style: "width: 32px; height: 32px;"
-  - else
-    .timeline-avatar
-      %i.icon-comment
-  .text= markdown(strip_tags(sanitize(event.text)))
-  .clear-both
+- present( event, TimelineEventPresenter ) do |presenter|
+  %div{ class: presenter.css_class_definition}
+    .pull-right.timeline-name= presenter.timeline_name
+    = presenter.avatar
+    .text= presenter.body
+    .clear-both

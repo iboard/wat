@@ -13,12 +13,14 @@ class PageEvent < DoorkeeperEvent
   end
 
   def text
-    @text ||= I18n.t(:page_event, user: sender.name, action: I18n.t(self.message.to_sym),
+    @text ||= I18n.t(:page_event,
+                     user: "[#{sender.name}](/users/#{sender._id}/profile)",
+                     action: I18n.t(self.message.to_sym),
                      time: distance_of_time_in_words(Time.now, self.created_at),
                      page: "[#{page.title}](/pages/#{page._id})"
     )
   rescue => e
-    self.message += " " + e.inspect
+    self.message += " ??? " + e.inspect
     super
   end
 

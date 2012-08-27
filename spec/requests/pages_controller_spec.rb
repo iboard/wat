@@ -61,7 +61,7 @@ describe PagesController do
         page.all('article h1', text: @page.title).first.should be_nil
       end
       page.should have_content "This is a modified page"
-      latest_doorkeeper_event.text.should == "Page '[First Page](/pages/first-page)' saved by Testuser, less than a minute ago"
+      latest_content_event.text.should == "<span class='timestamp-timeline'>less than a minute ago,</span><span class='timeline-username'>[Testuser](/users/testuser/profile)</span><br/><sapn class='timeline-message'>saved page '[First Page](/pages/first-page)'</span>"
     end
 
     it "see a new page button" do
@@ -81,7 +81,7 @@ describe PagesController do
       else
         page.all('h1', text: "A new page for WAT").first.should_not be_nil
       end
-      latest_doorkeeper_event.text.should == "Page '[A new page for WAT](/pages/a-new-page-for-wat)' created by Testuser, less than a minute ago"
+      latest_content_event.text.should == "<span class='timestamp-timeline'>less than a minute ago,</span><span class='timeline-username'>[Testuser](/users/testuser/profile)</span><br/><sapn class='timeline-message'>created page '[A new page for WAT](/pages/a-new-page-for-wat)'</span>"
   end
 
     it "accepts uploading pictures for banner and links to target url" do

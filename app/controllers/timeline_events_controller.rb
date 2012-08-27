@@ -5,7 +5,7 @@ class TimelineEventsController < ApplicationController
   def create
     _message = params[:timeline_event][:timeline_event][:message].strip
     unless _message.blank?
-      event = @timeline.reload.create_event({sender_id: @user._id, receiver_ids: [], message: _message}, UserMessage)
+      event = @user.timeline.create_event({sender_id: @user._id, receiver_ids: [], message: _message}, UserMessage)
     end
 
     respond_to do |format|

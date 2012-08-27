@@ -21,7 +21,7 @@ module Doorkeeper
 
   unless defined?(DOORKEEPER_TIMELINE)
     DOORKEEPER_TIMELINE = 'doorkeeper'
-
+    DOORKEEPER_CONTENT = 'content'
 
     def self.create_event(*args)
       _tl = Timeline.find_or_create_by(name: DOORKEEPER_TIMELINE)

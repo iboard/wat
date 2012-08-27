@@ -21,7 +21,7 @@ describe Comment do
   it "creates a comment event" do
     user = test_user "Mr. Comment", "secret"
     @page.comments.create( comment: "Please note this in the timeline", user_id: user._id)
-    latest_doorkeeper_event.text.should == "'[A Commentable Page](/pages/commentable)' was commented by Mr. Comment, less than a minute ago"
+    latest_content_event.text.should == "<span class='timestamp-timeline'>less than a minute ago,</span> <span class='timeline-username'>[Mr. Comment](/users/mr-period--comment/profile)</span><br/><span class='timeline-message'>'comments [A Commentable Page](/pages/commentable)'</span>"
   end
   
 end

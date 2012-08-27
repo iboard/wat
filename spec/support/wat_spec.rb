@@ -80,4 +80,8 @@ unless defined?(TEXT_FILE_FIXTURE)
   def latest_doorkeeper_event
     Timeline.find_or_create_by(name: Doorkeeper::DOORKEEPER_TIMELINE).timeline_events.last
   end
+
+  def latest_content_event
+    Timeline.find_or_create_by(name: Doorkeeper::DOORKEEPER_CONTENT).timeline_events.last
+  end
 end

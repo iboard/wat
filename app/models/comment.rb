@@ -22,7 +22,7 @@ class Comment
 
   private
   def fire_comment_event
-    Doorkeeper.create_event(
+    Timeline.find_or_create_by(name: Doorkeeper::DOORKEEPER_CONTENT).create_event(
         {  message: 'commented', sender_id: self.user_id,
            ip: self.posted_from_ip,
            commentable_id: self.commentable._id, commentable_type: self.commentable.class.to_s

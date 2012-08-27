@@ -12,6 +12,7 @@ describe TimelineSubscriptionsController do
     User.delete_all
     Identity.delete_all
     @user = test_user 'Frank Zappa', 'secretword'
+    @user.subscribe_timelines(@user.timeline)
     visit switch_language_path(:en)
     sign_in_user name: 'Frank Zappa', password: 'secretword'
   end
@@ -25,15 +26,15 @@ describe TimelineSubscriptionsController do
     it "allows to post via HTML/POST to 'doorkeeper'-Timeline WITHOUT JS" do
       fill_in "timeline_event_timeline_event_message", with: "My first posting to public Timeline"
       click_button "Post"
-      Doorkeeper.latest_event.text.should =~ /Frank Zappa says, 'My first posting to public Timeline'/
-      page.should have_content "Frank Zappa says, 'My first posting to public Timeline'"
+      @user.timeline.reload.timeline_events.last.text.should == "<span class='timestamp-timeline'>less than a minute ago,</span> <span class='timeline-username'>[Frank Zappa](/users/frank-zappa/profile) says</span><br/><span class='timeline-message'>'My first posting to public Timeline'</span>"
+      page.text.should match /Frank Zappa.*says.*'My first posting to public Timeline'/
     end
 
     it "allows to post via HTML/POST to 'doorkeeper'-timeline with JS", js: true do
       fill_in "timeline_event_timeline_event_message", with: "My first posting to public Timeline"
       click_button "Post"
-      wait_until {  Doorkeeper::timeline.reload.timeline_events.map(&:text).join(" ") =~ /Frank Zappa says/ }
-      Doorkeeper.latest_event.text.should =~ /Frank Zappa says, 'My first posting to public Timeline'/
+      wait_until { @user.timeline && @user.timeline.reload.timeline_events.map(&:text).join(" ") =~ /Frank Zappa.*says/ }
+      @user.timeline.timeline_events.last.text.should == "<span class='timestamp-timeline'>less than a minute ago,</span> <span class='timeline-username'>[Frank Zappa](/users/frank-zappa/profile) says</span><br/><span class='timeline-message'>'My first posting to public Timeline'</span>"
     end
   end
 
@@ -70,12 +71,12 @@ describe TimelineSubscriptionsController do
       check "timeline_subscriptions_message_#{Timeline.where(name: 'doorkeeper').first._id}"
       wait_until { page.has_content? "You're now receiving messages from 'doorkeeper'"}
       page.should have_content "You're now receiving messages from 'doorkeeper'"
-      page.should have_content "Frank Zappa signed in"
+      page.text.should match /Frank Zappa.*signed in/
 
       uncheck "timeline_subscriptions_message_#{Timeline.where(name: 'doorkeeper').first._id}"
       wait_until { page.has_content? "You will not receive new messages from 'doorkeeper'"}
       page.should have_content "You will not receive new messages from 'doorkeeper'"
-      page.should_not have_content "Frank Zappa signed in"
+      page.text.should_not match /Frank Zappa.*signed in/
     end
   end
 end

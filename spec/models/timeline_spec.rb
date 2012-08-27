@@ -55,7 +55,7 @@ describe Timeline do
       end
 
       it "formats it's output in method text()" do
-        @timeline.timeline_events.last.text.should =~ /Sender to 2 users, 'From Sender to Receivers'/
+        @timeline.timeline_events.last.text.should =~ /Sender.*2 users.*'From Sender to Receivers'/
       end
 
     end

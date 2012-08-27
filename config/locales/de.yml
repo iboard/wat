@@ -356,12 +356,12 @@ de:
   edit_email_and_location: 'E-Mail & Location'
   invitation_message: Hängen sie eine Nachricht an ...
   message_from_user_to_count_receivers: 
-    zero: "<em>%{time}</em>, %{sender} sagt: '%{message}'"
-    one: "<em>%{time}</em>, %{sender} an %{receiver}: '%{message}'"
-    other: "<em>%{time}</em>, %{sender} an %{count} andere Benutzer: '%{message}'"
+    zero: "<span class='timeline-username'>%{sender}, </span><span class='timestamp-timeline'>vor %{time}</span><br/><span class='timeline-message'>'%{message}'</span>"
+    one: "<span class='timeline-username'>%{sender}, </span><span class='timestamp-timeline'>Vor %{time}</span> -&gt; %{receiver}<br/><span class='timeline-message'>'%{message}'</span>"
+    other: "<span class='timeline-username'>%{sender}, </span><span class='timestamp-timeline'>Vor %{time}</span> -&gt; %{count} andere Benutzer<br/></span><span class='timeline-message'>'%{message}'</span>"
   logged_in: 'angemeldet'
   logged_out: 'abgemeldet'
-  user_action_event: "Vor %{time} hat sich %{user} %{action}"
+  user_action_event: "<span class='timeline-username'>%{user}</span>, <span class='timeline-username'>vor %{time}</span><br/><span class='timeline-message'>%{action}</span>"
   subscriptions: "Abonnierte Timelines"
   timeline: Timeline
   hide: verbergen
@@ -372,8 +372,8 @@ de:
   action_saved: gespeichert
   action_created: erzeugt
   action_delete: gelöscht
-  page_event: "Vor %{time} hat %{user} die Seite '%{page}' %{action}"
-  comment_event: "'%{commentable_link}' wurde vor %{time} von %{user} kommentiert"
+  page_event: "<span class='timeline-username'>%{user}, </span><span class='timestamp-timeline'>vor %{time}</span><br/><span class='timeline-message'>Seite '%{page}' %{action}</span>"
+  comment_event: "'%{commentable_link}' wurde vor <span class='timeline-username'>%{time}</span> von <span class='timeline-username'>%{user}</span> kommentiert"
   message_couldnt_be_sent: "Ihre Nachricht konnte leider nicht versandt werden."
   post: "Senden"
   on_screen: Im Browser

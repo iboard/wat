@@ -213,13 +213,13 @@ private
   end
 
   def fire_page_created_event
-    Doorkeeper.create_event(
+    Timeline.find_or_create_by(name: Doorkeeper::DOORKEEPER_CONTENT).create_event(
         {message: 'action_created', sender_id: self.last_modified_by, page_id: self._id}, PageEvent
     ) if is_online
   end
 
   def fire_page_modified_event
-    Doorkeeper.create_event(
+    Timeline.find_or_create_by(name: Doorkeeper::DOORKEEPER_CONTENT).create_event(
         {message: 'action_saved', sender_id: self.last_modified_by, page_id: self._id}, PageEvent
     ) if is_online && @saved_from_controller
   end

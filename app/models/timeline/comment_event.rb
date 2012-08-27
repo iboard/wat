@@ -15,7 +15,7 @@ class CommentEvent < DoorkeeperEvent
   end
 
   def text
-    _name = self.sender.nil? ? I18n.t(:anonymous) : self.sender.name
+    _name = self.sender.nil? ? I18n.t(:anonymous) : "[#{sender.name}](/users/#{sender._id}/profile)"
     @text ||= I18n.t(:comment_event, user: _name, time: distance_of_time_in_words(Time.now, self.created_at),
                      commentable_link: "[#{commentable.try(:title)}](/#{commentable_type.underscore.pluralize}/#{self.commentable_id})"
                     )
