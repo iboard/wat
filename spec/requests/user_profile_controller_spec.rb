@@ -138,5 +138,11 @@ describe UsersController do
       visit user_profile_path(@user1)
       page.should have_content "This profile is not public"
     end
+
+    it "shows a 'No Profile' page if user.profile == nil" do
+      _user = test_user "No Profile", "secret"
+      visit "/users/no-profile/profile"
+      page.should have_content "'No Profile' doesn't has a profile-page."
+    end
   end
 end

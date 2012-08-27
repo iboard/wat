@@ -398,3 +398,6 @@ en:
   enable_timeline_hint: Enable personal timeline
   timeline_updated: Timeline successfully updated
   error_updating_timeline: "Timeline couldn't be updated"
+  user_has_no_profile: "User '%{user}' doesn't has a profile-page."
+  edit_your_profile_hint: "You didn't create your profile-page yet. You can do so by going to %{link} and create your profile in 'Personal Information'"
+  edit_your_profile: "Edit your profile"

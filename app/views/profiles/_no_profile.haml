@@ -1,0 +1,13 @@
+%br/
+%br/
+%br/
+%br/
+- if user == current_user
+  .alert.alert.message
+    %h1= t(:edit_your_profile_hint, link: link_to(t(:personal_information), user_path(user))).html_safe
+- else
+  .alert.alert-info
+    %p
+      %i.icon-exclamation-sign
+    %h1=t(:user_has_no_profile, user: user.name)
+
