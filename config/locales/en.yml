@@ -362,7 +362,7 @@ en:
   timeline: Timeline
   hide: hide
   show: show
-  post_your_message_here: 'Your public message ...'
+  post_your_message_here: 'Your message ...'
   message_sent: 'Message sent.'
   unsupported_image_type: "unsupported image type. Please use %{available}"
   action_saved: saved
@@ -404,3 +404,6 @@ en:
   send_to_timelines: "To"
   post_message: "Post"
   post_message_hint: "Select the 'Timelines' to which you will post your message. Max. 160 characters. Your personal Timeline is included automatically."
+  admin: "Administrator"
+  author: "Author"
+  maintainer: "Maintainer"
