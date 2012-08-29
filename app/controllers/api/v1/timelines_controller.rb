@@ -7,6 +7,8 @@ module Api
     class TimelinesController < ApplicationController
       respond_to :json
 
+      before_filter :check_api_token
+
       # GET /api/v1/timelines[.json]
       def index
         respond_with Timeline.only([:_id, :name]).map { |timeline|
@@ -56,6 +58,12 @@ module Api
             _rc[key.to_sym] = value
           end
           _rc
+        end
+      end
+
+      def check_api_token
+        unless params[:token].present? && Settings.api.tokens.include?(params[:token])
+          render json: {error: "API-TOKEN NOT ACCEPTED"}, status: "406 - Not Accaptable Request"
         end
       end
     end

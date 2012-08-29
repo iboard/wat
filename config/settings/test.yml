@@ -15,3 +15,7 @@ application_mail_subject_prefix: "WAT: "
 
 supress_page_title: false
 multilanguage: true
+
+api:
+  tokens:
+    - "API_TEST_TOKEN"

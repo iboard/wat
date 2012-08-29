@@ -40,6 +40,13 @@ developer_mail_address: "developer@example.com"
 # 
 # page_banner_offset: 20
 
+# API-TOKENS
+#
+# api:
+#   tokens:
+#     - "Enter a long random string to share with your API-consumers
+#
+
 
 # OTHER PLACES WHERE YOU CAN MODIFY WAT's BEHAVIOR
 #
