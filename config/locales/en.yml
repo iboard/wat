@@ -401,3 +401,6 @@ en:
   user_has_no_profile: "User '%{user}' doesn't has a profile-page."
   edit_your_profile_hint: "You didn't create your profile-page yet. You can do so by going to %{link} and create your profile in 'Personal Information'"
   edit_your_profile: "Edit your profile"
+  send_to_timelines: "To"
+  post_message: "Post"
+  post_message_hint: "Select the 'Timelines' to which you will post your message. Max. 160 characters. Your personal Timeline is included automatically."

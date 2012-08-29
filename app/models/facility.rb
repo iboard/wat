@@ -14,7 +14,7 @@ class Facility
   validates_presence_of :name
   field :access, type: String, default: "r--"
 
-  embedded_in :user
+  embedded_in :facilitizer, polymorphic: true
   field :owner_id, type: BSON::ObjectId
   field :consumer_ids, type: Array
 

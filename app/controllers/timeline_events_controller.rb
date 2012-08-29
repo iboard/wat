@@ -3,9 +3,14 @@ class TimelineEventsController < ApplicationController
   before_filter :load_timeline
 
   def create
-    _message = params[:timeline_event][:timeline_event][:message].strip
+    _event =   params[:timeline_event][:timeline_event]
+    _message = _event[:message].strip
+    _timelines = params[:timelines_to].present? ? params[:timelines_to].map(&:first) : nil
+    _event[:timelines_to] = _timelines if _timelines
+    _event[:sender_id] = @user._id
+
     unless _message.blank?
-      event = @user.timeline.create_event({sender_id: @user._id, receiver_ids: [], message: _message}, UserMessage)
+      event = @user.timeline.create_event( _event, UserMessage)
     end
 
     respond_to do |format|

@@ -17,7 +17,7 @@ describe TimelineSubscriptionsController do
     sign_in_user name: 'Frank Zappa', password: 'secretword'
   end
 
-  it "should renders timeline events and timeline-subscriptions" do
+  it "should render timeline events and timeline-subscriptions" do
     visit timelines_path
     page.should have_content "Timeline"
   end
@@ -38,7 +38,8 @@ describe TimelineSubscriptionsController do
     end
   end
 
-  describe TimelineSubscription do
+  describe "Personal Timeline" do
+
     it "Renders a list of available timelines on right box" do
       visit timelines_path
       page.should have_content "Subscriptions"
@@ -50,6 +51,10 @@ describe TimelineSubscriptionsController do
       visit timelines_path
       page.should have_content "Personal Timeline"
     end
+
+  end
+
+  describe TimelineSubscription do
 
     it "doesn't list disabled or non-public timelines" do
       other_user = test_user "Mr. Nowhere", "secret"
@@ -78,5 +83,6 @@ describe TimelineSubscriptionsController do
       page.should have_content "You will not receive new messages from 'doorkeeper'"
       page.text.should_not match /Frank Zappa.*signed in/
     end
+
   end
 end

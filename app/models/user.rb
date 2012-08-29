@@ -41,7 +41,7 @@ class User
   field :location, type: Hash, spacial: true
 
   embeds_many :authentications
-  embeds_many :facilities
+  embeds_many :facilities, as: :facilitizer
   embeds_one :profile
   embeds_one :avatar
 
@@ -279,6 +279,10 @@ class User
 
   def available_timelines
     Timeline.enabled.public.asc(:name)
+  end
+
+  def postable_timelines
+    Timeline.where( :"facilities.name".in => self.facilities.map(&:name))
   end
 
   def subscribe_timelines(*timelines)

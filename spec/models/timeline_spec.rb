@@ -14,6 +14,18 @@ describe Timeline do
     timeline.user.should == user
   end
 
+  describe  "can have facilities" do
+    before(:each) do
+      @timeline = Timeline.create name: "With Facilities"
+      @timeline.facilities.create name: 'Admin', access: 'rwx'
+      @user = test_user "Admin", "secret", "Admin"
+    end
+
+    it "lists in user.postable_timelines if at least one facility matches" do
+      @user.postable_timelines.should include(@timeline)
+    end
+  end
+
   describe TimelineEvent do
 
     before(:each) do

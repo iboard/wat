@@ -5,7 +5,7 @@
   .span8
     #post-message-form
       - if is_action?('index')
-        .well
+        .post-message-http-view
           = render 'timelines/post_message_http'
       - else
         = render 'timelines/post_message_ajax'

@@ -1,4 +1,7 @@
 class Timeline
+
+  DEFAULT_RELOAD_TIME = 10.seconds
+
   include Mongoid::Document
   include Mongoid::Timestamps
 
@@ -15,6 +18,7 @@ class Timeline
   belongs_to :user
 
   has_many :timeline_subscriptions
+  embeds_many :facilities, as: :facilitizer
 
   scope :enabled, -> { where(enabled: true) }
   scope :public,  -> { where(public: true)  }

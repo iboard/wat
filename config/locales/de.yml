@@ -403,3 +403,6 @@ de:
   user_has_no_profile: "Der Benutzer '%{user}' hat kein Profil angelegt"
   edit_your_profile_hint: "Sie haben bisher noch kein Profil angelegt. Um Ihr Profil anzulegen gehen sie bitte auf %{link} und erzeugen sie ihr Profil unter 'Personendaten'."
   edit_your_profile: "Ihr Profil bearbeiten"
+  send_to_timelines: "Empfänger"
+  post_message: "Nachricht senden"
+  post_message_hint: "Wählen Sie die 'Timelines' an die sie ihre Nachricht senden wollen. Max. 160 Zeichen. Ihre persönliche Timeline ist automatisch inkludiert."
