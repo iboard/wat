@@ -3,6 +3,17 @@ Wat::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
 
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      resources :timelines do
+        member do
+          get  :events
+          post :create_event
+        end
+      end
+    end
+  end
+
   # Default
   root :to => "home#index"
 
