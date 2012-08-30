@@ -1,6 +1,7 @@
 require "bundler/capistrano"
 
 # SETUP SECTION =================================================
+# @todo Move to "Partial" excluded from git
 server "andi.altendorfer.at", :web, :app, primary: true
 
 set :virtual_host, "andi.altendorfer.at"
