@@ -119,8 +119,17 @@
   display: inline;
   font-size: 0.8em;
   margin: 0px;
-  margin-top: -10px;
-  color: #0088AF;
+  margin-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-radius: 0.5em;
+  text-shadow: 1px 1px 1px #485158;
+  background-color: #b5cbd9;
+  color: #2f3438;
+  box-shadow: 1px 1px 1px #8897a3;
+  opacity: 0.7;
 }
 
 .timestamp-timeline {

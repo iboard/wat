@@ -1,6 +1,8 @@
 - begin
-  - events.map{|e| e}.reverse.each_with_index do |_event, idx|
-    - unless _event.new_record?
-      = render 'timelines/event', event: _event, index: idx
+  - events.map{|e| e}.reverse.group_by { |event| event._id }.each do |_group|
+    - event = _group.last.first
+    - unless event.new_record?
+      - timelines = _group.last.map { |event| event.timeline.name }
+      = render 'timelines/event', event: event, timelines: timelines
 - rescue => e
   = t(:not_available) + " => #{e.inspect}"

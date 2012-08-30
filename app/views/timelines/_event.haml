@@ -1,6 +1,8 @@
 - present( event, TimelineEventPresenter ) do |presenter|
   %div{ class: presenter.css_class_definition}
-    .pull-right.timeline-name= presenter.timeline_name
     = presenter.avatar
+    .pull-right
+      - timelines.each do |_name|
+        .timeline-name=_name
     .text= presenter.body
     .clear-both

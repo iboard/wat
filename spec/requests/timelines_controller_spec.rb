@@ -67,6 +67,27 @@ describe TimelinesController do
       @user.timeline.timeline_events.last.text.should == "<span class='timestamp-timeline'>less than a minute ago,</span> <span class='timeline-username'>[testuser](/users/testuser/profile) says</span><br/><span class='timeline-message'>'Hello World!'</span>"
 
     end
+
+    it "groups messages if one occurs in multiple subscribed timelines" do
+      %w(TimelineOne TimelineTwo).each do |tl|
+        _tl = Timeline.create name: tl, public: true, enabled: true
+        _tl.facilities.create name: "Poster", access: 'rwx'
+        @user.subscribe_timelines(_tl)
+      end
+      @user.facilities.create name: "Poster", access: 'rwx'
+      @user.reload
+      sign_in_user name: 'testuser', password: 'secret'
+      visit timelines_path
+      fill_in "timeline_event[timeline_event][message]", with: "Please Filter Me"
+      check "TimelineOne"
+      check "TimelineTwo"
+      click_button "Post"
+      wait_until {  @user.timeline.reload.timeline_events.map(&:text).join(" ") =~ /testuser.*says/ }
+      fill_in "timeline_event[timeline_event][message]", with: "Hello World!"
+      click_button "Post"
+      wait_until {  @user.timeline.reload.timeline_events.map(&:text).join(" ") =~ /testuser.*says/ }
+      page.all( '.timeline-message', text: "Please Filter Me").count.should == 1
+    end
   end
 
   describe "System Timelines" do
