@@ -381,7 +381,7 @@ en:
   timeline_subscriptions: Timelines ...
   users_profile: "%{name}'s Profile"
   maintainer: Maintainer
-  remove_check_if_profile_is_not_public: uncheck this check box to hide your profile from other users except admins.
+  remove_check_if_profile_is_not_public: Visible? (Check if you wan't to show your profile to other users)
   public: public
   hidden: hidden
   this_profile_is_not_public: This profile is not public
