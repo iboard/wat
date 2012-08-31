@@ -33,6 +33,10 @@ developer_mail_address: "developer@example.com"
 # show_user_menu: true
 # supress_global_search: false
 
+
+timeline:
+  reload_interval: 10
+
 # LAYOUT
 
 # If a page has a banner: on PagesController::show the page 

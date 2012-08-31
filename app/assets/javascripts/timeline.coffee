@@ -34,7 +34,7 @@ jQuery ->
       success  : (res, status, xhr) ->
         $('#timeline #entries').html(latest_events)
         $('#timeline #entries .latest-timeline-event').effect('highlight', {}, 30000)
-        setTimeout( "restartTimelineUpdater()", 5000 )
+        setTimeout( "restartTimelineUpdater()", interval_in_seconds )
         if $('#events').length > 0
           $('#events').html(latest_events)
           $('.latest-timeline-event').effect('highlight', {}, 30000)

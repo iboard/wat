@@ -19,3 +19,6 @@ multilanguage: true
 api:
   tokens:
     - "API_TEST_TOKEN"
+
+timeline:
+  reload_interval: 3000
