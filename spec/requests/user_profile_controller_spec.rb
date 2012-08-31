@@ -140,9 +140,9 @@ describe UsersController do
     end
 
     it "shows a 'No Profile' page if user.profile == nil" do
-      _user = test_user "No Profile", "secret"
+      test_user "No Profile", "secret"
       visit "/users/no-profile/profile"
-      page.should have_content "'No Profile' doesn't has a profile-page."
+      page.should have_content "User 'No Profile' doesn't have a (public) profile-page."
     end
   end
 end

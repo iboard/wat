@@ -306,33 +306,31 @@ class User
   end
 
 
-  def events
+  def events(of_last_n_seconds=1.hour)
     all_events = []
-    if self.timeline_subscriptions
-      self.timeline_subscriptions.each do  |subscription|
-        all_events += subscription.timeline.timeline_events if subscription.timeline
-      end
-      all_events.flatten.sort {|a,b|
-        as = a._id.to_s
-        bs = b._id.to_s
-        if as < bs
-          -1
-        elsif as == bs
-          0
-        else
-          1
-        end
-      }
+    self.timelines.each do  |_timeline|
+      all_events += _timeline.since(Time.now.utc - of_last_n_seconds) if _timeline
     end
+    all_events.flatten.compact.sort {|a,b|
+      as = a._id.to_s
+      bs = b._id.to_s
+      if as < bs
+        -1
+      elsif as == bs
+        0
+      else
+        1
+      end
+    }
   end
 
   def timelines
-    Timeline.any_in( _id:  self.timeline_subscriptions.map(&:timeline_id) )
+    Timeline.any_in( _id:  self.timeline_subscriptions.map(&:timeline_id)+[(self.timeline||create_personal_timeline)._id] )
   end
 
   def create_personal_timeline
     _name = self.name
-    while _found =  Timeline.find_by(name: _name )
+    while Timeline.find_by(name: _name )
       _name = "%s %d"  % [self.name, Timeline.where(name: _name).count + 1]
     end
     self.create_timeline( name: _name )

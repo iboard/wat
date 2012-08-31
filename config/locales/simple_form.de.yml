@@ -23,3 +23,9 @@ de:
     #   username: 'User name to sign in.'
     #   password: 'No special characters, please.'
 
+    labels:
+      timeline:
+        show_timeline_since: 'Zeitspanne'
+    hints:
+      timeline:
+        show_timeline_since: 'Zeigt Events der letzen n Minuten'

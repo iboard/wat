@@ -36,6 +36,7 @@ developer_mail_address: "developer@example.com"
 
 timeline:
   reload_interval: 10
+  default_duration: 1440
 
 # LAYOUT
 

@@ -27,6 +27,17 @@ class Timeline
     where(options).first
   end
 
+  # Virtual attribute. Data will not be stored in database
+  # TimelinesController will use this field to set the session-var
+  # for the timeline-duration to show
+  def show_timeline_since
+    (@show_timeline_since || 60)
+  end
+
+  def show_timeline_since=(minutes)
+    @show_timeline_since = minutes
+  end
+
   def since(time=nil)
     if time
       self.timeline_events.since(time)

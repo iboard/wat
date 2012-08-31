@@ -88,6 +88,42 @@ describe TimelinesController do
       wait_until {  @user.timeline.reload.timeline_events.map(&:text).join(" ") =~ /testuser.*says/ }
       page.all( '.timeline-message', text: "Please Filter Me").count.should == 1
     end
+
+    describe "loads messages on demand" do
+      before(:each) do
+        @user = test_user "Big Timeline", "secret"
+        @timeline = @user.timeline
+        @timeline.timeline_events.delete_all
+        100.times do |n|
+          @timeline.create_event message: "Message number #{n}", created_at: Time.now-(100-n).minutes
+        end
+      end
+
+      it "user.events should load for the past hour by default" do
+        @user.events.count.should == 60
+      end
+
+      it "loads older events on demand" do
+        @user.events(1.day).count.should == 100
+      end
+
+      it "shows the latest hour on the timelines page" do
+        sign_in_user name: "Big Timeline", password: "secret"
+        visit timelines_path
+        page.should have_content "Message number #{61}"
+        page.should_not have_content "Message number #{40}"
+      end
+
+      it "should offer a field to set duration" do
+        sign_in_user name: "Big Timeline", password: "secret"
+        visit timelines_path
+        page.should_not have_content "Message number #{40}"
+        fill_in "timeline_show_timeline_since", with: "200"
+        click_button "Update & Refresh"
+        page.should have_content "Message number #{1}"
+      end
+
+    end
   end
 
   describe "System Timelines" do
@@ -128,7 +164,7 @@ describe TimelinesController do
         sign_in_user name: 'testuser', password: 'secret'
         visit timelines_path
         fill_in "timeline_name", with: "My cool words"
-        click_button "Save"
+        click_button "Update & Refresh"
         page.should have_content "My cool words"
       end
     end

@@ -25,7 +25,7 @@ describe UsersController do
     fill_in "timeline_name", with: "Frank says ..."
     check "timeline_enabled"
     uncheck "timeline_public"
-    click_button "Save"
+    click_button "Update & Refresh"
 
     @user.timeline.name.should == "Frank says ..."
     @user.timeline.enabled.should be_true

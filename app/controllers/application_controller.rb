@@ -123,6 +123,9 @@ private
   def setup_timeline
     session[:timeline] ||= { display: :show, timelines: :all }
     @timeline_display = session[:timeline][:display] == :show ? 'icon-chevron-down' : 'icon-chevron-up'
+    if current_user
+      @events = current_user.events( (session[:show_timeline_since] ||= (Settings.timeline.default_duration || 60)).minutes)
+    end
     Doorkeeper.configure do |doorkeeper|
       doorkeeper.doorkeeper = Doorkeeper::TimelineLogger.new
       doorkeeper.timeline.reload

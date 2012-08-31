@@ -2,6 +2,7 @@ class TimelinesController < ApplicationController
 
 
   before_filter  :load_timelines
+  before_filter  :set_timeline_duration, only: [:update]
 
   # GET /timelines
   # Sets no_timeline to prevent timeline-view (in corner) on this page
@@ -41,8 +42,14 @@ class TimelinesController < ApplicationController
 
 private
   def load_timelines
-    @timelines = current_user.timeline_subscriptions.map(&:timeline)
-    @events = current_user.events
+    @timelines = current_user.timelines
+    @events = current_user.events( (session[:show_timeline_since] || 60).minutes )
+  end
+
+  def set_timeline_duration
+    if params[:timeline][:show_timeline_since].present?
+      session[:show_timeline_since] = params[:timeline][:show_timeline_since].to_i
+    end
   end
 
 end

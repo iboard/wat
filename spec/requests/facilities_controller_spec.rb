@@ -38,7 +38,7 @@ describe FacilitiesController do
   it "has a form for a new facility" do
     sign_in_user name: 'Testuser', password: 'notsecret'
     visit user_facilities_path(@user1)
-    select "Admin", from: "Name"
+    select "Administrator", from: "Name"
     check 'read'
     uncheck 'write'
     check 'execute'

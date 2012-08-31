@@ -7,4 +7,5 @@
   #post-message-form
     = render "timelines/post_message_ajax"
   #entries
-    = render "timelines/events", events: []
+    = render "timelines/current_time"
+    = render "timelines/events", events: @events

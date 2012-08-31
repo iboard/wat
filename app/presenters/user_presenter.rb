@@ -23,7 +23,9 @@ class UserPresenter < BasePresenter
       _rc += user.name
     end
     if user.profile && (user.profile.is_public || user == current_user)
-      _rc += "&nbsp;"*4 + button_link_to( 'icon-share icon-white', 'btn btn-primary', t(:user_profile),  user_profile_path(user) )
+      _rc += "<ul class='nav pull-right'><li>" +
+          button_link_to( 'icon-share icon-white', 'btn btn-primary', t(:user_profile),  user_profile_path(user) ) +
+          "</li></ul>"
     end
     _rc.html_safe
   end
