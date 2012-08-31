@@ -383,6 +383,7 @@ de:
   you_are_no_longer_receiving_messages_of_timeline: "Sie erhalten von '%{timeline}' keine Nachrichten mehr"
   timeline_subscription_help: Um Nachrichten von verschiedenen Timelines zu erhalten, setzen sie die Checkboxen unten entsprechend.
   timeline_subscriptions: Timelines ...
+  timeline_settings: "Timeline-Einstellungen"
   users_profile: '%{name} - Profil'
   maintainer: 'Verwaltung'
   remove_check_if_profile_is_not_public: Profil anzeigen? Wählen Sie diese Option wenn Ihr Profil auch anderen Benutzern angezeigt werden soll.
@@ -410,3 +411,5 @@ de:
   author: "Autor"
   maintainer: "Verwaltung"
   update_timeline: "Speichern & Aktualisieren"
+  no_events_to_display: "Es gibt keine Ereignisse und Nachrichten.<br/>%{settings_link}"
+  load_more: " ... "

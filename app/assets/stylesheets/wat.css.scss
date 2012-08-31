@@ -700,3 +700,20 @@ ul.versions {
   margin-left: 20px;
   padding-top: 10px;
 }
+
+.message {
+  border-radius: 0.5em;
+  background: #444;
+  color: white;
+  letter-spacing: 1px;
+  font-size: 1.2em;
+  font-weight: 100;
+  line-height: 150%;
+  a {
+    font-weight: normal;
+  }
+}
+
+.centered {
+  text-align: center;
+}

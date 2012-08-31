@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   helper_method :param_to_class
   helper_method :class_to_param
   helper_method :is_action?
+  helper_method :timeline_duration
 
 
 private
@@ -124,12 +125,16 @@ private
     session[:timeline] ||= { display: :show, timelines: :all }
     @timeline_display = session[:timeline][:display] == :show ? 'icon-chevron-down' : 'icon-chevron-up'
     if current_user
-      @events = current_user.events( (session[:show_timeline_since] ||= (Settings.timeline.default_duration || 60)).minutes)
+      @events = current_user.events(timeline_duration())
     end
     Doorkeeper.configure do |doorkeeper|
       doorkeeper.doorkeeper = Doorkeeper::TimelineLogger.new
       doorkeeper.timeline.reload
     end
+  end
+
+  def timeline_duration
+    (session[:show_timeline_since] ||= (Settings.timeline.default_duration || 60)).minutes
   end
 
   def is_action?(what)

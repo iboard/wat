@@ -379,6 +379,7 @@ en:
   you_are_no_longer_receiving_messages_of_timeline: "You will not receive new messages from '%{timeline}'"
   timeline_subscription_help: In order to see messages from several Timelines listed below, check or uncheck their checkboxes.
   timeline_subscriptions: Timelines ...
+  timeline_settings: "Timeline-settings"
   users_profile: "%{name}'s Profile"
   maintainer: Maintainer
   remove_check_if_profile_is_not_public: Visible? (Check if you wan't to show your profile to other users)
@@ -408,3 +409,5 @@ en:
   author: "Author"
   maintainer: "Maintainer"
   update_timeline: "Update & Refresh"
+  no_events_to_display: "There are no events to display.<br/>%{settings_link}"
+  load_more: " ... "
