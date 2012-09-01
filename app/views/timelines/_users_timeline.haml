@@ -8,4 +8,4 @@
     = render "timelines/post_message_ajax"
   #entries
     = render "timelines/current_time"
-    = render "timelines/events", events: @events
+    = render "timelines/events", events: @events || current_user.events(Timeline::DEFAULT_RELOAD_TIME)

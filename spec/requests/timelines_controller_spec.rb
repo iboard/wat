@@ -110,17 +110,21 @@ describe TimelinesController do
       it "shows the latest hour on the timelines page" do
         sign_in_user name: "Big Timeline", password: "secret"
         visit timelines_path
-        page.should have_content "Message number #{61}"
-        page.should_not have_content "Message number #{40}"
+        fill_in "timeline_show_timeline_since", with: "60"
+        click_button "Update & Refresh"
+        page.should have_content "Message number 61"
+        page.should_not have_content "Message number 20"
       end
 
       it "should offer a field to set duration" do
         sign_in_user name: "Big Timeline", password: "secret"
         visit timelines_path
-        page.should_not have_content "Message number #{40}"
+        fill_in "timeline_show_timeline_since", with: "60"
+        click_button "Update & Refresh"
+        page.should_not have_content "Message number 20"
         fill_in "timeline_show_timeline_since", with: "200"
         click_button "Update & Refresh"
-        page.should have_content "Message number #{1}"
+        page.should have_content "Message number 1"
       end
 
     end

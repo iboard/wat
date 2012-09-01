@@ -1,6 +1,6 @@
 - begin
   - if events.count == 0
-    = render :partial => 'no_events_found'
+    = render :partial => 'timelines/no_events_found'
   - else
     - events.reverse.group_by { |event|  distance_of_time_in_words( Time.now, event.created_at ) }.each do |hour,events|
       - if events.any?

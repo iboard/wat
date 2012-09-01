@@ -21,4 +21,5 @@ api:
     - "API_TEST_TOKEN"
 
 timeline:
-  reload_interval: 3000
+  reload_interval: 5
+  default_duration: 1440
