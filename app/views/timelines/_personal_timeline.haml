@@ -1,6 +1,7 @@
 %h2=t(:personal_timeline)
 
 =simple_form_for( current_user.timeline||current_user.build_timeline(name: current_user.name), url: update_user_timeline_timelines_path(current_user), html: {class: 'form form-vertical'} ) do |f|
+  %br/
   .fieldset
     .check-box-with-label
       =f.input :enabled, as: 'boolean', label: false
@@ -8,6 +9,8 @@
     .check-box-with-label
       =f.input :public,  as: 'boolean', label: false
       =f.label :public, t(:public_timeline_hint)
+    %br/
+    %br/
     =f.input :name
     - f.object.send(:show_timeline_since=, session[:show_timeline_since]||60)
     =f.input :show_timeline_since, as: 'integer'

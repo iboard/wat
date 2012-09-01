@@ -5,6 +5,4 @@ class DoorkeeperEvent < UserEvent
 
   field  :ip
 
-
-
 end

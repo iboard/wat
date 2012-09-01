@@ -1,10 +1,10 @@
-.well{:style=> params[:controller]=='home' ? 'min-height: 200px;' : 'min-height: 165px;', :class => page.date_range}
+.well{:class => "page-preview " + page.date_range}
   - if !page.title
     .alert.alert-error
       t(:page_has_no_title)
   - else
     - _preview = truncate((page.body||''),length: page.preview_length_or_default, omission: "... ")
-    - _link = icon_link_to( "icon-eye-open", "btn", t(:read_more), page)
+    - _link = icon_link_to( "icon-eye-open", "", t(:read_more), page)
     - truncated = _preview.length < (page.body||'').length
 
     - present page do |presenter|
@@ -17,7 +17,8 @@
       %div
         %strong= presenter.body_snippet(_preview)
         %br/
-        = render "comments/comments_preview", commentable: page
-        %br/
         - if truncated
-          = _link
+          .pull-right
+            = _link
+        = render "comments/comments_preview", commentable: page
+        .clear-both

@@ -6,7 +6,7 @@
       %li= icon_link_to( 'icon-zoom-in', '', t(:open_page), page_path(page)) unless params[:action] == 'show'
       %li= icon_link_to( 'icon-edit', '', t(:edit_page), edit_page_path(page)) unless ['new','edit'].include? params[:action]
       %li= icon_link_to( 'icon-remove', '', t(:delete_page), page_path(page), :method => :delete, :confirm => t(:are_you_sure)) unless params[:action] == 'new'
-  .nav
+  .nav.opacitive
     - if page.is_hero?
       %ul.nav.pull-left
         %li

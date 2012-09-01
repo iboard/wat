@@ -100,7 +100,7 @@ describe TimelinesController do
       end
 
       it "user.events should load for the past hour by default" do
-        @user.events.count.should == 60
+        [59,60,61].should include(@user.events.count)
       end
 
       it "loads older events on demand" do

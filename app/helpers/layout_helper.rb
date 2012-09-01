@@ -171,8 +171,8 @@ module LayoutHelper
     x
   end
 
-  def datepicker( field, value )
-    _date = value ? value.strftime('%Y-%m-%d') : (Time.now+1.year).strftime('%Y-%m-%d')
+  def datepicker( field, value, _offset=0)
+    _date = value ? value.strftime('%Y-%m-%d') : (Time.now+_offset).strftime('%Y-%m-%d')
     ( "&nbsp;"*3 +
       "<div class='input-append date' id='dp3' data-date='#{_date}' data-date-format='yyyy-mm-dd'>" +
         "<input class='span2' size='16' type='text' value='#{_date}' name='#{field}'>" +

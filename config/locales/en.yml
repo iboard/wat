@@ -334,8 +334,8 @@ en:
   repost_comment: Repost comment
   section_and_banner: Section and Banner
   other_options: Other options
-  publish_on_hint: "&nbsp;Do not check if always publish or check and set date"
-  expire_on_hint: "&nbsp;Do not check if never expires or check and set date"
+  publish_on_hint: "&nbsp;Do not check if always online. Or check and set date"
+  expire_on_hint: "&nbsp;Do not check if never expires. Or check and set date"
   this_version_has_no_translation_of: "This verion of the document has no translation of %{lang}"
   versions_of_this_document: "Available versions of this document"
   file_not_found: "File '%{file}' not found"

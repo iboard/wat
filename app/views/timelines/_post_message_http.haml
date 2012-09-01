@@ -1,6 +1,8 @@
 =simple_form_for [Doorkeeper::timeline,Doorkeeper::timeline.timeline_events.new()] do |f|
-  = render 'timelines/select_timeline_fields', f: f
-  = render 'timelines/post_message_fields', f: f
+  %fieldset
+    = render 'timelines/select_timeline_fields', f: f
+  %fieldset
+    = render 'timelines/post_message_fields', f: f
   = f.submit t(:post_message), class: 'btn btn-primary'
   .form-hint.inline= t(:post_message_hint)
 #no-hide-timeline

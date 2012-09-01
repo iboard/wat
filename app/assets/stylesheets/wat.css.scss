@@ -518,16 +518,10 @@ img.floating-avatar {
 }
 
 .comment-preview {
-  border-radius: 0.5em 0.5em 0.5em 0.5em;
   padding: 5px;
   padding-left: 1em;
-  box-shadow: 1px 1px 1px #333;
-  background: #2388AE;
-  color: white;
-  width: 150px; 
-  a {
-    color: white;
-  }
+  width: 150px;
+
 }
 
 .comment {
@@ -577,6 +571,10 @@ img.floating-avatar {
   padding: 10px;
   background: white;
   margin-bottom: 10px;
+}
+
+.page-preview {
+  height: auto;
 }
 
 #page-options {
@@ -716,4 +714,8 @@ ul.versions {
 
 .centered {
   text-align: center;
+}
+
+.opacitive {
+  opacity: 0.4;
 }

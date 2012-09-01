@@ -23,9 +23,7 @@ class Timeline
   scope :enabled, -> { where(enabled: true) }
   scope :public,  -> { where(public: true)  }
 
-  def self.find_by(options)
-    where(options).first
-  end
+ # @!group Virtual Attributes
 
   # Virtual attribute. Data will not be stored in database
   # TimelinesController will use this field to set the session-var
@@ -36,6 +34,14 @@ class Timeline
 
   def show_timeline_since=(minutes)
     @show_timeline_since = minutes
+  end
+
+  # @!endgroup
+
+  # @!group Finders
+
+  def self.find_by(options)
+    where(options).first
   end
 
   def since(time=nil)
@@ -58,6 +64,6 @@ class Timeline
     since(_since).any_of( receiver_ids: user._id )
   end
 
+  # @!endgroup
 
-  
 end

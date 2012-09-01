@@ -14,7 +14,6 @@ describe Timeline do
 
   it "rejects if API-token not present" do
     get "/api/v1/timelines"
-    puts response.inspect
     response.body.should == { error: "API-TOKEN NOT ACCEPTED" }.to_json
   end
 
@@ -31,8 +30,8 @@ describe Timeline do
 
   describe "should accept POST to timeline events" do
 
-    it "with event-param as standard RAILS hash" do
-      post "/api/v1/timelines/#{@timeline._id}/create_event", token: @api_token, event:  {message: "Hello World"}
+    it "with event-param as standard json hash" do
+      post "/api/v1/timelines/#{@timeline._id}/create_event", token: @api_token, event: { message: "Hello World" }
       @timeline.reload.timeline_events.last.message.should == "Hello World"
       response.body.should have_content "\"message\":\"Hello World\""
     end
