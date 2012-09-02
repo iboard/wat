@@ -16,7 +16,6 @@ class TimelinesController < ApplicationController
     redirect_to root_path, alert: t(:access_denied) unless user == current_user || current_user.can_execute?('Admin')
 
     timeline = user.timeline
-
     if (timeline && timeline.update_attributes(params[:timeline])) || user.create_timeline( params[:timeline])
       _since = Time.now - params[:timeline][:show_timeline_since].to_i.minutes
       redirect_to timelines_path(since: _since.to_s), notice: t(:timeline_updated) + " " + _since.to_s
@@ -57,7 +56,6 @@ class TimelinesController < ApplicationController
 
   def load_timelines
     @timelines = current_user.timelines
-    Rails.logger.info "*"*40 + "\n" + last_updated.inspect
     @events = current_user.events( last_updated )
   end
 

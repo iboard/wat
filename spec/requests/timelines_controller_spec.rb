@@ -66,7 +66,6 @@ describe TimelinesController do
       click_button "Post"
       wait_until {  @user.timeline.reload.timeline_events.map(&:text).join(" ") =~ /testuser.*says/ }
       @user.timeline.timeline_events.last.text.should == "<span class='timestamp-timeline'>less than a minute ago,</span> <span class='timeline-username'>[testuser](/users/testuser/profile) says</span><br/><span class='timeline-message'>'Hello World!'</span>"
-
     end
 
     it "groups messages if one occurs in multiple subscribed timelines" do
