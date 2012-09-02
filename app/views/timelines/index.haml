@@ -9,8 +9,12 @@
           = render 'timelines/post_message_http'
       - else
         = render 'timelines/post_message_ajax'
-    #events
-      = render 'events', events: @events
+    %ul{id: 'events'}
+      - if @events.any?
+        = render 'events', events: @events
+      - else
+        %li
+
   .span4
     .well
       = render 'personal_timeline'

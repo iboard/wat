@@ -1,4 +1,4 @@
 .message.small
   .centered
     .pull-right= icon_link_to 'icon-chevron-up icon-white','', '', '#'
-    = t(:age_in_words, distance: distance_of_time_in_words( Time.now, events.first.created_at ))
+    =  events.first.created_at.strftime("%Y-%m-%d %H:%M")

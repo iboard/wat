@@ -5,11 +5,15 @@ jQuery ->
       _state = $('#timeline-display').attr('class')
       if _state == "icon-chevron-down icon-white timeline-toggle"
         restartTimelineUpdater()
+        $('.new-entry').show()
         $('#timeline').height(300)
         $('#input-text').show(-10)
     else if $('#events').length > 0
       restartTimelineUpdater()
 
+    if $('#start-timeline').length > 0
+      $('#start-timeline').ready ->
+        restartTimelineUpdater()
 
   self.toggleTimeline = (state) ->
     if state == 'hidden'
@@ -30,14 +34,12 @@ jQuery ->
     $('#input-text').show(500)
 
   self.restartTimelineUpdater = () ->
-    $.ajax "/timelines/update_timeline",
+    $.ajax "/timelines/update_timeline?since=" + $('#last_update').val(),
       success  : (res, status, xhr) ->
-        $('#timeline #entries').html(latest_events)
-        $('#timeline #entries .latest-timeline-event').effect('highlight', {}, 30000)
+        $('#last_update').val( last_update )
+        if latest_events.length > 0
+          dropInEvent(latest_events)
         setTimeout( "restartTimelineUpdater()", interval_in_seconds )
-        if $('#events').length > 0
-          $('#events').html(latest_events)
-          $('.latest-timeline-event').effect('highlight', {}, 30000)
       error    : (xhr, status, err) ->
         $('#timeline #entries').html( "<div class='alert alert-info'>
                                        No Timeline available at the moment.<hr/>
@@ -65,11 +67,12 @@ jQuery ->
       _path += 'unsubscribe.js'
     $.ajax _path,
       success  : (res, status, xhr) ->
-        $('#timeline #entries').html(latest_events)
-        $('#timeline #entries .latest-timeline-event').effect('highlight', {}, 4000)
-        $('#events').html(latest_events)
+        dropInEvent(latest_events)
         $('#response').html( "<div class='alert alert-info'>" + message + "</div>")
       error    : (xhr, status, err) ->
         alert "Can't change subscription for this timeline / Abo kann nicht geändert werden\n\nError: " + err + "\n" + _path
 
-
+  self.dropInEvent = (latest_events) ->
+    if ('#events').length > 0
+      $('ul#events li:first').prepend( latest_events )
+      $('.new-entry').show('blind', direction: 'vertical', 2000).removeClass('new-entry')

@@ -306,10 +306,11 @@ class User
   end
 
 
-  def events(of_last_n_seconds=1.hour)
+  def events(since=nil)
+    since ||= Time.now - (Settings.timeline.default_duration || 60).minutes
     all_events = []
     self.timelines.each do  |_timeline|
-      all_events += _timeline.since(Time.now.utc - of_last_n_seconds) if _timeline
+      all_events += _timeline.since(since) if _timeline
     end
     all_events.flatten.compact.sort {|a,b|
       as = a._id.to_s

@@ -81,7 +81,6 @@ describe TimelineSubscriptionsController do
       uncheck "timeline_subscriptions_message_#{Timeline.where(name: 'doorkeeper').first._id}"
       wait_until { page.has_content? "You will not receive new messages from 'doorkeeper'"}
       page.should have_content "You will not receive new messages from 'doorkeeper'"
-      page.text.should_not match /Frank Zappa.*signed in/
     end
 
   end

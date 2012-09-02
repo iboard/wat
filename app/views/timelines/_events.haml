@@ -1,13 +1,12 @@
 - begin
-  - if events.count == 0
-    = render :partial => 'timelines/no_events_found'
-  - else
-    - # Reverse (latest event on top) and group by age
-    - events.reverse.group_by { |event|  distance_of_time_in_words( Time.now, event.created_at ) }.each do |hour,events|
-      = render 'timelines/timeline_devider', events: events             # => about 1 hour ago
+  - if events.count > 0
+    - events.reverse.group_by { |event|  event.created_at.strftime("%Y%m%d%H")  }.each do |hour,events|
       - events.each.group_by {|event| event._id }.each do |id, _events| # group identical events and display first.
         - unless _events.first.new_record?                              # skip new events
-          = render 'timelines/event', event: _events.first, timelines: _events.map { |_e| _e.timeline.name }
+          %li.new-entry= render 'timelines/event', event: _events.first, timelines: _events.map { |_e| _e.timeline.name }
+      %li.new-entry= render 'timelines/timeline_devider', events: events          # => about 1 hour ago
+  - else
+    %li
 - rescue => e
-  = t(:not_available)
-  = e.inspect
+  %li= t(:not_available)
+  %li= e.inspect

@@ -48,6 +48,7 @@ describe TimelinesController do
     it "offers a hide/show link", js: true do
       visit switch_language_path(:en)
       sign_in_user name: 'testuser', password: 'secret'
+      wait_until { page.has_content? "less than a minute ago" }
       page.text.should match /testuser.*less than a minute ago.*signed in/
       visit root_path
       click_link "Timeline"
@@ -100,7 +101,7 @@ describe TimelinesController do
       end
 
       it "user.events should load for the past hour by default" do
-        [59,60,61].should include(@user.events.count)
+        @user.events.count.should == 100
       end
 
       it "loads older events on demand" do
@@ -110,6 +111,7 @@ describe TimelinesController do
       it "shows the latest hour on the timelines page" do
         sign_in_user name: "Big Timeline", password: "secret"
         visit timelines_path
+        # show last 60 mins
         fill_in "timeline_show_timeline_since", with: "60"
         click_button "Update & Refresh"
         page.should have_content "Message number 61"
@@ -119,14 +121,26 @@ describe TimelinesController do
       it "should offer a field to set duration" do
         sign_in_user name: "Big Timeline", password: "secret"
         visit timelines_path
+        # show last hour
         fill_in "timeline_show_timeline_since", with: "60"
         click_button "Update & Refresh"
         page.should_not have_content "Message number 20"
+        # show all
         fill_in "timeline_show_timeline_since", with: "200"
         click_button "Update & Refresh"
         page.should have_content "Message number 1"
       end
 
+      it "loads new event and merge it into the window", js: true do
+        # instead of loading the entire list
+        visit switch_language_path(:en)
+        sign_in_user name: "Big Timeline", password: "secret"
+        visit timelines_path
+        @user.events.count.should == 101
+        @user.timeline.create_event( message: "A new post drops in" )
+        wait_until { page.has_content?("A new post drops in")}
+        page.should have_content "A new post drops in"
+      end
     end
   end
 

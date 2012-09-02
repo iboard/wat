@@ -16,8 +16,10 @@ class TimelinesController < ApplicationController
     redirect_to root_path, alert: t(:access_denied) unless user == current_user || current_user.can_execute?('Admin')
 
     timeline = user.timeline
+
     if (timeline && timeline.update_attributes(params[:timeline])) || user.create_timeline( params[:timeline])
-      redirect_to timelines_path, notice: t(:timeline_updated)
+      _since = Time.now - params[:timeline][:show_timeline_since].to_i.minutes
+      redirect_to timelines_path(since: _since.to_s), notice: t(:timeline_updated) + " " + _since.to_s
     else
       redirect_to timelines_path, alert: (t(:error_updating_timeline) + ":<br/>" + timeline.errors.full_messages.join("<br/>")).html_safe
     end
@@ -37,13 +39,26 @@ class TimelinesController < ApplicationController
 
   # Ajax request called every 5 seconds from timeline.coffee
   def update_timeline
+    @since = last_updated
+    cookies.permanent[:timeline_last_updated] = Time.now
   end
 
 
-private
+  private
+  def last_updated
+    if params[:since].present?
+      Time.parse params[:since]
+    elsif session[:timeline_last_updated] || cookies[:timeline_last_updated]
+      session[:timeline_last_updated] || cookies[:timeline_last_updated]
+    else
+      Time.now-(Settings.timeline.default_duration || 60).minutes
+    end
+  end
+
   def load_timelines
     @timelines = current_user.timelines
-    @events = current_user.events( (session[:show_timeline_since] || 60).minutes )
+    Rails.logger.info "*"*40 + "\n" + last_updated.inspect
+    @events = current_user.events( last_updated )
   end
 
   def set_timeline_duration
