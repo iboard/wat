@@ -122,8 +122,9 @@ private
   end
 
   def setup_timeline
-    session[:timeline] ||= { display: :show, timelines: :all }
+    session[:timeline] ||= cookie[:timeline] || { display: :show, timelines: :all, duration: Settings.timeline.default_duration  }
     @timeline_display = session[:timeline][:display] == :show ? 'icon-chevron-down' : 'icon-chevron-up'
+    cookies.permanent[:timeline] = session[:timeline]
     if current_user
       @events = current_user.events(timeline_last_request())
     end
@@ -136,8 +137,6 @@ private
   def timeline_last_request
     if params[:since].present?
       Time.parse params[:since]
-    elsif session[:timeline_last_updated] || cookies[:timeline_last_updated]
-      session[:timeline_last_updated] || cookies[:timeline_last_updated]
     else
       Time.now-(Settings.timeline.default_duration || 1440).minutes
     end

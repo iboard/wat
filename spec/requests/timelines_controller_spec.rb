@@ -48,8 +48,9 @@ describe TimelinesController do
     it "offers a hide/show link", js: true do
       visit switch_language_path(:en)
       sign_in_user name: 'testuser', password: 'secret'
+      sleep 1
       wait_until { page.has_content? "less than a minute ago" }
-      page.text.should match /testuser.*less than a minute ago.*signed in/
+      page.text.should match /testuser(.*)less than a minute ago(.*)signed in/
       visit root_path
       click_link "Timeline"
       wait_until { page.all('#entries', :visible => false) }

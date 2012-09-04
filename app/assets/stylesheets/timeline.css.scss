@@ -153,6 +153,10 @@
   display: block;
 }
 
+#events {
+
+}
+
 #events .timeline-message {
   margin-left: 40px;
 }
@@ -167,6 +171,11 @@ ul#events {
 
 #timeline {
   ul#events {
+    z-index: 2900;
+    height: 235px;
+    max-heigth: 100px;
+    overflow: scroll;
+
     margin-top: 35px;
     margin-left: 5px;
     margin-right: 5px;

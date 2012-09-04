@@ -17,10 +17,9 @@ class TimelinesController < ApplicationController
 
     timeline = user.timeline
     if (timeline && timeline.update_attributes(params[:timeline])) || user.create_timeline( params[:timeline])
-      _since = Time.now - params[:timeline][:show_timeline_since].to_i.minutes
-      redirect_to timelines_path(since: _since.to_s), notice: t(:timeline_updated) + " " + _since.to_s
+      redirect_to timelines_path(since: fetch_events_since), notice: t(:timeline_updated)
     else
-      redirect_to timelines_path, alert: (t(:error_updating_timeline) + ":<br/>" + timeline.errors.full_messages.join("<br/>")).html_safe
+      redirect_to timelines_path(since: fetch_events_since), alert: (t(:error_updating_timeline) + ":<br/>" + timeline.errors.full_messages.join("<br/>")).html_safe
     end
   end
 
@@ -56,13 +55,23 @@ class TimelinesController < ApplicationController
 
   def load_timelines
     @timelines = current_user.timelines
-    @events = current_user.events( last_updated )
+    @events = current_user.events( fetch_events_since )
   end
 
   def set_timeline_duration
     if params[:timeline][:show_timeline_since].present?
       session[:show_timeline_since] = params[:timeline][:show_timeline_since].to_i
     end
+  end
+
+  def timeline_duration
+    params[:show_timeline_since] ||= session[:timeline_duration] || cookies[:timeline_duration]
+  end
+
+  def fetch_events_since
+    _since_time = params[:since].present? ? params[:since] : nil
+    _gap = (session[:show_timeline_since].present? && !params[:since]) ? session[:show_timeline_since].to_i.minutes : 60.minutes
+    _since_time || Time.now.utc-_gap
   end
 
 end
