@@ -10,12 +10,15 @@
 
 #events {
   display: block;
-  overflow: scroll-y;
+  overflow-y: scroll;
   .timeline-event {
     img {
-      border-radius: 2em;
       float: left;
+      border-radius: 1em 4px 4px 4px;
+      margin-left: 0px;
       margin-right: 10px;
+      padding-left: 0px;
+      box-shadow: 1px 1px 2px #000;
     }
   }
 }
@@ -84,6 +87,17 @@
     }
   }
 
+  .timeline-avatar {
+    float: left;
+    img {
+      border-radius: 1em 4px 4px 4px;
+      margin-left: 0px;
+      padding-left: 0px;
+      box-shadow: 1px 1px 2px #000;
+    }
+  }
+
+
   #events {
     margin-top: 30px;
     padding-left: 0px;
@@ -96,20 +110,10 @@
       margin-left: 0px;
       z-index: 11;
       color: black;
-      border-radius: 1em 1em 1em 1em;
+      border-radius: 0.25em 0.25em 0.25em 0.25em;
       line-height: 0.5em;
     }
     .text {
-      margin-left: 40px;
-    }
-    .timeline-avatar {
-      float: left;
-      img {
-        border-radius: 1em 4px 4px 4px;
-        margin-left: 0px;
-        padding-left: 0px;
-        box-shadow: 1px 1px 2px #000;
-      }
     }
   }
 }
@@ -137,9 +141,9 @@
 
 .timestamp-timeline {
   display: inline;
-  font-size: 0.7em;
+  font-size: 0.75em;
   font-style: italic;
-  line-height: 100%;
+  line-height: 90%;
 }
 
 .timeline-username {
