@@ -12,7 +12,7 @@
     %br/
     %br/
     =f.input :name
-    - f.object.send(:show_timeline_since=, session[:show_timeline_since]||60)
+    - f.object.send(:show_timeline_since=, @timeline_session[:show_timeline_since])
     =f.input :show_timeline_since, as: 'integer'
   %br/
   =f.button :submit, t(:update_timeline), class: "btn btn-primary"

@@ -48,9 +48,10 @@ describe TimelinesController do
     it "offers a hide/show link", js: true do
       visit switch_language_path(:en)
       sign_in_user name: 'testuser', password: 'secret'
-      sleep 1
       wait_until { page.has_content? "less than a minute ago" }
-      page.text.should match /testuser(.*)less than a minute ago(.*)signed in/
+      page.should have_css( ".timeline-username")
+      page.should have_css( ".timestamp-timeline")
+      page.find(".timeline-message").text.should == "signed in"
       visit root_path
       click_link "Timeline"
       wait_until { page.all('#entries', :visible => false) }
@@ -118,7 +119,8 @@ describe TimelinesController do
         page.should_not have_content "Message number 20"
       end
 
-      it "should offer a field to set duration" do
+      it "should offer a field to set duration", js: true do
+        visit switch_language_path(:en)
         sign_in_user name: "Big Timeline", password: "secret"
         visit timelines_path
         # show last hour
@@ -128,6 +130,7 @@ describe TimelinesController do
         # show all
         fill_in "timeline_show_timeline_since", with: "200"
         click_button "Update & Refresh"
+        wait_until { page.has_content?( "Message number 1") }
         page.should have_content "Message number 1"
       end
 

@@ -3,7 +3,8 @@
     - events.reverse.group_by { |event|  event.created_at.strftime("%Y%m%d%H")  }.each do |hour,events|
       - events.each.group_by {|event| event._id }.each do |id, _events| # group identical events and display first.
         - unless _events.first.new_record?                              # skip new events
-          %li.new-entry= render 'timelines/event', event: _events.first, timelines: _events.map { |_e| _e.timeline.name }
+          %li{class: is_action?('update_timeline') ? 'new-entry' : ''}
+            = render 'timelines/event', event: _events.first, timelines: _events.map { |_e| _e.timeline.name }
       %li.new-entry= render 'timelines/timeline_devider', events: events          # => about 1 hour ago
   - else
     %li

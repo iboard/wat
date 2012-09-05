@@ -39,10 +39,10 @@ module Api
           if( _event = timeline.timeline_events.create( extract_event ) )
             render json: _event
           else
-            render json: "Could not create Event #{params[:event].inspect} in Timeline #{timeline.inspect}", status: 500
+            render json: "Can't create event. #{params[:event].inspect} in Timeline #{timeline.inspect}", status: 500
           end
         rescue => e
-          Rails.logger.info(" ******** #{e.inspect} *********")
+          Rails.logger.warn("Can't create event. Error: #{e.inspect} in #{__FILE__}:#{__LINE__} with params #{params.inspect}")
         end
       end
 

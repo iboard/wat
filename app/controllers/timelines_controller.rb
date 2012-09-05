@@ -1,8 +1,8 @@
 class TimelinesController < ApplicationController
 
 
+  before_filter  :initialize_timeline_session
   before_filter  :load_timelines
-  before_filter  :set_timeline_duration, only: [:update]
 
   # GET /timelines
   # Sets no_timeline to prevent timeline-view (in corner) on this page
@@ -16,8 +16,8 @@ class TimelinesController < ApplicationController
     redirect_to root_path, alert: t(:access_denied) unless user == current_user || current_user.can_execute?('Admin')
 
     timeline = user.timeline
-    if (timeline && timeline.update_attributes(params[:timeline])) || user.create_timeline( params[:timeline])
-      redirect_to timelines_path(since: fetch_events_since), notice: t(:timeline_updated)
+    if (timeline && update_or_create_timeline(timeline, user))
+      redirect_to timelines_path(since: @since), notice: t(:timeline_updated)
     else
       redirect_to timelines_path(since: fetch_events_since), alert: (t(:error_updating_timeline) + ":<br/>" + timeline.errors.full_messages.join("<br/>")).html_safe
     end
@@ -25,8 +25,7 @@ class TimelinesController < ApplicationController
 
   # user clicks on show/hide timeline
   def toggle
-    @timeline_display = session[:timeline][:display] == :hidden ? :show : :hidden
-    session[:timeline][:display] = @timeline_display
+    toggle_timeline_display
     respond_to do |format|
       format.js {}
       format.html {
@@ -38,40 +37,35 @@ class TimelinesController < ApplicationController
   # Ajax request called every 5 seconds from timeline.coffee
   def update_timeline
     @since = last_updated
-    cookies.permanent[:timeline_last_updated] = Time.now
   end
 
 
   private
-  def last_updated
-    if params[:since].present?
-      Time.parse params[:since]
-    elsif session[:timeline_last_updated] || cookies[:timeline_last_updated]
-      session[:timeline_last_updated] || cookies[:timeline_last_updated]
-    else
-      Time.now-(Settings.timeline.default_duration || 60).minutes
-    end
+
+  def toggle_timeline_display
+    session[:timeline][:display] = @timeline_session[:display] == :show ? :hidden : :show
+    cookies.permanent[:timeline] = session[:timeline]
   end
 
   def load_timelines
     @timelines = current_user.timelines
-    @events = current_user.events( fetch_events_since )
+    @events = current_user.events( last_updated )
   end
 
-  def set_timeline_duration
-    if params[:timeline][:show_timeline_since].present?
-      session[:show_timeline_since] = params[:timeline][:show_timeline_since].to_i
+  def last_updated
+    if params[:since].present?
+      Time.parse params[:since]
+    elsif
+      Time.now - @timeline_session[:show_timeline_since].to_i.minutes
     end
   end
 
-  def timeline_duration
-    params[:show_timeline_since] ||= session[:timeline_duration] || cookies[:timeline_duration]
+  def update_or_create_timeline(timeline, user)
+    timeline.update_attributes(params[:timeline])
+    session[:timeline][:show_timeline_since] = params[:timeline][:show_timeline_since]
+    @timeline_session[:show_timeline_since] = params[:timeline][:show_timeline_since]
+    @since = Time.now - params[:timeline][:show_timeline_since].to_i.minutes
   end
 
-  def fetch_events_since
-    _since_time = params[:since].present? ? params[:since] : nil
-    _gap = (session[:show_timeline_since].present? && !params[:since]) ? session[:show_timeline_since].to_i.minutes : 60.minutes
-    _since_time || Time.now.utc-_gap
-  end
 
 end

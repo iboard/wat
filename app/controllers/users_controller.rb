@@ -118,12 +118,8 @@ class UsersController < ApplicationController
     else
       subscribe_or_unsubscribe_timeline
       respond_to do |format|
-        format.html {
-          Rails.logger.info "VIA HTTP"
-          redirect_to root_path, alert: t(:only_ajax) }
-        format.js   {
-          Rails.logger.info "VIA AJAX"
-        }
+        format.html { redirect_to root_path, alert: t(:only_ajax) }
+        format.js   {}
       end
     end
   end

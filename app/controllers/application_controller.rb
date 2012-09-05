@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :ensure_locale
+  before_filter :initialize_timeline_session
   before_filter :setup_timeline
 
   helper_method :current_user
@@ -122,9 +123,6 @@ private
   end
 
   def setup_timeline
-    session[:timeline] ||= cookie[:timeline] || { display: :show, timelines: :all, duration: Settings.timeline.default_duration  }
-    @timeline_display = session[:timeline][:display] == :show ? 'icon-chevron-down' : 'icon-chevron-up'
-    cookies.permanent[:timeline] = session[:timeline]
     if current_user
       @events = current_user.events(timeline_last_request())
     end
@@ -138,12 +136,33 @@ private
     if params[:since].present?
       Time.parse params[:since]
     else
-      Time.now-(Settings.timeline.default_duration || 1440).minutes
+      Time.now-(@timeline_session ? @timeline_session[:show_timeline_since].to_i : Settings.timeline.default_duration).minutes
     end
   end
 
   def is_action?(what)
     params[:action] == what.to_s.underscore
+  end
+
+  def initialize_timeline_session
+    session[:timeline] = nil if session[:timeline].class == String
+    unless session && session[:timeline] && session[:timeline][:display] && session[:timeline][:show_timeline_since]
+      cookies.permanent[:timeline] = nil if cookies[:timeline].class == String
+      if cookies && cookies[:timeline] && cookies[:timeline][:display] && cookies[:timeline][:show_timeline_since]
+        session[:timeline] = cookies[:timeline]
+      else
+        session[:timeline] = {
+            display: :show,
+            show_timeline_since: Settings.timeline.default_duration
+        }
+      end
+      if params[:timeline].present?
+        session[:timeline][:show_timeline_since] = params[:timeline][:show_timeline_since]
+        params[:since] = Time.now - params[:timeline][:show_timeline_since].minutes
+      end
+      cookies.permanent[:timeline] = session[:timeline]
+    end
+    @timeline_session = session[:timeline]
   end
 
 protected

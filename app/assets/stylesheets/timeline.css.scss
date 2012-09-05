@@ -9,6 +9,8 @@
 }
 
 #events {
+  display: block;
+  overflow: scroll-y;
   .timeline-event {
     img {
       border-radius: 2em;
@@ -82,13 +84,13 @@
     }
   }
 
-  #entries {
+  #events {
     margin-top: 30px;
     padding-left: 0px;
     margin-right: 8px;
     margin-bottom: 20px;
     height: 240px;
-    overflow: scroll;
+    overflow-x: hidden;
     .bubble {
       padding-left: 5px;
       margin-left: 0px;
@@ -171,11 +173,12 @@ ul#events {
 
 #timeline {
   ul#events {
-    z-index: 2900;
+    display: block;
+    z-index: 9900;
     height: 235px;
-    max-heigth: 100px;
-    overflow: scroll;
-
+    min-height: 235px;
+    max-height: 235px;
+    overflow: scroll-y;
     margin-top: 35px;
     margin-left: 5px;
     margin-right: 5px;

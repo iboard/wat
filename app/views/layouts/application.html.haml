@@ -44,7 +44,7 @@
               = yield(:search_bar) 
 
     = form_tag update_timeline_timelines_path, style: 'display: none;' do
-      = text_field_tag "last_update", "last_update", value: session[:timeline_last_updated] || Time.now-5.minutes
+      = text_field_tag "last_update", "last_update", value: Time.now.to_s
     = render "timelines/users_timeline", user: current_user if current_user && !@no_timeline
     .main-background
       .container.main

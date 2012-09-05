@@ -1,3 +1,7 @@
-var latest_events= '<%= j render "events", events: @events -%>';
+<% if @events.any? %>
+  var latest_events= '<%= j render "events", events: @events -%>';
+<% else %>
+  var latest_events= '';
+<% end %>
 var interval_in_seconds = <%= (Settings.timeline.reload_interval || 10).seconds * 1000 %>;
 var last_update= '<%= (Time.now).to_s %>';
