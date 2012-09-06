@@ -15,4 +15,5 @@
  *= require users
  *= require datepicker
  *= require timeline
+ *= require ckeditor_overrides
 */
