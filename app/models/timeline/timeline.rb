@@ -11,7 +11,6 @@ class Timeline
 
   field                   :enabled, type: Boolean, default: true
   field                   :public,  type: Boolean, default: true
-  # field                   :threshold, type: Integer, default: 0
 
   embeds_many  :timeline_events
   accepts_nested_attributes_for :timeline_events
