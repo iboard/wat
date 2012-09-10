@@ -53,14 +53,7 @@ class Timeline
   end
 
   def create_event( event_options={}, _class=TimelineEvent )
-    _count = 0
-    _distance = distance_for( "#{_class}" )
-    if _distance > 0
-      _search = { :_type => "#{_class}" }
-      _search.update( event_options ) if event_options != {}
-      _count = since(Time.now - _distance.seconds).where( _search ).count
-    end
-    self.timeline_events.create( event_options, _class) unless _count > 0
+    self.timeline_events.create( event_options, _class) if allow_event?(event_options, _class)
   end
 
   def events_from(user,_since=nil)
@@ -74,9 +67,26 @@ class Timeline
   # @!endgroup
 
   private
-  def distance_for(_class)
-    _d = eval( "Settings.#{_class.to_s.underscore}_distance_in_seconds" ) || "0"
-    eval _d.to_s
+
+  # Check if it's allowed to create the event
+  # By now there is one check only (Thresholding). Further checks can be added here
+  # @return Boolean - true if it's ok to create the event.
+  def allow_event?(event_options, _class)
+    ! threshold_reached?(_class, event_options, distance_for( _class ))
   end
 
+  def threshold_reached?(_class, event_options, threshold)
+    return false if threshold == 0
+    _search = {:_type => _class.to_s}
+    _search.update(event_options) if event_options != {}
+    since(Time.now - threshold.seconds).where(_search).count > 0
+  end
+
+  def distance_for(_class)
+    begin
+      eval( "Settings.timeline.event_classes.#{_class.to_s.underscore}.threshold" )
+    rescue
+      0
+    end
+  end
 end

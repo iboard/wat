@@ -22,4 +22,8 @@ api:
 
 timeline:
   reload_interval: 1
-  default_duration: 1440
+  default_duration: 120
+  event_classes:
+    timeline_event:
+      threshold: 2
+

@@ -33,10 +33,20 @@ developer_mail_address: "developer@example.com"
 # show_user_menu: true
 # supress_global_search: false
 
+# TIMELINE BEHAVIOR
 
 timeline:
-  reload_interval: 10
-  default_duration: 1440
+  # Reload timeline on client every 5 seconds
+  reload_interval: 5
+
+  # By default show the last two hours
+  default_duration: 120
+
+  # Setup behavior of timeline-classes
+  # threshold: How many seconds between identical messages
+  event_classes:
+    timeline_event:
+      threshold: 10
 
 # LAYOUT
 

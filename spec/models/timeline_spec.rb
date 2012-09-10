@@ -45,7 +45,7 @@ describe Timeline do
       @timeline.since( Time.now-2.years ).map(&:message).should == ['old entry','new entry']
     end
 
-    it "isn't valid if similar event exists within threshold" do
+    it "doesn't allow similar event within threshold" do
       @user = test_user "Admin", "secret", "Admin"
       timeline = Timeline.find_or_create_by(name: "Threshold")
       event = timeline.create_event( sender_id: @user.id, message: "Test" )
