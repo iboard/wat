@@ -7,8 +7,8 @@
       .nav.nav-pills
         - Secrets::defined_providers.each do |provider|
           = link_to provider.to_s.humanize, "/auth/#{provider.to_s.downcase}", :class => 'btn btn-large'
-          - if Secrets::secret['openid']
-            = link_to "OpenID", "/auth/open_id", :class => 'btn btn-large'
+        - if Secrets::secret['openid']
+          = link_to "OpenID", "/auth/open_id", :class => 'btn btn-large'
 
 = form_tag( "/auth/identity/callback", :class => 'form-horizontal') do
   %fieldset

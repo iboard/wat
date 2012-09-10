@@ -411,3 +411,4 @@ en:
   update_timeline: "Update & Refresh"
   no_events_to_display: "There are no events to display.<br/>%{settings_link}"
   load_more: " ... "
+  event_threshold_reached: "The same message can be sent once every %{time} seconds only."
