@@ -17,3 +17,11 @@ timeline:
   event_classes:
     timeline_event:
       threshold: 10
+    user_event:
+      threshold: 10
+    doorkeeper_event:
+      threshold: 900
+    comment_event:
+      threshold: 300
+    page_event:
+      threshold: 300

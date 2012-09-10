@@ -36,7 +36,17 @@ developer_mail_address: "developer@example.com"
 timeline:
   reload_interval: 5
   default_duration: 1440
-
+  event_classes:
+    timeline_event:
+      threshold: 10
+    user_event:
+      threshold: 10
+    doorkeeper_event:
+      threshold: 900
+    comment_event:
+      threshold: 300
+    page_event:
+      threshold: 300
 # LAYOUT
 
 # If a page has a banner: on PagesController::show the page 
