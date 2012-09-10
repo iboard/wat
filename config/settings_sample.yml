@@ -10,3 +10,6 @@ max_twitter_messages: 3
 
 application_name: "W.A.T."
 start_search_at_min_chars: 3
+
+# Example: !!! Used for spec/models/timeline_spec.rb !!!
+timeline_event_distance_in_seconds: 2*1

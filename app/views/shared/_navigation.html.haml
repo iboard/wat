@@ -8,8 +8,8 @@
           %li.hr
           - Secrets::defined_providers.each do |provider|
             %li= link_to provider.to_s.humanize, "/auth/#{provider.to_s.downcase}"
-            - if Secrets::secret['openid']
-              %li= link_to "OpenID", "/auth/open_id"
+          - if Secrets::secret['openid']
+            %li= link_to "OpenID", "/auth/open_id"
           %li.hr
           %li= icon_link_to 'icon-leaf', '', t(:register_new_account), new_identity_path
     - else
