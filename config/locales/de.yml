@@ -413,3 +413,4 @@ de:
   update_timeline: "Speichern & Aktualisieren"
   no_events_to_display: "Es gibt keine Ereignisse und Nachrichten.<br/>%{settings_link}"
   load_more: " ... "
+  event_threshold_reached: "Die selbe Nachricht kann nur einmal alle %{time} Sekunden abgesandt werden."

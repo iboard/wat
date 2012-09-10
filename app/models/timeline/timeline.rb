@@ -11,6 +11,7 @@ class Timeline
 
   field                   :enabled, type: Boolean, default: true
   field                   :public,  type: Boolean, default: true
+  # field                   :threshold, type: Integer, default: 0
 
   embeds_many  :timeline_events
   accepts_nested_attributes_for :timeline_events
@@ -53,7 +54,14 @@ class Timeline
   end
 
   def create_event( event_options={}, _class=TimelineEvent )
-    self.timeline_events.create( event_options, _class)
+    _count = 0
+    _distance = distance_for( "#{_class}" )
+    if _distance > 0
+      _search = { :_type => "#{_class}" }
+      _search.update( event_options ) if event_options != {}
+      _count = since(Time.now - _distance.seconds).where( _search ).count
+    end
+    self.timeline_events.create( event_options, _class) unless _count > 0
   end
 
   def events_from(user,_since=nil)
@@ -65,5 +73,11 @@ class Timeline
   end
 
   # @!endgroup
+
+  private
+  def distance_for(_class)
+    _d = eval( "Settings.#{_class.to_s.underscore}_distance_in_seconds" ) || "0"
+    eval _d.to_s
+  end
 
 end
