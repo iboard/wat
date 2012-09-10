@@ -17,7 +17,7 @@ timeline:
   event_classes:
     timeline_event:
       threshold: 10
-    user_event:
+    user_message:
       threshold: 10
     doorkeeper_event:
       threshold: 900

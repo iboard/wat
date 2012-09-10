@@ -85,7 +85,8 @@ class Timeline
   def distance_for(_class)
     begin
       eval( "Settings.timeline.event_classes.#{_class.to_s.underscore}.threshold" )
-    rescue
+    rescue => e
+      Rails.logger.warn "*** => RETURN DEFAULT 0 FOR Settings.timeline.event_classes.#{_class.to_s.underscore}.threshold (error=#{e.inspect})"
       0
     end
   end
