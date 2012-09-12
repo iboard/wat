@@ -5,7 +5,7 @@ require File.expand_path '../deploy_helpers/helper_functions.rb', __FILE__
 load_target_server
 
 set :scm, "git"
-set :repository, "git@github.com:iboard/#{source_repository}.git"
+set :repository, "git://github.com/iboard/#{source_repository}.git"
 set :branch, "master"
 # END SETUP SECTION =============================================
 
