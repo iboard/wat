@@ -5,12 +5,12 @@
 
 # Mailserver
 
-smtp_server: mail.domain.com
+smtp_server: "mail.domain.com"
 smtp_port: 25
-smtp_domain: domain.com
-smtp_user: username
+smtp_domain: "domain.com"
+smtp_user: "username"
 smtp_password: 'secret'
-smtp_authentication: plain
+smtp_authentication: "plain"
 smtp_enable_starttls_auto: true
 smtp_host: "localhost:3000"
 smtp_default_from: "noreply@domain.com"
@@ -19,7 +19,7 @@ smtp_default_from: "noreply@domain.com"
 # Application
 
 application_brand: "&alpha;WAT"
-application_mail_signature: [W]eb[A]pplication[Template] http://gitbub.com/iboard/wat
+application_mail_signature: "[W]eb[A]pplication[Template] http://gitbub.com/iboard/wat"
 application_mail_subject_prefix: "WAT: "
 developer_mail_address: "developer@example.com"
 
