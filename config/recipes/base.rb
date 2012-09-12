@@ -1,7 +1,9 @@
 # @param [String] from - the erb-template to read from
 # @param [String] to - where to put the rendered result
-def template(from, to=nil)
-  erb = File.read(File.expand_path("../templates/#{from}",__FILE__))
+def template(from, to=nil,template_path=nil)
+  template_path ||= File.expand_path("../templates",__FILE__)
+  _template = File.join(template_path, from)
+  erb = File.read(_template)
   result = ERB.new(erb).result(binding)
   if to
     put result, to  
@@ -17,6 +19,7 @@ namespace :deploy do
   task :install do
     puts "NO INSTALL RECIPIENT IS DEFINED YET"
     puts "SEE #{__FILE__} :deploy:install AND SETUP REQIRED STEPS THERE"
+    puts "Or use project 'deploy' to setup base packages"
   end
 
   desc "Setup the config-files on the server with example-defaults"
@@ -28,11 +31,6 @@ namespace :deploy do
 
     run "mkdir -p #{shared_path}/config/settings"
     put File.read("config/settings/production.yml_sample"), "#{shared_path}/config/settings/production.yml"
-
-    puts "=============================================================="
-    puts "EDIT FILES IN #{shared_path} ON YOUR "
-    puts "SERVER BEFORE deploy:cold"
-    puts "=============================================================="
   end
   after "deploy:setup", "deploy:setup_config"
 

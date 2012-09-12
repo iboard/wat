@@ -17,6 +17,7 @@ load "config/recipes/check"
 load "config/recipes/virtual_host_proxy_balancer"
 load "config/recipes/webrick"
 load "config/recipes/paperclip"
+load "config/recipes/application_config"
 
 # NOT YET AVAILABLE BUT COMMING SOON
 #load "config/recipes/unicorn"  

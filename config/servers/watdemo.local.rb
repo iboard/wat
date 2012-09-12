@@ -22,3 +22,4 @@ set :deploy_to, "/home/#{user}/apps/#{application}"
 set :source_repository, "wat"
 set :deploy_via, :remote_cache
 set :use_sudo, false
+set :application_name, "WAT Demo Installation"

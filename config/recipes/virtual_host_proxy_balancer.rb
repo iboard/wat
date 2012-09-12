@@ -27,7 +27,7 @@ namespace :deploy do
     run "#{sudo} mv /tmp/apache_site_conf /etc/apache2/sites-enabled/#{application}"
     run "#{sudo} apache2ctl graceful"
   end
-  after "deploy:setup", "virtual_host_proxy_balancer:setup"
+  after "deploy:setup", "deploy:install_proxy_module"
 
   desc "Generate the virtual host config and show but not update on server"
   task :show do
