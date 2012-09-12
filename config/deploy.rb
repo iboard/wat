@@ -1,18 +1,10 @@
 require "bundler/capistrano"
-
+require File.expand_path '../deploy_helpers/helper_functions.rb', __FILE__
 # SETUP SECTION =================================================
 # @todo Move to "Partial" excluded from git
 server "andi.altendorfer.at", :web, :app, primary: true
 
-set :virtual_host, "andi.altendorfer.at"
-set :cluster_ports, [3000,3001,3002]
-set :bind_ip, "0.0.0.0"
-set :application, "andi"
-set :user, 'deployer'
-set :deploy_to, "/home/#{user}/apps/#{application}"
-set :source_repository, "wat" 
-set :deploy_via, :remote_cache
-set :use_sudo, false
+load_target_server
 
 set :scm, "git"
 set :repository, "git@github.com:iboard/#{source_repository}.git"

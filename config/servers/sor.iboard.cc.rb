@@ -1,0 +1,9 @@
+set :virtual_host, "sor.iboard.cc"
+set :cluster_ports, [3200,3201,3202]
+set :bind_ip, "0.0.0.0"
+set :application, "sor"
+set :user, 'deployer'
+set :deploy_to, "/home/#{user}/apps/#{application}"
+set :source_repository, "wat"
+set :deploy_via, :remote_cache
+set :use_sudo, false

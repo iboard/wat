@@ -1,0 +1,9 @@
+set :virtual_host, "andi.altendorfer.at"
+set :cluster_ports, [3000,3001,3002]
+set :bind_ip, "0.0.0.0"
+set :application, "andi"
+set :user, 'deployer'
+set :deploy_to, "/home/#{user}/apps/#{application}"
+set :source_repository, "wat"
+set :deploy_via, :remote_cache
+set :use_sudo, false
