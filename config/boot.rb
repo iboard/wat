@@ -10,6 +10,6 @@ require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
 # on top the yaml-file. Enable the next two lines to switch to 'syck' will give you the exact
 # line of the syntax-error. But please remark 'syck' when done because it's the standard
 # yaml-interpreter and faster.
-# require 'yaml'
-# YAML::ENGINE.yamler= 'syck'
+require 'yaml'
+YAML::ENGINE.yamler= 'psych'
 
