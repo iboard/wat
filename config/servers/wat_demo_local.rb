@@ -12,8 +12,8 @@
 #    * I for one prepared a VMWare-template from which I start
 #    * Otherwise you may add capistrano recipes to do this task
 #
-server "debian64.local", :web, :app, primary: true
-set :virtual_host, "debian64.local"
+server "watdemo.local", :web, :app, primary: true
+set :virtual_host, "watdemo.local"
 set :cluster_ports, [3000,3001,3002]
 set :bind_ip, "0.0.0.0"
 set :application, "watdemo"
