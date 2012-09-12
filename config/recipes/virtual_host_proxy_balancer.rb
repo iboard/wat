@@ -5,7 +5,7 @@ namespace :virtual_host_proxy_balancer do
     run "#{sudo} a2enmod proxy_balancer"
     run "#{sudo} a2enmod rewrite"
   end
-  after "deploy:install", "virtual_host:install"
+  after "deploy:install", "virtual_host_proxy_balancer:install"
   
 
   desc "Enable a virtual host for the application and restart apache"
@@ -14,7 +14,7 @@ namespace :virtual_host_proxy_balancer do
     run "#{sudo} mv /tmp/apache_site_conf /etc/apache2/sites-enabled/#{application}"
     run "#{sudo} apache2ctl graceful"
   end
-  after "deploy:setup", "virtual_host:setup"
+  after "deploy:setup", "virtual_host_proxy_balancer:setup"
 
   desc "Generate the virtual host config and show but not update on server"
   task :show do

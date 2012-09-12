@@ -1,8 +1,6 @@
 require "bundler/capistrano"
 require File.expand_path '../deploy_helpers/helper_functions.rb', __FILE__
 # SETUP SECTION =================================================
-# @todo Move to "Partial" excluded from git
-server "andi.altendorfer.at", :web, :app, primary: true
 
 load_target_server
 
