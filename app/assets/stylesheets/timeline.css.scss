@@ -143,28 +143,30 @@
   display: inline;
   font-size: 0.75em;
   font-style: italic;
-  line-height: 90%;
+  line-height: 100%;
 }
 
 .timeline-username {
   display: inline;
   font-size: 0.7em;
   font-style: italic;
-  line-height: 100%;
+  line-height: 130%;
 }
 
 .timeline-message {
   font-size: 0.9em;
-  line-height: 150%;
+  line-height: 130%;
   display: block;
 }
 
 #events {
-
+   .text {
+     line-height: 110%;
+     margin-left: 40px;
+   }
 }
 
 #events .timeline-message {
-  margin-left: 40px;
 }
 
 ul#events {
