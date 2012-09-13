@@ -25,7 +25,7 @@ module Wat
       g.helper_specs false
     end
 
-    config.mongoid.logger = false #Logger.new($stdout, :error)
+    Mongoid.logger = false #Logger.new($stdout, :error)
 
 
     # Settings in config/environments/* take precedence over those specified here.

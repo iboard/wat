@@ -21,5 +21,3 @@
 //= require jsort_sortable
 //= require ckeditor/init
 //= require_tree .
-
-

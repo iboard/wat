@@ -142,7 +142,7 @@ describe Page do
         end
 
         it "raises an error if initialized with unavailable version" do
-          expect { Version.new(@page, 4) }.should raise_error(Versionizer::VersionError)
+          expect { Version.new(@page, 4) }.to raise_error(Versionizer::VersionError)
         end
 
         it "delegates request of fields to the specified version" do

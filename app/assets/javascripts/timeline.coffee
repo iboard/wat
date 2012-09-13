@@ -54,7 +54,7 @@ jQuery ->
       error    : (xhr, status, err) ->
         $('#timeline #entries').html( "<div class='alert alert-info'>
                                        No Timeline available at the moment.<hr/>
-                                      Im Augenblick ist keine Timeline verfügbar.") 
+                                      Im Augenblick ist keine Timeline verfügbar.")
         setTimeout( "restartTimelineUpdater()", 60000 )
 
   self.dropInEvent = (latest_events) ->

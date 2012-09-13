@@ -15,7 +15,7 @@ gem "haml", ">= 3.1.4"
 gem "haml-rails", ">= 0.3.4", :group => :development
 gem "rspec-rails", ">= 2.8.1", :group => [:development, :test]
 gem "database_cleaner", ">= 0.7.1", :group => :test
-gem "mongoid-rspec", ">= 1.4.4", :group => :test
+gem "mongoid-rspec", "~> 1.4.4", :group => :test
 gem "factory_girl_rails", ">= 1.7.0", :group => :test
 gem "email_spec", ">= 1.2.1", :group => :test
 gem "guard", ">= 0.6.2", :group => :development  
@@ -80,7 +80,7 @@ gem "jsort", "~> 0.0.4"
 
 # Application
 gem "bson_ext", ">= 1.5.2"
-gem "mongoid", ">= 2.4.4"
+gem "mongoid", "~> 2.4.4"
 gem "mongoid-paperclip", :require => 'mongoid_paperclip'
 gem "yard"
 gem "redcarpet"
