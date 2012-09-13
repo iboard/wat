@@ -126,8 +126,8 @@ describe Page do
           [_version.title, _version.body].should == ["Version #{11-n}", "This is Version #{11-n}"]
         end
 
-        expect { Version.new(_page, 13) }.should raise_error(Versionizer::VersionError)
-        expect { Version.new(_page, 1) }.should raise_error(Versionizer::VersionError)
+        expect { Version.new(_page, 13) }.to raise_error(Versionizer::VersionError)
+        expect { Version.new(_page, 1) }.to raise_error(Versionizer::VersionError)
       end
 
       describe "wraps an object in class Version" do

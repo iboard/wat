@@ -33,10 +33,10 @@ class Avatar
                               tiny: "32x32="
                             },
                             processors: [:cropper]
-  after_update  :reprocess_avatar, if: :cropping?
+  after_update  :reprocess_avatar
 
   def cropping?
-    !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
+    !@reprocessed && !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
   end
 
   # Avatar or Gravatar path
@@ -62,9 +62,12 @@ class Avatar
   def large=(ignore)
   end
 
-private
+  private
   def reprocess_avatar
-    avatar.reprocess!
+    if cropping? && !@reprocessed
+      @reprocessed = true
+      avatar.reprocess!
+    end
   end
 
 end
