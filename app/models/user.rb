@@ -43,7 +43,8 @@ class User
   embeds_many :authentications
   embeds_many :facilities, as: :facilitizer
   embeds_one :profile
-  embeds_one :avatar
+  embeds_one :avatar, cascade_callbacks: true
+  accepts_nested_attributes_for :avatar
 
   has_many :contact_invitations #, as: 'sent_invitations'
   has_many :attachments, class_name: "UserAttachment"

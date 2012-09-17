@@ -24,6 +24,7 @@ class Avatar
 
   attr_accessor :crop_x,:crop_y,:crop_w,:crop_h
 
+
   has_mongoid_attached_file :avatar,
                             styles: {
                               avatar: "128x128>",
@@ -33,10 +34,9 @@ class Avatar
                               tiny: "32x32="
                             },
                             processors: [:cropper]
-  after_update  :reprocess_avatar
 
   def cropping?
-    !@reprocessed && !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
+    !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
   end
 
   # Avatar or Gravatar path
@@ -60,14 +60,6 @@ class Avatar
   end
 
   def large=(ignore)
-  end
-
-  private
-  def reprocess_avatar
-    if cropping? && !@reprocessed
-      @reprocessed = true
-      avatar.reprocess!
-    end
   end
 
 end
