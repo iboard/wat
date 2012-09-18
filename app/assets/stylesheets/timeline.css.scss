@@ -35,7 +35,7 @@
   color: #EDEDED;
   padding: 0px;
   opacity: 0.95;
-  z-index: 10;
+  z-index: 2;
   border-radius: 1em 0em 0em 0em;
 
   #post-message-form {
@@ -61,7 +61,7 @@
 
   #input-text {
     display: none;
-    z-index: 13;
+    z-index: 2;
   }
 
 
@@ -74,7 +74,7 @@
     display: block-inline;
     border-radius: 1em 0em 0em 0em;
     background-color: #171717;
-    z-index: 12;
+    z-index: 2;
     color: white;
     a {
       text-decoration: none;
@@ -108,7 +108,7 @@
     .bubble {
       padding-left: 5px;
       margin-left: 0px;
-      z-index: 11;
+      z-index: 2;
       color: black;
       border-radius: 0.25em 0.25em 0.25em 0.25em;
       line-height: 0.5em;
@@ -180,7 +180,7 @@ ul#events {
 #timeline {
   ul#events {
     display: block;
-    z-index: 9900;
+    z-index: 2;
     height: 235px;
     min-height: 235px;
     max-height: 235px;

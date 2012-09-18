@@ -1,7 +1,7 @@
 $tableBorderColor: #ccc;
 
-@import url(http://fonts.googleapis.com/css?family=Bitter);
-@import url(http://fonts.googleapis.com/css?family=Lobster);
+// @import url(http://fonts.googleapis.com/css?family=Bitter);
+// @import url(http://fonts.googleapis.com/css?family=Lobster);
 
 html {
   height: 100%; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#53666e", endColorstr="#2b353a");
@@ -259,6 +259,30 @@ img.avatar {
 }
 
 
+
+@media (max-width: 480px) {
+
+  .banner, #banner {
+    min-width: 100%;
+    padding: 0px;
+    margin: 0px;
+    margin-top: 10px;
+
+    overflow: hidden;
+    a {
+      img {
+        width: 100%;
+        border-radius: 15px 15px 0px 0px;
+      }
+    }
+    img {
+      width: 100%;
+      border-radius: 15px 15px 0px 0px;
+    }
+  }
+}
+
+
 @media (max-width: 767px) {
   body {
     padding: 0px;
@@ -303,8 +327,13 @@ img.avatar {
   }
 }
 
-
+// iPad Landscape
 @media (min-width: 790px) {
+  .navbar-fixed-top {
+    %ul %li {
+      border: 1px solid red;
+    }
+  }
   .profile-avatar {
     img {
       width: 100px;
@@ -357,29 +386,6 @@ img.avatar {
   
 
 }
-
-@media (max-width: 480px) {
-
-  .banner, #banner {
-    min-width: 100%;
-    padding: 0px;
-    margin: 0px;
-    margin-top: 10px;
-
-    overflow: hidden;
-    a {
-      img {
-        width: 100%;
-        border-radius: 15px 15px 0px 0px;
-      }
-    }
-    img {
-      width: 100%;
-      border-radius: 15px 15px 0px 0px;
-    }
-  }
-}
-
 
 .banner-preview {
   border-radius: 5px;
