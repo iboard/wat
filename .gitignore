@@ -27,6 +27,7 @@ config/servers/configs
 # bundler state
 /.bundle
 /vendor/bundle/
+vendor/courses_dummy/
 /.rvmrc
 
 # minimal Rails specific artifacts
