@@ -1,4 +1,10 @@
 - @identity ||= Identity.new
+
+- if @identity.errors.any?
+  %br/
+  %br/
+  .alert.alert-error
+    = @identity.errors.full_messages.join("<br/>")
 .row-fluid
   .span6
     .hero-unit

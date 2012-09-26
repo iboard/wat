@@ -10,8 +10,8 @@ class Authentication
 
 private
   def remove_identity
-    if self.provider == 'Identity'
-      Identity.where(uid: self.uid).delete_all
+    if self.provider =~ /Identity/i
+      Identity.where(_id: self.uid).delete_all
     end
   end
 

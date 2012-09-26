@@ -9,7 +9,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   end
 
   configure do |config|
-    config.path_prefix = '/auth' if Rails.env == 'production'
+    config.path_prefix = '/auth' #unless Rails.env == 'test'
   end
 
 
@@ -22,7 +22,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     provider :openid, :store => OpenID::Store::Filesystem.new(_store)
   end
 
-  provider :identity, :fields => [:name], :auth_key => 'name', on_failed_registration: lambda { |env|    
+  provider :identity, :fields => [:name], :auth_key => 'name', on_failed_registration: lambda { |env|
     IdentitiesController.action(:new).call(env)
   }
 

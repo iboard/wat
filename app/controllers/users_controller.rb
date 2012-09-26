@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       flash.now[:info] = t(:please_enter_your_email_address)
     end
   end
-  
+
   def update
     @user = User.find(params[:id])
     if params[:user][:password_reset_token].present?

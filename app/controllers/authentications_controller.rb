@@ -4,7 +4,7 @@ class AuthenticationsController < ApplicationController
   def destroy
     @user = User.find(params[:user_id])
     unless @user.authentications.count == 1
-      @user.authentications.find(params[:id]).delete
+      @user.authentications.find(params[:id]).destroy
       @user.save
       redirect_to user_path(@user), :notice => t(:removed_authentication_successfully)
     else
