@@ -113,6 +113,7 @@ de:
   facility_successfully_added: Kompetenz wurde erfolgreich hinzufügt.
   facility_name: Kompetenz
   admin: Administrator
+  administrator: "Administrator"
   author: Autor
   moderator: Moderator
   page_title_hint: 'Wird als Teil der URL benutz; am besten beschränken sie sich auf a-z, leer, 0-9'
@@ -407,7 +408,6 @@ de:
   send_to_timelines: "Empfänger"
   post_message: "Nachricht senden"
   post_message_hint: "Wählen Sie die 'Timelines' an die sie ihre Nachricht senden wollen. Max. 160 Zeichen. Ihre persönliche Timeline ist automatisch inkludiert."
-  admin: "Administrator"
   author: "Autor"
   maintainer: "Verwaltung"
   update_timeline: "Speichern & Aktualisieren"

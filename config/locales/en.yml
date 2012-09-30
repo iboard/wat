@@ -110,6 +110,7 @@ en:
   facility_could_not_be_added: "Facilit couldn't be added (%{errors})"
   facility_successfully_added: Facility successfully added.
   admin: Admin
+  administrator: "Administrator"
   author: Author
   moderator: Moderator
   page_title_hint: 'will be used as part of the URL; best use simple words, numbers, blanks, but not any other chars.'
@@ -405,7 +406,6 @@ en:
   send_to_timelines: "To"
   post_message: "Post"
   post_message_hint: "Select the 'Timelines' to which you will post your message. Max. 160 characters. Your personal Timeline is included automatically."
-  admin: "Administrator"
   author: "Author"
   maintainer: "Maintainer"
   update_timeline: "Update & Refresh"
