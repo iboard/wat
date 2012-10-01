@@ -53,6 +53,9 @@ class User
   accepts_nested_attributes_for :timeline
   has_many :timeline_subscriptions
 
+  has_many :messages, as: :sender
+  has_many :messages, as: :receiver
+
   # Accessible Attributes
   attr_accessible :name, :email, :location_token
 
@@ -340,6 +343,14 @@ class User
 
   def subscribe_doorkeeper_timeline
     self.timeline_subscriptions.find_or_create_by user_id: self._id, timeline_id: Timeline.find_or_create_by( name: Doorkeeper::DOORKEEPER_TIMELINE )._id
+  end
+
+  def received_messages
+    Message.where( receiver_ids: self._id )
+  end
+
+  def sent_messages
+    Message.where( sender_id: self._id )
   end
 
   protected
