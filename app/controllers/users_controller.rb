@@ -65,6 +65,14 @@ class UsersController < ApplicationController
       @user.confirm_email_token = nil
       @user.email_confirmed_at = Time.now.utc
       @user.save!
+      # create UserEvent to sender's timeline
+      _sender = ContactInvitation.where( recipient_email: @user.email ).first
+      if _sender
+        Timeline.find_by(name: _sender.name).create_event(
+            {  message: "User '#{@user.name}' has confirmed invitation"
+            }, UserEvent
+        )
+      end
       redirect_to root_path, :notice => t(:email_confirmed)
     else
       redirect_to root_path, :alert => t(:token_not_found)

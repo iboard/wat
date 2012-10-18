@@ -52,12 +52,14 @@ describe UsersController do
       page.should have_link "Cancel Account" 
     end
   
-    it "should delete user" do
-      sign_in_user name: 'Testuser', password: 'notsecret'
+    it "should delete user and creates a Event to AdminTimeline" do
+      @user1 = sign_in_user name: 'Testuser', password: 'notsecret'
       visit users_path
       page.click_link "Cancel Account" 
       visit users_path
       page.should have_no_content "Testuser"
+      # has created a UserChangedEvent to AdminTimeline
+      Timeline.find_by(name: 'Admin').timeline_events.last.text.should =~ /User 'Testuser' was destroyed/
     end
 
     it "should display a message if destroying is not possible" do
@@ -98,10 +100,12 @@ describe UsersController do
       page.should have_content "Access denied"
     end
   
-    it "sends a confirmation mail when a user is created" do
+    it "sends a confirmation mail when a user is created and creates a Event to AdminTimeline" do
       visit signout_path
       sign_up_user name: "Friendly User", password: 'notsecret', email: 'friendly.user@example.com'
       last_email.to.should include('friendly.user@example.com')
+      # has created a UserChangedEvent to AdminTimeline
+      Timeline.find_by(name: 'Admin').timeline_events.last.text.should =~ /User 'Friendly User' was created/
     end
   
     it "sends a confirmation mail when the email changes" do
@@ -239,10 +243,12 @@ describe UsersController do
     it "finds users using the search-form without JS" do
       test_user 'Hidden user', 'secret'
       visit users_path
+      page.should have_content "admin@example.com"
+      page.should have_content "hidden.user@example.com"
       fill_in 'search_search_text', with: "admi"
       click_button "Search"
-      page.should have_content "Admin"
-      page.should_not have_content "Hidden user"
+      page.should have_content "admin@example.com"
+      page.should_not have_content "hidden.user@example.com"
       assert page.all( '.user-location div' ).count == 0, "Should not show Google-map while search"
     end
 
