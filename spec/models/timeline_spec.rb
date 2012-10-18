@@ -22,7 +22,11 @@ describe Timeline do
     end
 
     it "lists in user.postable_timelines if at least one facility matches" do
+      user = test_user "Mr. Nice", "secret"
       @user.postable_timelines.should include(@timeline)
+      @user.available_timelines.should include(@timeline)
+      user.postable_timelines.should_not include(@timeline)
+      user.available_timelines.should_not include(@timeline)
     end
   end
 

@@ -27,7 +27,7 @@ describe ContactInvitation do
     last_email.parts.first.body.should  match "Lorem Ipsum my friend"
   end
 
-  it "connects two users with user.accept_contact_invitation" do
+  it "connects two users with user.accept_contact_invitation and creates a UserEvent to sender's timeline" do
     test_user "My Friend", "secret"
     friend = User.find('my-friend')
     invitation = ContactInvitation.create( sender: @user, recipient_email: 'my.friend@example.com')
@@ -37,6 +37,8 @@ describe ContactInvitation do
     @user.contacts.first.should_not be_nil
     @user.contacts.first.name.should == "My Friend"
     friend.reverse_contacts.first.should == @user
+    # and has created a UserEvent to sender's timeline
+    Timeline.find_by(name: @user.name).timeline_events.last.message.should =~ /has_accepted_invitation/
   end
 
 

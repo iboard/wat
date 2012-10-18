@@ -45,16 +45,19 @@ describe ContactInvitationsController do
   describe "Accept an invitation" do
   
     before(:each) do
-      test_user "New Friend", "secret"
+      @user = test_user "New Friend", "secret"
       sign_in_user name: 'New Friend', password: 'secret'
       invitation = ContactInvitation.create(sender: @admin, recipient_email: 'new.friend@example.com')
       @token = invitation.token
     end
 
-    it "by visiting accept_contact_invitation_path" do
+    it "by visiting accept_contact_invitation_path and creates a UserEvent to sender's timeline" do
       visit accept_contact_invitation_path(@token)
       page.should have_content I18n.t(:your_account_is_now_connected_with, sender: 'Fredy' )
+      # and has created a UserEvent to sender's timeline
+      Timeline.find_by(name: @admin.name).timeline_events.last.message.should =~ /has_accepted_invitation/
     end
+
   end
 
 end
