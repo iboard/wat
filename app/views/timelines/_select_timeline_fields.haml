@@ -5,4 +5,3 @@
     .check-box-with-label
       = check_box_tag "timelines_to[#{timeline._id}]", timeline.id, timeline == current_user.timeline
       = label_tag "timelines_to[#{timeline._id}]", timeline.name
-      -# = label_tag "timelines_to[#{timeline._id}]", timeline.name.titleize
