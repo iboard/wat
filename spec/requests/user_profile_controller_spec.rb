@@ -49,7 +49,8 @@ describe UsersController do
     page.should have_link "Create your profile"
   end
 
-  it "saves changes in the profile", js: true do
+  it "saves changes in the profile and creates a Event to own- and to AdminTimeline", js: true do
+    @admin = test_user 'Testuser', 'notsecret', 'Admin'
     visit user_path(@user1)
     click_link 'Personal information'
     click_link "Create your profile"
@@ -63,6 +64,9 @@ describe UsersController do
     page.should have_content "Profile successfully updated"
     page.should have_content "Eduard"
     page.should have_content "Nockenfell"
+    # has created a UserEvent to user's timeline and a ProfileChangedEvent to AdminTimeline
+    Timeline.find_by(name: @user1.name).timeline_events.last.message.should =~ /updated_your_profile/
+    Timeline.find_by(name: 'Admin').timeline_events.last.text.should =~ /User '#{@user1.name}' has updated his Profile/
   end
 
   it "shows an default avatar in user header if no image is available" do

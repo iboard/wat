@@ -71,12 +71,12 @@ jQuery ->
   # Triggers for Subscription-check-boxes
 
   if $('.subsribe-timeline-by-email-checkbox').length > 0
-    $('.subsribe-timeline-by-email-checkbox').change ->
+    $('.subsribe-timeline-by-email-checkbox').change (event) ->
       event.preventDefault()
       alert "This function is not implemented yet<br/>Die Funktion ist noch nicht implementiert."
 
   if $('.subsribe-timeline-on-screen-checkbox').length > 0
-    $('.subsribe-timeline-on-screen-checkbox').change ->
+    $('.subsribe-timeline-on-screen-checkbox').change (event) ->
       event.preventDefault()
       subscribeUserTimeline($(this))
 

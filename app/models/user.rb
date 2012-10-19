@@ -63,6 +63,8 @@ class User
   after_destroy :clear_identity
   after_create  :create_personal_timeline
   after_create  :subscribe_doorkeeper_timeline
+  after_destroy :create_admin_timeline_event_for_destroy
+  after_create  :create_admin_timeline_event_for_create
 
 
   # Add an authentication to this user
@@ -196,9 +198,13 @@ class User
   # Create facility on invitation.sender
   # @params [ContactInvitation] The received invitation
   def accept_contact_invitation(invitation)
+    Rails.logger.info("UsersClass accept_contact_invitation invitation? #{invitation.inspect}")
+
     _sender = invitation.sender
     _sender.facilities.create(name: self.name, access: 'r--', consumer_ids: [self._id])
     _sender.save!
+    # create UserEvent to sender's timeline
+    create_user_event_to_sender(invitation)
   end
 
   # @param [User] check if this user is in contacts or reverse_contacts
@@ -281,12 +287,40 @@ class User
     end
   end
 
+  # @return [String|Array] name with User.facilities.where(access: /r../)
+  def can_read_facility_names
+    _facility_names ||= []
+    self.facilities.where(:access => /r/i).each do |fac|
+      _facility_names.push( fac.name )
+    end
+    _facility_names
+  end
+
+  # @return [String|Array] name if User.facilities.where(access: /.w./)
+  def can_write_facility_names
+    _facility_names ||= []
+    self.facilities.where(:access => /w/i).each do |fac|
+      _facility_names.push( fac.name )
+    end
+    _facility_names
+  end
+
+  # @return [String|Array] name if User.facilities.where(access: /..x/)
+  def can_execute_facility_names
+    _facility_names ||= []
+    self.facilities.where(:access => /x/i).each do |fac|
+      _facility_names.push( fac.name )
+    end
+    _facility_names
+  end
+
+  # Subscriptions
   def available_timelines
-    Timeline.enabled.public.asc(:name)
+    Timeline.enabled.public.any_of( {:facilities.exists => false}, { :"facilities.name".in => self.can_read_facility_names } ).asc(:name)
   end
 
   def postable_timelines
-    Timeline.where( :"facilities.name".in => self.facilities.map(&:name))
+    Timeline.where( :"facilities.name".in => self.can_write_facility_names )
   end
 
   def subscribe_timelines(*timelines)
@@ -355,9 +389,20 @@ class User
 
   protected
 
+  def create_user_event_to_sender(invitation)
+    Timeline.find_by(user_id: invitation.sender_id).create_event( {  message: "has_accepted_invitation", sender_id: self.id }, UserEvent )
+  end
+
+  def create_admin_timeline_event_for_create
+    AdminTimeline::user_changed( self, "created" )
+  end
+
+  def create_admin_timeline_event_for_destroy
+    AdminTimeline::user_changed( self, "destroyed" )
+  end
+
   def clear_identity
     Identity.where(name: self.name).delete_all
   end
 
 end
-
