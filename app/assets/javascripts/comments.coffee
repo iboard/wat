@@ -6,7 +6,7 @@ jQuery ->
       $('body').animate( {scrollTop : y  },'fast')
 
   if $('.close-comments-button').length > 0
-    $('.close-comments-button').click ->
+    $('.close-comments-button').click (event) ->
       event.preventDefault()
       $(this).prev().html('')
       $(this).hide()
