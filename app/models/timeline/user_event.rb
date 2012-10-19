@@ -1,5 +1,7 @@
 class UserEvent < TimelineEvent
 
+  include ActionView::Helpers::DateHelper
+
   field    :sender_id
 
   def sender
@@ -10,7 +12,7 @@ class UserEvent < TimelineEvent
     I18n.t( :user_action_event,
             user: sender_markdown_link,
             sender: sender_markdown_link,
-            time: distance_of_time_in_words( Time.now, self.created_at ),
+            time: time_ago_in_words( self.created_at ),
             action: I18n.t(self.message.to_sym)
     )
   rescue => e

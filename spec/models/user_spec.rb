@@ -13,7 +13,7 @@ describe User do
     assert !user2.valid?(), 'User with same name should not be created'
   end
 
-  it "removes identities when destroyed" do
+  it "removes identities when destroyed and creates a Event to AdminTimeline" do
     user = User.create!(name: "Test With Identities", email: 'identity@iboard.cc')
     identity = Identity.create!(provider: 'identity', uid:'test123', name: 'Test With Identities', password:"12345", password_confirmation: "12345")
     user.authentications = [ identity ]
@@ -22,6 +22,8 @@ describe User do
     assert Identity.count == 1, "there should be one identity"
     user.destroy
     assert Identity.count == 0, "Identity should have been deleted"
+    # has created a UserChangedEvent to AdminTimeline
+    Timeline.find_by(name: 'Admin').timeline_events.last.text.should =~ /User 'Test With Identities' was destroyed/
   end
 
   it "should store geo-location" do
@@ -48,11 +50,13 @@ describe User do
       last_email.parts.first.body.should  match /requeset to reset your password/
     end
 
-    it "should be subscribed to 'doorkeeper' when created" do
+    it "should be subscribed to 'doorkeeper' when created and creates a Event to AdminTimeline" do
       timeline = Timeline.find_or_create_by(name: 'doorkeeper')
       user = test_user 'Frank Zappa', 'Secret Word of Today'
       user.timeline_subscriptions.count.should == 1
       user.timelines.first.name.should == 'doorkeeper'
+      # has created a UserChangedEvent to AdminTimeline
+      Timeline.find_by(name: 'Admin').timeline_events.last.text.should =~ /User 'Frank Zappa' was created/
     end
 
   end

@@ -6,6 +6,8 @@
 
 class PageEvent < DoorkeeperEvent
 
+  include ActionView::Helpers::DateHelper
+
   field :page_id
 
   def page
