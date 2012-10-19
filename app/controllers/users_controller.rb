@@ -68,7 +68,7 @@ class UsersController < ApplicationController
       # create UserEvent to sender's timeline
       _sender = ContactInvitation.where( recipient_email: @user.email ).first
       if _sender
-        Timeline.find_by(name: _sender.name).create_event(
+        @user.timeline.create_event(
             {  message: "User '#{@user.name}' has confirmed invitation"
             }, UserEvent
         )

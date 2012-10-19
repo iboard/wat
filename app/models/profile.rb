@@ -30,7 +30,7 @@ class Profile
   end
 
   def create_user_event(_what)
-    Timeline.find_by(name: self.user.name).create_event( {  message: "#{_what}_your_profile", sender_id: self.user._id }, UserEvent )
+    self.user.timeline.create_event( {  message: "#{_what}_your_profile", sender_id: self.user._id }, UserEvent )
   end
 
   def create_admin_event(_what)
