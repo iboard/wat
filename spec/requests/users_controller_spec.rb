@@ -17,7 +17,6 @@ describe UsersController do
     fill_in "password", with: "12345"
     click_button "Register"
     page.should_not have_content "Prohibited this account from being saved"
-
   end
   
   describe "With an admin and temporary users" do
@@ -30,10 +29,11 @@ describe UsersController do
     end
    
     it "should login user" do
-       sign_in_user name: 'Testuser', password: 'notsecret'
-       visit users_path
-       page.click_link "You"
-       page.should have_content "Testuser"
+      sign_in_user name: 'Testuser', password: 'notsecret'
+      visit users_path
+      page.should have_content "testuser@example.com"
+      page.click_link "Edit"
+      page.should have_content "testuser@example.com"
     end
   
     it "should have add- and remove authentication buttons" do
@@ -57,7 +57,7 @@ describe UsersController do
       visit users_path
       page.click_link "Cancel Account" 
       visit users_path
-      page.should have_no_content "Testuser"
+      page.should have_no_content "testuser@example.com"
       # has created a UserChangedEvent to AdminTimeline
       Timeline.find_by(name: 'Admin').timeline_events.last.text.should =~ /User 'Testuser' was destroyed/
     end
@@ -73,7 +73,7 @@ describe UsersController do
       sign_in_user name: 'Testuser', password: 'notsecret'
       visit users_path
       page.click_link "Cancel Account" 
-      page.should have_content "Testuser"
+      page.should have_content "testuser@example.com"
       page.should have_content I18n.t(:can_not_delete_user, why: "I'll not die yet!")
     end
   
@@ -96,7 +96,7 @@ describe UsersController do
       test_user 'Foreigner', 'alians'
       test_user 'Hacker', 'notsecret'
       visit users_path
-      page.should_not have_content "Foreigner"
+      page.should_not have_content "foreigner@example.com"
       page.should have_content "Access denied"
     end
   
@@ -258,8 +258,8 @@ describe UsersController do
       visit users_path
       fill_in 'search_search_text', with: "find"
       page.should_not have_button "Search"
-      page.should have_content "Find Me"
-      page.should_not have_content "admin@iboard.cc"
+      page.should have_content "find@me.com"
+      page.should_not have_content "admin@example.com"
       assert page.all( '.user-location div' ).count == 0, "Should not show Google-map while search"
     end
 
