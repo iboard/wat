@@ -210,7 +210,12 @@ describe Page do
   describe PageEvent do
 
     before( :each ) do
+      $NO_TIMELINE_FOR_SPECS = false
       Page.create permalink: 'a new page', title: 'A new page', body: 'Lorem ipsum', last_modified_by: test_user( "Andi A", "secret" )._id
+    end
+
+    after(:each) do
+      $NO_TIMELINE_FOR_SPECS = true
     end
 
     it "Creates a PageEvent when a new page is created" do

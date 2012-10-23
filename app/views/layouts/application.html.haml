@@ -43,9 +43,10 @@
               - ensure_default_search_box
               = yield(:search_bar) 
 
-    = form_tag update_timeline_timelines_path, style: 'display: none;' do
-      = text_field_tag "last_update", "last_update", value: Time.now.to_s
-    = render "timelines/users_timeline", user: current_user if current_user && !@no_timeline
+    - if !$NO_TIMELINE_FOR_SPECS
+      = form_tag update_timeline_timelines_path, style: 'display: none;' do
+        = text_field_tag "last_update", "last_update", value: Time.now.to_s
+      = render "timelines/users_timeline", user: current_user if current_user && !@no_timeline
     .main-background
       .container.main
         - if content_for?(:top_menu)

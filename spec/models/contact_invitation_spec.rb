@@ -3,8 +3,8 @@ require 'spec_helper'
 describe ContactInvitation do
 
   before :each do
-    test_user "Frank Zappa", "secret word for today"
-    @user = User.find('frank-zappa')
+    @user = test_user "Frank Zappa", "secret word for today"
+    # @user = User.find('frank-zappa')
   end
   
   it "stores a sender and a recipient" do
@@ -28,17 +28,20 @@ describe ContactInvitation do
   end
 
   it "connects two users with user.accept_contact_invitation and creates a UserEvent to sender's timeline" do
+    $NO_TIMELINE_FOR_SPECS = false
+    @user2 = test_user "Frank Zappa2", "2ndsecret word for today"
     test_user "My Friend", "secret"
     friend = User.find('my-friend')
-    invitation = ContactInvitation.create( sender: @user, recipient_email: 'my.friend@example.com')
+    invitation = ContactInvitation.create( sender: @user2, recipient_email: 'my.friend@example.com')
     friend.accept_contact_invitation(invitation)
-    @user.reload
+    @user2.reload
     friend.reload
-    @user.contacts.first.should_not be_nil
-    @user.contacts.first.name.should == "My Friend"
-    friend.reverse_contacts.first.should == @user
+    @user2.contacts.first.should_not be_nil
+    @user2.contacts.first.name.should == "My Friend"
+    friend.reverse_contacts.first.should == @user2
     # and has created a UserEvent to sender's timeline
-    Timeline.find_by(name: @user.name).timeline_events.last.message.should =~ /has_accepted_invitation/
+    Timeline.find_by(name: @user2.name).timeline_events.last.message.should =~ /has_accepted_invitation/
+    $NO_TIMELINE_FOR_SPECS = true
   end
 
 

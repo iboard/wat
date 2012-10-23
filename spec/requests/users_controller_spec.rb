@@ -53,6 +53,7 @@ describe UsersController do
     end
   
     it "should delete user and creates a Event to AdminTimeline" do
+      $NO_TIMELINE_FOR_SPECS = false
       @user1 = sign_in_user name: 'Testuser', password: 'notsecret'
       visit users_path
       page.click_link "Cancel Account" 
@@ -60,6 +61,7 @@ describe UsersController do
       page.should have_no_content "testuser@example.com"
       # has created a UserChangedEvent to AdminTimeline
       Timeline.find_by(name: 'Admin').timeline_events.last.text.should =~ /User 'Testuser' was destroyed/
+      $NO_TIMELINE_FOR_SPECS = true
     end
 
     it "should display a message if destroying is not possible" do
@@ -102,10 +104,12 @@ describe UsersController do
   
     it "sends a confirmation mail when a user is created and creates a Event to AdminTimeline" do
       visit signout_path
+      $NO_TIMELINE_FOR_SPECS = false
       sign_up_user name: "Friendly User", password: 'notsecret', email: 'friendly.user@example.com'
       last_email.to.should include('friendly.user@example.com')
       # has created a UserChangedEvent to AdminTimeline
       Timeline.find_by(name: 'Admin').timeline_events.last.text.should =~ /User 'Friendly User' was created/
+      $NO_TIMELINE_FOR_SPECS = true
     end
   
     it "sends a confirmation mail when the email changes" do
