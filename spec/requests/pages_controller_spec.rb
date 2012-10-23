@@ -51,6 +51,7 @@ describe PagesController do
     end
 
     it "edit the page" do
+      $NO_TIMELINE_FOR_SPECS = false
       page.click_link "Edit page"
       fill_in "page_body", with: "This is a modified page."
       
@@ -62,6 +63,7 @@ describe PagesController do
       end
       page.should have_content "This is a modified page"
       latest_content_event.text.should == "<span class='timestamp-timeline'>less than a minute ago,</span><span class='timeline-username'>[Testuser](/users/testuser/profile)</span><br/><sapn class='timeline-message'>saved page '[First Page](/pages/first-page)'</span>"
+      $NO_TIMELINE_FOR_SPECS = true
     end
 
     it "see a new page button" do
@@ -69,6 +71,7 @@ describe PagesController do
     end
 
     it "create a new page" do
+      $NO_TIMELINE_FOR_SPECS = false
       page.should have_link "Create page"
       click_link "Create page"
       fill_in "page_permalink", with: "A new page for WAT"
@@ -82,7 +85,8 @@ describe PagesController do
         page.all('h1', text: "A new page for WAT").first.should_not be_nil
       end
       latest_content_event.text.should == "<span class='timestamp-timeline'>less than a minute ago,</span><span class='timeline-username'>[Testuser](/users/testuser/profile)</span><br/><sapn class='timeline-message'>created page '[A new page for WAT](/pages/a-new-page-for-wat)'</span>"
-  end
+      $NO_TIMELINE_FOR_SPECS = true
+    end
 
     it "accepts uploading pictures for banner and links to target url" do
       click_link "Create page"

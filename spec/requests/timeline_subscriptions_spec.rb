@@ -7,6 +7,13 @@ require "rspec"
 
 describe TimelineSubscriptionsController do
 
+  before(:all) do
+    $NO_TIMELINE_FOR_SPECS = false
+  end
+  after(:all) do
+    $NO_TIMELINE_FOR_SPECS = true
+  end
+
   before(:each) do
     Timeline.delete_all
     User.delete_all
@@ -39,7 +46,6 @@ describe TimelineSubscriptionsController do
   end
 
   describe "Personal Timeline" do
-
     it "Renders a list of available timelines on right box" do
       visit timelines_path
       page.should have_content "Subscriptions"
@@ -51,11 +57,9 @@ describe TimelineSubscriptionsController do
       visit timelines_path
       page.should have_content "Personal Timeline"
     end
-
   end
 
   describe TimelineSubscription do
-
     it "doesn't list disabled or non-public timelines" do
       other_user = test_user "Mr. Nowhere", "secret"
       other_user.timeline.update_attributes(public: false)
@@ -82,6 +86,6 @@ describe TimelineSubscriptionsController do
       wait_until { page.has_content? "You will not receive new messages from 'doorkeeper'"}
       page.should have_content "You will not receive new messages from 'doorkeeper'"
     end
-
   end
+
 end

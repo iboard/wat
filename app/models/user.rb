@@ -198,8 +198,6 @@ class User
   # Create facility on invitation.sender
   # @params [ContactInvitation] The received invitation
   def accept_contact_invitation(invitation)
-    Rails.logger.info("UsersClass accept_contact_invitation invitation? #{invitation.inspect}")
-
     _sender = invitation.sender
     _sender.facilities.create(name: self.name, access: 'r--', consumer_ids: [self._id])
     _sender.save!
