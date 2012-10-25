@@ -19,7 +19,7 @@ class TranslationsController < ApplicationController
   def normalize_key(_input)
     begin
       _hash = eval( _input )
-      _hash
+      _hash.class == Hash ? _hash : _input
     rescue
       _input
     end
