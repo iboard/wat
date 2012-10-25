@@ -4,9 +4,9 @@ class Facility
 
   unless defined?(WAT_APPLICATION_FACILITIES)
     WAT_APPLICATION_FACILITIES = [
-        [I18n.translate(:admin), 'Admin'],
-        [I18n.translate(:author), 'Author'],
-        [I18n.translate(:maintainer), 'Maintainer']
+        ['Admin', 'Admin'],
+        ['Author', 'Author'],
+        ['Maintainer', 'Maintainer']
     ]
   end
 

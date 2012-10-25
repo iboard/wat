@@ -92,6 +92,7 @@ gem 'simple_form'
 gem 'rails_config'
 gem 'capistrano'
 gem "ckeditor", "~> 3.7.1"
+gem "redis"
 
 
 # Authentication

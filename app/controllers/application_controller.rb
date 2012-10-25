@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :ensure_locale
   before_filter :initialize_timeline_session
   before_filter :setup_timeline
+  before_filter :track_locales
 
   helper_method :current_user
   helper_method :user_signed_in?
@@ -177,5 +178,9 @@ protected
   #   asset.assetable = current_user
   #   return true
   # end
+
+  def track_locales
+    I18n.track_locales = true if can_read?('Locale Admin')
+  end
 
 end

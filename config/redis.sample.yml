@@ -1,0 +1,8 @@
+test:
+  db: 0
+
+development:
+  db: 1
+
+production:
+  db: 1

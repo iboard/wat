@@ -17,7 +17,11 @@ Wat::Application.routes.draw do
   # Default
   root :to => "home#index"
 
-  # Authentication Routs
+  # Translations
+  resources :translations
+
+
+  # Authentication Routes
   match '/auth/:provider/callback' => 'sessions#create'
   match '/auth/identity/register' => 'users#create'
   match '/signin' => 'sessions#new', :as => :signin

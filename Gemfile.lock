@@ -245,6 +245,7 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     redcarpet (2.1.1)
+    redis (3.0.2)
     rspec (2.11.0)
       rspec-core (~> 2.11.0)
       rspec-expectations (~> 2.11.0)
@@ -344,6 +345,7 @@ DEPENDENCIES
   rails_config
   rb-fsevent
   redcarpet
+  redis
   rspec-rails (>= 2.8.1)
   ruby_gntp
   sass-rails (~> 3.2.3)

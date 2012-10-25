@@ -1,0 +1,11 @@
+.well
+  %h3= t(:used_locales)
+  .pull-right
+    = button_link_to 'icon-edit', 'btn btn-primary', t(:edit_translations), translations_path(used_keys: I18n.used_locales)
+
+  %ul
+    - I18n.used_locales.each do |key|
+      %li
+        %strong= key
+        ="=>"
+        = t(key)
