@@ -6,7 +6,8 @@ class Facility
     WAT_APPLICATION_FACILITIES = [
         ['Admin', 'Admin'],
         ['Author', 'Author'],
-        ['Maintainer', 'Maintainer']
+        ['Maintainer', 'Maintainer'],
+        ['Locale Admin', 'Locale Admin']
     ]
   end
 
