@@ -11,7 +11,7 @@ def get_redis_db_id
   end
 end
 
-TRANSLATION_STORE = Redis.new(db: get_redis_db_id, thread_safe: true)
+TRANSLATION_STORE = Redis.new(db: get_redis_db_id)
 I18n.backend = I18n::Backend::Chain.new(I18n::Backend::KeyValue.new(TRANSLATION_STORE), I18n.backend)
 
 
