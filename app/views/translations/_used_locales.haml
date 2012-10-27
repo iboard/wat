@@ -1,7 +1,9 @@
 .well
-  %h3= t(:used_locales)
   .pull-right
-    = button_link_to 'icon-edit', 'btn btn-primary', t(:edit_translations), translations_path(used_keys: I18n.used_locales)
+    = form_tag edit_page_translations_path do
+      = hidden_field_tag  :used_keys, used_keys: I18n.used_locales
+      = submit_tag t(:edit_translations), class: "btn btn-primary"
+  %h3= t(:used_locales)
 
   %ul
     - I18n.used_locales.each do |key|
@@ -9,3 +11,4 @@
         %strong= key
         ="=>"
         = t(key)
+

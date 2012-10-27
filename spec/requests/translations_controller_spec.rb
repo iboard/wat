@@ -9,7 +9,7 @@ describe TranslationsController do
   end
 
   it "should list translations keys" do
-    click_link "Edit this translations"
+    click_button "Edit this translations"
     page.should have_content "edit_profile en Edit profile de Benutzerkonto bearbeiten"
   end
 end

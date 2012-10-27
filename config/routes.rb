@@ -18,7 +18,11 @@ Wat::Application.routes.draw do
   root :to => "home#index"
 
   # Translations
-  resources :translations
+  resources :translations do
+    collection do
+      post '/edit_page_translations' => :index, :as => :edit_page
+    end
+  end
 
 
   # Authentication Routes

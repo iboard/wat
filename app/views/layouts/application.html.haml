@@ -72,7 +72,7 @@
               = yield
               
 
-    = render "translations/used_locales" if can_read?('Locale Admin')
+    = render "translations/used_locales" if can_read?('Locale Admin') && params[:controller] != 'translations'
     %footer
       .container
         = render 'shared/section_footer'
