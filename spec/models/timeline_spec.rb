@@ -3,9 +3,11 @@ require 'spec_helper'
 describe Timeline do
 
   it "stores with a unique name" do
+    $NO_TIMELINE_FOR_SPECS = false
     Timeline.create name: 'System Timeline'
     Timeline.find_by(name: 'System Timeline').name.should == 'System Timeline'
     Timeline.create(name: 'System Timeline').errors[:name].should include('is already taken')
+    $NO_TIMELINE_FOR_SPECS = true
   end
 
   it "belongs to a user" do
@@ -16,9 +18,14 @@ describe Timeline do
 
   describe  "can have facilities" do
     before(:each) do
+      $NO_TIMELINE_FOR_SPECS = false
       @timeline = Timeline.create name: "With Facilities"
       @timeline.facilities.create name: 'Admin', access: 'rwx'
       @user = test_user "Admin", "secret", "Admin"
+    end
+
+    after(:each) do
+      $NO_TIMELINE_FOR_SPECS = true
     end
 
     it "lists in user.postable_timelines if at least one facility matches" do
@@ -60,6 +67,7 @@ describe Timeline do
 
     describe UserMessage do
       before(:each) do
+        $NO_TIMELINE_FOR_SPECS = false
         @sender   = User.create( name: 'Sender' )
         @receiver1= User.create( name: 'Receiver 1')
         @receiver2= User.create( name: 'Receiver 2')
@@ -72,7 +80,11 @@ describe Timeline do
         )
         @timeline.timeline_events.count.should == 1
       end
-  
+
+      after(:each) do
+        $NO_TIMELINE_FOR_SPECS = true
+      end
+
       it "has a sender and a receiver" do
         @timeline.events_from(@sender).first.receivers.to_a.should == [@receiver1, @receiver2]
         @timeline.events_for(@receiver1).should == [@event]

@@ -19,7 +19,7 @@ smtp_default_from: "noreply@domain.com"
 # Application
 
 application_brand: "&alpha;WAT"
-application_mail_signature: [W]eb[A]pplication[Template] http://gitbub.com/iboard/wat
+application_mail_signature: "[W]eb[A]pplication[Template] http://gitbub.com/iboard/wat"
 application_mail_subject_prefix: "WAT: "
 developer_mail_address: "developer@example.com"
 
@@ -32,6 +32,9 @@ developer_mail_address: "developer@example.com"
 # supress_page_title: false
 # show_user_menu: true
 # supress_global_search: false
+
+# paginate_users_per_page: 4
+# paginate_pages_per_page: 4
 
 # TIMELINE BEHAVIOR
 

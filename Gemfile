@@ -93,7 +93,7 @@ gem 'rails_config'
 gem 'capistrano'
 gem "ckeditor", "~> 3.7.1"
 gem "redis"
-
+gem "will_paginate", "3.0.pre4"
 
 # Authentication
 gem "omniauth", ">= 1.0.2"

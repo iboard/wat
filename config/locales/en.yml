@@ -369,6 +369,7 @@ en:
   action_saved: saved
   action_created: created
   action_delete: deleted
+  commented: commented
   page_event: "<span class='timestamp-timeline'>%{time} ago,</span><span class='timeline-username'>%{user}</span><br/><sapn class='timeline-message'>%{action} page '%{page}'</span>"
   comment_event: "<span class='timestamp-timeline'>%{time} ago,</span> <span class='timeline-username'>%{user}</span><br/><span class='timeline-message'>'comments %{commentable_link}'</span>"
   message_couldnt_be_sent: "Sorry, your message couldn't be posted"
@@ -421,3 +422,7 @@ en:
   updated_your_profile: "You have updated your Profile"
   has_accepted_invitation: "Has accepted invitation."
   edit_translations: "Edit this translations"
+  scroll_to_top: 'Scroll to top'
+  loading: 'Loading …'
+  load_more: 'Show more …'
+  end_of_list: ' -- END -- '

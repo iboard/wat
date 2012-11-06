@@ -15,19 +15,18 @@ class UserPresenter < BasePresenter
     end
   end
 
-  def name_and_profile_link
-    _rc = ""
-    if !user.respond_to?(:name)
-      _rc += content_tag( :span, class: 'none_given') { I18n.t(:no_name_given) }
-    else
-      _rc += user.name
-    end
+  def name_and_profile_links
+    user.name.html_safe + profile_links.html_safe
+  end
+
+  def profile_links
     if user.profile && (user.profile.is_public || user == current_user)
-      _rc += "<ul class='nav pull-right'><li>" +
-          button_link_to( 'icon-share icon-white', 'btn btn-primary', t(:user_profile),  user_profile_path(user) ) +
-          "</li></ul>"
+      "<ul class='nav pull-right'><li>" +
+         button_link_to('icon-share icon-white', 'btn btn-primary', t(:user_profile), user_profile_path(user)) +
+      "</li></ul>".html_safe
+    else
+      "".html_safe
     end
-    _rc.html_safe
   end
 
   def social_media_links

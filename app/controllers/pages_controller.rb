@@ -9,8 +9,10 @@ class PagesController < ApplicationController
   before_filter :set_last_modifier, only: [:create, :update]
 
   def index
-    @pages ||= permitted_pages
-    redirect_to signin_path, alert: t(:you_need_to_sign_in) if !@pages
+    @pages_to_show ||= permitted_pages
+    redirect_to signin_path, alert: t(:you_need_to_sign_in) if !@pages_to_show
+    _pp = Settings.paginate_pages_per_page || 4
+    @pages ||= @pages_to_show.paginate( page: params[:page], per_page: _pp )
   end
   
   def show
@@ -123,10 +125,11 @@ private
     if params[:search].present?
       _p = params[:search].is_a?(String) ? JSON.parse( params[:search] ) : params[:search]
       @search = Search.new( search_text: _p['search_text'], search_controller: _p['search_controller'] )
+      _pp = Settings.paginate_pages_per_page || 4
       @pages = permitted_pages.any_of(
         {title: /#{@search.search_text}/i}, 
         {body: /#{@search.search_text}/i}
-    )
+      ).paginate( page: params[:page], per_page: _pp )
     else
       @search = Search.new search_text: '', search_controller: 'pages'
     end

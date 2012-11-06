@@ -1,0 +1,17 @@
+$(".pagination").html("<%= escape_javascript( page_navigation_links( " + resource + ", " + pagination_class + ", " + previous + ", " + next + " ) ) -%>");
+
+$('.load_more').before( '<div id="page<%= ' + resource.current_page + ' -%>" style="clear: both; display: none;">'+
+                          '<p class="page_seperator"><%= ' + resource.current_page + ' -%>'+
+                          '/<%= ' + resource.total_pages + ' -%></p>'+
+                          '<%= escape_javascript(render(:partial => ' + resource + ')) -%>'+
+                          '</div>');
+
+if is_on_last_page(resource)
+  $('#load_more').html( '<%=  escape_javascript(link_to_function(t(:load_more),"insert_load_button( 'load_more','#{t(:loading)}',"+
+        "'#{path(:page => (params[:page] ? (params[:page].to_i+1) : 2),:order => params[:order].to_sym, :direction => params[:direction].to_sym)}')", :id => "load_more_link" )) -%>');
+  $('#page<%= resource.current_page -%>').slideDown();
+  setTimeout("checkScroll()", 500);
+else
+  $('#page<%= resource.current_page -%>').slideDown();
+  $('#load_more').html('<p style="text-align:center; margin-top: 20px;"><%= escape_javascript(t(:end_of_list)) -%></p>');
+  $(".pagination").hide();

@@ -50,6 +50,7 @@ describe UsersController do
   end
 
   it "saves changes in the profile and creates a Event to own- and to AdminTimeline", js: true do
+    $NO_TIMELINE_FOR_SPECS = false
     @admin = test_user 'Testuser', 'notsecret', 'Admin'
     visit user_path(@user1)
     click_link 'Personal information'
@@ -67,6 +68,7 @@ describe UsersController do
     # has created a UserEvent to user's timeline and a ProfileChangedEvent to AdminTimeline
     Timeline.find_by(name: @user1.name).timeline_events.last.message.should =~ /updated_your_profile/
     Timeline.find_by(name: 'Admin').timeline_events.last.text.should =~ /User '#{@user1.name}' has updated his Profile/
+    $NO_TIMELINE_FOR_SPECS = true
   end
 
   it "shows an default avatar in user header if no image is available" do

@@ -33,6 +33,12 @@ developer_mail_address: "developer@example.com"
 # show_user_menu: true
 # supress_global_search: false
 
+# default, when not defined = 4
+paginate_users_per_page: 2
+paginate_pages_per_page: 2
+
+# TIMELINE BEHAVIOR
+
 timeline:
   reload_interval: 5
   default_duration: 1440

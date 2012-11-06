@@ -13,8 +13,8 @@ describe ApplicationController do
     visit switch_language_path(:en)
     page.should have_css "#search_search_text"
     fill_in "search_search_text", with: "Body One"
-    wait_until { page.has_content?("Page ONE") }
-    page.should have_no_content "Page TWO"
+    wait_until { page.all('h1', text: "Page ONE") }
+    page.all('h1', text: "Page TWO").should be_empty
   end
 
   it "can supress the global search by configuration" do

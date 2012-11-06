@@ -2,6 +2,13 @@ require 'spec_helper'
 
 describe TimelinesController do
 
+  before(:all) do
+    $NO_TIMELINE_FOR_SPECS = false
+  end
+  after(:all) do
+    $NO_TIMELINE_FOR_SPECS = true
+  end
+
   before(:each) do
     User.delete_all
     Identity.delete_all

@@ -53,6 +53,7 @@ Wat::Application.routes.draw do
     collection do
       get 'forgot_password' => :forgot_password
       post 'send_password_reset_token' => :send_password_reset_token
+      get 'autocomplete_search' => :autocomplete_search
     end
     member do
       get 'confirm_email/:token' => :confirm_email, :as => 'confirm_email'

@@ -63,6 +63,8 @@ Spork.each_run do
   Doorkeeper.configure do |doorkeeper|
     doorkeeper.doorkeeper ||= Doorkeeper::TimelineLogger.new
   end
+  
+  $NO_TIMELINE_FOR_SPECS = true
 
 end
 
