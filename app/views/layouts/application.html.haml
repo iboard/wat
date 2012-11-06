@@ -35,6 +35,8 @@
             %span.icon-bar
             %span.icon-bar
           %a.brand{:href => (root_url + "#")}= (Settings.application_brand || "Please set application_brand in settings").html_safe
+          - if content_for?(:scroll_to_top)
+            = yield(:scroll_to_top)
           .container.nav-collapse
             %ul.nav
               = render "shared/section_menu"

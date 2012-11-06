@@ -6,6 +6,10 @@
  *= require jquery.Jcrop
  *= require application
  *= require attachment
+ *= require endless_page
+ *= require token-input
+ *= require token-input-facebook
+ *= require token-input-mac
  *= require bootstrap_and_overrides
  *= require facilities
  *= require forms

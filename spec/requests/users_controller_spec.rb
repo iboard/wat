@@ -262,6 +262,16 @@ describe UsersController do
       visit users_path
       fill_in 'search_search_text', with: "find"
       page.should_not have_button "Search"
+      # keypress_script = "var e = $.Event('keydown', { keyCode: #{13} }); $('#search_search_text').trigger(e);"
+      # page.driver.browser.execute_script(keypress_script)
+      # sleep 3
+      # wait_until { !page.all('h2', text: "Admin") }
+      page.all('h2').each do |_what|
+        Rails.logger.info("UsersControllerSpec _what? #{_what.inspect}")
+      end
+      wait_until { page.has_no_content?( "admin@example.com")  }
+      wait_until { page.has_content?( "find@me.com")  }
+
       page.should have_content "find@me.com"
       page.should_not have_content "admin@example.com"
       assert page.all( '.user-location div' ).count == 0, "Should not show Google-map while search"

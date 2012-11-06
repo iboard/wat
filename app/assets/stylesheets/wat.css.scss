@@ -262,6 +262,7 @@ img.avatar {
 
 @media (max-width: 480px) {
 
+  ul.token-input-list-facebook, 
   .banner, #banner {
     min-width: 100%;
     padding: 0px;
@@ -404,7 +405,7 @@ img.avatar {
 }
 
 .search-query {
-  width: 100px;
+  width: 150px;
 }
 
 #search-button {

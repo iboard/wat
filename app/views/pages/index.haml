@@ -1,9 +1,22 @@
+- @load_javascript_on_top = true
 = render 'shared/search'
 = render 'pages_menu'
+
+- content_for :scroll_to_top do
+  = render 'shared/scroll_to_top'
+= javascript_include_tag 'endless_page'
+
 %h1.pull-right= title( t(:pages))
 %br/
 %hr/
 %br/
 
-#result
-  =render @pages
+.container
+  #result
+    - unless @pages.any?
+      .alert.alert-error= t(:no_page_found_for, search: @search.search_text)
+    - else
+      = render @pages
+      = render :partial => '/shared/load_more', :locals => { :resources => @pages, :path => pages_path }
+
+      = page_navigation_links( @pages, 'pagination', '&#8592; Previous', 'Next &#8594;' )

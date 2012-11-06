@@ -9,7 +9,8 @@ class UsersController < ApplicationController
 
   def index
     if can_read?('Admin')
-      @users ||= User.asc(:name)
+      _pp = Settings.paginate_users_per_page || 4
+      @users ||= User.asc(:name).paginate( page: params[:page], per_page: _pp )
     else
       redirect_to root_path, :alert => t(:access_denied)
     end
@@ -132,19 +133,36 @@ class UsersController < ApplicationController
     end
   end
 
+  def autocomplete_search
+    respond_to do |format|
+       format.json { 
+         render :json => User.any_of({ name: /#{params[:q]}/i }, { email: /#{params[:q]}/i })
+                             .only(:name,:email)
+                             .map{ |user| 
+                               [
+                                 :name   => user.name, 
+                                 :name_search => user.name + " (#{user.email})"
+                               ]
+                              }
+                             .flatten
+       }
+     end
+  end
+  
 private
   def parse_search_param
     if params[:search].present?
       _p = params[:search].is_a?(String) ? JSON.parse( params[:search] ) : params[:search]
       @search = Search.new( search_text: _p['search_text'], search_controller: _p['search_controller'] )
+      _pp = Settings.paginate_users_per_page || 4
       @users = User.any_of(
         {name: /#{@search.search_text}/i}, 
         {email: /#{@search.search_text}/i}
-      ).asc(:name)
+      ).asc(:name).paginate( page: params[:page], per_page: _pp )
     else
       @search = Search.new search_text: '', search_controller: 'users'
     end
-  end      
+  end
 
   def correct_user_or_reset_token?
     unless params[:user][:password_reset_token].present?

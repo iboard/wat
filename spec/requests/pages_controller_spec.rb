@@ -203,11 +203,11 @@ describe PagesController do
       Page.create permalink: "@feature1", title: '@feature1', body: "Ruby Is Hero"
       Page.create permalink: "Find Me", title: "Find Me", body: "You catched me!"
       visit pages_path
-      page.should have_content "Ruby Is Hero"
+      page.all('h1', text: "Ruby Is Hero").should_not be_nil
       fill_in 'search_search_text', with: "find"
       page.should_not have_button "Search"
-      page.should have_content "You catched me!"
-      page.should_not have_content "Ruby Is Hero"
+      page.all('h1', text: "You catched me!").should_not be_nil
+      page.all('h1', text: "Ruby Is Hero").should be_empty
     end
 
     it "let change featured on/off" do
