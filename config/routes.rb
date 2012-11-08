@@ -82,6 +82,7 @@ Wat::Application.routes.draw do
     collection do
       get  'sort' => :sort
       post 'update_sort' => :update_sort
+      get 'autocomplete_search' => :autocomplete_search
     end
     member do
       get 'restore_version/:version' => :restore_version, :as => 'restore_version'

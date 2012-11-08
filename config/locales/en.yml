@@ -53,6 +53,7 @@ en:
     cloned from http://github.com/iboard/wat
   home: Home
   user: User
+  users: Users
   edit_page: Edit page
   you_not_allowed_to_edit_this_page: You're not allowed to edit this page.
   update_page: Update page
@@ -68,6 +69,7 @@ en:
   page_not_found: Page not found (404).
   page_successfully_created: Page successfully created.
   page: Page
+  pages: Pages
   canceled: Canceled.
   read_more: read more …
   listing_pages: List all pages
@@ -159,6 +161,9 @@ en:
   default_preview_length: "Defaults to %{length}"
   default_preview_hint: "Number of characters shown in previews"
   search: Search
+  search_for: "Search for %{for_controller}..."
+  no_result: 'Nothing found'
+  searching_text: 'Searching...'
   no_user_found_for: "No user found where name or email matches '%{search}'"
   no_page_found_for: "No page found where title or body matches '%{search}'"
   can_not_delete_user: "Sorry, your account could't be deleted. %{why}"

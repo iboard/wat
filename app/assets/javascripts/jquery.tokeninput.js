@@ -264,7 +264,7 @@ $.TokenList = function (input, url_or_data, settings) {
                     break;
 
                 case KEY.TAB:
-                case KEY.ENTER:
+                //case KEY.ENTER:
                 case KEY.NUMPAD_ENTER:
                 case KEY.COMMA:
                   if(selected_dropdown_item) {

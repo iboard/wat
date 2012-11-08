@@ -1,10 +1,15 @@
 jQuery ->
+  if $('#token-input-search_search_text').length > 0
+    _placeholderText = $('.search-query').data('placeholder')
+    $('#token-input-search_search_text').attr("placeholder", _placeholderText )
+
   $("#search-button").remove()
   $("#token-input-search_search_text").keyup (event) ->
-    # event.keyCode == 13 is equivalent to 'enter'
     if event.keyCode == 13
+      _value = $('.token-input-token-wwedu p').html() || $('tester').html() || $('tester').val()
       controller = $('#search_search_controller').val()
       $.ajax("/"+controller, {
         type: 'GET',
-        data: { search: { search_text: $('#search_search_text').val(), search_controller: controller} }
+        data: { search: { search_text: _value, search_controller: controller} }
       })
+      $(".token-input-list").remove()

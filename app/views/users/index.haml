@@ -2,8 +2,6 @@
 = render 'shared/search'
 = render 'users_menu'
 
-- content_for :scroll_to_top do
-  = render 'shared/scroll_to_top'
 = javascript_include_tag 'endless_page'
 
 %h1.pull-right= title( t(:listing_users))
@@ -13,11 +11,4 @@
 
 .container
   #result
-    - unless @users.any?
-      .alert.alert-error= t(:no_user_found_for, search: @search.search_text)
-    - else
-      .each_user_show
-        = render @users
-        = render :partial => '/shared/load_more', :locals => { :resources => @users, :path => users_path }
-
-      = page_navigation_links( @users, 'pagination', '&#8592; Previous', 'Next &#8594;' )
+    = render "users_pagination"

@@ -1,35 +1,25 @@
 <% if params[:search].present? %>
-  $('#result').html('<%= escape_javascript( 
-      unless @pages.any?
-        content_tag :div, :class => "alert alert-error" do
-          t(:no_page_found_for, search: @search.search_text)
-        end
-      else
-        content_tag :div, :class => "each_user_show" do
-          render @pages
-          render :partial => "/shared/load_more", :locals => { :resources => @pages, :path => pages_path }
-        end
-        page_navigation_links( @pages, "pagination", "&#8592; Previous", "Next &#8594;" )
-      end
-  ) -%>');
+  $('#result').html('<%= escape_javascript( render "pages_pagination" ) -%>');
 <% end %>
 
 /* REVIEW: This file is needed for any endles-loading view. Is there a way to unify this, so we have it only once? */
 $(".pagination").html("<%= escape_javascript( page_navigation_links( @pages, 'pagination', '&#8592; Previous', 'Next &#8594;' ) ) %>");
 
-$('.load_more').before( '<div id="page<%= @pages.current_page -%>" style="clear: both; display: none;">'+
-                          '<p class="page_seperator"><%= @pages.current_page -%>'+
-                          '/<%= @pages.total_pages -%></p>'+
-                          '<%= escape_javascript(render(:partial => @pages)) -%>'+
-                          '</div>');
+<% if @pages.current_page > 1 %>
+  $('.load_more').before( '<div id="page<%= @pages.current_page -%>" style="clear: both; display: none;">'+
+                            '<p class="page_seperator"><%= @pages.current_page -%>'+
+                            '/<%= @pages.total_pages -%></p>'+
+                            '<%= escape_javascript(render(:partial => @pages)) -%>'+
+                            '</div>');
+<% end %>
 
 <% if is_on_last_page(@pages) %>
-  $('#load_more').html( '<%=  escape_javascript(link_to_function(t(:load_more),"insert_load_button( 'load_more','#{t(:loading)}',"+
-        "'#{pages_path(:page => (params[:page] ? (params[:page].to_i+1) : 2),:order => params[:order].to_sym, :direction => params[:direction].to_sym)}')", :id => "load_more_link" )) -%>');
-  $('#page<%= @pages.current_page -%>').slideDown();
-  setTimeout("checkScroll()", 500);
-<% else %>
   $('#page<%= @pages.current_page -%>').slideDown();
   $('#load_more').html('<p style="text-align:center; margin-top: 20px;"><%= escape_javascript(t(:end_of_list)) -%></p>');
   $(".pagination").hide();
+<% else %>
+  $('#load_more').html( '<%=  escape_javascript(link_to_function(t(:load_more),"insert_load_button( 'load_more','#{t(:loading)}',"+
+        "'#{pages_path(:page => (params[:page] ? (params[:page].to_i+1) : 2),:order => (params[:order] ? params[:order].to_sym : nil), :direction => (params[:direction] ? params[:direction].to_sym : nil))}')", :id => "load_more_link" )) -%>');
+  $('#page<%= @pages.current_page -%>').slideDown();
+  setTimeout("checkScroll()", 500);
 <% end %>
