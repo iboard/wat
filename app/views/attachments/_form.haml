@@ -2,7 +2,7 @@
   .well
     - @attachment.application_file ||= ApplicationFile.new( attachment: @attachment )
     = simple_fields_for @attachment.application_file do |app_file|
-      - app_file.input :file, as: :file
+      = render 'shared/file_upload', model_id: "application_file_file", field_name: "application_file[file]", field_label: t(:file)
   .form-actions
     = f.button :submit, t(:upload_file), class: 'btn-primary'
     = link_to t(:cancel), :back, class: 'btn'

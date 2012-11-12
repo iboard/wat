@@ -276,6 +276,7 @@ en:
     zero: 0 TB
     one: 1 TB
     other: "%{count} TB"
+  file: "File"
   file_deleted: "File '%{filename}' deleted"
   file_not_deleted: "Can't delete '%{filename}' - '%{error}'"
   your_files: Your files ...
@@ -290,6 +291,9 @@ en:
   replace_file: Replace File
   current_file: Current File
   new_file: New File
+  select_file: "Select file"
+  change_file: "Change"
+  remove_file: "Remove"
   search_place_example: 'Greenwich, London'
   search_place_hint: 'Address is not stored but used to search coordinates only'
   edit_avatar: Edit

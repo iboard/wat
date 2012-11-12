@@ -11,5 +11,5 @@
         .pull-right
           =image_tag page.banner.banner.url(:preview)
           =f.input :delete_banner, as: :boolean, label: false, hint: ("&nbsp;".html_safe+t(:check_to_remove_the_image_from_the_server))
-      =fb.input :banner, as: :file,  :label => t(:upload_a_banner)
+      = render 'shared/file_upload', model_id: "page_banner_banner", field_name: "page[banner][banner]", field_label: t(:upload_a_banner)
       =fb.input :linked_url, as: :url

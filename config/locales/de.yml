@@ -281,6 +281,7 @@ de:
     zero: 0 TB
     one: 1 TB
     other: "%{count} TB"
+  file: "Datei"
   file_deleted: "Datei '%{filename}' wurde gelöscht"
   file_not_deleted: "Datei '%{filename}' kann nicht gelöscht werden - '%{error}'"
   your_files: Ihre Dateien ...
@@ -295,6 +296,9 @@ de:
   replace_file: Datei ersetzen
   current_file: Aktuelle Datei
   new_file: Neue Datei
+  select_file: "Datei auswählen"
+  change_file: "Ändern"
+  remove_file: "Entfernen"
   search_place_example: 'Schloß Schönbrunn, Wien'
   search_place_hint: 'Die Adresse wird nicht gespeichert sondern nur zum Suchen der Koordinaten benutzt.'
   edit_avatar: "Bearbeiten"

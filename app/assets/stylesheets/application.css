@@ -8,6 +8,7 @@
  *= require attachment
  *= require endless_page
  *= require bootstrap_and_overrides
+ *= require bootstrap_fileupload
  *= require token-input
  *= require token-input-facebook
  *= require token-input-mac
