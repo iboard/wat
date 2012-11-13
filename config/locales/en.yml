@@ -53,6 +53,7 @@ en:
     cloned from http://github.com/iboard/wat
   home: Home
   user: User
+  users: Users
   edit_page: Edit page
   you_not_allowed_to_edit_this_page: You're not allowed to edit this page.
   update_page: Update page
@@ -68,6 +69,7 @@ en:
   page_not_found: Page not found (404).
   page_successfully_created: Page successfully created.
   page: Page
+  pages: Pages
   canceled: Canceled.
   read_more: read more …
   listing_pages: List all pages
@@ -159,6 +161,9 @@ en:
   default_preview_length: "Defaults to %{length}"
   default_preview_hint: "Number of characters shown in previews"
   search: Search
+  search_for: "Search for %{for_controller}..."
+  no_result: 'Nothing found'
+  searching_text: 'Searching...'
   no_user_found_for: "No user found where name or email matches '%{search}'"
   no_page_found_for: "No page found where title or body matches '%{search}'"
   can_not_delete_user: "Sorry, your account could't be deleted. %{why}"
@@ -271,6 +276,7 @@ en:
     zero: 0 TB
     one: 1 TB
     other: "%{count} TB"
+  file: "File"
   file_deleted: "File '%{filename}' deleted"
   file_not_deleted: "Can't delete '%{filename}' - '%{error}'"
   your_files: Your files ...
@@ -285,6 +291,9 @@ en:
   replace_file: Replace File
   current_file: Current File
   new_file: New File
+  select_file: "Select file"
+  change_file: "Change"
+  remove_file: "Remove"
   search_place_example: 'Greenwich, London'
   search_place_hint: 'Address is not stored but used to search coordinates only'
   edit_avatar: Edit

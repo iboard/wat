@@ -9,8 +9,10 @@ class UsersController < ApplicationController
 
   def index
     if can_read?('Admin')
+      $users_to_show = nil if !params[:page].present?
       _pp = Settings.paginate_users_per_page || 4
-      @users ||= User.asc(:name).paginate( page: params[:page], per_page: _pp )
+      $users_to_show ||= (@searched_users ? @searched_users : User.asc(:name))
+      @users ||= $users_to_show.asc(:name).paginate( page: (params[:page] ? params[:page] : 1), per_page: _pp )
     else
       redirect_to root_path, :alert => t(:access_denied)
     end
@@ -141,7 +143,7 @@ class UsersController < ApplicationController
                              .map{ |user| 
                                [
                                  :name   => user.name, 
-                                 :name_search => user.name + " (#{user.email})"
+                                 :search_name => user.name + " (#{user.email})"
                                ]
                               }
                              .flatten
@@ -154,11 +156,10 @@ private
     if params[:search].present?
       _p = params[:search].is_a?(String) ? JSON.parse( params[:search] ) : params[:search]
       @search = Search.new( search_text: _p['search_text'], search_controller: _p['search_controller'] )
-      _pp = Settings.paginate_users_per_page || 4
-      @users = User.any_of(
+      @searched_users = User.any_of(
         {name: /#{@search.search_text}/i}, 
         {email: /#{@search.search_text}/i}
-      ).asc(:name).paginate( page: params[:page], per_page: _pp )
+      ).asc(:name)
     else
       @search = Search.new search_text: '', search_controller: 'users'
     end

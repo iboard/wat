@@ -8,7 +8,6 @@ jQuery ->
     target = $("#"+where)
     id = 'load_more_link'
     target.html("<div id='"+id+"'><img src='/images/spinner.gif' title='Loading...' /> "+txt+"</div>")
-    # alert("insert_load_button: url: path? #{path} / context: where? #{where}")
     $.ajax({ url: path, context: where })
 
   self.smoothToTop = ->
@@ -16,11 +15,9 @@ jQuery ->
 
   self.checkScroll = ->
     if (nearBottomOfPage())
-      # alert("checkScroll -> if nearBottomOfPage")
       currentPage += 1
       $('#load_more_link').click()
     else
-      # alert("checkScroll -> else nearBottomOfPage")
       setTimeout("checkScroll()", 500)
 
   self.controllToTopLink = ->

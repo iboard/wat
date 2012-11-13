@@ -39,7 +39,8 @@ module ApplicationHelper
   # @param [WillPaginate-Array] collection
   # @return Boolean - true if on last page
   def is_on_last_page(collection)
-    collection.total_pages && (collection.current_page < collection.total_pages)
+    return true if !collection || !collection.total_pages
+    collection.current_page >= collection.total_pages
   end
 
   # To use https://github.com/mislav/will_paginate in combination with Twitter-Bootstrap pagination

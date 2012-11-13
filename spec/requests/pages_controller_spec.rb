@@ -193,6 +193,7 @@ describe PagesController do
       fill_in 'search_search_text', with: "find"
       click_button "Search"
       page.should have_content "You catched me!"
+      page.should_not have_content "Ruby Is Hero"
     end
 
     it "finds pages using the search-form with JS", js: true do
@@ -204,8 +205,10 @@ describe PagesController do
       Page.create permalink: "Find Me", title: "Find Me", body: "You catched me!"
       visit pages_path
       page.all('h1', text: "Ruby Is Hero").should_not be_nil
-      fill_in 'search_search_text', with: "find"
+      page.find(:xpath, "//tester").set "find"
       page.should_not have_button "Search"
+      keypress_script = "var e = $.Event('keyup', { keyCode: #{13} }); $('#token-input-search_search_text').trigger(e);"
+      page.driver.browser.execute_script(keypress_script)
       page.all('h1', text: "You catched me!").should_not be_nil
       page.all('h1', text: "Ruby Is Hero").should be_empty
     end
