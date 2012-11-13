@@ -8,6 +8,7 @@ class PagesController < ApplicationController
   before_filter :authenticate_admin!, except: [:index, :show]
   before_filter :set_last_modifier, only: [:create, :update]
 
+  # TODO: don't use global variable $pages_to_show
   def index
     $pages_to_show = nil if !params[:page].present?
     _pp = Settings.paginate_pages_per_page || 4
