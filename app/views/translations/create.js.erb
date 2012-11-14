@@ -1,0 +1,1 @@
+$("#translation-tr-<%= @locale %>-<%= @key.gsub(/\./, '-') %>").replaceWith('<%= j render "locale_tr", locale: @locale, key: @key %>');

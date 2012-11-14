@@ -432,5 +432,6 @@ en:
   has_accepted_invitation: "Has accepted invitation."
   scroll_to_top: 'Scroll to top'
   loading: 'Loading …'
-  load_more: 'Show more …'
+  load_more_link: 'Show more …'
   end_of_list: ' -- END -- '
+  edit_translations: "Edit this translations"

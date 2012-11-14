@@ -23,6 +23,8 @@ config/settings.yml
 /config/environments/*.local.yml
 /config/servers/configs
 config/servers/configs
+/config/redis.yml
+config/redis.yml
 
 # bundler state
 /.bundle

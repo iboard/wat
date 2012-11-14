@@ -1,0 +1,4 @@
+%tr{id: "translation-tr-#{locale}-#{key.gsub(/\./, '-')}", class: 'locale-line', 'data-locale' => locale, 'data-key' => key, 'data-value' => _json = prepare_locale_value_for_js(locale,key) }
+  %td= locale.to_s
+  - I18n.locale = locale
+  %td{id: "translation-#{locale}-#{key}"}= _json

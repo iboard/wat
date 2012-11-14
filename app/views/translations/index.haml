@@ -1,0 +1,12 @@
+%h1= title t(:translations) + " (#{I18n.locale})"
+
+- gui_locale = I18n.locale
+%table.full-width.table.stripped
+  - eval(params[:used_keys])[:used_keys].map {|k| k.to_s.gsub(/\A..\./,'')}.uniq.each do |key|
+    %tr
+      %td{colspan: 1+I18n.available_locales.count}
+        %h3= key
+    - I18n.available_locales.each do |locale|
+      - I18n.locale=locale
+      = render 'locale_tr', locale: locale, key: key
+- I18n.locale=gui_locale

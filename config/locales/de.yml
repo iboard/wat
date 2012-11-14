@@ -434,5 +434,6 @@ de:
   has_accepted_invitation: "Hat die Einladung akzeptiert."
   scroll_to_top: 'Zum Anfang der Seite'
   loading: 'Laden …'
-  load_more: 'Mehr anzeigen …'
+  load_more_link: 'Mehr anzeigen …'
   end_of_list: ' -- ENDE -- '
+  edit_translations: "Diese Übersetzungen bearbeiten"

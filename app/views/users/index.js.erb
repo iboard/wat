@@ -18,7 +18,7 @@ $(".pagination").html("<%= escape_javascript( page_navigation_links( @users, 'pa
   $('#load_more').html('<p style="text-align:center; margin-top: 20px;"><%= escape_javascript(t(:end_of_list)) -%></p>');
   $(".pagination").hide();
 <% else %>
-  $('#load_more').html( '<%=  escape_javascript(link_to_function(t(:load_more),"insert_load_button( 'load_more','#{t(:loading)}',"+
+  $('#load_more').html( '<%=  escape_javascript(link_to_function(t(:load_more_link),"insert_load_button( 'load_more','#{t(:loading)}',"+
         "'#{users_path(:page => (params[:page] ? (params[:page].to_i+1) : 2),:order => (params[:order] ? params[:order].to_sym : nil), :direction => (params[:direction] ? params[:direction].to_sym : nil))}')", :id => "load_more_link" )) -%>');
   $('#page<%= @users.current_page -%>').slideDown();
   setTimeout("checkScroll()", 500);
