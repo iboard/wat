@@ -42,6 +42,10 @@ body {
   }
 }
 
+#global_result #result_detail {
+  margin-top: 20px;
+}
+
 .inline {
   display: inline;
 }
@@ -262,6 +266,7 @@ img.avatar {
 
 @media (max-width: 480px) {
 
+  ul.token-input-list-facebook, 
   .banner, #banner {
     min-width: 100%;
     padding: 0px;
@@ -404,7 +409,7 @@ img.avatar {
 }
 
 .search-query {
-  width: 100px;
+  width: 150px;
 }
 
 #search-button {

@@ -7,6 +7,13 @@ require "rspec"
 
 describe UsersController do
 
+  before(:all) do
+    $NO_TIMELINE_FOR_SPECS = false
+  end
+  after(:all) do
+    $NO_TIMELINE_FOR_SPECS = true
+  end
+
   before(:each) do
     @user = test_user "Mr. Nice", "secret"
     visit switch_language_path(:en)

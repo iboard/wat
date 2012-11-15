@@ -1,5 +1,9 @@
+- @load_javascript_on_top = true
 = render 'shared/search'
 = render 'users_menu'
+
+= javascript_include_tag 'endless_page'
+
 %h1.pull-right= title( t(:listing_users))
 %br/
 %hr/
@@ -7,9 +11,4 @@
 
 .container
   #result
-    - unless @users.any?
-      .alert.alert-error= t(:no_user_found_for, search: @search.search_text)
-    - else
-      .each_user_show
-        - @users.each do |user|
-          = render 'user', :user => user
+    = render "users_pagination"

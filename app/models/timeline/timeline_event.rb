@@ -9,6 +9,7 @@ class TimelineEvent
 
   # if timelines_to is defined, copy event to other timelines
   after_create  :copy_events
+  before_create :do_not_create_timeline_event_for_specs
 
   def self.since(time)
     where(:created_at.gte => time)
@@ -37,6 +38,12 @@ class TimelineEvent
   # @!endgroup
 
   private
+
+  def do_not_create_timeline_event_for_specs
+    if $NO_TIMELINE_FOR_SPECS && $NO_TIMELINE_FOR_SPECS == true
+      return false
+    end
+  end
 
   # Copy self (Event) to all other timelines, mentioned in @timelines_to
   def copy_events

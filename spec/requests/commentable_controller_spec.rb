@@ -58,6 +58,7 @@ describe Commentable do
       end
 
       it "offers a form to enter a new comment" do
+        $NO_TIMELINE_FOR_SPECS = false
         click_link "One comment"
         fill_in "comment_comment_comment", with: "To short"
         click_button "Post comment"
@@ -71,6 +72,7 @@ describe Commentable do
         page.should have_content "2 comments for Page 'First Page'"
         page.should have_content "This is a cool feature"
         page.should have_content "XXXX Lorem ipsum dolor sit amet"
+        $NO_TIMELINE_FOR_SPECS = true
       end
 
       it "offers a form to modify an existing comment" do

@@ -14,6 +14,7 @@ describe User do
   end
 
   it "removes identities when destroyed and creates a Event to AdminTimeline" do
+    $NO_TIMELINE_FOR_SPECS = false
     user = User.create!(name: "Test With Identities", email: 'identity@iboard.cc')
     identity = Identity.create!(provider: 'identity', uid:'test123', name: 'Test With Identities', password:"12345", password_confirmation: "12345")
     user.authentications = [ identity ]
@@ -40,7 +41,12 @@ describe User do
   describe "(standard user)" do
     before :each do
       User.delete_all
+      $NO_TIMELINE_FOR_SPECS = false
       @user = test_user "The Pirate", "ahoid"
+    end
+
+    after :each do
+      $NO_TIMELINE_FOR_SPECS = true
     end
 
     it "sends a forgot password link" do

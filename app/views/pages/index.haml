@@ -1,9 +1,14 @@
+- @load_javascript_on_top = true
 = render 'shared/search'
 = render 'pages_menu'
+
+= javascript_include_tag 'endless_page'
+
 %h1.pull-right= title( t(:pages))
 %br/
 %hr/
 %br/
 
-#result
-  =render @pages
+.container
+  #result
+    = render "pages_pagination"

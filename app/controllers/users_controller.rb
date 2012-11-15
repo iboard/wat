@@ -9,7 +9,10 @@ class UsersController < ApplicationController
 
   def index
     if can_read?('Admin')
-      @users ||= User.asc(:name)
+      $users_to_show = nil if !params[:page].present?
+      _pp = Settings.paginate_users_per_page || 4
+      $users_to_show ||= (@searched_users ? @searched_users : User.asc(:name))
+      @users ||= $users_to_show.asc(:name).paginate( page: (params[:page] ? params[:page] : 1), per_page: _pp )
     else
       redirect_to root_path, :alert => t(:access_denied)
     end
@@ -132,19 +135,35 @@ class UsersController < ApplicationController
     end
   end
 
+  def autocomplete_search
+    respond_to do |format|
+       format.json { 
+         render :json => User.any_of({ name: /#{params[:q]}/i }, { email: /#{params[:q]}/i })
+                             .only(:name,:email)
+                             .map{ |user| 
+                               [
+                                 :search_name => user.name, 
+                                 :list_name => user.name + " (#{user.email})"
+                               ]
+                              }
+                             .flatten
+       }
+     end
+  end
+  
 private
   def parse_search_param
     if params[:search].present?
       _p = params[:search].is_a?(String) ? JSON.parse( params[:search] ) : params[:search]
       @search = Search.new( search_text: _p['search_text'], search_controller: _p['search_controller'] )
-      @users = User.any_of(
+      @searched_users = User.any_of(
         {name: /#{@search.search_text}/i}, 
         {email: /#{@search.search_text}/i}
       ).asc(:name)
     else
       @search = Search.new search_text: '', search_controller: 'users'
     end
-  end      
+  end
 
   def correct_user_or_reset_token?
     unless params[:user][:password_reset_token].present?

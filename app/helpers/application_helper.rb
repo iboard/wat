@@ -35,4 +35,22 @@ module ApplicationHelper
     end
   end
 
+  # Check if paginate is on last page
+  # @param [WillPaginate-Array] collection
+  # @return Boolean - true if on last page
+  def is_on_last_page(collection)
+    return true if !collection || !collection.total_pages
+    collection.current_page >= collection.total_pages
+  end
+
+  # To use https://github.com/mislav/will_paginate in combination with Twitter-Bootstrap pagination
+  # renderer is defined in config/initializers/bootstrap_link_renderer.rb
+  # Possible usage see: README.md
+  def page_navigation_links(pages, _class='pagination', _previous='&larr;', _next='&rarr;')
+    if pages.total_pages > 1
+      will_paginate(pages, class: _class, inner_window: 2, outer_window: 0, 
+            renderer: ::BootstrapLinkRenderer, previous_label: _previous.html_safe, next_label: _next.html_safe).html_safe
+    end
+  end
+
 end

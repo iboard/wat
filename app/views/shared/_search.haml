@@ -3,5 +3,5 @@
     = form_for @search, html: {class:'navbar-search'} do |f|
       .controlls
         =f.hidden_field  :search_controller
-        =f.text_field    :search_text, placeholder: t(:search)+"...", class: "search-query"
+        =f.text_field    :search_text, placeholder: t(:search)+"...", class: "search-query", :"data-controller" => @search.search_controller, :"data-hint-text" => t(:search_for, for_controller: t(@search.search_controller)), :'data-no-results-text' => t(:no_result), :'data-searching-text' => t(:searching_text), :"data-placeholder" => t(:search)+"..."
         =f.submit t(:search), id: 'search-button'

@@ -17,7 +17,6 @@ describe UsersController do
     fill_in "password", with: "12345"
     click_button "Register"
     page.should_not have_content "Prohibited this account from being saved"
-
   end
   
   describe "With an admin and temporary users" do
@@ -30,10 +29,11 @@ describe UsersController do
     end
    
     it "should login user" do
-       sign_in_user name: 'Testuser', password: 'notsecret'
-       visit users_path
-       page.click_link "You"
-       page.should have_content "Testuser"
+      sign_in_user name: 'Testuser', password: 'notsecret'
+      visit users_path
+      page.should have_content "testuser@example.com"
+      page.click_link "Edit"
+      page.should have_content "testuser@example.com"
     end
   
     it "should have add- and remove authentication buttons" do
@@ -53,13 +53,15 @@ describe UsersController do
     end
   
     it "should delete user and creates a Event to AdminTimeline" do
+      $NO_TIMELINE_FOR_SPECS = false
       @user1 = sign_in_user name: 'Testuser', password: 'notsecret'
       visit users_path
       page.click_link "Cancel Account" 
       visit users_path
-      page.should have_no_content "Testuser"
+      page.should have_no_content "testuser@example.com"
       # has created a UserChangedEvent to AdminTimeline
       Timeline.find_by(name: 'Admin').timeline_events.last.text.should =~ /User 'Testuser' was destroyed/
+      $NO_TIMELINE_FOR_SPECS = true
     end
 
     it "should display a message if destroying is not possible" do
@@ -73,7 +75,7 @@ describe UsersController do
       sign_in_user name: 'Testuser', password: 'notsecret'
       visit users_path
       page.click_link "Cancel Account" 
-      page.should have_content "Testuser"
+      page.should have_content "testuser@example.com"
       page.should have_content I18n.t(:can_not_delete_user, why: "I'll not die yet!")
     end
   
@@ -96,16 +98,18 @@ describe UsersController do
       test_user 'Foreigner', 'alians'
       test_user 'Hacker', 'notsecret'
       visit users_path
-      page.should_not have_content "Foreigner"
+      page.should_not have_content "foreigner@example.com"
       page.should have_content "Access denied"
     end
   
     it "sends a confirmation mail when a user is created and creates a Event to AdminTimeline" do
       visit signout_path
+      $NO_TIMELINE_FOR_SPECS = false
       sign_up_user name: "Friendly User", password: 'notsecret', email: 'friendly.user@example.com'
       last_email.to.should include('friendly.user@example.com')
       # has created a UserChangedEvent to AdminTimeline
       Timeline.find_by(name: 'Admin').timeline_events.last.text.should =~ /User 'Friendly User' was created/
+      $NO_TIMELINE_FOR_SPECS = true
     end
   
     it "sends a confirmation mail when the email changes" do
@@ -256,10 +260,12 @@ describe UsersController do
       User.create name: "Find Me", email: "find@me.com"
       set_current_user @admin
       visit users_path
-      fill_in 'search_search_text', with: "find"
+      page.find(:xpath, "//tester").set "find"
       page.should_not have_button "Search"
-      page.should have_content "Find Me"
-      page.should_not have_content "admin@iboard.cc"
+      keypress_script = "var e = $.Event('keyup', { keyCode: #{13} }); $('#token-input-search_search_text').trigger(e);"
+      page.driver.browser.execute_script(keypress_script)
+      page.should have_content "find@me.com"
+      page.should_not have_content "admin@example.com"
       assert page.all( '.user-location div' ).count == 0, "Should not show Google-map while search"
     end
 

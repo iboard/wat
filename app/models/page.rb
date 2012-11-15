@@ -173,7 +173,6 @@ private
   def remove_banner?
     if @delete_banner
       self.banner.delete if self.banner
-      self.banner = nil
     end
     true
   end

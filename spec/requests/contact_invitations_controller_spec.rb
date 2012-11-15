@@ -9,7 +9,9 @@ describe ContactInvitationsController do
     User.delete_all
     Identity.delete_all
     visit switch_language_path(:en)
+    $NO_TIMELINE_FOR_SPECS = false
     @admin = test_user 'Fredy', 'notsecret', 'User'
+    $NO_TIMELINE_FOR_SPECS = true
     sign_in_user name: 'Fredy', password: 'notsecret'
   end
 
@@ -45,10 +47,15 @@ describe ContactInvitationsController do
   describe "Accept an invitation" do
   
     before(:each) do
+      $NO_TIMELINE_FOR_SPECS = false
       @user = test_user "New Friend", "secret"
       sign_in_user name: 'New Friend', password: 'secret'
       invitation = ContactInvitation.create(sender: @admin, recipient_email: 'new.friend@example.com')
       @token = invitation.token
+    end
+
+    after(:each) do
+      $NO_TIMELINE_FOR_SPECS = true
     end
 
     it "by visiting accept_contact_invitation_path and creates a UserEvent to sender's timeline" do
