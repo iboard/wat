@@ -142,8 +142,8 @@ class UsersController < ApplicationController
                              .only(:name,:email)
                              .map{ |user| 
                                [
-                                 :name   => user.name, 
-                                 :search_name => user.name + " (#{user.email})"
+                                 :search_name => user.name, 
+                                 :list_name => user.name + " (#{user.email})"
                                ]
                               }
                              .flatten

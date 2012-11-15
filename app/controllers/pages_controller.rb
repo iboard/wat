@@ -2,11 +2,12 @@
 
 class PagesController < ApplicationController
 
-  before_filter :parse_search_param, only: [:index]
-  _allow_index_actions = Settings.supress_global_search != true ? [:show, :index] : [:show]
+  _allow_index_actions = Settings.supress_global_search == true ? [:show] : [:show, :index, :autocomplete_search]
   before_filter :authenticate_user!, except: _allow_index_actions
-  before_filter :authenticate_admin!, except: [:index, :show]
+  before_filter :authenticate_admin!, except: [:index, :show, :autocomplete_search]
   before_filter :set_last_modifier, only: [:create, :update]
+
+  before_filter :parse_search_param, only: [:index]
 
   def index
     $pages_to_show = nil if !params[:page].present?
@@ -127,8 +128,8 @@ class PagesController < ApplicationController
                              .only(:title)
                              .map{ |page| 
                                [
-                                 :name   => page.title, 
-                                 :search_name => page.title
+                                 :search_name => page.title, 
+                                 :list_name => page.title
                                ]
                               }
                              .flatten

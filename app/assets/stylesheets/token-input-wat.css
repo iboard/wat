@@ -30,7 +30,6 @@ ul.token-input-list-wat {
     min-height: 1px;
     z-index: 999;
     margin: 0;
-    padding: 3px;
     background: transparent;
 }
 
@@ -110,19 +109,19 @@ li.token-input-input-token-wat {
 li.token-input-input-token-wat input {
   background-color: #6a97b5;
   color: white;
-  height: 18px; 
+  height: 16px; 
   border-radius: 15px 15px 15px 15px;
   border: none;
-  width: 100px;
+  width: 180px;
   padding: 4px 9px;
   margin: 0;
 }
 
 /*do not combine the following 2, it doesn't work!*/
-input::-webkit-input-placeholder {
+li.token-input-input-token-wat input::-webkit-input-placeholder {
   color:white;
 }
-input:-moz-placeholder {
+li.token-input-input-token-wat input:-moz-placeholder {
   color:white;
 }
 
@@ -152,7 +151,7 @@ div.token-input-dropdown-wat p {
     margin: 0;
     padding: 0 5px;
     font-style: italic;
-    color: #aaa;
+    color: #333333;
 }
 
 div.token-input-dropdown-wat h3.token-input-dropdown-category-wat {
@@ -167,6 +166,7 @@ div.token-input-dropdown-wat h3.token-input-dropdown-category-wat {
 div.token-input-dropdown-wat ul {
     margin: 0;
     padding: 0;
+    color: #333333;
 }
 
 div.token-input-dropdown-wat ul li {

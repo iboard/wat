@@ -4,18 +4,49 @@ describe ApplicationController do
 
   before(:each) do
     Page.delete_all
-    Page.create( title: 'Page ONE', permalink: 'page one', body: 'Body One')
-    Page.create( title: 'Page TWO', permalink: 'page two', body: 'Body Two')
+    Page.create permalink: 'online-page', title: 'header for online', body: "This is for the online-homepage", is_online: true
+    Page.create permalink: 'not-online-page', title: 'header for not online', body: "This is for the not-online-homepage", is_online: false
+    test_user 'Testuser', 'notsecret'
     visit root_path
   end
 
-  it "can search pages with a search-field in the top-menu", js: true do
-    visit switch_language_path(:en)
+  it "can search for online pages without JS" do
     page.should have_css "#search_search_text"
-    fill_in "search_search_text", with: "Body One"
-    wait_until { page.all('h1', text: "Page ONE") }
-    page.all('h1', text: "Page TWO").should be_empty
+    fill_in 'search_search_text', with: "online"
+    click_button "Search"
+    page.all('h1', text: "This is for the online-homepage").should_not be_nil
+    page.all('h1', text: "This is for the not-online-homepage").should be_empty
   end
+
+  it "can search for online pages with JS", js: true do
+    page.should have_css "#token-input-search_search_text"
+    page.find(:xpath, "//tester").set "online"
+    keypress_script = "var e = $.Event('keyup', { keyCode: #{13} }); $('#token-input-search_search_text').trigger(e);"
+    page.driver.browser.execute_script(keypress_script)
+    page.all('h1', text: "This is for the online-homepage").should_not be_nil
+    page.all('h1', text: "This is for the not-online-homepage").should be_empty
+  end
+
+  it "when logged in is possible to search for online pages without JS" do
+    sign_in_user name: 'Testuser', password: 'notsecret'
+    page.should have_css "#search_search_text"
+    fill_in 'search_search_text', with: "online"
+    click_button "Search"
+    page.all('h1', text: "This is for the online-homepage").should_not be_nil
+    page.all('h1', text: "This is for the not-online-homepage").should be_empty
+  end
+
+  it "when logged in is possible to search for online pages with JS", js: true do
+    visit switch_language_path(:en)
+    sign_in_user name: 'Testuser', password: 'notsecret'
+    page.should have_css "#token-input-search_search_text"
+    page.find(:xpath, "//tester").set "online"
+    keypress_script = "var e = $.Event('keyup', { keyCode: #{13} }); $('#token-input-search_search_text').trigger(e);"
+    page.driver.browser.execute_script(keypress_script)
+    page.all('h1', text: "This is for the online-homepage").should_not be_nil
+    page.all('h1', text: "This is for the not-online-homepage").should be_empty
+  end
+
 
   it "can supress the global search by configuration" do
     Settings.supress_global_search=true
@@ -42,5 +73,4 @@ describe ApplicationController do
   #   end
   # end
 
-  
 end

@@ -1,5 +1,8 @@
 <% if params[:search].present? %>
-  $('#result').html('<%= escape_javascript( render "pages_pagination" ) -%>');
+  if ($('#result').length > 0){
+      $('#result').html('<%= escape_javascript( render "pages_pagination" ) -%>');}
+  else{
+      $('#global_result').html('<div id="result_detail"><%= escape_javascript( render "pages_pagination" ) -%></div>');}
 <% end %>
 
 /* REVIEW: This file is needed for any endles-loading view. Is there a way to unify this, so we have it only once? */
@@ -15,7 +18,7 @@ $(".pagination").html("<%= escape_javascript( page_navigation_links( @pages, 'pa
 
 <% if is_on_last_page(@pages) %>
   $('#page<%= @pages.current_page -%>').slideDown();
-  $('#load_more').html('<p style="text-align:center; margin-top: 20px;"><%= escape_javascript(t(:end_of_list)) -%></p>');
+  $('#load_more').html('<p style="text-align:center; margin-top: 20px;"><%= escape_javascript(t(:end_of_list)) -%></p><p/ class="page_seperator_bold"p>');
   $(".pagination").hide();
 <% else %>
   $('#load_more').html( '<%=  escape_javascript(link_to_function(t(:load_more_link),"insert_load_button( 'load_more','#{t(:loading)}',"+

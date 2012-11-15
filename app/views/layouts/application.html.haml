@@ -51,6 +51,7 @@
       = render "timelines/users_timeline", user: current_user if current_user && !@no_timeline
     .main-background
       .container.main
+        #global_result
         - if content_for?(:top_menu)
           =content_for(:top_menu)
         - if flash.any?

@@ -6,6 +6,7 @@
  * Licensed jointly under the GPL and MIT licenses,
  * choose which one suits your project best!
  *
+ * Changes made by Karl Hochfilzer, marked as // hock
  */
 
 (function ($) {
@@ -264,6 +265,7 @@ $.TokenList = function (input, url_or_data, settings) {
                     break;
 
                 case KEY.TAB:
+                // hock
                 //case KEY.ENTER:
                 case KEY.NUMPAD_ENTER:
                 case KEY.COMMA:
@@ -343,17 +345,20 @@ $.TokenList = function (input, url_or_data, settings) {
     // The list to store the dropdown items in
     var dropdown = $("<div>")
         .addClass(settings.classes.dropdown)
-        .appendTo("body")
+        // hock
+        // .appendTo("body")
+        .appendTo(".navbar.navbar-fixed-top")
         .hide();
 
     // Magic element to help us resize the text input
+    // hock, width: was "auto"
     var input_resizer = $("<tester/>")
         .insertAfter(input_box)
         .css({
             position: "absolute",
             top: -9999,
             left: -9999,
-            width: "auto",
+            width: "150px",
             fontSize: input_box.css("fontSize"),
             fontFamily: input_box.css("fontFamily"),
             fontWeight: input_box.css("fontWeight"),
@@ -516,7 +521,8 @@ $.TokenList = function (input, url_or_data, settings) {
         }
 
         // Clear input box
-        input_box.val("");
+        // hock
+        // input_box.val("");
 
         // Don't show the help dropdown, they've got the idea
         hide_dropdown();

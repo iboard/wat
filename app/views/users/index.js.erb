@@ -15,7 +15,7 @@ $(".pagination").html("<%= escape_javascript( page_navigation_links( @users, 'pa
 
 <% if is_on_last_page(@users) %>
   $('#page<%= @users.current_page -%>').slideDown();
-  $('#load_more').html('<p style="text-align:center; margin-top: 20px;"><%= escape_javascript(t(:end_of_list)) -%></p>');
+  $('#load_more').html('<p style="text-align:center; margin-top: 20px;"><%= escape_javascript(t(:end_of_list)) -%></p><p/ class="page_seperator_bold"p>');
   $(".pagination").hide();
 <% else %>
   $('#load_more').html( '<%=  escape_javascript(link_to_function(t(:load_more_link),"insert_load_button( 'load_more','#{t(:loading)}',"+
