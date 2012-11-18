@@ -3,9 +3,14 @@ require "rspec"
 describe User do
 
   before(:each) do
+    $NO_TIMELINE_FOR_SPECS = false
     @user = test_user 'Mr. Test', 'secret'
     @doorkeeper= Timeline.find_or_create_by( name: Doorkeeper::DOORKEEPER_TIMELINE)
     @contentkeeper = Timeline.create(name: 'content-timeline')
+  end
+
+  after(:each) do
+    $NO_TIMELINE_FOR_SPECS = true
   end
 
   it "can subscribe and read events from all subscriptions/timelines" do

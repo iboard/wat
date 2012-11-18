@@ -8,8 +8,13 @@ describe Timeline do
 
   before(:each) do
     Timeline.delete_all
+    $NO_TIMELINE_FOR_SPECS = false
     @timeline = Timeline.create( name: "First Timeline", public: true, enabled: true )
     @api_token = Settings.api.tokens.first
+  end
+
+  after(:each) do
+    $NO_TIMELINE_FOR_SPECS = true
   end
 
   it "rejects if API-token not present" do

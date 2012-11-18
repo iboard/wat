@@ -23,6 +23,8 @@ class Timeline
   scope :enabled, -> { where(enabled: true) }
   scope :public,  -> { where(public: true)  }
 
+  before_create :do_not_create_timeline_for_specs
+
  # @!group Virtual Attributes
 
   # Virtual attribute. Data will not be stored in database
@@ -67,6 +69,12 @@ class Timeline
   # @!endgroup
 
   private
+
+  def do_not_create_timeline_for_specs
+    if $NO_TIMELINE_FOR_SPECS && $NO_TIMELINE_FOR_SPECS == true
+      return false
+    end
+  end
 
   # Check if it's allowed to create the event
   # By now there is one check only (Thresholding). Further checks can be added here

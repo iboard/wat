@@ -92,6 +92,7 @@ gem 'simple_form'
 gem 'rails_config'
 gem 'capistrano'
 gem "ckeditor", "~> 3.7.1"
+gem "will_paginate", "3.0.pre4"
 gem "redis"
 
 

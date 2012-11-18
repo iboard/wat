@@ -33,6 +33,9 @@ developer_mail_address: "developer@example.com"
 # show_user_menu: true
 # supress_global_search: false
 
+# paginate_users_per_page: 4
+# paginate_pages_per_page: 4
+
 # TIMELINE BEHAVIOR
 
 timeline:

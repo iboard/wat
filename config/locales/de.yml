@@ -55,6 +55,7 @@ de:
     cloned from http://github.com/iboard/wat
   home: Home
   user: Benutzer
+  users: Benutzer
   edit_page: Seite bearbeiten
   you_not_allowed_to_edit_this_page: Sie sind nicht berechtigt diese Seite zu bearbeiten
   update_page: Seite aktualisieren
@@ -70,6 +71,7 @@ de:
   page_not_found: Die Seite wurde nicht gefunden (404).
   page_successfully_created: Seite wurde erfolgreich erzeugt
   page: Seite
+  pages: Seiten
   canceled: Abgebrochen.
   read_more: mehr lesen …
   listing_pages: Liste aller Seiten
@@ -162,6 +164,9 @@ de:
   default_preview_length: "Standard %{length}"
   default_preview_hint: "Anzahl Zeichen, die in der Vorschau angezeigt werden"
   search: 'Suchen'
+  search_for: "Suchen nach %{for_controller}..."
+  no_result: 'Nichts gefunden'
+  searching_text: 'Suchen...'
   no_user_found_for: "Mit '%{search}' im Namen oder EMail wurde kein Benutzer gefunden"
   no_page_found_for: "Mit '%{search}' im Titel oder Inhalt wurde keine Seite gefunden"
   can_not_delete_user: "Ihr Benutzerkonto konnte nicht gelöscht werden. %{why}"
@@ -276,6 +281,7 @@ de:
     zero: 0 TB
     one: 1 TB
     other: "%{count} TB"
+  file: "Datei"
   file_deleted: "Datei '%{filename}' wurde gelöscht"
   file_not_deleted: "Datei '%{filename}' kann nicht gelöscht werden - '%{error}'"
   your_files: Ihre Dateien ...
@@ -290,6 +296,9 @@ de:
   replace_file: Datei ersetzen
   current_file: Aktuelle Datei
   new_file: Neue Datei
+  select_file: "Datei auswählen"
+  change_file: "Ändern"
+  remove_file: "Entfernen"
   search_place_example: 'Schloß Schönbrunn, Wien'
   search_place_hint: 'Die Adresse wird nicht gespeichert sondern nur zum Suchen der Koordinaten benutzt.'
   edit_avatar: "Bearbeiten"
@@ -373,6 +382,7 @@ de:
   action_saved: gespeichert
   action_created: erzeugt
   action_delete: gelöscht
+  commented: kommentiert
   page_event: "<span class='timeline-username'>%{user}, </span><span class='timestamp-timeline'>vor %{time}</span><br/><span class='timeline-message'>Seite '%{page}' %{action}</span>"
   comment_event: "'%{commentable_link}' wurde vor <span class='timeline-username'>%{time}</span> von <span class='timeline-username'>%{user}</span> kommentiert"
   message_couldnt_be_sent: "Ihre Nachricht konnte leider nicht versandt werden."
@@ -422,4 +432,8 @@ de:
   created_your_profile: "Sie haben Ihr Profil erzeugt"
   updated_your_profile: "Sie haben Ihr Profil aktualisiert"
   has_accepted_invitation: "Hat die Einladung akzeptiert."
+  scroll_to_top: 'Zum Anfang der Seite'
+  loading: 'Laden …'
+  load_more_link: 'Mehr anzeigen …'
+  end_of_list: ' -- ENDE -- '
   edit_translations: "Diese Übersetzungen bearbeiten"

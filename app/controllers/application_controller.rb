@@ -124,6 +124,7 @@ private
   end
 
   def setup_timeline
+    return false if $NO_TIMELINE_FOR_SPECS && $NO_TIMELINE_FOR_SPECS == true
     if current_user
       @events = current_user.events(timeline_last_request())
     end
