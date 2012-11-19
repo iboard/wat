@@ -1,0 +1,9 @@
+- unless resources.any?
+  .alert.alert-error= alert_error_text
+- else
+  .pagination_box= page_navigation_links( resources, 'pagination', '&#8592; ' + t(:previous), t(:next) + ' &#8594;' )
+
+  = render resources
+  = render :partial => '/shared/load_more', :locals => { :resources => resources, :path => path }
+
+  .pagination_box= page_navigation_links( resources, 'pagination', '&#8592; ' + t(:previous), t(:next) + ' &#8594;' )
