@@ -10,11 +10,11 @@ class PagesController < ApplicationController
   before_filter :parse_search_param, only: [:index]
 
   def index
-    $pages_to_show = nil if !params[:page].present?
+    @pages_to_show = nil if !params[:page].present?
     _pp = Settings.paginate_pages_per_page || 4
-    $pages_to_show ||= (@searched_pages ? @searched_pages : permitted_pages )
-    redirect_to signin_path, alert: t(:you_need_to_sign_in) if !$pages_to_show
-    @pages ||= $pages_to_show.paginate( page: (params[:page] ? params[:page] : 1), per_page: _pp )
+    @pages_to_show ||= (@searched_pages ? @searched_pages : permitted_pages )
+    redirect_to signin_path, alert: t(:you_need_to_sign_in) if !@pages_to_show
+    @pages ||= @pages_to_show.asc(:position).paginate( page: (params[:page] ? params[:page] : 1), per_page: _pp )
   end
   
   def show
@@ -125,7 +125,7 @@ class PagesController < ApplicationController
     respond_to do |format|
        format.json { 
          render :json => permitted_pages.any_of({ title: /#{params[:q]}/i }, { body: /#{params[:q]}/i })
-                             .only(:title)
+                             .only(:title).asc(:title)
                              .map{ |page| 
                                [
                                  :search_name => page.title, 
@@ -147,6 +147,7 @@ private
         {body: /#{@search.search_text}/i}
       )
     else
+      @searched_pages = nil
       @search = Search.new search_text: '', search_controller: 'pages'
     end
   end

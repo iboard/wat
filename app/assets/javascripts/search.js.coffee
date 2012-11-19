@@ -22,12 +22,11 @@ jQuery ->
   if $('#token-input-search_search_text').length > 0
     _placeholderText = $('.search-query').data('placeholder')
     $('#token-input-search_search_text').attr("placeholder", _placeholderText )
-
-  $("#search-button").remove()
-  $("#token-input-search_search_text").live('keyup', (event) -> 
-    if event.keyCode == 13
-      tokenInputSearch()
-    )
+    $("#search-button").remove()
+    $("#token-input-search_search_text").live('keyup', (event) -> 
+      if event.keyCode == 13
+        tokenInputSearch()
+      )
 
   self.tokenInputSearch = () ->
     _value = $('.token-input-token-wat p').html() || $('tester').html() || $('tester').val()

@@ -110,6 +110,30 @@ class User
     User.where(:authentications.matches => {provider: provider, uid: uid.to_s}).first
   end
 
+  # Find Users by a given search-condition
+  def self.search(search)
+    if search and search != ""
+      _p = search.is_a?(String) ? JSON.parse( search ) : search
+      @search = Search.new( search_text: _p['search_text'], search_controller: _p['search_controller'] )
+      # @searched_users = User.any_of(
+      #   {name: /#{@search.search_text}/i}, 
+      #   {email: /#{@search.search_text}/i}
+      # ).asc(:name)
+      # search_params[:search]
+      any_of(
+        {name: /#{@search.search_text}/i}, 
+        {email: /#{@search.search_text}/i}
+      )
+    else
+      scoped
+    end
+  end
+
+
+
+
+
+
   # Adds an authentication to this user
   # @param [Authentication]
   def add_authentication(authentication)

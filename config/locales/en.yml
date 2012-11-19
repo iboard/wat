@@ -435,3 +435,5 @@ en:
   load_more_link: 'Show more …'
   end_of_list: ' -- END -- '
   edit_translations: "Edit this translations"
+  previous: "Previous"
+  next: "Next"

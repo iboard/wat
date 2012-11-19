@@ -437,3 +437,5 @@ de:
   load_more_link: 'Mehr anzeigen …'
   end_of_list: ' -- ENDE -- '
   edit_translations: "Diese Übersetzungen bearbeiten"
+  previous: "Vorherige"
+  next: "Nächste"

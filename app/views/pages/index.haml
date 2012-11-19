@@ -11,4 +11,4 @@
 
 .container
   #result
-    = render "pages_pagination"
+    = render :partial => '/shared/pagination_page', :locals => { :resources => @pages, :path => pages_path, :alert_error_text => t(:no_page_found_for, search: @search.search_text) }
