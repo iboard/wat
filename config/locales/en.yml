@@ -430,8 +430,10 @@ en:
   created_your_profile: "You have created your Profile"
   updated_your_profile: "You have updated your Profile"
   has_accepted_invitation: "Has accepted invitation."
-  edit_translations: "Edit this translations"
   scroll_to_top: 'Scroll to top'
   loading: 'Loading …'
-  load_more: 'Show more …'
+  load_more_link: 'Show more …'
   end_of_list: ' -- END -- '
+  edit_translations: "Edit this translations"
+  previous: "Previous"
+  next: "Next"

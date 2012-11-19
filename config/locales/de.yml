@@ -432,8 +432,10 @@ de:
   created_your_profile: "Sie haben Ihr Profil erzeugt"
   updated_your_profile: "Sie haben Ihr Profil aktualisiert"
   has_accepted_invitation: "Hat die Einladung akzeptiert."
-  edit_translations: "Diese Übersetzungen bearbeiten"
   scroll_to_top: 'Zum Anfang der Seite'
   loading: 'Laden …'
-  load_more: 'Mehr anzeigen …'
+  load_more_link: 'Mehr anzeigen …'
   end_of_list: ' -- ENDE -- '
+  edit_translations: "Diese Übersetzungen bearbeiten"
+  previous: "Vorherige"
+  next: "Nächste"
