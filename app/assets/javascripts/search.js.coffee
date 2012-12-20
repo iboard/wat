@@ -17,6 +17,7 @@ jQuery ->
     tokenValue: 'search_name',
     tokenFormatter: (item) -> "<li><p>" + item[this.tokenValue] + "</p></li>",
     onAdd: (item) -> tokenInputSearch()
+    onDelete: (item) -> window.location.reload()
   })
 
   if $('#token-input-search_search_text').length > 0

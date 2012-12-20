@@ -37,8 +37,9 @@ describe FacilitiesController do
 
   it "has a form for a new facility" do
     sign_in_user name: 'Testuser', password: 'notsecret'
+    visit switch_language_path(:en)
     visit user_facilities_path(@user1)
-    page.all("option", value: "Admin").select
+    select "Admin", from: "facility_name"
     check 'read'
     uncheck 'write'
     check 'execute'
