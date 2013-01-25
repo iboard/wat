@@ -437,3 +437,5 @@ en:
   edit_translations: "Edit this translations"
   previous: "Previous"
   next: "Next"
+  change_password: 'Change password'
+  password_successfully_changed: 'New password set'

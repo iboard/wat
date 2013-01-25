@@ -31,4 +31,14 @@ jQuery ->
       $('.subnav-fixed .left li:first-child').attr('style', 'margin-left: ' + subnav_left + "px;" )
     unless $('.subnav-fixed').length > 0
       $('.left li:first-child').attr('style', 'margin-left: 0px;' )
-  
+
+
+jQuery ->
+
+  $(document).ready ->
+    $('.toggle-next').each ->
+      $(this).parent().next().hide()
+
+  $('.toggle-next').click (event) ->
+    event.preventDefault()
+    $(this).parent().next().toggle(250)

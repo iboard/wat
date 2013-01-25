@@ -439,3 +439,5 @@ de:
   edit_translations: "Diese Übersetzungen bearbeiten"
   previous: "Vorherige"
   next: "Nächste"
+  change_password: 'Passwort Ändern'
+  password_successfully_changed: 'Das neue Passwort wurde gespeichert.'

@@ -29,7 +29,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if params[:user][:password_reset_token].present?
       if create_or_update_authentication
-        redirect_to signin_path, notice: t(:password_set)
+        if current_user
+          redirect_to user_path(current_user), notice: t(:password_successfully_changed)
+          return false
+        else
+          redirect_to signin_path, notice: t(:password_set)
+        end
       else
         flash.now[:alert] =@identity.errors.full_messages.join("<br/>").html_safe
         render :reset_password

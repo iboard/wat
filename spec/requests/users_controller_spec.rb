@@ -225,7 +225,21 @@ describe UsersController do
       page.should have_link 'Forgot password?'
     end
 
+    it "should allow users to change password for identity" do
+      user = test_user 'Paranoia Fred', 'secret'
+      sign_in_user name: "Paranoia Fred", password: 'secret'
 
+      visit user_path(user)
+      fill_in 'New password', with: "verysecret"
+      fill_in 'Confirm password', with: "verysecret"
+      click_button "Set new password"
+      page.should have_content "New password set"
+
+      # Check login with new password
+      visit signout_path
+      sign_in_user name: "Paranoia Fred", password: 'verysecret'
+      page.should have_content "Signed in"
+    end
   end
   
   describe "as an admin" do
