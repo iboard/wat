@@ -6,6 +6,7 @@ class AttachmentsController < ApplicationController
 
   def index
     @attachments ||= Attachment.where( user_id: @user._id )
+    @attachment ||= UserAttachment.new(user_id: @user._id )
   end
 
   def new
@@ -14,10 +15,16 @@ class AttachmentsController < ApplicationController
 
   def create
     @attachment = @user.attachments.create(params[:application_file])
-    if @attachment.save && @user.save
-      redirect_to user_attachments_path(@user), notice: t(:file_stored_successfully)
-    else
-      render :new
+    _ok = @attachment.save && @user.save
+    respond_to do |format|
+      format.html {
+        if _ok
+          redirect_to user_attachments_path(@user), notice: t(:file_stored_successfully)
+        else
+          render :new
+        end
+      }
+      format.js {}
     end
   end
 

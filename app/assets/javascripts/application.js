@@ -20,5 +20,8 @@
 //= require bootstrap-fileupload
 //= require datepicker
 //= require jsort_sortable
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
+//= require attachment_uploader
 //= require ckeditor/init
 //= require_tree .

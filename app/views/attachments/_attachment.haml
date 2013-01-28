@@ -1,15 +1,14 @@
-%ul.nav
-  %li
-    .well{id: attachment.user}
-      - if attachment.application_file
-        - present attachment do |attachment_presenter|
-          = attachment_presenter.present
-      - else
-        %span.alert.alert-error= t(:no_file_available)
-      - unless params[:action] == 'edit'
-        .pull-right
-          = button_link_to 'icon-trash', 'btn btn-danger btn-mini', t(:delete), user_attachment_path(attachment.user, attachment), confirm: t(:are_you_sure), method: :delete
-          = button_link_to 'icon-refresh', 'btn btn-default btn-mini', t(:replace_file_button), edit_user_attachment_path(attachment.user, attachment)
-      .clear-both
+%li
+  .well{id: attachment.user}
+    - if attachment.application_file
+      - present attachment do |attachment_presenter|
+        = attachment_presenter.present
+    - else
+      %span.alert.alert-error= t(:no_file_available)
+    - unless params[:action] == 'edit'
+      .pull-right
+        = button_link_to 'icon-trash', 'btn btn-danger btn-mini', t(:delete), user_attachment_path(attachment.user, attachment), confirm: t(:are_you_sure), method: :delete
+        = button_link_to 'icon-refresh', 'btn btn-default btn-mini', t(:replace_file_button), edit_user_attachment_path(attachment.user, attachment)
+    .clear-both
 
         

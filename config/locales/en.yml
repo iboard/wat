@@ -439,3 +439,5 @@ en:
   next: "Next"
   change_password: 'Change password'
   password_successfully_changed: 'New password set'
+  drop_files_here: 'Drop files here to upload'
+  upload_files: 'Upload files'

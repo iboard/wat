@@ -1,0 +1,4 @@
+= simple_form_for attachment, html: { class: 'form form-horizontal attachment-upload-form', multiple: true} do |f|
+  =f.input :file, input_html: { multiple: true, name: 'application_file[file]' }, hint: t(:drop_files_here)
+  =f.label ' '
+  = render 'upload_template', attachment: attachment

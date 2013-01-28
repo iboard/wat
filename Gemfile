@@ -10,6 +10,7 @@ group :assets do
 
   # 2.1 has no-go issues with dropdown menus. Stay at 2.0.4 until 2.1.1
   gem 'bootstrap-sass', '2.0.4.2' #~> 2.1.0.0'
+  gem 'jquery-fileupload-rails'
 end
 
 gem 'jquery-rails'
@@ -94,6 +95,7 @@ gem 'capistrano'
 gem "ckeditor", "~> 3.7.1"
 gem "will_paginate", "3.0.pre4"
 gem "redis"
+
 
 # Authentication
 gem "omniauth", ">= 1.0.2"

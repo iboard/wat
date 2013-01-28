@@ -441,3 +441,5 @@ de:
   next: "Nächste"
   change_password: 'Passwort Ändern'
   password_successfully_changed: 'Das neue Passwort wurde gespeichert.'
+  drop_files_here: 'Dateien hier ablegen'
+  upload_files: 'Dateien ablegen'

@@ -1,8 +1,3 @@
-= simple_form_for @attachment, html: { multipart: true } do |f|
-  .well
-    - @attachment.application_file ||= ApplicationFile.new( attachment: @attachment )
-    = simple_fields_for @attachment.application_file do |app_file|
-      = render 'shared/file_upload', model_id: "application_file_file", field_name: "application_file[file]", field_label: t(:file)
-  .form-actions
-    = f.button :submit, t(:upload_file), class: 'btn-primary'
-    = link_to t(:cancel), :back, class: 'btn'
+.well
+  - @attachment.application_file ||= ApplicationFile.new( attachment: @attachment )
+  = render 'multiple_upload_form', attachment: @attachment

@@ -26,6 +26,7 @@ describe AttachmentsController do
 
     before(:each) do
       @user = test_user "Hugo Gans", "munic"
+      visit switch_language_path(:en)
       sign_in_user name: "Hugo Gans", password: "munic"
     end
 
@@ -59,16 +60,12 @@ describe AttachmentsController do
       page.should have_link "Your files"
     end
 
-    it "let the user upload a file" do
+    it "let the user upload a file", js: true do
       click_link "Your files ..."
       test_file = TEXT_FILE_FIXTURE
       page.should have_content I18n.t(:number_of_your_files, count: 0)
-      click_link "Upload file"
-      attach_file("application_file_file", test_file)
-      click_button("Upload file")
-      page.should have_content File::basename(TEXT_FILE_FIXTURE)
-      page.click_link File.basename(TEXT_FILE_FIXTURE)
-      page.should have_content "Testfile Signature"
+      attach_file("user_attachment_file", test_file)
+      page.should have_link File.basename(TEXT_FILE_FIXTURE)
       @test_attachments << @user.attachments.last
     end
 
