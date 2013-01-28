@@ -14,7 +14,8 @@
       }
     = stylesheet_link_tag "application", :media => "all"
     - if @load_javascript_on_top
-      = javascript_include_tag "application" 
+      = javascript_include_tag "application"
+      = javascript_include_tag "bootstrap-fileupload" if @use_bootstrap_file_upload
       = javascript_include_tag "http://maps.googleapis.com/maps/api/js?sensor=false"
 
 
@@ -93,5 +94,6 @@
       \==================================================
     / Placed at the end of the document so the pages load faster
     - unless @load_javascript_on_top
-      = javascript_include_tag "application" 
+      = javascript_include_tag "application"
+      = javascript_include_tag "bootstrap-fileupload" if @use_bootstrap_file_upload
       = javascript_include_tag "http://maps.googleapis.com/maps/api/js?sensor=false"

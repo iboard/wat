@@ -1,3 +1,4 @@
+- @use_bootstrap_file_upload = true
 %h1= t(:upload_your_avatar)
 %br/
 =simple_form_for [user,user.avatar],url: user_avatar_path(user),html: {remote: true,multicast: true,:multipart => true, class: 'form form-horizontal'} do |f|

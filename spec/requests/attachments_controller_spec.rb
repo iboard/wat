@@ -69,7 +69,8 @@ describe AttachmentsController do
       @test_attachments << @user.attachments.last
     end
 
-    it "let the user replace file" do
+    # TODO: use jquery-upload for replacing
+    xit "let the user replace file" do
       @user.attachments.create(file: File.new(TEXT_FILE_FIXTURE))
       _path = @user.attachments.first.path
       visit user_attachments_path(@user)

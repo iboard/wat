@@ -17,7 +17,6 @@
 //= require jquery.Jcrop
 //= require bootstrap-carousel
 //= require bootstrap-datepicker
-//= require bootstrap-fileupload
 //= require datepicker
 //= require jsort_sortable
 //= require jquery-fileupload/basic
