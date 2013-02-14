@@ -7,9 +7,9 @@
   =f.input :banner_text_position, :collection => ['left', 'right']
   .well
     =f.simple_fields_for page.banner||page.build_banner do |fb|
+      .attachment-single-upload
+        = render 'shared/single_upload', model_id: "page_banner_banner", field_name: "page[banner][banner]", existing_file_preview: page.banner.banner_file_name.nil? ? "" : page.banner.banner.url(:preview), use_multiple: false, field_label: t(:upload_a_banner), hint: 'png, jpg, gif'
       - if page.banner && page.banner.banner.exists?
         .pull-right
-          =image_tag page.banner.banner.url(:preview)
           =f.input :delete_banner, as: :boolean, label: false, hint: ("&nbsp;".html_safe+t(:check_to_remove_the_image_from_the_server))
-      =fb.input :banner, input_html: { multiple: false, name: 'page[banner][banner]'},  hint: 'png, jpg, gif'
       =fb.input :linked_url, as: :url

@@ -284,6 +284,7 @@ de:
   file: "Datei"
   file_deleted: "Datei '%{filename}' wurde gelöscht"
   file_not_deleted: "Datei '%{filename}' kann nicht gelöscht werden - '%{error}'"
+  file_not_uploaded: "Datei '%{filename}' kann nicht hochgeladen werden - '%{error}'"
   your_files: Ihre Dateien ...
   upload_file: Datei hochladen
   number_of_your_files: 

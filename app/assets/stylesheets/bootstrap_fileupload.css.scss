@@ -126,3 +126,25 @@
 .control-group.success .fileupload .thumbnail {
   border-color: #468847;
 }
+
+.hidden_fields{ 
+  display: none;
+}
+
+.attachment-upload{
+  display: inline-block;
+  margin-bottom: 5px;
+  .controls{
+    margin-left: 0px;
+  }
+}
+
+.attachments-available{
+  display: inline-block;
+  .attachment-name-link{
+    float: left;
+  }
+  .attachment-delete-link{
+    float: right;
+  }
+}

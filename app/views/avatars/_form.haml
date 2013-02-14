@@ -1,10 +1,11 @@
-- @use_bootstrap_file_upload = true
 %h1= t(:upload_your_avatar)
 %br/
 =simple_form_for [user,user.avatar],url: user_avatar_path(user),html: {remote: true,multicast: true,:multipart => true, class: 'form form-horizontal'} do |f|
   %fieldset
     =f.input :use_gravatar, as: :boolean, hint: "&nbsp;".html_safe+link_to( 'Gravatar?', "http://gravatar.com")
-    = render 'shared/file_upload', model_id: "avatar_avatar", field_name: "avatar[avatar]", field_label: t(:avatar), existing_file_preview: user.avatar.avatar.url(:thumb)
+    = javascript_tag( "registerUploadField( );")
+    .attachment-single-upload
+      = render 'shared/single_upload', model_id: "avatar_avatar", field_name: "avatar[avatar]", existing_file_preview: user.avatar.avatar_file_name.nil? ? "" : user.avatar.avatar.url(:thumb), use_multiple: false, field_label: t(:avatar)
   .clear-both
   .form-actions
     =f.submit value: t(:update_avatar), class: 'btn btn-primary'
