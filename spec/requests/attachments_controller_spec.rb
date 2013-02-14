@@ -64,25 +64,20 @@ describe AttachmentsController do
       click_link "Your files ..."
       test_file = TEXT_FILE_FIXTURE
       page.should have_content I18n.t(:number_of_your_files, count: 0)
-      attach_file("user_attachment_file", test_file)
+      click_link "Upload file"
+      attach_file("attachment_application_file_file", test_file)
       page.should have_link File.basename(TEXT_FILE_FIXTURE)
       @test_attachments << @user.attachments.last
     end
 
-    # TODO: use jquery-upload for replacing
-    xit "let the user replace file" do
+    it "let the user replace file", js: true do
       @user.attachments.create(file: File.new(TEXT_FILE_FIXTURE))
-      _path = @user.attachments.first.path
       visit user_attachments_path(@user)
       click_link "Replace"
-      attach_file("application_file_file", File.join(Rails.root,'fixtures', 'avatar.jpg'))
+      attach_file("attachment_application_file_file", File.join(Rails.root,'fixtures', 'avatar.jpg'))
       click_button("Upload file")
       page.should have_content 'avatar.jpg'
       page.should have_content '117 KB'
-      click_link "Delete"
-      if _path
-        File.exist?(_path).should be_false
-      end
     end
 
     it "let the user upload NO file" do

@@ -1,0 +1,13 @@
+= errors_for @attachment if @attachment
+
+%h1= t(:users_attachments, user: @user.name)
+
+.attachment-header
+  = render 'shared/attachment_upload', attachment: @attachment, new_attachment_path: new_attachment_path( @attachment ), model_id: "attachment_application_file_file", field_name: "attachment[application_file][file]", use_multiple: true, controller_function: "users/#{@user._id}/attachments/upload_finished", use_progressall: true
+
+.alert.alert-info= t(:number_of_your_files, count: @attachments.count)
+
+#filelist
+  %ul.nav#upload-target
+    - @attachments.each do |attachment|
+      = render 'attachments/attachment', user: @user, attachment: attachment

@@ -1,14 +1,2 @@
-.upload-area
-  %h3=t(:upload_files)
-  = errors_for @attachment if @attachment
-  = render 'form'
-  #upload-progress-bar
-
-%h1= t(:users_attachments, user: @user.name)
-
-.alert.alert-info= t(:number_of_your_files, count: @attachments.count)
-
-#filelist
-  %ul.nav#upload-target
-    - @attachments.each do |attachment|
-      =render 'attachments/attachment', user: @user, attachment: attachment
+.attachment-index
+  = render 'attachments/attachments', user: @user

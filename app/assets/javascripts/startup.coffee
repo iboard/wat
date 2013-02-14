@@ -1,5 +1,8 @@
-$(window).load ->
-  setFocusToFirstInputField()
+jQuery ->
+  $(document).ready ->
+    setFocusToFirstInputField()
 
-this.setFocusToFirstInputField = ->
-  $("input").not($("#search_search_text")).not($("#token-input-search_search_text")).not($(".disabled")).not($("input[type=hidden]")).first().focus()
+  setFocusToFirstInputField = ->
+    firstInput = $('form').find('input,textarea,select').not($("#search_search_text")).not($("#token-input-search_search_text")).not($(".disabled")).filter(':visible:first')
+    if (firstInput != null)
+        firstInput.focus()

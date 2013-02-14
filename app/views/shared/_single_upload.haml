@@ -1,0 +1,22 @@
+.controll-group.fileupload.fileupload-new{ :"data-provides" => "fileupload"}
+  - if !local_assigns[:field_label].nil? && field_label != ""
+    %label.control-label{ for: "#{model_id}"}= field_label
+  - else
+    %h3= t(:upload_files)
+  .controls
+    .uneditable-input.span3
+      %span.fileupload-preview
+    %span.btn.btn-file
+      %span.fileupload-new= t(:select_file)
+      %input.fileupload-files{ type: "file", label: false, id: "#{model_id}", name: "#{field_name}", multiple: use_multiple }
+    - if !local_assigns[:existing_file_preview].nil? && local_assigns[:existing_file_preview] != ""
+      = image_tag( existing_file_preview )
+    - if !local_assigns[:hint].nil? && hint != ""
+      %p.help-block= hint
+
+- if !local_assigns[:attachment_parent].nil? && attachment_parent != ""
+  .hidden_fields
+    = simple_fields_for attachment_parent do |t|
+      - t.object.attributes.each do |attr_name, attr_value|
+        - if  attr_name =~ /_id/
+          = t.input attr_name, input_html: { value: "#{attr_value}" }
