@@ -1,0 +1,5 @@
+$(".attachment#<%= @attachment._id -%>").remove();
+$('.alert.alert-info').html( '<%= j t(:number_of_your_files, count: @attachments.count) %>');
+
+$('.attachment_file_add').hide(150);
+$('.attachment_file_new').show(150);

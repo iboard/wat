@@ -279,6 +279,7 @@ en:
   file: "File"
   file_deleted: "File '%{filename}' deleted"
   file_not_deleted: "Can't delete '%{filename}' - '%{error}'"
+  file_not_uploaded: "Can't upload '%{filename}' - '%{error}'"
   your_files: Your files ...
   upload_file: Upload file
   number_of_your_files:

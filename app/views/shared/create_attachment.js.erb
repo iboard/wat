@@ -1,0 +1,2 @@
+$('#upload-target').append("<%= j render( 'attachments/attachment', attachment: @attachment ) %>");
+$('.alert.alert-info').html( '<%= j t(:number_of_your_files, count: @attachments.count) %>');

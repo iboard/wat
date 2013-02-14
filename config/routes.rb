@@ -49,7 +49,11 @@ Wat::Application.routes.draw do
       end
     end
     resources :facilities
-    resources :attachments
+    resources :attachments do
+      collection do
+        get 'upload_finished' => :upload_finished
+      end
+    end
     collection do
       get 'forgot_password' => :forgot_password
       post 'send_password_reset_token' => :send_password_reset_token
