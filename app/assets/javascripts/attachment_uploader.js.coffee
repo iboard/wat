@@ -31,7 +31,7 @@ jQuery ->
             progress = parseInt(data.loaded / data.total * 100, 10)
             data.context.find('.bar').css('width', progress + '%')
         progressall: (e, data) ->
-          if $('.template-upload-all')
+          if $('#template-upload-all').length > 0
             if !data.context_all
               data.context_all = $(tmpl("template-upload-all", data))
               $(".upload-all-progress-bar").html(data.context_all)

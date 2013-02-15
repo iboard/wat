@@ -2,8 +2,9 @@
 .attachment_file_new
   = button_link_to 'icon-upload', 'btn btn-success', t(:upload_file), new_attachment_path, remote: true
 .attachment_file_add.upload-area{ style: "display: none;", :"data-controller-function" => local_assigns[:controller_function].nil? ? "" : controller_function }
-  - if !local_assigns[:use_progressall].nil? && use_progressall == true
-    = render 'shared/upload_all_template'
-  .upload-all-progress-bar
+  - if !local_assigns[:use_progressall].nil?
+    - if use_progressall == true
+      = render 'shared/upload_all_template'
+      .upload-all-progress-bar
   = render 'shared/multiple_upload', attachment: attachment, attachment_parent: local_assigns[:attachment_parent].nil? ? "" : attachment_parent, model_id: model_id, field_name: field_name, field_label: local_assigns[:field_label].nil? ? "" : field_label, existing_file_preview: local_assigns[:existing_file_preview].nil? ? "" : existing_file_preview, use_multiple: use_multiple
 %br
