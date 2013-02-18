@@ -22,7 +22,5 @@
               %li= icon_link_to('icon-th-large', '', t(:sections), sections_path)
               %li= icon_link_to('icon-list', '', t(:pages), pages_path)
       %ul.nav
-        %li.dropdown
-          = link_to avatar(:tiny), '#', :class => 'dropdown-toggle', 'data-toggle' => 'dropdown', style: 'margin: 0px; padding: 0px; padding-top: 5px;'
-          %ul.dropdown-menu
-            = render 'shared/signed_in_menu'
+        %li.dropdown.user-top-menu
+          = render 'shared/user_top_menu'
