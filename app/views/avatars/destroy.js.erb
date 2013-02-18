@@ -1,2 +1,3 @@
 $('#user-name').html('<%= escape_javascript render( "users/short_header", user: @user) %>');
 $('#profile-section').html('<%= escape_javascript render "form", user: @user %>');
+$('.user-top-menu').html('<%= escape_javascript render "shared/user_top_menu" %>');
