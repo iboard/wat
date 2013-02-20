@@ -19,7 +19,10 @@
         %p
           = presenter.email
           - unless short
-            = presenter.confirmed_at
+            - if user.email_confirmed_at
+              = presenter.confirmed_at
+            - else
+              = link_to "Confirm: #{user.email}", confirm_email_user_path(user._id, 'admin')
             %br/
             = presenter.exists_since
             %br/
