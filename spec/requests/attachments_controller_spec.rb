@@ -66,7 +66,7 @@ describe AttachmentsController do
       page.should have_content I18n.t(:number_of_your_files, count: 0)
       click_link "Upload file"
       attach_file("attachment_application_file_file", test_file)
-      page.should have_link File.basename(TEXT_FILE_FIXTURE)
+      wait_until {  page.has_link?(File.basename(TEXT_FILE_FIXTURE)) }
       @test_attachments << @user.attachments.last
     end
 
@@ -76,7 +76,7 @@ describe AttachmentsController do
       click_link "Replace"
       attach_file("attachment_application_file_file", File.join(Rails.root,'fixtures', 'avatar.jpg'))
       click_button("Upload file")
-      page.should have_content 'avatar.jpg'
+      wait_until { page.has_content?( 'avatar.jpg' ) }
       page.should have_content '117 KB'
     end
 
