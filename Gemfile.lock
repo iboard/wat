@@ -215,7 +215,6 @@ GEM
       mime-types
     polyglot (0.3.3)
     posix-spawn (0.3.6)
-    pow (0.2.3)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -345,7 +344,6 @@ DEPENDENCIES
   omniauth-openid
   omniauth-tumblr
   omniauth-twitter
-  pow
   rails (= 3.2.2)
   rails_config
   rb-fsevent
