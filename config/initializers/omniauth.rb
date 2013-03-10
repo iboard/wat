@@ -1,7 +1,6 @@
 # -*- encoding : utf-8 -*-
 require 'openid/store/filesystem'
 
-
 Rails.application.config.middleware.use OmniAuth::Builder do
 
   unless defined?(OpenSSL::SSL::VERIFY_PEER) && OpenSSL::SSL::VERIFY_PEER == OpenSSL::SSL::VERIFY_NONE
@@ -22,9 +21,9 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     provider :openid, :store => OpenID::Store::Filesystem.new(_store)
   end
 
-  provider :identity, :fields => [:name], :auth_key => 'name', on_failed_registration: lambda { |env|
-    IdentitiesController.action(:new).call(env)
-  }
+  provider :identity,
+    :fields => [:name, :invitation_token],
+    :auth_key => 'name', on_failed_registration: lambda { |env| IdentitiesController.action(:new).call(env) }
 
 end
 

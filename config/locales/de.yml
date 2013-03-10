@@ -444,3 +444,8 @@ de:
   password_successfully_changed: 'Das neue Passwort wurde gespeichert.'
   drop_files_here: 'Dateien hier ablegen'
   upload_files: 'Dateien ablegen'
+  you_need_an_invitation_token: 'Sie benötigen eine Einladung um ein Konto erstellen zu können'
+  invitation_token: 'Einladungs-Code'
+  invitation_token_not_found: 'Einladungs-Code nicht gültig'
+  cant_remove_local_authentication: "Lokale Authentifizierungen können nicht gelöscht werden"
+  create_local_account_first: 'Achtung: Auf diesen System können sie externe Authentifizierungs-Provider erst nutzen wenn sie zuvor eine lokale Authentifizierung erstellt haben.'

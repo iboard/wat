@@ -13,11 +13,15 @@
 %p
   If you don't have a user at 
   = Settings.application_name || '0.0.0.0:3000'
-  by now, you may sign up here: 
-  = signin_url
+  by now, you may sign up here:
+  - if Settings.public_sign_up == 'disabled'
+    = new_identity_url(:invitation_token => @contact_invitation.token)
+  - else
+    = new_identity_url
+
 
 %p 
-  To accept the invitation, visit:
+  To accept the invitation, once you are logged in, visit:
   = accept_contact_invitation_url(@contact_invitation.token)
   or ignore this email otherwise.
 
@@ -38,10 +42,13 @@
   Wenn Sie noch keinen Account auf 
   = Settings.application_name || '0.0.0.0:3000' 
   haben, können Sie hier 
-  = signin_url 
+  - if Settings.public_sign_up == 'disabled'
+    = new_identity_url(:invitation_token => @contact_invitation.token)
+  - else
+    = new_identity_url
   einen neuen Account erstellen.
 
 %p
-  Um die Einladung anzunehmen, öffnen Sie:
+  Um die Einladung anzunehmen, sobald Sie angemeldet sind, öffnen Sie:
   = accept_contact_invitation_url(@contact_invitation.token)
   Anderenfalls ignorieren Sie diese eMail einfach.

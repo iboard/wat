@@ -40,6 +40,8 @@ class User
   field :password_reset_token
   field :location, type: Hash, spacial: true
 
+  validates_with UserInvitationValidator
+
   embeds_many :authentications
   embeds_many :facilities, as: :facilitizer
   embeds_one :profile
@@ -94,6 +96,7 @@ class User
 
     _user = User.find_with_authentication(_provider, _uid) || current_user || create(name: _name)
     if _user
+      _user.update_invitation_token(auth) if auth[:invitation_token].present?
       _user.email ||= _email
       _user.save
       _user.authentications.find_or_create_by(provider: _provider, uid: _uid)
@@ -101,6 +104,12 @@ class User
 
     _user
   end
+
+  def update_invitation_token(auth)
+    identity = Identity.where(name: self.name).first
+    identity.update_attribute(:invitation_token, auth[:invitation_token] )
+  end
+
 
   # Find a User by a given authentication
   # @param [String] provider like 'twitter', 'facebook', ...

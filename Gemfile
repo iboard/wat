@@ -74,7 +74,6 @@ end
 
 group :development do
   gem "guard-spork"
-  gem "pow"
   gem "syntax"
 end
 

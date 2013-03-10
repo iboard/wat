@@ -4,7 +4,8 @@
   %br/
   %br/
   .alert.alert-error
-    = @identity.errors.full_messages.join("<br/>")
+    = @identity.errors.full_messages.join("<br/>".html_safe).html_safe
+
 .row-fluid
   .span6
     .hero-unit
@@ -22,7 +23,9 @@
       - @identity.name ||= current_user.name if current_user
       %fieldset
         %legend= title t(:new_account)
-        - unless current_user
+        - if Settings.public_sign_up == 'disabled'
+          = f.input :invitation_token, :input_html => {:id => 'invitation_token',:name => 'invitation_token', :value => (params[:invitation_token]||'')}
+        - if !current_user
           =f.input :name, :input_html => {:id => 'name',:name => 'name'}
         - else
           %strong= @identity.name

@@ -442,3 +442,8 @@ en:
   password_successfully_changed: 'New password set'
   drop_files_here: 'Drop files here to upload'
   upload_files: 'Upload files'
+  you_need_an_invitation_token: 'You need an invitation to sign-up to this service'
+  invitation_token: 'Invitation Token'
+  invitation_token_not_found: 'Invitation token not valid'
+  cant_remove_local_authentication: "Local authentication couldn't be deleted"
+  create_local_account_first: 'Attention: On this system you can use external authentication-providers only if you have created a local identity first!'

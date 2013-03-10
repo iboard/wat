@@ -172,7 +172,7 @@ private
   end
 
   def correct_user_or_reset_token?
-    unless params[:user][:password_reset_token].present?
+    if !params[:user][:password_reset_token].present?
       correct_user?
     else
       _user = User.where(password_reset_token: params[:user][:password_reset_token]).first
@@ -191,7 +191,7 @@ private
     @identity = Identity.where(name: @user.name).first
     
     unless @identity
-      @identity = Identity.create(name: @user.name)
+      @identity = Identity.create(name: @user.name, invitation_token: params[:invitation_token])
       auth = @user.authentications.create(provider: 'identity', uid: @identity.id.to_s)
     end
 

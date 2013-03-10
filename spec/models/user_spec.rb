@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe User do
 
+  after do
+    Settings.merge!(public_sign_up: 'enabled')
+  end
+
   it "uses name as a key" do
     user = User.create!(name: 'Andi Altendorfer', email: 'andreas@altendorfer.at')
     assert User.find('andi-altendorfer') == user
@@ -36,6 +40,12 @@ describe User do
       "User's latitude should be 48.2073 but is #{user.location.inspect}"
     assert user.location['lng'] == 14.2542
       "User's longitude should be 14.2542 but is #{user.location.inspect}"
+  end
+
+  it "should not be valid if no invation exists" do
+    user = test_user 'Not Invited', 'secret', [], true
+    Settings.merge!( public_sign_up: 'disabled' )
+    user.should_not be_valid
   end
 
   describe "(standard user)" do

@@ -279,4 +279,8 @@ de:
           attributes:
             title:
               blank_on_locale: Darf nicht leer sein
-      
+        identity:
+          attributes:
+            invitation_token:
+              cant_be_blank: "Sie müssen den Einladungs-Code angeben."
+              token_not_found: "Ungültiger Einladungs-Code."

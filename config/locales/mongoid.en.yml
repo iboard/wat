@@ -1,0 +1,9 @@
+en:
+  mongoid:
+    errors:
+      models:
+        identity:
+          attributes:
+            invitation_token:
+              cant_be_blank:  "You have to enter an invitation-token"
+              token_not_found: "Invalid invitation-token"

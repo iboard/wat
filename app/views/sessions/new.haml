@@ -1,5 +1,7 @@
 %h1= title t(:sign_in)
-
+- if Settings.public_sign_up == 'disabled'
+  .alert.alert-info
+    %h2=t(:create_local_account_first)
 %form.form-horizontal
   %fieldset
     %legend= t(:use_a_login_provider)

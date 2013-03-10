@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
   # 3. Redirect to root_url with notice
   def create
     auth = request.env["omniauth.auth"]
+    auth.merge!( invitation_token: params[:invitation_token]) if params[:invitation_token].present?
     user = User.find_or_create_with_omniauth(auth,current_user)
 
     if user && user.valid?

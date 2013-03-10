@@ -5,6 +5,10 @@ require 'capybara/rspec'
 
 describe UsersController do
 
+  after(:each) do
+    Settings.merge!(public_sign_up: 'enabled')
+  end
+
   it "doesn't allow passwords shorter than 5 characters" do
     User.delete_all
     Identity.delete_all
@@ -18,7 +22,45 @@ describe UsersController do
     click_button "Register"
     page.should_not have_content "Prohibited this account from being saved"
   end
-  
+
+  describe "with global sign_up disabled " do
+    after(:each) do
+      Settings.merge!(public_sign_up: "allowed")
+    end
+
+    it "should not allow to create a user without invitation token" do
+      ContactInvitation.delete_all
+      Identity.delete_all
+      Settings.merge!( public_sign_up: 'disabled')
+
+      visit new_identity_path
+      fill_in "name", with: "Not invited"
+      fill_in "password", with: "123456"
+      fill_in "password_confirmation", with: "123456"
+      click_button "Register"
+      page.should_not have_content "User created"
+      page.should have_content "You have to enter an invitation-token"
+    end
+
+    it "should allow creating users if invitation found" do
+      ContactInvitation.delete_all
+      Identity.delete_all
+      _admin = test_user( 'Admin', 'password', facilities=[], confirmed=true)
+
+      _invitation = ContactInvitation.create!(recipient_email: 'invited@some.we', sender_id: _admin.id )
+      Settings.merge!( public_sign_up: 'disabled')
+
+      visit new_identity_path
+      fill_in "name", with: "Not invited"
+      fill_in "invitation_token", with: _invitation.token
+      fill_in "password", with: "123456"
+      fill_in "password_confirmation", with: "123456"
+      click_button "Register"
+      User.find('not-invited').should_not be_nil
+      page.should have_content "Please enter your email address"
+    end
+  end
+
   describe "With an admin and temporary users" do
     before(:each) do
       User.delete_all
