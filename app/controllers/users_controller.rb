@@ -68,7 +68,11 @@ class UsersController < ApplicationController
   end
 
   def confirm_email
-    @user = User.where(_id: params[:id], confirm_email_token: params[:token]).first
+    if can_execute?('Admin')
+      @user = User.where(_id: params[:id]).first
+    else
+      @user = User.where(_id: params[:id], confirm_email_token: params[:token]).first
+    end
     if @user
       @user.confirm_email_token = nil
       @user.email_confirmed_at = Time.now.utc

@@ -311,7 +311,7 @@ class User
   def picture(size)
     if self.avatar && (self.avatar.use_gravatar)
       gravatar_path(size).first
-    elsif self.avatar && self.avatar.avatar
+    elsif self.avatar && self.avatar.avatar_file_name
       self.avatar.avatar.url(size)
     else
       "/images/avatars/#{size.to_s}/missing.png"

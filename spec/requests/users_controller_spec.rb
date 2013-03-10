@@ -300,6 +300,27 @@ describe UsersController do
       page.should have_content "Account exists since #{I18n.localize(@admin.created_at)}"
     end
 
+    it "should be possible to set email-confirmed for any user" do
+      @user_to_test = User.create(name: "Testerle", email: "somewhere@some.pl")
+      @user_to_test.email_confirmed_at.should be_nil
+      visit users_path
+      page.should have_link "Confirm: somewhere@some.pl"
+      click_link "Confirm: somewhere@some.pl"
+      @user_to_test.reload.email_confirmed_at.should_not be_nil
+      page.should have_content "Your e-mail is confirmed now"
+    end
+
+    it "should not be possible to confirm foreign emails if not admin" do
+      @hacker = test_user 'Hacker', 'notsecret', 'Hacker'
+      @user_to_test = User.create(name: "Testerle", email: "somewhere@some.pl")
+      @user_to_test.email_confirmed_at.should be_nil
+      visit signout_path
+      sign_in_user name: 'Hacker', password: 'notsecret'
+      visit confirm_email_user_path(@user_to_test._id, 'admin')
+      @user_to_test.reload.email_confirmed_at.should be_nil
+      page.should have_content "Token not found"
+    end
+
     it "finds users using the search-form without JS" do
       test_user 'Hidden user', 'secret'
       visit users_path
@@ -324,6 +345,7 @@ describe UsersController do
       page.should_not have_content "admin@example.com"
       assert page.all( '.user-location div' ).count == 0, "Should not show Google-map while search"
     end
+
 
   end
 

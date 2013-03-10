@@ -16,15 +16,16 @@ describe TimelineSubscription do
   it "can be added to a user" do
     @user.subscribe_timelines(@public_timeline,@contentkeeper)
     @user.timeline_subscriptions.count.should == 2
-    @user.timeline_subscriptions.map(&:timeline).should == [@public_timeline,@contentkeeper]
+    @user.timeline_subscriptions.map(&:timeline).should include(@public_timeline,@contentkeeper)
   end
 
   it "can be removed from a user" do
     @user.subscribe_timelines(@public_timeline,@contentkeeper)
-    @user.timeline_subscriptions.map(&:timeline).should == [@public_timeline,@contentkeeper]
+    @user.timeline_subscriptions.map(&:timeline).should include(@public_timeline,@contentkeeper)
     @user.unsubscribe_timelines(@public_timeline)
     @user.timeline_subscriptions.count.should == 1
-    @user.timeline_subscriptions.map(&:timeline).should == [@contentkeeper]
+    @user.timeline_subscriptions.map(&:timeline).should include(@contentkeeper)
+    @user.timeline_subscriptions.map(&:timeline).should_not include(@public_timeline)
   end
 
   it "can be asked if user subscribed" do
