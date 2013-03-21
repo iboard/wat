@@ -468,6 +468,27 @@ img.avatar {
       }
     }
   }
+  ul.pages.dropdown-menu {
+    background: $navbarBackground;
+    border-color: #d5d5d5;
+    border-width: 0 0 1px;
+    border-radius: 5px;
+    a {
+      color: white;
+      &:hover {
+        color: black;
+        background: white;
+      }
+    }
+    .active {
+      a {
+        background: $navbarBackgroundHighlight;
+        &:hover {
+          color: black;
+        }
+      }
+    }
+  }
 }
 
 .sort-title, .sort-edit-link, .sort-section-label {
