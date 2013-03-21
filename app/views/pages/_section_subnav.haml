@@ -1,7 +1,15 @@
+- _count_pages = section.pages.count
+- _pages_to_show = Settings.pages_in_section_subnav || 4
 - if section.pages.count > 1
   .subnav
     %ul{class: "nav nav-pills section-menu #{section._id} left"}
       - _pages = can_read?('Admin','Maintainer') ? section.pages : section.pages.online
-      - _pages.only(:title).each do |page|
+      - _pages.only(:title).limit(_pages_to_show).each do |page|
         %li{class: page == @page ? 'active' : 'inactive'}=link_to page.title, page, id: "link_to_#{page.id}"
-  %hr/
+      - if _count_pages > 4
+        %li.inactive.dropdown
+          = link_to ((t(:load_more_link))+"<b class='caret'></b>").html_safe, "#", :class => 'dropdown-toggle', 'data-toggle' => 'dropdown'
+          %ul.pages.dropdown-menu
+            - _pages.only(:title).skip(_pages_to_show).each do |page|
+              %li{class: page == @page ? 'active' : 'inactive'}=link_to page.title, page, id: "link_to_#{page.id}"
+  %hr

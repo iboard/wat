@@ -35,6 +35,7 @@ developer_mail_address: "developer@example.com"
 
 # paginate_users_per_page: 4
 # paginate_pages_per_page: 4
+# pages_in_section_subnav: 4
 
 # TIMELINE BEHAVIOR
 
