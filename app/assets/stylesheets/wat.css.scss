@@ -469,6 +469,9 @@ img.avatar {
     }
   }
   ul.pages.dropdown-menu {
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden; 
     background: $navbarBackground;
     border-color: #d5d5d5;
     border-width: 0 0 1px;
