@@ -12,6 +12,7 @@
 
 # IMPORTANT! Never push this files to a public repo!
 
+.ruby-*
 /config/mongoid.yml
 config/mongoid.yml
 /config/settings.yml
