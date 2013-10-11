@@ -9,6 +9,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 
   configure do |config|
     config.path_prefix = '/auth' #unless Rails.env == 'test'
+    config.logger = Rails.logger
   end
 
 

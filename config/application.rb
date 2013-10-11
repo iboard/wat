@@ -34,7 +34,7 @@ module Wat
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
-    config.autoload_paths += %W(#{config.root}/lib 
+    config.autoload_paths += %W(#{config.root}/lib
                                 #{config.root}/app/models/ckeditor
                                 #{config.root}/app/models/timeline
                              )
@@ -79,5 +79,7 @@ module Wat
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    # suppress 3rd-party logging
+    Paperclip.options[:log] = false
   end
 end
